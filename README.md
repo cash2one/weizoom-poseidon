@@ -19,8 +19,8 @@ cnpm install
 ### 如何在本地开发调试？ ###
 
 答：初次搭建环境，按如下步骤：
-1. 在mysql中创建`wemanage`数据库: `CREATE DATABASE wemanage DEFAULT CHARSET UTF8;`；
-1. 将`wemanage`数据库授权给`wemanage`用户：`GRANT ALL ON wemanage.* TO 'wemanage'@localhost IDENTIFIED BY 'weizoom';`；
+1. 在mysql中创建`poseidon`数据库: `CREATE DATABASE poseidon DEFAULT CHARSET UTF8;`；
+1. 将`poseidon`数据库授权给`poseidon`用户：`GRANT ALL ON poseidon.* TO 'poseidon'@localhost IDENTIFIED BY 'weizoom';`；
 1. 执行 `rebuild.sh`或`rebuild.sh`，初始化数据库；
 1. 启动 `start_bundle_server.bat`或`start_bundle_server.sh`；
 1. 启动 `start_server.sh | bunyan`；

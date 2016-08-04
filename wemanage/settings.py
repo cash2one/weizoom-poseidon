@@ -24,11 +24,11 @@ DATABASES = {
         # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'ENGINE': 'django.db.backends.mysql',
         # Or path to database file if using sqlite3.
-        'NAME': 'wemanage',
-        'USER': 'wemanage',                      # Not used with sqlite3.
+        'NAME': 'poseidon',
+        'USER': 'poseidon',                      # Not used with sqlite3.
         'PASSWORD': 'weizoom',                  # Not used with sqlite3.
         # Set to empty string for localhost. Not used with sqlite3.
-        'HOST': '127.0.0.1'
+        'HOST': 'db.poseidon.com'
     }
 }
 

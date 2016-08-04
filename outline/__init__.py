@@ -9,3 +9,5 @@ import data_comment
 import fans_trend
 import fans_increment_trend
 import task_finish_time
+
+import app
