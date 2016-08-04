@@ -1,0 +1,15 @@
+<% extends "page.html" %>
+
+<% block js %>
+<script type="text/javascript">
+	W.breadcrumb = [{
+		name: '运营活动',
+		href: '/app/apps/'
+	}, {
+		name: '{{resource.display_name}}',
+		href: '#'
+	}];
+
+	W.pageContentComponent = './app/app/{{app_name}}/activities/ActivitiesPage.react';
+</script>
+<% endblock %>

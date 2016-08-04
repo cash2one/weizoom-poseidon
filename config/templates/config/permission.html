@@ -1,0 +1,15 @@
+{% extends "page.html" %}
+
+{% block js %}
+<script type="text/javascript">
+	W.breadcrumb = [{
+		name: '权限管理',
+		href: '/config/permissions/'
+	}, {
+		name: '添加权限',
+		href: '#'
+	}];
+
+	W.pageContentComponent = './config/permission/PermissionPage.react';
+</script>
+{% endblock %}

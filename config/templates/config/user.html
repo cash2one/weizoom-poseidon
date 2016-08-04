@@ -1,0 +1,15 @@
+{% extends "page.html" %}
+
+{% block js %}
+<script type="text/javascript">
+	W.breadcrumb = [{
+		name: '用户管理',
+		href: '/config/users/'
+	}, {
+		name: '添加用户',
+		href: '#'
+	}];
+
+	W.pageContentComponent = './config/user/UserPage.react';
+</script>
+{% endblock %}

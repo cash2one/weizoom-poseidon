@@ -1,0 +1,11 @@
+{	
+	"name": "demo",
+	"display_name": "演示App",
+	"resources": [{
+		"name": "Demo",
+		"need_user_participant": true,
+		"is_main_entry": true,
+		"display_name": "开发用App",
+		"enable_wepage": false
+	}]
+}
