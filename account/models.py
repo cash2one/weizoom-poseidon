@@ -76,3 +76,7 @@ class AccessToken(models.Model):
 		db_table = 'access_token'
 		verbose_name = 'access_token'
 		verbose_name_plural = 'access_token'
+
+	@property
+	def get_woid_by_access_token(self):
+		return self.app.woid

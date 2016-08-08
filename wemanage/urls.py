@@ -6,7 +6,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 admin.autodiscover()
 
-from core.restful_url import restful_url
+from core.restful_url import restful_url,restful_url2
 from account import views as account_view
 
 
@@ -23,6 +23,7 @@ urlpatterns = patterns('',
 	url(r'^outline/', restful_url('outline')),
 	url(r'^resource/', restful_url('resource')),
 	url(r'^config/', restful_url('config')),
+	url(r'^mall/', restful_url('mall')),
 )
 
 urlpatterns += staticfiles_urlpatterns()

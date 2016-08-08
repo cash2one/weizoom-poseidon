@@ -10,6 +10,7 @@ IS_UNDER_CODE_GENERATION = False
 
 MODE = 'develop'
 
+ZEUS_HOST = 'api.zeus.com'
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -164,6 +165,7 @@ INSTALLED_APPS = [
 
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
+    'mall',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     # 'django_behave',
