@@ -16,19 +16,13 @@ class OrderShip(resource.Resource):
 	resource = 'order_ship'
 
 	def post(request):
-		response = create_response(200)
 		access_token = request.POST.get('access_token',None)
 		data = {}
 		try:
 			access_token = AccessToken.objects.get(access_token=access_token)
 			woid = access_token.get_woid_by_access_token
 		except:
-			data = { 
-				'is_success': False,
-				'errMsg': u'access_token存在问题',
-			}
-			response.data = data
-			return response.get_response()
+			errMsg = u'access_token存在问题'
 
 		order_id = request.POST.get('order_id','')
 		express = request.POST.get('express','')
@@ -46,31 +40,23 @@ class OrderShip(resource.Resource):
 			'resource': 'mall.delivery',
 			'data': param_data
 			})
+			print "resp>>>>>>>>",resp['data']
 			if resp and resp["code"]==200:
-				print 'resp>>>>',resp
 				success = resp['data']["result"]
 				if success == 'SUCCESS':
-
-					data = { 
-					'is_success': True,
-					'errMsg': '',
-					}
+					errMsg = ''
 				else:
-					data = { 
-					'is_success': False,
-					'errMsg': resp['data']['msg'],
-					}
+					errMsg = resp['data']['msg']
 
 		else:
-			data = { 
-				'is_success': False,
-				'errMsg': u'缺少必要参数',
-				} 
-		if not data:
-			data = { 
-				'is_success': False,
-				'errMsg': u'请求存在问题，请联系管理员',
-				} 
-		response.data = data
-		return response.get_response()
+			errMsg = u'缺少必要参数'
+		
+
+		if errMsg:
+			response = create_response(500)
+			response.errMsg = errMsg
+			return response.get_response()
+		else:
+			response = create_response(200)
+			return response.get_response()
 
