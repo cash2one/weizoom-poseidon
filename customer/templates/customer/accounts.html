@@ -1,0 +1,13 @@
+{% extends "page.html" %}
+
+{% block js %}
+<script type="text/javascript">
+	W.breadcrumb = [{
+		name: '商品API',
+		href: '/outline/datas/',
+		action: 'xa-backToList',
+	}];
+
+	W.pageContentComponent = './customer/accounts/AccountsPage.react';
+</script>
+{% endblock %}

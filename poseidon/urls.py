@@ -23,6 +23,8 @@ urlpatterns = patterns('',
 	url(r'^outline/', restful_url('outline')),
 	url(r'^resource/', restful_url('resource')),
 	url(r'^config/', restful_url('config')),
+	url(r'^customer/', restful_url('customer')),
+	url(r'^interface/', restful_url('interface'))
 )
 
 urlpatterns += staticfiles_urlpatterns()
