@@ -39,9 +39,7 @@ var Action = {
 			name: data['name'],
 			password: data['password'],
 			display_name: data['displayName'],
-			email: data['email'],
-			group: data['group'],
-			permissions: JSON.stringify(data['permissions'])
+			status: data['status']
 		};
 		if (data.id === -1) {
 			Resource.put({

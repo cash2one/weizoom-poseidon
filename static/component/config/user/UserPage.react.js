@@ -40,29 +40,21 @@ var UserPage = React.createClass({
 	},
 
 	render:function(){
-		var optionsForGroup = _.map(this.state.groups, function(group) {
-			return {
-				text: group.displayName,
-				value: ""+group.id
-			}
-		});
-
-		var optionsForPermission = _.map(this.state.permissions, function(permission) {
-			return {
-				text: permission.name,
-				value: ""+permission.id,
-				selectable: permission.selectable
-			}
-		});
-
-		var mPassword = null;
+		var optionsForStatus = [{
+			text: '是',
+			value: '1'
+		}, {
+			text: '否',
+			value: '0'
+		}];
+		
 		if (this.state.user.id === -1) {
-			mPassword = (
-				<Reactman.FormInput label="密码:" name="password" validate="require-string" placeholder="" value={this.state.user.password} onChange={this.onChange} />
-			);
-		} else {
-			mPassword = '';
-		}
+            var labelName = '登录密码:';
+			var validate = "require-notempty";
+        } else {
+            var labelName = '修改密码:';
+			var validate = "";
+        }
 
 		return (
 		<div className="xui-outlineData-page xui-formPage">
@@ -70,8 +62,9 @@ var UserPage = React.createClass({
 				<fieldset>
 					<legend className="pl10 pt10 pb10">用户信息</legend>
 					<Reactman.FormInput label="登录名:" name="name" validate="require-string" placeholder="" value={this.state.user.name} onChange={this.onChange} autoFocus={true} />
-					{mPassword}
-					<Reactman.FormInput label="主体名称:" name="displayName" validate="require-string" placeholder="" value={this.state.user.displayName} onChange={this.onChange} />
+					<Reactman.FormInput label={labelName} name="password" validate={validate} placeholder="" value={this.state.user.password} onChange={this.onChange} />
+					<Reactman.FormInput label="账号主体:" name="displayName" validate="require-string" placeholder="" value={this.state.user.displayName} onChange={this.onChange} />
+					<Reactman.FormRadio label="是否开启:" name="status" value={this.state.user.status} options={optionsForStatus} onChange={this.onChange} />
 				</fieldset>
 				<fieldset>
 					<Reactman.FormSubmit onClick={this.onSubmit} text="确 定"/>

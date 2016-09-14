@@ -46,12 +46,21 @@ var UsersPage = React.createClass({
 				<a href={'/config/user/?id='+data.id}>{value}</a>
 			)
 		} else if (field === 'action') {
-			return (
-			<div>
-				<a className="btn btn-link btn-xs" onClick={this.onClickDelete} data-user-id={data.id}>删除</a>
-				<a className="btn btn-link btn-xs" href={'/config/user/?id='+data.id}>编辑</a>
-			</div>
-			);
+			if(data.status == 1){
+				return (
+					<div>
+						<a className="btn btn-link btn-xs" onClick={this.onClickDelete} data-user-id={data.id}>关闭</a>
+						<a className="btn btn-link btn-xs" href={'/config/user/?id='+data.id}>编辑</a>
+					</div>
+				);
+			}else{
+				return (
+					<div>
+						<a className="btn btn-link btn-xs" onClick={this.onClickDelete} data-user-id={data.id}>删除</a>
+						<a className="btn btn-link btn-xs" href={'/config/user/?id='+data.id}>编辑</a>
+					</div>
+				);
+			}
 		} else {
 			return value;
 		}

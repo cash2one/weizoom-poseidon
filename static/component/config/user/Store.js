@@ -24,9 +24,7 @@ var Store = StoreUtil.createStore(Dispatcher, {
 
 	init: function() {
 		this.data = {
-			user: Reactman.loadJSON('user'),
-			groups: _.sortBy(Reactman.loadJSON('groups'), 'id'),
-			permissions: _.sortBy(Reactman.loadJSON('permissions'), 'id')
+			user: Reactman.loadJSON('user')
 		};
 		if (!this.data.user) {
 			this.data.user = {
@@ -34,8 +32,7 @@ var Store = StoreUtil.createStore(Dispatcher, {
 				name: '',
 				password: '',
 				displayName: '',
-				group: '2', //2 is for 运营,
-				permissions: []
+				status: '1'
 			};
 		}
 	},
@@ -43,7 +40,6 @@ var Store = StoreUtil.createStore(Dispatcher, {
 	handleUpdatePermission: function(action) {
 		this.__emitChange();
 	},
-
 
 	handleUpdateUser: function(action) {
 		this.data.user[action.data.property] = action.data.value;
