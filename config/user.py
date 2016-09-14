@@ -55,6 +55,7 @@ class User(resource.Resource):
 		#获得系统所有的group数据
 		groups = [group for group in auth_models.Group.objects.all() if group.name != 'SystemManager' and group.name != 'Staff']
 		group_datas = []
+		print '============='
 		for group in groups:
 			group_datas.append({
 				'id': group.id,
@@ -91,23 +92,10 @@ class User(resource.Resource):
 		username = request.POST['name']
 		password = request.POST['password']
 		display_name = request.POST['display_name']
-		email = request.POST['email']
-		user = auth_models.User.objects.create_user(username, email, password)
+		user = auth_models.User.objects.create_user(username, username+'@weizoom.com', password)
 		auth_models.User.objects.filter(id=user.id).update(first_name=display_name)
-
-		group_id = request.POST.get('group', None)
-		if group_id:
-			group = auth_models.Group.objects.get(id=group_id)
-			user.groups.add(group)
-
-		#处理权限
-		permission_ids = json.loads(request.POST['permissions'])
-		permissions = auth_models.Permission.objects.filter(id__in=permission_ids)
-		for permission in permissions:
-			user.user_permissions.add(permission)
-
+		
 		response = create_response(200)
-
 		return response.get_response()
 
 	@login_required
@@ -115,28 +103,10 @@ class User(resource.Resource):
 		user_id = request.POST['id']
 		auth_models.User.objects.filter(id=user_id).update(
 			username = request.POST['name'],
-			first_name = request.POST['display_name'],
-			email = request.POST['email'],
+			first_name = request.POST['display_name']
 		)
 
-		user = auth_models.User.objects.get(id=user_id)
-		group = auth_models.Group.objects.get(id=request.POST['group'])
-		user.groups.clear()
-		user.groups.add(group)
-
-		#处理权限
-		user.user_permissions.clear()
-		permission_ids = json.loads(request.POST['permissions'])
-		permissions = auth_models.Permission.objects.filter(id__in=permission_ids)
-		for permission in permissions:
-			if permission.codename.startswith('__manage_'):
-				#跳过跟group关联的permission
-				continue
-
-			user.user_permissions.add(permission)
-
 		response = create_response(200)
-
 		return response.get_response()
 
 	@login_required

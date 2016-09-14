@@ -71,16 +71,8 @@ var UserPage = React.createClass({
 					<legend className="pl10 pt10 pb10">用户信息</legend>
 					<Reactman.FormInput label="登录名:" name="name" validate="require-string" placeholder="" value={this.state.user.name} onChange={this.onChange} autoFocus={true} />
 					{mPassword}
-					<Reactman.FormInput label="真实名:" name="displayName" validate="require-string" placeholder="" value={this.state.user.displayName} onChange={this.onChange} />
-					<Reactman.FormInput label="电子邮箱:" name="email" validate="require-string" placeholder="" value={this.state.user.email} onChange={this.onChange} />
-					<Reactman.FormRadio label="部门:" name="group" value={this.state.user.group} options={optionsForGroup} onChange={this.onChange} />
+					<Reactman.FormInput label="主体名称:" name="displayName" validate="require-string" placeholder="" value={this.state.user.displayName} onChange={this.onChange} />
 				</fieldset>
-
-				<fieldset className="form-inline">
-					<legend className="pl10 pt10 pb10">权限</legend>
-					<Reactman.FormCheckbox label="" name="permissions" value={this.state.user.permissions} options={optionsForPermission} onChange={this.onChange} />
-				</fieldset>
-
 				<fieldset>
 					<Reactman.FormSubmit onClick={this.onSubmit} text="确 定"/>
 				</fieldset>

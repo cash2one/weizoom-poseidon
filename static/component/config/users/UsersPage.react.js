@@ -49,7 +49,7 @@ var UsersPage = React.createClass({
 			return (
 			<div>
 				<a className="btn btn-link btn-xs" onClick={this.onClickDelete} data-user-id={data.id}>删除</a>
-				<a className="btn btn-link btn-xs mt5" href={'/config/user/?id='+data.id}>编辑</a>
+				<a className="btn btn-link btn-xs" href={'/config/user/?id='+data.id}>编辑</a>
 			</div>
 			);
 		} else {
@@ -74,7 +74,7 @@ var UsersPage = React.createClass({
 			<Reactman.FilterPanel onConfirm={this.onConfirmFilter}>
 				<Reactman.FilterRow>
 					<Reactman.FilterField>
-						<Reactman.FormInput label="姓名:" name="name" match='~' />
+						<Reactman.FormInput label="登录名:" name="username" match='~' />
 					</Reactman.FilterField>
 				</Reactman.FilterRow>
 			</Reactman.FilterPanel>
@@ -84,11 +84,11 @@ var UsersPage = React.createClass({
 					<Reactman.TableActionButton text="添加用户" icon="plus" href="/config/user/" />
 				</Reactman.TableActionBar>
 				<Reactman.Table resource={usersResource} formatter={this.rowFormatter} pagination={true} ref="table">
-					<Reactman.TableColumn name="#" field="index" width="40px" />
-					<Reactman.TableColumn name="姓名" field="displayName" />
-					<Reactman.TableColumn name="部门" field="group" width="60px"/>
-					<Reactman.TableColumn name="上次登录" field="lastLogin" width="160px" />
-					<Reactman.TableColumn name="操作" field="action" width="80px" />
+					<Reactman.TableColumn name="登录名" field="username" />
+					<Reactman.TableColumn name="主体名称" field="displayName"/>
+					<Reactman.TableColumn name="创建时间" field="createdAt" width="160px" />
+					<Reactman.TableColumn name="应用状态" field="AppStatus" width="100px" />
+					<Reactman.TableColumn name="操作" field="action" width="100px" />
 				</Reactman.Table>
 			</Reactman.TablePanel>
 		</div>

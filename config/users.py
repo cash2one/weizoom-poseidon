@@ -14,7 +14,7 @@ from core.jsonresponse import create_response
 from core import paginator
 from util import db_util
 import nav
-import models
+from account.models import *
 
 FIRST_NAV = 'config'
 SECOND_NAV = 'config-user'
@@ -51,15 +51,20 @@ class Users(resource.Resource):
 		users = users.order_by('-id')
 		pageinfo, users = paginator.paginate(users, cur_page, COUNT_PER_PAGE)
 
+		user_ids = [user.id for user in users]
+		accounts = UserProfile.objects.filter(user_id__in=user_ids)
+		user_id2AppStatus = {account.user_id: account.app_status for account in accounts}
+		user_id2Status = {account.user_id: account.status for account in accounts}
 		#组装数据
 		rows = []
 		for user in users:
 			rows.append({
 				'id': user.id,
-				'name': user.username,
+				'username': user.username,
 				'displayName': user.first_name,
-				'lastLogin': user.last_login.strftime('%Y-%m-%d %H:%M'),
-				'group': u''
+				'createdAt': user.date_joined.strftime('%Y-%m-%d %H:%M'),
+				'AppStatus': APP_STATUS2NAME[user_id2AppStatus[user.id]],
+				'status': user_id2Status[user.id]
 			})
 		data = {
 			'rows': rows,

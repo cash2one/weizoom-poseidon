@@ -19,13 +19,13 @@ def top_navs(request):
 	}]
 
 	if request.user.has_perm('permission.__manage_system'):
-		top_navs.append({
+		top_navs = [{
 			'name': 'config',
-			'displayName': '配置',
+			'displayName': '账号管理',
 			'icon': 'cog',
 			'href': '/config/users/'
-		})
-
+		}]
+		
 	return {'top_navs': top_navs}
 
 
