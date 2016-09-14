@@ -31,6 +31,6 @@ class LoginedAccount(resource.Resource):
 			if user_info:
 				if user_info.first().is_staff:
 					return HttpResponseRedirect('/config/users/')
-			return HttpResponseRedirect('/outline/outline/')
+			return HttpResponseRedirect('/customer/accounts/')
 		else:
 			return HttpResponseRedirect('/account/login/')

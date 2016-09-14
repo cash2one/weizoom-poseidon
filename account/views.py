@@ -32,7 +32,7 @@ random.seed(time.time())
 #===============================================================================
 def index(request):
 	if request.user.is_authenticated():
-		return HttpResponseRedirect('/outline/outline/')
+		return HttpResponseRedirect('/customer/accounts/')
 	else:
 		return HttpResponseRedirect('/account/login/')
 
