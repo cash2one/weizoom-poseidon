@@ -24,7 +24,7 @@ class LoginedAccount(resource.Resource):
 		password = request.POST.get('password', 'empty_password')
 		user = auth.authenticate(username=username, password=password)
 
-		if user:
+		if user and user.is_active:
 			auth.login(request, user)
 			return HttpResponseRedirect('/outline/outline/')
 		else:

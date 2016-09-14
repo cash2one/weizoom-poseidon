@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 	ReactDOM.render(
 		<Reactman.Page 
-			sitename="WeManage" 
+			sitename="微众开放平台" 
 			userName={W.userName}
 			topNavs={W.topNavs} 
 			activeTopNav={W.activeTopNav} 

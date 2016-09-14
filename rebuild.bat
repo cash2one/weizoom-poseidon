@@ -1,2 +1,2 @@
-mysql -u wemanage --password=weizoom wemanage < rebuild_database.sql
+mysql -u poseidon --password=weizoom poseidon < rebuild_database.sql
 python manage.py syncdb --noinput

@@ -1,4 +1,3 @@
-
 'use strict';
 
 var path = require('path');
@@ -8,7 +7,7 @@ module.exports = {
 	entry: {
 		dev: [
 			'webpack/hot/only-dev-server',
-			'webpack-dev-server/client?http://localhost:4188',
+			'webpack-dev-server/client?http://localhost:4199',
 			path.resolve(__dirname, 'static/index.js')
 		],
 		dist: [
@@ -16,8 +15,8 @@ module.exports = {
 		]
 	},
 	output: {
-		path: path.resolve(__dirname, 'build'),
-		filename: '[name].bundle.js',
+		path: path.resolve(__dirname, 'static/build'),
+		filename: 'bundle.js',
 		publicPath: '/static/'
 	},
 	module: {
@@ -28,6 +27,9 @@ module.exports = {
 		}, {
 			test: /\.css$/, // Only .css files
 			loader: 'style!css' // Run both loaders
+		},{
+			test: /\.html$/,
+			loader: 'raw'
 		}]
 	},
 	plugins: [

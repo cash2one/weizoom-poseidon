@@ -5,9 +5,9 @@ from django.contrib.auth.models import User
 from account import models as account_models
 
 #===============================================================================
-# init_wemanage : 初始化role与group
+# init_poseidon : 初始化role与group
 #===============================================================================
-def init_wemanage(app, created_models, verbosity, **kwargs):
+def init_poseidon(app, created_models, verbosity, **kwargs):
 	from django.contrib.auth.models import Permission
 	from django.contrib.auth.models import Group
 	from django.contrib.contenttypes.models import ContentType
@@ -33,8 +33,8 @@ def init_wemanage(app, created_models, verbosity, **kwargs):
 	manage_basic_action_permission = Permission.objects.create(name="Can do basic action", codename="__manage_basic_action", content_type=ctype)
 	g.permissions.add(manage_basic_action_permission)
 
-	print "Install custom permission groups for wemanage successfully"
+	print "Install custom permission groups for poseidon successfully"
 
 
-signals.post_syncdb.connect(init_wemanage, sender=account_models, dispatch_uid = "wemanage.init_wemanage")
+signals.post_syncdb.connect(init_poseidon, sender=account_models, dispatch_uid = "poseidon.init_poseidon")
 	

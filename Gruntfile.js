@@ -87,11 +87,13 @@ var getCopyFiles = function() {
 	return items;
 }
 
+var PRUNT_TASK_ID = 1;
 var PruntTask = function() {
 	this.taskLines = [];
 	this.files = [];
 
 	this.inRecordTaskMode = false;
+	this.id = PRUNT_TASK_ID++;
 }
 PruntTask.prototype.addLine = function(line) {
 	if (this.inRecordTaskMode) {
@@ -167,7 +169,7 @@ module.exports = function(grunt) {
 	            	beauty: false
 	            },
 	            files: {
-	            	'build/cdn/vessels_static/js/vessels_lib.min.js': ['build/cdn/vessels_static/js/vessels_lib.js']
+	            	'build/cdn/posedion_v2_static/js/lib.min.js': ['build/cdn/posedion_v2_static/js/lib.js']
 	            }
             }
 		},
@@ -182,14 +184,14 @@ module.exports = function(grunt) {
 					roundingPrecision: -1
 				},
 				files: {
-					'build/cdn/vessels_static/css/vessels_all.min.css': ['build/cdn/vessels_static/css/vessels_all.css']
+					'build/cdn/posedion_v2_static/css/all.min.css': ['build/cdn/posedion_v2_static/css/all.css']
 				}
 			}
 		},
 		md5: {
 		    digest_css: {
 		    	files: {
-		    		'build/cdn/vessels_static/css/': 'build/cdn/vessels_static/css/vessels_all.min.css'
+		    		'build/cdn/posedion_v2_static/css/': 'build/cdn/posedion_v2_static/css/all.min.css'
 		    	},
 		    	options: {
 		    		keepBasename: true,
@@ -201,7 +203,7 @@ module.exports = function(grunt) {
 		    },
 		    digest_js: {
 		    	files: {
-		    		'build/cdn/vessels_static/js/': 'build/cdn/vessels_static/js/vessels_lib.min.js'
+		    		'build/cdn/posedion_v2_static/js/': 'build/cdn/posedion_v2_static/js/lib.min.js'
 		    	},
 		    	options: {
 		    		keepBasename: true,
@@ -226,9 +228,9 @@ module.exports = function(grunt) {
         			{expand: true, src:getCopyFiles(), dest:'./dist/'},
         			{expand: false, src:['manage.py', 'rebuild.sh', 'rebuild_database.sql', 'start_service.sh', 'start_service.bat'], dest:'dist/'},
         			{expand: false, src:['dist/templates/base.html.merged.html'], dest:'dist/templates/base.html'},
-        			{expand: true, cwd:'build/cdn', src:['vessels_static/**'], dest:'dist/static'},
-        			{expand: true, cwd:'static/lib/font-awesome-4.5.0', src:['fonts/**'], dest:'dist/static/vessels_static'},
-        			{expand: true, cwd:'static/lib/bootstrap-3.3.6', src:['fonts/**'], dest:'dist/static/vessels_static'},
+        			{expand: true, cwd:'build/cdn', src:['posedion_v2_static/**'], dest:'dist/static'},
+        			{expand: true, cwd:'static/lib/font-awesome-4.5.0', src:['fonts/**'], dest:'dist/static/posedion_v2_static'},
+        			{expand: true, cwd:'static/lib/bootstrap-3.3.6', src:['fonts/**'], dest:'dist/static/posedion_v2_static'},
         			{expand: false, src:['build/dist.bundle.js'], dest:'dist/static/bundle.js'}
         		]
         	}
@@ -352,7 +354,7 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerTask('modify-mode', function() {
-		var filePath = './dist/wemanage/settings.py';
+		var filePath = './dist/poseidon/settings.py';
 		var content = grunt.file.read(filePath);
 		content = content.replace("MODE = 'develop'", "MODE = 'deploy'")
 		grunt.file.write(filePath, content)
@@ -395,7 +397,7 @@ module.exports = function(grunt) {
 			var taskInfo = pruntTask.getTask();
 			var taskName = taskInfo.task;
 
-			var id = taskInfo.id;
+			var id = pruntTask.id;
 			var destKey = _string.sprintf('weizoom-merge.%s.dest', id);
 			var filesKey = _string.sprintf('weizoom-merge.%s.files', id);
 			grunt.config.set(destKey, taskInfo.args.dest);

@@ -1,0 +1,6 @@
+*.pyc
+node_modules/*
+.idea
+.*~
+static/upload/
+npm-debug.log

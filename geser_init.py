@@ -12,3 +12,5 @@ def replace_service_name_for(file_name):
 		f.write(content)
 
 replace_service_name_for('./README.md')
+replace_service_name_for('./Gruntfile.js')
+replace_service_name_for('./devenv/register_service/linux.tmpl')

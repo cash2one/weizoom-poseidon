@@ -84,6 +84,12 @@ var DatasPage = React.createClass({
 		debug(data);
 	},
 
+	onForceUpdate: function(event) {
+		this.setState(Store.getData());
+		var filterOptions = Store.getData().filterOptions;
+		this.refs.table.refresh(filterOptions);
+	},
+
 	rowFormatter: function(field, value, data) {
 		if (field === 'models') {
 			var models = value;
@@ -126,6 +132,7 @@ var DatasPage = React.createClass({
 	},
 
 	render:function(){
+		debug('render ...');
 		var resource = {
 			resource: 'outline.datas',
 			data: {
@@ -197,6 +204,7 @@ var DatasPage = React.createClass({
 
 			<Reactman.TablePanel>
 				<Reactman.TableActionBar>
+					<Reactman.TableActionButton text="强制刷新" icon="refresh" onClick={this.onForceUpdate} />
 					<Reactman.TableActionButton text="添加商品" icon="plus" href="/outline/data/" />
 					<Reactman.TableActionButton text="批量删除" icon="remove" onClick={this.onClickBatchDelete} />
 				</Reactman.TableActionBar>

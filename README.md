@@ -1,4 +1,4 @@
-**poseidon**
+**posedion_v2**
 
 # FAQ
 
@@ -24,5 +24,5 @@ cnpm install
 1. 执行 `rebuild.sh`或`rebuild.sh`，初始化数据库；
 1. 启动 `start_bundle_server.bat`或`start_bundle_server.sh`；
 1. 启动 `start_server.sh | bunyan`；
-1. 访问 `http://127.0.0.1:4180/account/login/`；
+1. 访问 `http://127.0.0.1:4190/account/login/`；
 1. 以 `manager:test`登陆系统。

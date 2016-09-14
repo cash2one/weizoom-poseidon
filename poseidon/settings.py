@@ -120,10 +120,10 @@ MIDDLEWARE_CLASSES = [
 ]
 
 
-ROOT_URLCONF = 'wemanage.urls'
+ROOT_URLCONF = 'poseidon.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'wemanage.wsgi.application'
+WSGI_APPLICATION = 'poseidon.wsgi.application'
 
 TEMPLATE_CONTEXT_PROCESSORS = [
     'django.contrib.auth.context_processors.auth',
@@ -220,14 +220,14 @@ LOGIN_URL = '/account/login/'
 
 if 'develop' == MODE:
     logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s', level=logging.INFO)
-    WEBPACK_BUNDLE_JS = 'http://127.0.0.1:4188/static/dev.bundle.js'
+    WEBPACK_BUNDLE_JS = 'http://127.0.0.1:4199/static/bundle.js'
     DEBUG = True
 elif 'test' == MODE:
-    WEBPACK_BUNDLE_JS = '/static/bundle.js'
+    WEBPACK_BUNDLE_JS = '/static/build/bundle.js'
     ALLOWED_HOSTS = ['*', ]
     DEBUG = False
 else:
-    WEBPACK_BUNDLE_JS = '/static/bundle.js'
+    WEBPACK_BUNDLE_JS = '/static/build/bundle.js'
     ALLOWED_HOSTS = ['*', ]
     DEBUG = False
 
