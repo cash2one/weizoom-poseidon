@@ -91,40 +91,43 @@ var AccountsPage = React.createClass({
 	},
 
 	render:function(){
-		debug('render ...');
-		var resource = {
-			resource: 'outline.datas',
-			data: {
-				page: 1
-			}
-		};
-
 		return (
-		<div className="mt15 xui-outline-datasPage">
-			<Reactman.TablePanel>
-				<Reactman.TableActionBar>
-					
-				</Reactman.TableActionBar>
-				<Reactman.Table 
-					resource={resource} 
-					formatter={this.rowFormatter} 
-					pagination={true} 
-					expandRow={true} 
-					enableSelector={true} 
-					ref="table"
-					onBeforeLoad={this.onBeforeLoadTable}
-					onAfterLoad={this.onAfterLoadTable}
-				>
-					<Reactman.TableColumn name="#" field="index" width="40px" />
-					<Reactman.TableColumn name="商品" field="name" />
-					<Reactman.TableColumn name="重量" field="weight" width="60px"/>
-					<Reactman.TableColumn name="备注" field="comment" width="150px"/>
-					<Reactman.TableColumn name="价格" field="price" width="80px" />
-					<Reactman.TableColumn name="规格" field="models" width="100px" />
-					<Reactman.TableColumn name="创建日" field="created_at" width="160px" />
-					<Reactman.TableColumn name="操作" field="action" width="80px" />
-				</Reactman.Table>
-			</Reactman.TablePanel>
+		<div className="mt15 xui-customer-acountsPage">
+			<div className="xui-default-box">
+				<div className="xi-default-box">
+					<span className="xi-default-box-status">待激活</span>
+					<div className="xi-default-box-tips">
+						<span style={{fontSize:'20px', fontWeight:'bold'}}>默认应用</span>
+						<span style={{fontSize:'14px'}}>appid：激活后自动生成</span>
+						<span style={{fontSize:'14px'}}>appsecret：激活后自动生成</span>
+					</div>
+					<div className="xi-default-box-acctive-btn">
+						<a href="javascript:void(0);">立即激活</a>
+					</div>
+				</div>
+			</div>
+			<div className="xui-process-description">
+				<span className="xi-process-description-span">流程说明</span>
+				<div className="xui-process-description-div">
+					<div className="xui-process-description-title">
+						<span className="xi-number">1</span>
+						<img src="/static/img/poseidon/circular.png"></img>
+						<span className="xi-title" style={{fontSize: '18px'}}>激活应用</span>
+						<img src="/static/img/poseidon/line.png" style={{width:'40%'}}></img>
+					</div>
+					<div className="xui-process-description-title">
+						<span className="xi-number">2</span>
+						<img src="/static/img/poseidon/circular.png"></img>
+						<span className="xi-title" style={{fontSize: '18px'}}>应用审核</span>
+						<img src="/static/img/poseidon/line.png" style={{width:'40%'}}></img>
+					</div>
+					<div className="xui-process-description-title">
+						<span className="xi-number">3</span>
+						<img src="/static/img/poseidon/circular.png"></img>
+						<span className="xi-title" style={{fontSize: '18px'}}>接口联调</span>
+					</div>
+				</div>
+			</div>
 		</div>
 		)
 	}
