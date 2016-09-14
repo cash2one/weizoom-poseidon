@@ -30,10 +30,12 @@ class User(resource.Resource):
 		frontend_data = FrontEndData()
 		if user_id:
 			user = auth_models.User.objects.get(id=user_id)
+			status = UserProfile.objects.get(user_id=user.id).status
 			user_data = {
 				'id': user.id,
 				'name': user.username,
-				'displayName': user.first_name
+				'displayName': user.first_name,
+				'status': str(status)
 			}
 			frontend_data.add('user', user_data)
 		else:
@@ -67,12 +69,14 @@ class User(resource.Resource):
 	def api_post(request):
 		user_id = request.POST['id']
 		password = request.POST.get('password','')
+		status = int(request.POST['status'])
 		user = auth_models.User.objects.get(id=user_id)
 		user.username = request.POST['name']
 		user.first_name = request.POST['display_name']
 		if password != '':
 			user.set_password(password)
 		user.save()
+		UserProfile.objects.filter(user_id=user.id).update(status=status)
 		response = create_response(200)
 		return response.get_response()
 
