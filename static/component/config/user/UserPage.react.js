@@ -39,9 +39,11 @@ var UserPage = React.createClass({
 			Reactman.PageAction.showHint('error', '登录名请填写英文字母或数字');
 			return;
 		}
-		if(!regPsw.test(account.password.trim())){
-			Reactman.PageAction.showHint('error', '请输入6-20位数字英文任意组合');
-			return;
+		if(account.hasOwnProperty('password')){ //编辑的时候如果不输入密码则默认不修改密码，不校验
+			if(!regPsw.test(account.password.trim())){
+				Reactman.PageAction.showHint('error', '请输入6-20位数字英文任意组合');
+				return;
+			}
 		}
 		Action.saveUser(Store.getData().user);
 	},

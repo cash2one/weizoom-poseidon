@@ -34,9 +34,17 @@ var Action = {
 			Resource.put({
 				resource: 'config.user',
 				data: user,
-				dispatch: {
-					dispatcher: Dispatcher,
-					actionType: Constant.CONFIG_USER_SAVE_USER
+				success: function() {
+					Reactman.PageAction.showHint('success', '创建账号成功');
+					setTimeout(function(){
+						Dispatcher.dispatch({
+							actionType: Constant.CONFIG_USER_SAVE_USER,
+							data: data
+						});
+					},1000);
+				},
+				error: function(data) {
+					Reactman.PageAction.showHint('error', data.errMsg);
 				}
 			});
 		} else {
@@ -44,9 +52,17 @@ var Action = {
 			Resource.post({
 				resource: 'config.user',
 				data: user,
-				dispatch: {
-					dispatcher: Dispatcher,
-					actionType: Constant.CONFIG_USER_SAVE_USER
+				success: function() {
+					Reactman.PageAction.showHint('success', '编辑账号成功');
+					setTimeout(function(){
+						Dispatcher.dispatch({
+							actionType: Constant.CONFIG_USER_SAVE_USER,
+							data: data
+						});
+					},1000);
+				},
+				error: function(data) {
+					Reactman.PageAction.showHint('error', data.errMsg);
 				}
 			});
 		}		

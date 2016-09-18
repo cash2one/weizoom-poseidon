@@ -24,6 +24,17 @@ var UsersPage = React.createClass({
 		return Store.getData();
 	},
 
+	onClickChangeStatus: function(event) {
+		var userId = parseInt(event.target.getAttribute('data-user-id'));
+		Reactman.PageAction.showConfirm({
+			target: event.target,
+			title: '确认开启该账号吗?',
+			confirm: _.bind(function() {
+				Action.changeUserStatus(userId, this.refs.table.refresh);
+			}, this)
+		});
+	},
+
 	onClickDelete: function(event) {
 		var userId = parseInt(event.target.getAttribute('data-user-id'));
 		Reactman.PageAction.showConfirm({
@@ -49,7 +60,7 @@ var UsersPage = React.createClass({
 			if(data.status == 1){
 				return (
 					<div>
-						<a className="btn btn-link btn-xs" onClick={this.onClickDelete} data-user-id={data.id}>关闭</a>
+						<a className="btn btn-link btn-xs" onClick={this.onClickChangeStatus} data-user-id={data.id}>关闭</a>
 						<a className="btn btn-link btn-xs" href={'/config/user/?id='+data.id}>编辑</a>
 					</div>
 				);

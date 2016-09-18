@@ -77,3 +77,19 @@ class Users(resource.Resource):
 		response.data = data
 
 		return response.get_response()
+
+	@login_required
+	def api_post(request):
+		#更新账户状态
+		user_id = request.POST.get('id','')
+		try:
+			UserProfile.objects.filter(user_id=user_id).update(
+				status = 0
+				)
+			response = create_response(200)
+			return response.get_response()
+		except:
+			response = create_response(500)
+			response.errMsg = u'更新失败，请稍后再试'
+			return response.get_response()
+
