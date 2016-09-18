@@ -1,4 +1,4 @@
-auther:徐梓豪 2016-09-14
+author:徐梓豪 2016-09-14
 feature:普通账号激活应用
 #appid和appsecret会自动生成
 
