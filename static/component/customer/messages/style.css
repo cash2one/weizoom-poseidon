@@ -1,0 +1,17 @@
+input[name="ipName"]{
+    width: 250px;
+}
+
+input[name="serverIp"]{
+    width: 250px;
+}
+
+.xi-serverIp div{
+    display: inline-block;
+}
+
+.add-server-btn{
+    position: absolute;
+    top: 7px;
+    left: 440px;
+}

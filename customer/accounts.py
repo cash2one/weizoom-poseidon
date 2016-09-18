@@ -28,10 +28,13 @@ class Accounts(resource.Resource):
 		"""
 		响应GET
 		"""
+		customer_message = models.CustomerMessage.objects.filter(user=request.user)
+		status = 0 if not customer_message else customer_message[0].status
 		c = RequestContext(request, {
 			'first_nav_name': FIRST_NAV,
 			'second_navs': nav.get_second_navs(),
-			'second_nav_name': SECOND_NAV
+			'second_nav_name': SECOND_NAV,
+			'status': status
 		})
 		
 		return render_to_response('customer/accounts.html', c)

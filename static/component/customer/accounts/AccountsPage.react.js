@@ -13,8 +13,7 @@ var Reactman = require('reactman');
 var Store = require('./Store');
 var Constant = require('./Constant');
 var Action = require('./Action');
-
-var CommentDialog = require('./CommentDialog.react');
+var W = Reactman.W;
 
 require('./style.css');
 
@@ -29,49 +28,6 @@ var AccountsPage = React.createClass({
 		this.refs.table.refresh(filterOptions);
 	},
 
-	onClickDelete: function(event) {
-		var productId = parseInt(event.target.getAttribute('data-product-id'));
-		Reactman.PageAction.showConfirm({
-			target: event.target, 
-			title: '确认删除吗?',
-			confirm: _.bind(function() {
-				Action.deleteProduct(productId);
-			}, this)
-		});
-	},
-
-	onClickPrice: function(event) {
-		var productId = parseInt(event.target.getAttribute('data-product-id'));
-		var product = this.refs.table.getData(productId);
-
-		Reactman.PageAction.showPopover({
-			target: event.target,
-			content: '<span style="color:red">' + product.name + ':' + product.price + '</span>'
-		});
-	},
-
-	onClickComment: function(event) {
-		var productId = parseInt(event.target.getAttribute('data-product-id'));
-		var product = this.refs.table.getData(productId);
-		Reactman.PageAction.showDialog({
-			title: "创建备注", 
-			component: CommentDialog, 
-			data: {
-				product: product
-			},
-			success: function(inputData, dialogState) {
-				var product = inputData.product;
-				var comment = dialogState.comment;
-				Action.updateProduct(product, 'comment', comment);
-			}
-		});
-	},
-
-	onClickBatchDelete: function(event) {
-		var ids = _.pluck(this.refs.table.getSelectedDatas(), 'id');
-		alert('批量删除数据: ' + ids);
-	},
-
 	onConfirmFilter: function(data) {
 		Action.filterProducts(data);
 	},
@@ -84,25 +40,31 @@ var AccountsPage = React.createClass({
 		debug(data);
 	},
 
-	onForceUpdate: function(event) {
-		this.setState(Store.getData());
-		var filterOptions = Store.getData().filterOptions;
-		this.refs.table.refresh(filterOptions);
+	editMessage: function(){
+		W.gotoPage('/customer/messages/');
 	},
 
 	render:function(){
+		console.log(W.customerStatus);
+		var customerStatus = W.customerStatus;
+		var statusTitle = '待激活';
+		var statusBtn = <a href="javascript:void(0);" style={{display:'inline-block', width:'100%'}} onClick={this.editMessage}>立即激活</a>;
+		if(customerStatus==1) {
+			statusTitle = '审核中';
+			statusBtn = <a style={{display:'inline-block', width:'100%'}}>审核中</a>;
+		}
 		return (
 		<div className="mt15 xui-customer-acountsPage">
 			<div className="xui-default-box">
 				<div className="xi-default-box">
-					<span className="xi-default-box-status">待激活</span>
+					<span className="xi-default-box-status">{statusTitle}</span>
 					<div className="xi-default-box-tips">
 						<span style={{fontSize:'20px', fontWeight:'bold'}}>默认应用</span>
 						<span style={{fontSize:'14px'}}>appid：激活后自动生成</span>
 						<span style={{fontSize:'14px'}}>appsecret：激活后自动生成</span>
 					</div>
 					<div className="xi-default-box-acctive-btn">
-						<a href="javascript:void(0);">立即激活</a>
+						{statusBtn}
 					</div>
 				</div>
 			</div>
