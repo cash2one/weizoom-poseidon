@@ -45,6 +45,7 @@ class Messages(resource.Resource):
 			mobile_number = request.POST['mobileNumber'], 
 			email = request.POST['email'],
 			interface_url = request.POST['interfaceUrl'],
+			server_ip = request.POST['serverIp'],
 			status = models.STATUS_CHECKING
 		)
 
