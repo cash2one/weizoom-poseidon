@@ -18,18 +18,17 @@ from util import db_util
 import nav
 from account.models import *
 
-FIRST_NAV = 'config'
-SECOND_NAV = 'config-user'
+FIRST_NAV = 'application_audit'
+SECOND_NAV = 'application-audit'
 
 COUNT_PER_PAGE = 20
 
 filter2field = {
-	'displayName': 'first_name'
 }
 
-class Users(resource.Resource):
-	app = 'config'
-	resource = 'users'
+class ApplicationAudit(resource.Resource):
+	app = 'application_audit'
+	resource = 'applications'
 	
 	@login_required
 	def get(request):
@@ -42,23 +41,19 @@ class Users(resource.Resource):
 			'second_nav_name': SECOND_NAV
 		})
 		
-		return render_to_response('config/users.html', c)
+		return render_to_response('application_audit/application_audit.html', c)
 
 	@login_required
 	def api_get(request):
 		#获取业务数据
 		cur_page = request.GET.get('page', 1)
-		users = User.objects.filter(is_active=True, id__gt=3).order_by('-id')
-		users = db_util.filter_query_set(users, request, filter2field)
-		pageinfo, users = paginator.paginate(users, cur_page, COUNT_PER_PAGE)
+		applications = []
+		applications = db_util.filter_query_set(applications, request, filter2field)
+		pageinfo, applications = paginator.paginate(applications, cur_page, COUNT_PER_PAGE)
 
-		user_ids = [user.id for user in users]
-		accounts = UserProfile.objects.filter(user_id__in=user_ids)
-		user_id2AppStatus = {account.user_id: account.app_status for account in accounts}
-		user_id2Status = {account.user_id: account.status for account in accounts}
 		#组装数据
 		rows = []
-		for user in users:
+		for application in applications:
 			rows.append({
 				'id': user.id,
 				'username': user.username,
@@ -75,7 +70,6 @@ class Users(resource.Resource):
 		#构造response
 		response = create_response(200)
 		response.data = data
-
 		return response.get_response()
 
 	@login_required
@@ -90,6 +84,6 @@ class Users(resource.Resource):
 			return response.get_response()
 		except:
 			response = create_response(500)
-			response.errMsg = u'更新失败，请稍后再试'
+			response.errMsg = u'关闭失败，请稍后再试'
 			return response.get_response()
 

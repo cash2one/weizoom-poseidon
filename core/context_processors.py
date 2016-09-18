@@ -36,6 +36,11 @@ def top_navs(request):
 			'displayName': '账号管理',
 			'icon': 'cog',
 			'href': '/config/users/'
+		},{
+			'name': 'application_audit',
+			'displayName': '应用审核',
+			'icon': 'cog',
+			'href': '/application_audit/applications/'
 		}]
 		
 	return {'top_navs': top_navs}
