@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+__author__ = 'lihanyi'
+
 import json
 import time
 
@@ -22,7 +24,7 @@ SECOND_NAV = 'config-user'
 COUNT_PER_PAGE = 50
 
 filter2field = {
-	'name': 'username'
+	'displayName': 'first_name'
 }
 
 class Users(resource.Resource):
@@ -46,9 +48,8 @@ class Users(resource.Resource):
 	def api_get(request):
 		#获取业务数据
 		cur_page = request.GET.get('page', 1)
-		users = User.objects.filter(is_active=True, id__gt=3)
+		users = User.objects.filter(is_active=True, id__gt=3).order_by('-id')
 		users = db_util.filter_query_set(users, request, filter2field)
-		users = users.order_by('-id')
 		pageinfo, users = paginator.paginate(users, cur_page, COUNT_PER_PAGE)
 
 		user_ids = [user.id for user in users]

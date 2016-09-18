@@ -17,7 +17,6 @@ var Constant = require('./Constant');
 
 var Store = StoreUtil.createStore(Dispatcher, {
 	actions: {
-		'handleUpdatePermission': Constant.CONFIG_USER_UPDATE_PERMISSION,
 		'handleUpdateUser': Constant.CONFIG_USER_UPDATE_USER,
 		'handleSaveUser': Constant.CONFIG_USER_SAVE_USER
 	},
@@ -35,10 +34,6 @@ var Store = StoreUtil.createStore(Dispatcher, {
 				status: '1'
 			};
 		}
-	},
-
-	handleUpdatePermission: function(action) {
-		this.__emitChange();
 	},
 
 	handleUpdateUser: function(action) {

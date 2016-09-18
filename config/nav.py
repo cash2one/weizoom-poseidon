@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-__author__ = 'robert'
+__author__ = 'kuki'
 
 SECOND_NAVS = [{
 	'name': 'config-user',

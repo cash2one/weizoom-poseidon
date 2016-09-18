@@ -13,17 +13,6 @@ var Resource = Reactman.Resource;
 var Constant = require('./Constant');
 
 var Action = {
-	updatePermission: function(index, name, stocks) {
-		Dispatcher.dispatch({
-			actionType: Constant.CONFIG_USER_UPDATE_PERMISSION,
-			data: {
-				index: index,
-				name: name,
-				stocks: stocks
-			}
-		});
-	},
-
 	updateUser: function(property, value) {
 		Dispatcher.dispatch({
 			actionType: Constant.CONFIG_USER_UPDATE_USER,

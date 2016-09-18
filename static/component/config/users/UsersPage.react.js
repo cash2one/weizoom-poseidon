@@ -67,7 +67,7 @@ var UsersPage = React.createClass({
 	},
 
 	onConfirmFilter: function(data) {
-		Action.filterProducts(data);
+		Action.filterUser(data);
 	},
 
 	render:function(){
@@ -84,6 +84,9 @@ var UsersPage = React.createClass({
 				<Reactman.FilterRow>
 					<Reactman.FilterField>
 						<Reactman.FormInput label="登录名:" name="username" match='~' />
+					</Reactman.FilterField>
+					<Reactman.FilterField>
+						<Reactman.FormInput label="主体名称:" name="displayName" match='~' />
 					</Reactman.FilterField>
 				</Reactman.FilterRow>
 			</Reactman.FilterPanel>

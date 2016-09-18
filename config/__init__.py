@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-__author__ = 'robert'
+__author__ = 'lihanyi'
 
 import users
 import user
-import permissions
-import permission
