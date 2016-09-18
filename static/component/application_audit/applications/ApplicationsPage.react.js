@@ -57,18 +57,23 @@ var ApplicationsPage = React.createClass({
 				<a href={'/config/user/?id='+data.id}>{value}</a>
 			)
 		} else if (field === 'action') {
-			if(data.status == 1){
+			if(data.status === '待审核'){
 				return (
 					<div>
-						<a className="btn btn-link btn-xs" onClick={this.onClickChangeStatus} data-user-id={data.id}>关闭</a>
-						<a className="btn btn-link btn-xs" href={'/config/user/?id='+data.id}>编辑</a>
+						<a className="btn btn-link btn-xs" onClick={this.onClickChangeStatus} data-user-id={data.id}>确认通过</a>
+						<a className="btn btn-link btn-xs" onClick={this.onClickChangeStatus} data-user-id={data.id}>驳回修改</a>
+					</div>
+				);
+			}else if(data.status === '已启用'){
+				return (
+					<div>
+						<a className="btn btn-link btn-xs" onClick={this.onClickChangeStatus} data-user-id={data.id}>暂停停用</a>
 					</div>
 				);
 			}else{
 				return (
 					<div>
-						<a className="btn btn-link btn-xs" onClick={this.onClickDelete} data-user-id={data.id}>删除</a>
-						<a className="btn btn-link btn-xs" href={'/config/user/?id='+data.id}>编辑</a>
+						<p>驳回原因：服务器IP地址错误，请修改后重新激活。</p>
 					</div>
 				);
 			}
@@ -82,7 +87,7 @@ var ApplicationsPage = React.createClass({
 	},
 
 	render:function(){
-		var usersResource = {
+		var applicationsResource = {
 			resource: 'application_audit.applications',
 			data: {
 				page: 1
@@ -105,16 +110,19 @@ var ApplicationsPage = React.createClass({
 			<Reactman.TablePanel>
 				<Reactman.TableActionBar>
 				</Reactman.TableActionBar>
-				<Reactman.Table resource={usersResource} formatter={this.rowFormatter} pagination={true} ref="table">
+				<Reactman.Table resource={applicationsResource} formatter={this.rowFormatter} pagination={true} ref="table">
+					<Reactman.TableColumn name="登录名" field="username" />
+					<Reactman.TableColumn name="主体名称" field="displayName" />
 					<Reactman.TableColumn name="应用名称" field="appName" />
 					<Reactman.TableColumn name="app_id" field="appId"/>
 					<Reactman.TableColumn name="app_secret" field="appSecret"/>
 					<Reactman.TableColumn name="开发者姓名" field="DeveloperName"/>
 					<Reactman.TableColumn name="手机号" field="phone"/>
-					<Reactman.TableColumn name="邮箱" field="mail"/>
-					<Reactman.TableColumn name="服务器IP" field="ip"/>
-					<Reactman.TableColumn name="回调地址" field="address"/>
-					<Reactman.TableColumn name="操作" field="action" width="100px" />
+					<Reactman.TableColumn name="邮箱" field="email"/>
+					<Reactman.TableColumn name="服务器IP" field="serverIp"/>
+					<Reactman.TableColumn name="回调地址" field="interfaceUrl"/>
+					<Reactman.TableColumn name="状态" field="status"/>
+					<Reactman.TableColumn name="操作" field="action" width="120px" />
 				</Reactman.Table>
 			</Reactman.TablePanel>
 		</div>

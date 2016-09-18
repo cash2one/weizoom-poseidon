@@ -16,7 +16,8 @@ from core.jsonresponse import create_response
 from core import paginator
 from util import db_util
 import nav
-from account.models import *
+from account import models as account_models
+from customer import models as customer_models
 
 FIRST_NAV = 'application_audit'
 SECOND_NAV = 'application-audit'
@@ -24,6 +25,12 @@ SECOND_NAV = 'application-audit'
 COUNT_PER_PAGE = 20
 
 filter2field = {
+}
+
+status2name = {
+	1: u'待审核',
+	2: u'已启用',
+	3: u'已驳回',
 }
 
 class ApplicationAudit(resource.Resource):
@@ -47,20 +54,27 @@ class ApplicationAudit(resource.Resource):
 	def api_get(request):
 		#获取业务数据
 		cur_page = request.GET.get('page', 1)
-		applications = []
+		applications = customer_models.CustomerMessage.objects.filter(is_deleted=False)
 		applications = db_util.filter_query_set(applications, request, filter2field)
 		pageinfo, applications = paginator.paginate(applications, cur_page, COUNT_PER_PAGE)
-
+		user_ids = [application.user_id for application in applications]
+		user_infos = User.objects.filter(id__in=user_ids)
 		#组装数据
 		rows = []
 		for application in applications:
+			cur_user_info = user_infos.get(id=application.user_id)
 			rows.append({
-				'id': user.id,
-				'username': user.username,
-				'displayName': user.first_name,
-				'createdAt': user.date_joined.strftime('%Y-%m-%d %H:%M'),
-				'AppStatus': APP_STATUS2NAME[user_id2AppStatus[user.id]],
-				'status': user_id2Status[user.id]
+				'username': cur_user_info.username,
+				'displayName': cur_user_info.first_name,
+				'appName': u'默认应用',
+				'appId': u'审核后自动生成',
+				'appSecret': u'审核后自动生成',
+				'DeveloperName': application.name,
+				'phone': application.mobile_number,
+				'email': application.email,
+				'serverIp': application.server_ip,
+				'interfaceUrl': application.interface_url,
+				'status': status2name[application.status]
 			})
 		data = {
 			'rows': rows,
