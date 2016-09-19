@@ -25,13 +25,16 @@ var AccountsPage = React.createClass({
 
 	onChangeStore: function(event) {
 		var datas = Store.getData();
-		console.log(datas,"=======")
 		this.setState(Store.getData());
 	},
 
 	editMessage: function(){
 		var customerId = this.state.customerId;
-		W.gotoPage('/customer/messages/?customer_id='+customerId);
+		if (customerId!=-1){
+			W.gotoPage('/customer/messages/?customer_id='+customerId);
+		}else{
+			W.gotoPage('/customer/messages/');
+		}
 	},
 
 	componentWillMount: function(){
@@ -109,49 +112,49 @@ var AccountsPage = React.createClass({
 					</div>
 				</div>
 				)
-		}
-
-		return (
-		<div className="mt15 xui-customer-acountsPage">
-			<div className="xui-default-box">
-				<div className="xi-default-box">
-					<span className="xi-default-box-status">{statusTitle}</span>
-					<div className="xi-default-box-tips">
-						<div style={{width:'25%', textAlign:'center', display:'inline-block'}}>
-							<span style={{fontSize:'20px', fontWeight:'bold'}}>默认应用</span>
-							<span style={{fontSize:'14px'}}>appid：激活后自动生成</span>
-							<span style={{fontSize:'14px'}}>appsecret：激活后自动生成</span>
+		}else{
+			return (
+				<div className="mt15 xui-customer-acountsPage">
+					<div className="xui-default-box">
+						<div className="xi-default-box">
+							<span className="xi-default-box-status">{statusTitle}</span>
+							<div className="xi-default-box-tips">
+								<div style={{width:'25%', textAlign:'center', display:'inline-block'}}>
+									<span style={{fontSize:'20px', fontWeight:'bold'}}>默认应用</span>
+									<span style={{fontSize:'14px'}}>appid：激活后自动生成</span>
+									<span style={{fontSize:'14px'}}>appsecret：激活后自动生成</span>
+								</div>
+							</div>
+							<div className="xi-default-box-acctive-btn">
+								{statusBtn}
+							</div>
 						</div>
 					</div>
-					<div className="xi-default-box-acctive-btn">
-						{statusBtn}
+					<div className="xui-process-description">
+						<span className="xi-process-description-span">流程说明</span>
+						<div className="xui-process-description-div">
+							<div className="xui-process-description-title">
+								<span className="xi-number">1</span>
+								<img src="/static/img/poseidon/circular.png"></img>
+								<span className="xi-title" style={{fontSize: '18px'}}>激活应用</span>
+								<img src="/static/img/poseidon/line.png" style={{width:'40%'}}></img>
+							</div>
+							<div className="xui-process-description-title">
+								<span className="xi-number">2</span>
+								<img src="/static/img/poseidon/circular.png"></img>
+								<span className="xi-title" style={{fontSize: '18px'}}>应用审核</span>
+								<img src="/static/img/poseidon/line.png" style={{width:'40%'}}></img>
+							</div>
+							<div className="xui-process-description-title">
+								<span className="xi-number">3</span>
+								<img src="/static/img/poseidon/circular.png"></img>
+								<span className="xi-title" style={{fontSize: '18px'}}>接口联调</span>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div className="xui-process-description">
-				<span className="xi-process-description-span">流程说明</span>
-				<div className="xui-process-description-div">
-					<div className="xui-process-description-title">
-						<span className="xi-number">1</span>
-						<img src="/static/img/poseidon/circular.png"></img>
-						<span className="xi-title" style={{fontSize: '18px'}}>激活应用</span>
-						<img src="/static/img/poseidon/line.png" style={{width:'40%'}}></img>
-					</div>
-					<div className="xui-process-description-title">
-						<span className="xi-number">2</span>
-						<img src="/static/img/poseidon/circular.png"></img>
-						<span className="xi-title" style={{fontSize: '18px'}}>应用审核</span>
-						<img src="/static/img/poseidon/line.png" style={{width:'40%'}}></img>
-					</div>
-					<div className="xui-process-description-title">
-						<span className="xi-number">3</span>
-						<img src="/static/img/poseidon/circular.png"></img>
-						<span className="xi-title" style={{fontSize: '18px'}}>接口联调</span>
-					</div>
-				</div>
-			</div>
-		</div>
-		)
+			)
+		}
 	}
 })
 module.exports = AccountsPage;

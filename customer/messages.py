@@ -12,7 +12,7 @@ from core import resource
 from core.jsonresponse import create_response
 import nav
 import models
-from resource import models as resource_models
+from account import models as account_models
 from util import string_util
 from core.frontend_data import FrontEndData
 
@@ -30,7 +30,6 @@ class Messages(resource.Resource):
 		用户提交信息页面
 		"""
 		customer_id = request.GET.get('customer_id',-1)
-		print customer_id,"============"
 		frontend_data = FrontEndData()
 		if customer_id !=-1 :
 			customer_message = models.CustomerMessage.objects.get(user=request.user, id=customer_id)
@@ -41,10 +40,10 @@ class Messages(resource.Resource):
 				'email': customer_message.email,
 				'serverIp': customer_message.server_ip,
 				'interfaceUrl': customer_message.interface_url,
-				'serverIps': [] #更多服务器ip
+				'serverIps': [] 
 			}
 	
-			#获取商品规格
+			#更多服务器ip
 			customer_server_ips = models.CustomerServerIps.objects.filter(customer_id=customer_message)
 			for server_ip in customer_server_ips:
 				customer_data['serverIps'].append({
@@ -74,8 +73,12 @@ class Messages(resource.Resource):
 			mobile_number = request.POST['mobileNumber'], 
 			email = request.POST['email'],
 			interface_url = request.POST['interfaceUrl'],
-			server_ip = request.POST['serverIp'],
-			status = models.STATUS_CHECKING
+			server_ip = request.POST['serverIp']
+		)
+
+		#更新状态
+		account_models.UserProfile.objects.filter(user_id=request.user.id).update(
+			app_status = models.STATUS_CHECKING
 		)
 
 		server_ips = json.loads(request.POST['serverIps'])
@@ -97,11 +100,14 @@ class Messages(resource.Resource):
 			mobile_number = request.POST['mobileNumber'], 
 			email = request.POST['email'],
 			interface_url = request.POST['interfaceUrl'],
-			server_ip = request.POST['serverIp'],
-			status = models.STATUS_CHECKING
+			server_ip = request.POST['serverIp']
+		)
+		#更新状态
+		account_models.UserProfile.objects.filter(user_id=request.user.id).update(
+			app_status = models.STATUS_CHECKING
 		)
 
-		#删除、重建商品文档
+		#删除、重建
 		server_ips = json.loads(request.POST['serverIps'])
 		models.CustomerServerIps.objects.filter(customer_id=customer_id).delete()
 		for server_ip in server_ips:

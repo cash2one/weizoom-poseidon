@@ -20,7 +20,6 @@ class CustomerMessage(models.Model):
 	email = models.CharField(max_length=50, null=True) #邮箱
 	server_ip = models.CharField(max_length=50, null=True) #服务器IP
 	interface_url = models.CharField(max_length=1024, null=True) #接口回调地址
-	status = models.IntegerField(default=STATUS_UNACTIVATED) #状态
 	is_deleted = models.BooleanField(default=False)
 	app_id = models.CharField(max_length=50, null=True) #app_id
 	app_secret = models.CharField(max_length=50, null=True) #app_secret

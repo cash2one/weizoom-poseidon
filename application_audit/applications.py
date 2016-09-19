@@ -2,7 +2,7 @@
 __author__ = 'lihanyi'
 
 import json
-import time
+import time,datetime
 
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
@@ -111,7 +111,7 @@ class ApplicationAudit(resource.Resource):
 			user_id = customer_models.CustomerMessage.objects.get(id=customer_id).user_id
 			customer_info = customer_models.CustomerMessage.objects.filter(id=customer_id)
 			customer_info.update(
-				status = change_to_status
+				review_time = datetime.datetime.now()
 				)
 			account_models.UserProfile.objects.filter(user_id=user_id).update(
 				app_status = change_to_status
@@ -139,7 +139,7 @@ class ApplicationAudit(resource.Resource):
 		try:
 			user_id = customer_models.CustomerMessage.objects.get(id=customer_id).user_id
 			customer_models.CustomerMessage.objects.filter(id=customer_id).update(
-				status = account_models.REJECT,
+				review_time = datetime.datetime.now(),
 				reason = reason
 				)
 			account_models.UserProfile.objects.filter(user_id=user_id).update(

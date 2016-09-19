@@ -12,8 +12,7 @@ from core import resource
 from core.jsonresponse import create_response
 import nav
 import models
-from resource import models as resource_models
-from util import string_util
+from account import models as account_models
 
 FIRST_NAV = 'customer'
 SECOND_NAV = 'customer-accounts'
@@ -28,8 +27,8 @@ class Accounts(resource.Resource):
 		"""
 		响应GET
 		"""
-		customer_message = models.CustomerMessage.objects.filter(user=request.user)
-		status = 0 if not customer_message else customer_message[0].status
+		user_profile = account_models.UserProfile.objects.filter(user=request.user)
+		status = 0 if not user_profile else user_profile[0].app_status
 		c = RequestContext(request, {
 			'first_nav_name': FIRST_NAV,
 			'second_navs': nav.get_second_navs(),
@@ -42,9 +41,10 @@ class Accounts(resource.Resource):
 	@login_required
 	def api_get(request):
 		customer_message = models.CustomerMessage.objects.get(user=request.user)
+		user_profile = account_models.UserProfile.objects.filter(user=request.user)
 		data = {
 			'customerId': customer_message.id,
-			'status': customer_message.status,
+			'status': 0 if not user_profile else user_profile[0].app_status,
 			'appId': customer_message.app_id,
 			'appSecret': customer_message.app_secret,
 			'reason': customer_message.reason,
