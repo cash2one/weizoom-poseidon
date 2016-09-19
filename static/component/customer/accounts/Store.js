@@ -21,6 +21,7 @@ var Store = StoreUtil.createStore(Dispatcher, {
 
 	init: function() {
 		this.data = {
+			'customerId': -1
 		};
 	},
 

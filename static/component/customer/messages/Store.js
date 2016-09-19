@@ -22,10 +22,16 @@ var Store = StoreUtil.createStore(Dispatcher, {
 	},
 
 	init: function() {
-		this.data = {
-			'id':-1,
-			'serverIps': []
-		};
+		this.data = Reactman.loadJSON('customer');
+		if (this.data) {
+			console.log(this.data['serverIps'],"========");
+			this.data['serverIps'] = this.data['serverIps'];
+		} else {
+			this.data = {
+				'id':-1,
+				'serverIps': []
+			};
+		}
 	},
 
 	handleUpdateMessage: function(action) {

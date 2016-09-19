@@ -41,14 +41,19 @@ class Accounts(resource.Resource):
 
 	@login_required
 	def api_get(request):
-		customer_message = models.CustomerMessage.objects.filter(user=request.user)
-		status = 0 if not customer_message else customer_message[0].status
+		customer_message = models.CustomerMessage.objects.get(user=request.user)
 		data = {
-			'status': status
+			'customerId': customer_message.id,
+			'status': customer_message.status,
+			'appId': customer_message.app_id,
+			'appSecret': customer_message.app_secret,
+			'reason': customer_message.reason,
+			'serverIp': customer_message.server_ip,
+			'interfaceUrl': customer_message.interface_url,
+			'reviewTime': '' if not customer_message.review_time else customer_message.review_time.strftime("%Y-%m-%d")
 		}
 
 		#构造response
 		response = create_response(200)
 		response.data = data
-
 		return response.get_response()

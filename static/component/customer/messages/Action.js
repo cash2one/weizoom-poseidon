@@ -46,13 +46,12 @@ var Action = {
 				}
 			});
 		} else {
-			product['id'] = data.id;
 			Resource.post({
 				resource: 'customer.messages',
-				data: product,
+				data: messages,
 				dispatch: {
 					dispatcher: Dispatcher,
-					actionType: Constant.OUTLINE_DATA_SAVE_PRODUCT
+					actionType: Constant.CUSTOMER_MESSAGES_SAVE_MESSAGES
 				}
 			});
 		}
