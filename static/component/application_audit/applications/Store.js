@@ -17,11 +17,17 @@ var Constant = require('./Constant');
 var Store = StoreUtil.createStore(Dispatcher, {
 	actions: {
 		'handleUpdateApplication': Constant.UPDATE_APPLICATION,
+		'handleFilterApplication': Constant.FILTER_APPLICATION
 	},
 
 	init: function() {
 		this.data = {
 		};
+	},
+	
+	handleFilterApplication: function(action) {
+		this.data.filterOptions = action.data;
+		this.__emitChange();
 	},
 
 	handleUpdateApplication: function(action) {

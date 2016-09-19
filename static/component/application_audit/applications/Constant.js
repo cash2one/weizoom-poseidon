@@ -6,5 +6,6 @@
 var keyMirror = require('keymirror');
 
 module.exports = keyMirror({
-	UPDATE_APPLICATION: null
+	UPDATE_APPLICATION: null,
+	FILTER_APPLICATION: null
 });

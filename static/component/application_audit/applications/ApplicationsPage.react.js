@@ -92,7 +92,7 @@ var ApplicationsPage = React.createClass({
 	},
 
 	onConfirmFilter: function(data) {
-		Action.filterUser(data);
+		Action.filterApplication(data);
 	},
 
 	render:function(){
@@ -102,16 +102,38 @@ var ApplicationsPage = React.createClass({
 				page: 1
 			}
 		};
+		var statusOptions = [{
+			text: '全部',
+			value: -1
+		}, {
+			text: '未激活',
+			value: 0
+		}, {
+			text: '待审核',
+			value: 1
+		}, {
+			text: '已启用',
+			value: 2
+		}, {
+			text: '已驳回',
+			value: 3
+		}, {
+			text: '已停用',
+			value: 4
+		}];
 
 		return (
 		<div className="mt15 xui-config-usersPage">
 			<Reactman.FilterPanel onConfirm={this.onConfirmFilter}>
 				<Reactman.FilterRow>
 					<Reactman.FilterField>
-						<Reactman.FormInput label="登录名:" name="username" match='~' />
+						<Reactman.FormInput label="登录名:" name="username" match='=' />
 					</Reactman.FilterField>
 					<Reactman.FilterField>
-						<Reactman.FormInput label="主体名称:" name="displayName" match='~' />
+						<Reactman.FormInput label="主体名称:" name="displayName" match='=' />
+					</Reactman.FilterField>
+					<Reactman.FilterField>
+						<Reactman.FormSelect label="应用状态:" name="status" options={statusOptions} match='=' />
 					</Reactman.FilterField>
 				</Reactman.FilterRow>
 			</Reactman.FilterPanel>

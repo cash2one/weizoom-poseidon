@@ -35,6 +35,13 @@ var Action = {
 			actionType: Constant.UPDATE_APPLICATION,
 			data: {}
 		});
+	},
+
+	filterApplication: function(filterOptions) {
+		Dispatcher.dispatch({
+			actionType: Constant.FILTER_APPLICATION,
+			data: filterOptions
+		});
 	}
 };
 

@@ -49,7 +49,23 @@ class ApplicationAudit(resource.Resource):
 		#获取业务数据
 		cur_page = request.GET.get('page', 1)
 		applications = customer_models.CustomerMessage.objects.filter(is_deleted=False)
-		applications = db_util.filter_query_set(applications, request, filter2field)
+		
+		filters = dict([(db_util.get_filter_key(key, filter2field), db_util.get_filter_value(key, request.GET)) for key in request.GET if key.startswith('__f-')])
+		username = filters.get('username','')
+		display_name = filters.get('displayName','')
+		status = filters.get('status','')
+
+		if username:
+			filter_users = User.objects.filter(username__icontains=username)
+			filter_users_ids = [filter_user.id for filter_user in filter_users]
+			applications = applications.filter(user_id__in=filter_users_ids)
+		if display_name:
+			filter_users = User.objects.filter(first_name__icontains=display_name)
+			filter_users_ids = [filter_user.id for filter_user in filter_users]
+			applications = applications.filter(user_id__in=filter_users_ids)
+		if status:
+			applications = applications.filter(status=status)
+
 		pageinfo, applications = paginator.paginate(applications, cur_page, COUNT_PER_PAGE)
 		user_ids = [application.user_id for application in applications]
 		user_infos = User.objects.filter(id__in=user_ids)
