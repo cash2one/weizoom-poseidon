@@ -49,12 +49,10 @@ class ApplicationAudit(resource.Resource):
 		#获取业务数据
 		cur_page = request.GET.get('page', 1)
 		applications = customer_models.CustomerMessage.objects.filter(is_deleted=False)
-		
 		filters = dict([(db_util.get_filter_key(key, filter2field), db_util.get_filter_value(key, request.GET)) for key in request.GET if key.startswith('__f-')])
 		username = filters.get('username','')
 		display_name = filters.get('displayName','')
 		status = filters.get('status','')
-
 		if username:
 			filter_users = User.objects.filter(username__icontains=username)
 			filter_users_ids = [filter_user.id for filter_user in filter_users]
