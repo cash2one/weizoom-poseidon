@@ -16,7 +16,7 @@ var Constant = require('./Constant');
 
 var Store = StoreUtil.createStore(Dispatcher, {
 	actions: {
-		'handleFilterUser': Constant.CONFIG_USERS_FILTER_USER,
+		'handleUpdateApplication': Constant.UPDATE_APPLICATION,
 	},
 
 	init: function() {
@@ -24,8 +24,8 @@ var Store = StoreUtil.createStore(Dispatcher, {
 		};
 	},
 
-	handleFilterUser: function(action) {
-		this.data.filterOptions = action.data;
+	handleUpdateApplication: function(action) {
+		this.data = action.data;
 		this.__emitChange();
 	},
 

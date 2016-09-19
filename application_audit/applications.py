@@ -62,14 +62,15 @@ class ApplicationAudit(resource.Resource):
 				'username': cur_user_info.username,
 				'displayName': cur_user_info.first_name,
 				'appName': u'默认应用',
-				'appId': u'审核后自动生成',
-				'appSecret': u'审核后自动生成',
+				'appId': application.app_id if application.app_id else u'审核后自动生成',
+				'appSecret': application.app_secret if application.app_secret else u'审核后自动生成',
 				'DeveloperName': application.name,
 				'phone': application.mobile_number,
 				'email': application.email,
 				'serverIp': application.server_ip,
 				'interfaceUrl': application.interface_url,
-				'status': account_models.APP_STATUS2NAME[application.status]
+				'status': account_models.APP_STATUS2NAME[application.status],
+				'reason': u'驳回原因：' + application.reason if application.reason else ''
 			})
 		data = {
 			'rows': rows,
@@ -83,20 +84,55 @@ class ApplicationAudit(resource.Resource):
 
 	@login_required
 	def api_post(request):
-		#提交审核
+		#通过审核/暂时停用
 		customer_id = request.POST.get('id','')
+		status = request.POST.get('method','')
+		if status == 'close':
+			change_to_status = account_models.STOPED
+		else:
+			change_to_status = account_models.USING
 		try:
 			user_id = customer_models.CustomerMessage.objects.get(id=customer_id).user_id
-			customer_models.CustomerMessage.objects.filter(id=customer_id).update(
-				status = customer_models.STATUS_ACTIVATED
+			customer_info = customer_models.CustomerMessage.objects.filter(id=customer_id)
+			customer_info.update(
+				status = change_to_status
 				)
 			account_models.UserProfile.objects.filter(user_id=user_id).update(
-				status = customer_models.STATUS_ACTIVATED
+				app_status = change_to_status
 				)
+
+			#没有app_id等数据
+			if not customer_info.first().app_id and status == 'open':
+				customer_info.update(
+					app_id = '1111111111',
+					app_secret = 'sd124wr45sfds'
+					)
+
 			response = create_response(200)
 			return response.get_response()
 		except:
 			response = create_response(500)
 			response.errMsg = u'关闭失败，请稍后再试'
+			return response.get_response()
+
+	@login_required
+	def api_put(request):
+		#驳回
+		customer_id = request.POST.get('id','')
+		reason = request.POST.get('reason','')
+		try:
+			user_id = customer_models.CustomerMessage.objects.get(id=customer_id).user_id
+			customer_models.CustomerMessage.objects.filter(id=customer_id).update(
+				status = account_models.REJECT,
+				reason = reason
+				)
+			account_models.UserProfile.objects.filter(user_id=user_id).update(
+				app_status = account_models.REJECT
+				)
+			response = create_response(200)
+			return response.get_response()
+		except:
+			response = create_response(500)
+			response.errMsg = u'该记录不存在，请检查'
 			return response.get_response()
 

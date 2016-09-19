@@ -13,8 +13,7 @@ var Reactman = require('reactman');
 var Store = require('./Store');
 var Constant = require('./Constant');
 var Action = require('./Action');
-
-//var CommentDialog = require('./CommentDialog.react');
+var ApplicationDialog = require('./ApplicationDialog.react');
 
 require('./style.css');
 
@@ -35,21 +34,24 @@ var ApplicationsPage = React.createClass({
 			target: event.target,
 			title: title,
 			confirm: _.bind(function() {
-				Action.passAudit(customerId, this.refs.table.refresh);
+				Action.ChangeStatus(customerId, method, this.refs.table.refresh);
 			}, this)
 		});
 	},
 
-	// onClickDelete: function(event) {
-	// 	var userId = parseInt(event.target.getAttribute('data-user-id'));
-	// 	Reactman.PageAction.showConfirm({
-	// 		target: event.target, 
-	// 		title: '确认删除吗?',
-	// 		confirm: _.bind(function() {
-	// 			Action.deleteUser(userId, this.refs.table.refresh);
-	// 		}, this)
-	// 	});
-	// },
+	onClickUnPass: function(event) {
+		var customerId = event.target.getAttribute('data-customer-id');
+		Reactman.PageAction.showDialog({
+			title: "应用审核驳回",
+			component: ApplicationDialog,
+			data: {
+				id: customerId
+			},
+			success: function() {
+				Action.updateApplication();
+			}
+		});
+	},
 
 	onChangeStore: function(event) {
 		var filterOptions = Store.getData().filterOptions;
@@ -62,7 +64,7 @@ var ApplicationsPage = React.createClass({
 				return (
 					<div>
 						<a className="btn btn-link btn-xs" onClick={this.onClickChangeStatus} data-customer-id={data.id} data-method='open'>确认通过</a>
-						<a className="btn btn-link btn-xs" onClick={this.onClickChangeStatus} data-customer-id={data.id}>驳回修改</a>
+						<a className="btn btn-link btn-xs" onClick={this.onClickUnPass} data-customer-id={data.id}>驳回修改</a>
 					</div>
 				);
 			}else if(data.status === '已启用'){
@@ -71,10 +73,16 @@ var ApplicationsPage = React.createClass({
 						<a className="btn btn-link btn-xs" onClick={this.onClickChangeStatus} data-customer-id={data.id} data-method='close'>暂停停用</a>
 					</div>
 				);
+			}else if(data.status === '已停用'){
+				return (
+					<div>
+						<a className="btn btn-link btn-xs" onClick={this.onClickChangeStatus} data-customer-id={data.id} data-method='open'>开启应用</a>
+					</div>
+				);
 			}else{
 				return (
 					<div>
-						<p>驳回原因：服务器IP地址错误，请修改后重新激活。</p>
+						<p>{data.reason}</p>
 					</div>
 				);
 			}

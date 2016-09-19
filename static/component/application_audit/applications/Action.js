@@ -13,14 +13,15 @@ var Resource = Reactman.Resource;
 var Constant = require('./Constant');
 
 var Action = {
-	passAudit: function(id, callback) {
+	ChangeStatus: function(id, _method, callback) {
 		Resource.post({
 			resource: 'application_audit.applications',
 			data: {
-				id: id
+				id: id,
+				method: _method
 			},
 			success: function() {
-				Reactman.PageAction.showHint('success', '审核成功');
+				Reactman.PageAction.showHint('success', '修改状态成功');
 				callback();
 			},
 			error: function(data) {
@@ -29,10 +30,10 @@ var Action = {
 		});
 	},
 
-	filterUser: function(filterOptions) {
+	updateApplication: function() {
 		Dispatcher.dispatch({
-			actionType: Constant.CONFIG_USERS_FILTER_USER,
-			data: filterOptions
+			actionType: Constant.UPDATE_APPLICATION,
+			data: {}
 		});
 	}
 };
