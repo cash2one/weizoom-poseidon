@@ -33,7 +33,27 @@ var MessagesPage = React.createClass({
 	},
 
 	onSubmit: function() {
-		Action.saveMessages(Store.getData());
+		var data = Store.getData();
+		var mobile_reg = /^1[3|4|5|7|8][0-9]{9}$/; //验证手机
+		var email_reg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g; //验证邮箱
+		if(!mobile_reg.test(data.mobileNumber)){
+			Reactman.PageAction.showHint('error', '请输入正确的手机号!');
+			return;
+		}
+		if(!email_reg.test(data.email)){
+			Reactman.PageAction.showHint('error', '请输入正确的邮箱!');
+			return;
+		}
+		var messages = {
+			'id': data.id,
+			'name': data.name,
+			'mobileNumber': data.mobileNumber,
+			'email': data.email,
+			'interfaceUrl': data.interfaceUrl,
+			'serverIp': data.serverIp,
+			'serverIps': JSON.stringify(data.serverIps)
+		}
+		Action.saveMessages(messages);
 	},
 
 	componentDidMount: function() {

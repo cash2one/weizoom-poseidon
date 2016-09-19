@@ -24,35 +24,64 @@ var AccountsPage = React.createClass({
 	},
 
 	onChangeStore: function(event) {
-		var filterOptions = Store.getData().filterOptions;
-		this.refs.table.refresh(filterOptions);
-	},
-
-	onConfirmFilter: function(data) {
-		Action.filterProducts(data);
-	},
-
-	onBeforeLoadTable: function() {
-		$(window).scrollTop(0);
-	},
-
-	onAfterLoadTable: function(data) {
-		debug(data);
+		var datas = Store.getData();
+		console.log(datas,"=======")
+		this.setState(Store.getData());
 	},
 
 	editMessage: function(){
 		W.gotoPage('/customer/messages/');
 	},
 
+	componentWillMount: function(){
+		Action.getCustomerStatus();
+	},
+
 	render:function(){
-		console.log(W.customerStatus);
-		var customerStatus = W.customerStatus;
+		var customerStatus = this.state.status;
+		if(customerStatus == undefined) {
+			return (
+				<div></div>
+			)
+		}
+
 		var statusTitle = '待激活';
 		var statusBtn = <a href="javascript:void(0);" style={{display:'inline-block', width:'100%'}} onClick={this.editMessage}>立即激活</a>;
-		if(customerStatus==1) {
+		if(customerStatus ==1 ) {
 			statusTitle = '审核中';
 			statusBtn = <a style={{display:'inline-block', width:'100%'}}>审核中</a>;
+		}else if(customerStatus == 2){
+			statusTitle = '已激活';
 		}
+
+		if(customerStatus == 2 || customerStatus == 3){
+			return (
+				<div className="mt15 xui-customer-acountsPage">
+					<div className="xui-default-box">
+						<div className="xi-default-box">
+							<span className="xi-default-box-status" style={{color:'#51B9B6'}}>{statusTitle}</span>
+							<div className="xi-default-box-tips">
+								<div style={{width:'30%', textAlign:'center'}}>
+									<span style={{fontSize:'20px', fontWeight:'bold'}}>默认应用</span>
+									<span style={{fontSize:'14px'}}>appid：293891</span>
+									<span style={{fontSize:'14px'}}>appsecret：dk78sdf767ds</span>
+								</div>
+								<div className="xi-split-line"></div>
+								<div className="xi-messages-ip-url">
+									<span>服务器IP：211.68.20.85</span>
+									<span>接口回调地址：http:/weapp.weizoom.com/notice</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div style={{clear: 'both'}}></div>
+					<div className="xui-apply-record">
+						1111111111
+					</div>
+				</div>
+				)
+		}
+
 		return (
 		<div className="mt15 xui-customer-acountsPage">
 			<div className="xui-default-box">

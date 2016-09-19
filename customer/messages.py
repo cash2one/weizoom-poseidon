@@ -26,7 +26,7 @@ class Messages(resource.Resource):
 	@login_required
 	def get(request):
 		"""
-		响应GET
+		用户提交信息页面
 		"""
 		c = RequestContext(request, {
 			'first_nav_name': FIRST_NAV,
@@ -38,6 +38,9 @@ class Messages(resource.Resource):
 
 	@login_required
 	def api_put(request):
+		"""
+		保存提交信息
+		"""
 		messages = request.POST.get('name', '')
 		customer_message = models.CustomerMessage.objects.create(
 			user = request.user, 

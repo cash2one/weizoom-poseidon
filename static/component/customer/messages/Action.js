@@ -30,24 +30,15 @@ var Action = {
 		});
 	},
 
-	saveMessages: function(data){
-		var messages = {
-			'name': data.name,
-			'mobileNumber': data.mobileNumber,
-			'email': data.email,
-			'interfaceUrl': data.interfaceUrl,
-			'serverIp': data.serverIp,
-			'serverIps': JSON.stringify(data.serverIps)
-		}
-		
-		if (data.id === -1) {
+	saveMessages: function(messages){
+		if (messages.id === -1) {
 			Resource.put({
 				resource: 'customer.messages',
 				data: messages,
 				success: function() {
 					Dispatcher.dispatch({
 						actionType: Constant.CUSTOMER_MESSAGES_SAVE_MESSAGES,
-						data: data
+						data: messages
 					})
 				},
 				error: function(data) {

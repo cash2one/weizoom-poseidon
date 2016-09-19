@@ -16,8 +16,7 @@ var Constant = require('./Constant');
 
 var Store = StoreUtil.createStore(Dispatcher, {
 	actions: {
-		'handleUpdateProduct': Constant.OUTLINE_DATAS_UPDATE_PRODUCT,
-		'handleFilterProducts': Constant.OUTLINE_DATAS_FILTER_PRODUCTS,
+		'handleGetCustomerStatus': Constant.CUSTOMER_ACCOUNTS_GET_CUSTOMER_STATUS
 	},
 
 	init: function() {
@@ -25,12 +24,9 @@ var Store = StoreUtil.createStore(Dispatcher, {
 		};
 	},
 
-	handleUpdateProduct: function(action) {
-		this.__emitChange();
-	},
-
-	handleFilterProducts: function(action) {
-		this.data.filterOptions = action.data;
+	handleGetCustomerStatus: function(action) {
+		console.log(action.data);
+		this.data = action.data;
 		this.__emitChange();
 	},
 

@@ -38,3 +38,17 @@ class Accounts(resource.Resource):
 		})
 		
 		return render_to_response('customer/accounts.html', c)
+
+	@login_required
+	def api_get(request):
+		customer_message = models.CustomerMessage.objects.filter(user=request.user)
+		status = 0 if not customer_message else customer_message[0].status
+		data = {
+			'status': status
+		}
+
+		#构造response
+		response = create_response(200)
+		response.data = data
+
+		return response.get_response()
