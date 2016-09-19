@@ -13,31 +13,18 @@ var Resource = Reactman.Resource;
 var Constant = require('./Constant');
 
 var Action = {
-	changeUserStatus: function(id, callback) {
+	passAudit: function(id, callback) {
 		Resource.post({
-			resource: 'config.users',
+			resource: 'application_audit.applications',
 			data: {
 				id: id
 			},
 			success: function() {
-				Reactman.PageAction.showHint('success', '修改状态成功');
+				Reactman.PageAction.showHint('success', '审核成功');
 				callback();
 			},
 			error: function(data) {
 				Reactman.PageAction.showHint('error', data.errMsg);
-			}
-		});
-	},
-
-	deleteUser: function(id, callback) {
-		Resource.delete({
-			resource: 'config.user',
-			data: {
-				id: id
-			},
-			success: function(data) {
-				Reactman.PageAction.showHint('success', '删除成功');
-				callback();
 			}
 		});
 	},

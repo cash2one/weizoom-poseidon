@@ -18,10 +18,14 @@ from core import dateutil
 UNACTIVE = 0
 UNREVIEW = 1
 USING = 2
+REJECT = 3
+STOPED = 4
 APP_STATUS = (
 	(UNACTIVE, u'未激活'),
 	(UNREVIEW, u'待审核'),
-	(USING, u'已启用')
+	(USING, u'已启用'),
+	(REJECT, u'已驳回'),
+	(STOPED, u'已停用')
 )
 APP_STATUS2NAME = dict(APP_STATUS)
 

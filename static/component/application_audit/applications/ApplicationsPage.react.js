@@ -24,16 +24,21 @@ var ApplicationsPage = React.createClass({
 		return Store.getData();
 	},
 
-	// onClickChangeStatus: function(event) {
-	// 	var userId = parseInt(event.target.getAttribute('data-user-id'));
-	// 	Reactman.PageAction.showConfirm({
-	// 		target: event.target,
-	// 		title: '确认开启该账号吗?',
-	// 		confirm: _.bind(function() {
-	// 			Action.changeUserStatus(userId, this.refs.table.refresh);
-	// 		}, this)
-	// 	});
-	// },
+	onClickChangeStatus: function(event) {
+		var customerId = parseInt(event.target.getAttribute('data-customer-id'));
+		var method = event.target.getAttribute('data-method');
+		var title = '该应用激活审核确认通过?';
+		if( method === 'close'){
+			title = '确认停用该应用吗?'
+		}
+		Reactman.PageAction.showConfirm({
+			target: event.target,
+			title: title,
+			confirm: _.bind(function() {
+				Action.passAudit(customerId, this.refs.table.refresh);
+			}, this)
+		});
+	},
 
 	// onClickDelete: function(event) {
 	// 	var userId = parseInt(event.target.getAttribute('data-user-id'));
@@ -52,22 +57,18 @@ var ApplicationsPage = React.createClass({
 	},
 
 	rowFormatter: function(field, value, data) {
-		if (field === 'name') {
-			return (
-				<a href={'/config/user/?id='+data.id}>{value}</a>
-			)
-		} else if (field === 'action') {
+		if (field === 'action') {
 			if(data.status === '待审核'){
 				return (
 					<div>
-						<a className="btn btn-link btn-xs" onClick={this.onClickChangeStatus} data-user-id={data.id}>确认通过</a>
-						<a className="btn btn-link btn-xs" onClick={this.onClickChangeStatus} data-user-id={data.id}>驳回修改</a>
+						<a className="btn btn-link btn-xs" onClick={this.onClickChangeStatus} data-customer-id={data.id} data-method='open'>确认通过</a>
+						<a className="btn btn-link btn-xs" onClick={this.onClickChangeStatus} data-customer-id={data.id}>驳回修改</a>
 					</div>
 				);
 			}else if(data.status === '已启用'){
 				return (
 					<div>
-						<a className="btn btn-link btn-xs" onClick={this.onClickChangeStatus} data-user-id={data.id}>暂停停用</a>
+						<a className="btn btn-link btn-xs" onClick={this.onClickChangeStatus} data-customer-id={data.id} data-method='close'>暂停停用</a>
 					</div>
 				);
 			}else{

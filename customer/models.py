@@ -3,11 +3,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-#账号状态
+#应用状态
 STATUS_UNACTIVATED = 0 #待激活
 STATUS_CHECKING = 1 #审核中
 STATUS_ACTIVATED = 2 #已激活
 STATUS_REJECT = 3 #已驳回
+STATUS_STOPED = 4 #已停用
 
 class CustomerMessage(models.Model):
 	"""
@@ -21,6 +22,8 @@ class CustomerMessage(models.Model):
 	interface_url = models.CharField(max_length=1024, null=True) #接口回调地址
 	status = models.IntegerField(default=STATUS_UNACTIVATED) #状态
 	is_deleted = models.BooleanField(default=False)
+	app_id = models.CharField(max_length=50, null=True) #app_id
+	app_secret = models.CharField(max_length=50, null=True) #app_secret
 	created_at = models.DateTimeField(auto_now_add=True)  #添加时间
 
 	class Meta(object):

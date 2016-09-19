@@ -27,12 +27,6 @@ COUNT_PER_PAGE = 20
 filter2field = {
 }
 
-status2name = {
-	1: u'待审核',
-	2: u'已启用',
-	3: u'已驳回',
-}
-
 class ApplicationAudit(resource.Resource):
 	app = 'application_audit'
 	resource = 'applications'
@@ -64,6 +58,7 @@ class ApplicationAudit(resource.Resource):
 		for application in applications:
 			cur_user_info = user_infos.get(id=application.user_id)
 			rows.append({
+				'id': application.id,
 				'username': cur_user_info.username,
 				'displayName': cur_user_info.first_name,
 				'appName': u'默认应用',
@@ -74,7 +69,7 @@ class ApplicationAudit(resource.Resource):
 				'email': application.email,
 				'serverIp': application.server_ip,
 				'interfaceUrl': application.interface_url,
-				'status': status2name[application.status]
+				'status': account_models.APP_STATUS2NAME[application.status]
 			})
 		data = {
 			'rows': rows,
@@ -88,11 +83,15 @@ class ApplicationAudit(resource.Resource):
 
 	@login_required
 	def api_post(request):
-		#更新账户状态
-		user_id = request.POST.get('id','')
+		#提交审核
+		customer_id = request.POST.get('id','')
 		try:
-			UserProfile.objects.filter(user_id=user_id).update(
-				status = 0
+			user_id = customer_models.CustomerMessage.objects.get(id=customer_id).user_id
+			customer_models.CustomerMessage.objects.filter(id=customer_id).update(
+				status = customer_models.STATUS_ACTIVATED
+				)
+			account_models.UserProfile.objects.filter(user_id=user_id).update(
+				status = customer_models.STATUS_ACTIVATED
 				)
 			response = create_response(200)
 			return response.get_response()
