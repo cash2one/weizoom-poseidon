@@ -1,5 +1,5 @@
 author:徐梓豪 2016-09-20
-Feature: 测试商品列表API的场景
+Feature: 测试订单产生API的场景
 Background:
 	Given manager登录系统:管理系统
 	When manager创建运营账号
@@ -191,10 +191,7 @@ Background:
 		|account_main|application_name|     appid    |   appsecret  |dev_name|mob_number |  email_address  | ip_address | interface_address    |statute|   operation   |
 		|  爱伲咖啡  |  默认应用      |   3565989    |sd124wr45sfds |爱伲咖啡|13813984405|ainicoffee@qq.com|192.168.1.3
 		|http://192.168.0.130|已启用 |    暂停停用   |
-
-@poseidon @api
-Scenario:通过API获取商品列表
-	Given aini登录管理系统
+	Given aini登录系统:管理系统
 	When aini添加商品
 		"""
 		[{
@@ -245,24 +242,87 @@ Scenario:通过API获取商品列表
 		"description":"苹果平板，大屏看电视"
 		}]
 		"""
-
-	When 访问api
+	Given yunying登录系统:管理系统
+	When yunying同步商品'武汉鸭脖'
 		"""
 		{
-		"token":"$token(0511240157)$",
-		"product_id":"$product_id(854)$"
+		"synchronous_goods":"微众商城",
+		"synchronous_goods":"微众家",
+		"synchronous_goods":"微众白富美"
 		}
 		"""
-	Then 获取返回结果
+	When yunying同步商品'耐克男鞋'
 		"""
 		{
-		"product":"$product_id(854)$",
-		"product_name":"武汉鸭脖",
-		"promotion_title":"武汉鸭脖",
-		"product_norm":"否",
-		"product_price":"10.00",
-		"show_img":"https://shop14744486.koudaitong.com/v2/showcase/goods?alias=3emrtlx47zlri&from=wsc&kdtfrom=wsc",
-		"product_presentation":"周黑鸭 鲜卤鸭脖 230g/袋 办公室休闲零食 肉干小食"
+		"synchronous_goods":"微众家",
+		"synchronous_goods":"微众白富美"
 		}
 		"""
+	Then yunying查看商品列表
+		| goods_name | costumer_name |  product_style   |sales  |  status  |synchronous_platform|
+		|  武汉鸭脖  |   爱伲咖啡    |  生活用品--零食  | 0.00  |  已同步  |微众商城,微众家,微众白富美|
+		|  耐克男鞋  |   爱伲咖啡    |  电子数码--耳机  | 0.00  |  已同步  |微众家,微众白富美   |
+		|    ipad    |   爱伲咖啡    |电子数码--平板电脑| 0.00  |  未同步  |					|
 
+	Given jobs登录系统:weapp
+	When jobs上架商品
+		"""
+		[{
+		"name":"周黑鸭"
+		},{
+		"name":"耐克男鞋"
+		}]
+		"""
+	When 微信用户在微商城中购买同步了的商品
+		|	order_id	  | date       | consumer |    type   |businessman|   product | payment  | payment_method | freight |   price  | product_integral |  	 coupon  		| paid_amount |	weizoom_card 		| alipay | wechat | cash |      action       |  order_status   |
+		|201609201000001  | 2016-09-22 | bill     |    购买   | 微众商城   | 武汉鸭脖  | 支付    | 支付宝         | 10      |   9.99   |      20.00       |                		|   199.80      |           		  |10.00 | 0      | 0    |    jobs,支付      |  待发货         |
+		|201609201000002  | 2016-09-20 | tom      |    购买   | 微众家     | 耐克男鞋  | 支付    | 支付宝         | 15      |  298.00  |       1.00       |        				|         298.00   |       	          | 29.00| 0      | 0    |    jobs,支付      |  待发货         |
+
+@poseidon @api_order
+Scenairo:测试订单产生API的场景
+	Given aini登录系统:管理系统
+	Then aini查看订单列表
+		|    order_id   |   date   | order_price | consumer | businessman | 
+		|201609201000001|2016-09-22|    10.00    |   bill   |  微众商城   |
+		|201609201000002|2016-09-20|    29.00    |   tom    |   微众家    |
+
+	When 访问api	
+		"""
+		{
+		"order_id":"$order_id(201609201000001)$"
+		}
+		"""
+	Then 获取返回值
+		"""
+		{
+		"order_id":"201609201000001",
+		"order_price":14.90,           #接口传回结算价
+		"name":"耐克男鞋",
+		"num":1.00,
+		"consumer":"bill",
+		"businessman","微众商城",
+		"date":"2016-09-22",
+		"freight":"0.00",
+		"statute":"待发货"
+		}
+		"""
+	When 访问api	
+		"""
+		{
+		"order_id":"$order_id(201609201000001)$"
+		}
+		"""
+	Then 获取返回值
+		"""
+		{
+		"order_id":"201609201000002",
+		"order_price":8.00,           #接口传回结算价
+		"name":"武汉鸭脖",
+		"num":1.00,
+		"consumer":"bill",
+		"businessman","微众家",
+		"date":"2016-09-22",
+		"freight":"0.00",
+		"statute":"待发货"
+		}
+		"""
