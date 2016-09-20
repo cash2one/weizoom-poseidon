@@ -8,9 +8,6 @@ feature:管理员管理开放平台
 """
 Background:
 	Given manager登录开放平台系统
-
-@poseidon	
-Scenario:1 管理员创建开放平台账号
 	When manager创建账号
 	"""
 	{
@@ -20,6 +17,9 @@ Scenario:1 管理员创建开放平台账号
 	"isopen":"是"
 	}
 	"""
+@poseidon	
+Scenario:1 管理员创建开放平台账号
+	
 	Then manager查看账号列表
 	| ID | account_name |  main_name  |   creat_time   |   statute   |   operation  |
 	| 01 |     aini     |   爱伲咖啡  |2016-09-13 15:20|    已启用   |   编辑/关闭  |
