@@ -16,6 +16,7 @@ from core import resource
 from core.jsonresponse import create_response
 import nav
 from account.models import *
+from customer import models as customer_models
 from core.frontend_data import FrontEndData
 
 FIRST_NAV = 'config'
@@ -100,9 +101,8 @@ class User(resource.Resource):
 	def api_delete(request):
 		is_active = int(request.POST.get("is_active", '0')) != 0
 		auth_models.User.objects.filter(id=request.POST['id']).update(is_active=is_active)
-
+		customer_models.CustomerMessage.objects.filter(user_id=request.POST['id']).update(is_deleted=True)
 		response = create_response(200)
-
 		return response.get_response()
 
 def check_username_valid(username):

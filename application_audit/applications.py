@@ -58,15 +58,17 @@ class ApplicationAudit(resource.Resource):
 		display_name = filters.get('displayName','')
 		status = filters.get('status','')
 		if username:
-			filter_users = User.objects.filter(username__icontains=username)
+			filter_users = User.objects.filter(username__icontains=username, is_active=True)
 			filter_users_ids = [filter_user.id for filter_user in filter_users]
 			applications = applications.filter(user_id__in=filter_users_ids)
 		if display_name:
-			filter_users = User.objects.filter(first_name__icontains=display_name)
+			filter_users = User.objects.filter(first_name__icontains=display_name, is_active=True)
 			filter_users_ids = [filter_user.id for filter_user in filter_users]
 			applications = applications.filter(user_id__in=filter_users_ids)
 		if status:
-			applications = applications.filter(status=status)
+			filter_accounts = account_models.UserProfile.objects.filter(app_status=status)
+			filter_users_ids = [filter_account.user_id for filter_account in filter_accounts]
+			applications = applications.filter(user_id__in=filter_users_ids)
 
 		pageinfo, applications = paginator.paginate(applications, cur_page, COUNT_PER_PAGE)
 		user_ids = [application.user_id for application in applications]
