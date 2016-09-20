@@ -240,13 +240,54 @@ Background:
 			"customer_message": "bill的订单备注"
 		}
 		"""
+	Given manager登录系统:开放平台
+	When manager创建账号
+		"""
+		{
+		"acoount_name":"aini",
+		"password":"123456",
+		"account_main":"爱伲咖啡",
+		"isopen":"是"
+		}
+		"""
+	Given aini使用密码123456登录系统:开放平台
+	Then aini激活应用
+		"""
+		{
+		"dev_name":"爱伲咖啡",
+		"mobile_num":"13813984405",
+		"e_mail":"ainicoffee@qq.com",
+		"ip_address":"192.168.1.3",
+		"interface_address":"http://192.168.0.130"
+		}
+		"""
+	Then aini查看应用列表
+		|application_name|    app_id    |   app_secret   |   statute    |
+		|    默认应用    |55550bb005370f|20160913b13s057b|    待审核    |
+
+	Given manager登录系统:开放平台
+	Then manager查看应用审核列表
+		|account_main|application_name|     appid    |   appsecret  |dev_name|mob_number |  email_address  | ip_address | interface_address    |statute|   operation   |
+		|  爱伲咖啡  |  默认应用      |审核后自动生成|审核后自动生成|爱伲咖啡|13813984405|ainicoffee@qq.com|192.168.1.3
+		|http://192.168.0.130|待审核 |确认通过/驳回修改|
+	When manager同意申请
+		"""
+		{
+		"account_main":"爱伲咖啡"
+		}
+		"""
+	Then manager查看应用审核列表
+		|account_main|application_name|     appid    |   appsecret  |dev_name|mob_number |  email_address  | ip_address | interface_address    |statute|   operation   |
+		|  爱伲咖啡  |  默认应用      |   3565989    |sd124wr45sfds |爱伲咖啡|13813984405|ainicoffee@qq.com|192.168.1.3
+		|http://192.168.0.130|已启用 |    暂停停用   |
 
 @refund @order
-Scenario:1 ziying单个供应商商品订单-待支付
+Scenario:1 单个供应商商品订单-待支付
 	#待支付订单
 		#后台订单列表
-		Given zy1登录系统
-		Then zy1获得自营订单列表
+
+	Given aini登录系统:管理系统
+	Then aini查看订单列表
 			"""
 			[{
 				"order_no":"001",
@@ -270,8 +311,8 @@ Scenario:1 ziying单个供应商商品订单-待支付
 			}]
 			"""
 
-		#后台订单详情
-		Then zy1获得自营订单'001'
+	#后台订单详情
+	Then aini获得自营订单'001'
 			"""
 			{
 				"order_no":"001",
@@ -304,18 +345,18 @@ Scenario:1 ziying单个供应商商品订单-待支付
 				"final_price": 50.00
 			}
 			"""
-		Then zy1能获得订单'001'操作日志
+		Then aini能获得订单'001'操作日志
 			| action                  | operator |
 			| 下单                    | 客户     |
 
 @refund @order
-Scenario:2 ziying单个供应商商品订单-待发货
+Scenario:2 单个供应商商品订单-待发货
 	#待发货订单
 		When bill使用支付方式'微信支付'进行支付订单'001'于2016-01-02 10:00:00::apiserver
 
 		#后台订单列表
-		Given zy1登录系统
-		Then zy1获得自营订单列表
+		Given aini登录系统
+		Then aini获得自营订单列表
 			"""
 			[{
 				"order_no":"001",
@@ -346,7 +387,7 @@ Scenario:2 ziying单个供应商商品订单-待发货
 			"""
 
 		#后台订单详情
-		Then zy1获得自营订单'001'
+		Then aini获得自营订单'001'
 			"""
 			{
 				"order_no":"001",
@@ -378,18 +419,18 @@ Scenario:2 ziying单个供应商商品订单-待发货
 				"final_price": 50.00
 			}
 			"""
-		Then zy1能获得订单'001'操作日志
+		Then aini能获得订单'001'操作日志
 			| action                  | operator |
 			| 下单                    | 客户     |
 			| 支付                    | 客户     |
 
 @refund @order
-Scenario:3 ziying单个供应商商品订单-退款中
+Scenario:3 单个供应商商品订单-退款中
 	#退款中
 		When bill使用支付方式'微信支付'进行支付订单'001'于2016-01-02 10:00:00::apiserver
 
-		Given zy1登录系统
-		When zy1'申请退款'自营订单'001-供货商1'
+		Given aini登录系统
+		When aini申请退款'自营订单'001-供货商1'
 			"""
 			{
 				"cash":10.00,
@@ -401,7 +442,7 @@ Scenario:3 ziying单个供应商商品订单-退款中
 			"""
 
 		#后台订单列表
-		Then zy1获得自营订单列表
+		Then aini获得自营订单列表
 			"""
 			[{
 				"order_no":"001",
@@ -438,7 +479,7 @@ Scenario:3 ziying单个供应商商品订单-退款中
 			"""
 
 		#后台订单详情
-		Then zy1获得自营订单'001'
+		Then aini获得自营订单'001'
 			"""
 			{
 				"order_no":"001",
@@ -470,19 +511,19 @@ Scenario:3 ziying单个供应商商品订单-退款中
 				"final_price": 50.00
 			}
 			"""
-		Then zy1能获得订单'001'操作日志
+		Then aini能获得订单'001'操作日志
 			| action                  | operator |
 			| 下单                    | 客户     |
 			| 支付                    | 客户     |
 			| 退款                    | zy1      |
 
 @refund @order
-Scenario:4 ziying单个供应商商品订单-退款成功
+Scenario:4 单个供应商商品订单-退款成功
 	#退款完成
 		When bill使用支付方式'微信支付'进行支付订单'001'于2016-01-02 10:00:00::apiserver
 
-		Given zy1登录系统
-		When zy1'申请退款'自营订单'001-供货商1'
+		Given aini登录系统
+		When aini申请退款'自营订单'001-供货商1'
 			"""
 			{
 				"cash":10.00,
@@ -492,10 +533,10 @@ Scenario:4 ziying单个供应商商品订单-退款成功
 				"intergal_money":0.00
 			}
 			"""
-		When zy1通过财务审核'退款成功'自营订单'001-供货商1'
+		When aini通过财务审核'退款成功'自营订单'001-供货商1'
 
 		#后台订单列表
-		Then zy1获得自营订单列表
+		Then aini获得自营订单列表
 			"""
 			[{
 				"order_no":"001",
@@ -532,7 +573,7 @@ Scenario:4 ziying单个供应商商品订单-退款成功
 			"""
 
 		#后台订单详情
-		Then zy1获得自营订单'001'
+		Then aini获得自营订单'001'
 			"""
 			{
 				"order_no":"001",
@@ -574,9 +615,9 @@ Scenario:4 ziying单个供应商商品订单-退款成功
 				}
 			}
 			"""
-		Then zy1能获得订单'001'操作日志
+		Then aini能获得订单'001'操作日志
 			| action                  | operator |
 			| 下单                    | 客户     |
 			| 支付                    | 客户     |
-			| 退款                    | zy1      |
-			| 退款完成                | zy1      |
+			| 退款                    | aini     |
+			| 退款完成                | aini     |
