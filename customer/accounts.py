@@ -44,13 +44,7 @@ class Accounts(resource.Resource):
 		customer_message = models.CustomerMessage.objects.get(user=request.user)
 		user_profile = account_models.UserProfile.objects.filter(user=request.user)
 		application_logs = application_audit_models.ApplicationLog.objects.filter(user_id=request.user.id).order_by('review_time')
-		# logs = []
-		# for application_log in application_logs:
-		# 	logs.append({
-		# 		'status': application_log.status,
-		# 		'reason': application_log.reason,
-		# 		'reviewTime': application_log.review_time.strftime("%Y-%m-%d")
-		# 	})
+
 		logs = [{
 			'status': application_log.status,
 			'reason': application_log.reason,
@@ -62,11 +56,9 @@ class Accounts(resource.Resource):
 			'status': 0 if not user_profile else user_profile[0].app_status,
 			'appId': customer_message.app_id,
 			'appSecret': customer_message.app_secret,
-			# 'reason': customer_message.reason,
 			'serverIp': customer_message.server_ip,
 			'interfaceUrl': customer_message.interface_url,
 			'logs': json.dumps(logs)
-			# 'reviewTime': '' if not customer_message.review_time else customer_message.review_time.strftime("%Y-%m-%d")
 		}
 
 		#构造response
