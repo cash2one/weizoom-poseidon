@@ -13,6 +13,7 @@ from core.jsonresponse import create_response
 import nav
 import models
 from account import models as account_models
+from application_audit import models as application_audit_models
 
 FIRST_NAV = 'customer'
 SECOND_NAV = 'customer-accounts'
@@ -42,15 +43,30 @@ class Accounts(resource.Resource):
 	def api_get(request):
 		customer_message = models.CustomerMessage.objects.get(user=request.user)
 		user_profile = account_models.UserProfile.objects.filter(user=request.user)
+		application_logs = application_audit_models.ApplicationLog.objects.filter(user_id=request.user.id).order_by('review_time')
+		# logs = []
+		# for application_log in application_logs:
+		# 	logs.append({
+		# 		'status': application_log.status,
+		# 		'reason': application_log.reason,
+		# 		'reviewTime': application_log.review_time.strftime("%Y-%m-%d")
+		# 	})
+		logs = [{
+			'status': application_log.status,
+			'reason': application_log.reason,
+			'reviewTime': application_log.review_time.strftime("%Y-%m-%d")
+		} for application_log in application_logs]
+
 		data = {
 			'customerId': customer_message.id,
 			'status': 0 if not user_profile else user_profile[0].app_status,
 			'appId': customer_message.app_id,
 			'appSecret': customer_message.app_secret,
-			'reason': customer_message.reason,
+			# 'reason': customer_message.reason,
 			'serverIp': customer_message.server_ip,
 			'interfaceUrl': customer_message.interface_url,
-			'reviewTime': '' if not customer_message.review_time else customer_message.review_time.strftime("%Y-%m-%d")
+			'logs': json.dumps(logs)
+			# 'reviewTime': '' if not customer_message.review_time else customer_message.review_time.strftime("%Y-%m-%d")
 		}
 
 		#构造response

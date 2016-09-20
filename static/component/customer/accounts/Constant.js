@@ -6,6 +6,5 @@
 var keyMirror = require('keymirror');
 
 module.exports = keyMirror({
-	CUSTOMER_ACCOUNTS_GET_CUSTOMER_STATUS: null,
-	OUTLINE_DATAS_FILTER_PRODUCTS: null
+	CUSTOMER_ACCOUNTS_GET_CUSTOMER_STATUS: null
 });

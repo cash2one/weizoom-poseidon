@@ -22,17 +22,6 @@ var Action = {
 				actionType: Constant.CUSTOMER_ACCOUNTS_GET_CUSTOMER_STATUS
 			}
 		});
-	},
-
-	updateProduct: function(product, field, data) {
-		Dispatcher.dispatch({
-			actionType: Constant.OUTLINE_DATAS_UPDATE_PRODUCT,
-			data: {
-				product: product,
-				field: field,
-				data: data
-			}
-		});
 	}
 };
 

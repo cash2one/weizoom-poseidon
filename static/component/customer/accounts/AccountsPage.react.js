@@ -45,6 +45,7 @@ var AccountsPage = React.createClass({
 
 	render:function(){
 		var customerStatus = this.state.status;
+		var logs = this.state.logs;
 		var reviewTime = this.state.reviewTime;
 		var appId = this.state.appId;
 		var appSecret = this.state.appSecret;
@@ -52,7 +53,6 @@ var AccountsPage = React.createClass({
 		var interfaceUrl = this.state.interfaceUrl;
 		var statusTitle = '待激活';
 		var statusBtn = '';
-		var resultText = '';
 		var style = {}
 		style = {color: '#FF6600'};
 
@@ -61,23 +61,42 @@ var AccountsPage = React.createClass({
 			statusBtn = <a href="javascript:void(0);" style={{display:'inline-block', width:'100%'}}>审核中</a>;
 		}else if(customerStatus == 2){
 			statusTitle = '已激活';
-			resultText = '应用激活审核通过，可以正常使用；';
 			style = {color: '#51B9B6'};
 		}else if(customerStatus == 3) {
-			var reason = this.state.reason;
 			statusTitle = '已驳回';
-			resultText = '应用激活申请被驳回，' + reason;
 			appId = '激活后自动生成';
 			appSecret = '激活后自动生成';
 			statusBtn = <a href="javascript:void(0);" style={{display:'inline-block', width:'100%'}} onClick={this.editMessage}>重新修改并激活</a>;
 		}else if(customerStatus == 4) {
 			statusTitle = '已停用';
-			resultText = '应用已暂停使用';
 		}else{
 			statusBtn = <a href="javascript:void(0);" style={{display:'inline-block', width:'100%'}} onClick={this.editMessage}>立即激活</a>;
 		}
 
 		if(customerStatus == 2 || customerStatus == 3 || customerStatus == 4){
+			logs = JSON.parse(logs);
+			var applyRecord = '';
+			if(logs.length>0) {
+				applyRecord = logs.map(function(log, index){
+					var status = log.status;
+					var resultText = '';
+					if(status == 2) {
+						resultText = '应用激活审核通过，可以正常使用；';
+					}else if(status == 3) {
+						var reason = log.reason;
+						resultText = '应用激活申请被驳回，' + reason;
+					}else {
+						resultText = '应用已暂停使用';
+					}
+
+					return(
+						<div key={index}>
+							<span className="xi-time">{log.reviewTime}</span>
+							<span className="xi-result">{resultText}</span>
+						</div>
+					)
+				})
+			}
 			return (
 				<div className="mt15 xui-customer-acountsPage">
 					<div className="xui-default-box">
@@ -107,8 +126,7 @@ var AccountsPage = React.createClass({
 					<div style={{clear: 'both'}}></div>
 					<div className="xui-apply-record">
 						<span style={{display: 'block', fontWeight:'bold'}}>审核记录</span>
-						<span className="xi-time">{reviewTime}</span>
-						<span className="xi-result">{resultText}</span>
+						{applyRecord}
 					</div>
 				</div>
 				)
