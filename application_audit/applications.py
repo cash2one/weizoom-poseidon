@@ -15,6 +15,9 @@ from core import resource
 from core.jsonresponse import create_response
 from core import paginator
 from util import db_util
+from util import send_phone_msg
+from eaglet.core import watchdog
+
 import nav
 from account import models as account_models
 from customer import models as customer_models
@@ -141,7 +144,8 @@ class ApplicationAudit(resource.Resource):
 		customer_id = request.POST.get('id','')
 		reason = request.POST.get('reason','')
 		try:
-			user_id = customer_models.CustomerMessage.objects.get(id=customer_id).user_id
+			customer_message = customer_models.CustomerMessage.objects.get(id=customer_id)
+			user_id = customer_message.user_id
 			application_models.ApplicationLog.objects.create(
 				user_id = user_id,
 				customer_id = customer_id,
@@ -151,6 +155,15 @@ class ApplicationAudit(resource.Resource):
 			account_models.UserProfile.objects.filter(user_id=user_id).update(
 				app_status = account_models.REJECT
 				)
+
+			#向客户发送短信通知
+			try:
+				if customer_message.mobile_number:
+					content = u'%s【微众传媒】' %  reason
+					rs = send_phone_msg.send_phone_captcha(phones=str(customer_message.mobile_number), content=content)
+			except:
+				watchdog.info(u"发送驳回信息异常 id：%s" % customer_id)
+
 			response = create_response(200)
 			return response.get_response()
 		except Exception,e:

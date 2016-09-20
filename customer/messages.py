@@ -67,6 +67,8 @@ class Messages(resource.Resource):
 		"""
 		保存提交信息
 		"""
+		print request.POST['serverIp'],"========"
+		print type(str(request.POST['serverIp']))
 		customer_message = models.CustomerMessage.objects.create(
 			user = request.user, 
 			name = request.POST['name'], 
