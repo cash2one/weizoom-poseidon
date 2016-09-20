@@ -58,6 +58,12 @@ class User(resource.Resource):
 		password = request.POST['password']
 		display_name = request.POST['display_name']
 		status = int(request.POST['status'])
+		
+		if not check_username_valid(username):
+			response = create_response(500)
+			response.errMsg = u'登录账号已存在，请重新输入'
+			return response.get_response()
+
 		user = auth_models.User.objects.create_user(username, username+'@weizoom.com', password)
 		auth_models.User.objects.filter(id=user.id).update(first_name=display_name)
 		UserProfile.objects.filter(user_id=user.id).update(
@@ -70,11 +76,19 @@ class User(resource.Resource):
 	@login_required
 	def api_post(request):
 		user_id = request.POST['id']
+		username = request.POST['name']
 		password = request.POST.get('password','')
+		display_name = request.POST['display_name']
 		status = int(request.POST['status'])
+
+		if not check_username_valid(username):
+			response = create_response(500)
+			response.errMsg = u'登录账号已存在，请重新输入'
+			return response.get_response()
+		
 		user = auth_models.User.objects.get(id=user_id)
-		user.username = request.POST['name']
-		user.first_name = request.POST['display_name']
+		user.username = username
+		user.first_name = display_name
 		if password != '':
 			user.set_password(password)
 		user.save()
@@ -90,3 +104,10 @@ class User(resource.Resource):
 		response = create_response(200)
 
 		return response.get_response()
+
+def check_username_valid(username):
+	"""
+	创建用户时，检查登录账号是否存在
+	"""
+	user = auth_models.User.objects.filter(username=username)
+	return False if user else True

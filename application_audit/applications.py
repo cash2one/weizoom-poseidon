@@ -18,6 +18,7 @@ from util import db_util
 import nav
 from account import models as account_models
 from customer import models as customer_models
+import models as application_models
 
 FIRST_NAV = 'application_audit'
 SECOND_NAV = 'application-audit'
@@ -73,6 +74,7 @@ class ApplicationAudit(resource.Resource):
 		for application in applications:
 			cur_user_info = user_infos.get(id=application.user_id)
 			cur_account_info = account_infos.get(user_id=application.user_id)
+			reject_logs = application_models.ApplicationLog.objects.filter(user_id=application.user_id, status=account_models.REJECT)
 			rows.append({
 				'id': application.id,
 				'username': cur_user_info.username,
@@ -86,7 +88,7 @@ class ApplicationAudit(resource.Resource):
 				'serverIp': application.server_ip,
 				'interfaceUrl': application.interface_url,
 				'status': account_models.APP_STATUS2NAME[cur_account_info.app_status],
-				'reason': u'驳回原因：' + application.reason if application.reason else ''
+				'reason': u'驳回原因：' + reject_logs.last().reason if cur_account_info.app_status == account_models.REJECT else ''
 			})
 		data = {
 			'rows': rows,
@@ -110,8 +112,10 @@ class ApplicationAudit(resource.Resource):
 		try:
 			user_id = customer_models.CustomerMessage.objects.get(id=customer_id).user_id
 			customer_info = customer_models.CustomerMessage.objects.filter(id=customer_id)
-			customer_info.update(
-				review_time = datetime.datetime.now()
+			application_models.ApplicationLog.objects.create(
+				user_id = user_id,
+				customer_id = customer_id,
+				status = change_to_status
 				)
 			account_models.UserProfile.objects.filter(user_id=user_id).update(
 				app_status = change_to_status
@@ -138,8 +142,10 @@ class ApplicationAudit(resource.Resource):
 		reason = request.POST.get('reason','')
 		try:
 			user_id = customer_models.CustomerMessage.objects.get(id=customer_id).user_id
-			customer_models.CustomerMessage.objects.filter(id=customer_id).update(
-				review_time = datetime.datetime.now(),
+			application_models.ApplicationLog.objects.create(
+				user_id = user_id,
+				customer_id = customer_id,
+				status = account_models.REJECT,
 				reason = reason
 				)
 			account_models.UserProfile.objects.filter(user_id=user_id).update(
@@ -147,7 +153,8 @@ class ApplicationAudit(resource.Resource):
 				)
 			response = create_response(200)
 			return response.get_response()
-		except:
+		except Exception,e:
+			print e
 			response = create_response(500)
 			response.errMsg = u'该记录不存在，请检查'
 			return response.get_response()
