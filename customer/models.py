@@ -24,7 +24,6 @@ class CustomerMessage(models.Model):
 	app_id = models.CharField(max_length=50, null=True) #app_id
 	app_secret = models.CharField(max_length=50, null=True) #app_secret
 	reason = models.CharField(max_length=1024, null=True) #驳回原因
-	review_time = models.DateTimeField(null=True)  #审核时间
 	created_at = models.DateTimeField(auto_now_add=True)  #添加时间
 
 	class Meta(object):

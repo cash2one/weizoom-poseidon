@@ -67,10 +67,12 @@ class ApplicationAudit(resource.Resource):
 		pageinfo, applications = paginator.paginate(applications, cur_page, COUNT_PER_PAGE)
 		user_ids = [application.user_id for application in applications]
 		user_infos = User.objects.filter(id__in=user_ids)
+		account_infos = account_models.UserProfile.objects.filter(user_id__in=user_ids)
 		#组装数据
 		rows = []
 		for application in applications:
 			cur_user_info = user_infos.get(id=application.user_id)
+			cur_account_info = account_infos.get(user_id=application.user_id)
 			rows.append({
 				'id': application.id,
 				'username': cur_user_info.username,
@@ -83,7 +85,7 @@ class ApplicationAudit(resource.Resource):
 				'email': application.email,
 				'serverIp': application.server_ip,
 				'interfaceUrl': application.interface_url,
-				'status': account_models.APP_STATUS2NAME[application.status],
+				'status': account_models.APP_STATUS2NAME[cur_account_info.app_status],
 				'reason': u'驳回原因：' + application.reason if application.reason else ''
 			})
 		data = {
