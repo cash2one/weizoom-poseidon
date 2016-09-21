@@ -57,11 +57,11 @@ Background:
 						"models":{
 								"M": {
 									"price": 301.00,
-									"stock_type": "无限"
+									"stocks": 101
 								},
 								"S": {
 									"price": 300.00,
-									"stock_type": "无限"
+									"stocks": 101
 								}
 							}
 						}
@@ -142,11 +142,111 @@ Scenario:2 通过商品ID调用多规格商品API
 						"models":{
 								"M": {
 									"price": 301.00,
-									"stock_type": "无限"
+									"stocks": 101
 								},
 								"S": {
 									"price": 300.00,
-									"stock_type": "无限"
+									"stocks": 101
+								}
+							}
+						},
+				"postage":[{
+					"postage":10,
+					"condition_money": "100"
+				}]
+			}
+		"""
+Scenario:3 供货商修改单规格商品后，jd通过商品ID调用单规格商品API，获得修改后单规格商品详情
+	#同步商品到自营平台（修改商品1中的价格，库存后进行同步）
+			Given 给自营平台同步商品
+				"""
+				{
+					"accounts":["zy1"],
+					"supplier_name":"供货商1",
+					"id": "000001",
+					"name": "商品1-1",
+					"promotion_title": "商品1-2促销",
+					"price": 50.01,
+					"weight": 1,
+					"image": "love.png",
+					"stocks": 101,
+					"detail": "商品2描述信息"
+				}
+				"""	
+	When jd调用'商品详情'api
+		"""
+			{
+				"productId":"000001"
+			}
+		"""
+	Then jd获取'商品详情'api返回结果
+		"""
+			{
+				"id": "000001",
+				"name": "商品1-1",
+				"promotion_title": "商品1-2促销",
+				"price": 50.01,
+				"weight": 1,
+				"image": "love.png",
+				"stocks": 101,
+				"detail": "商品1-1描述信息",
+				"postage":[{
+					"postage":10,
+					"condition_money": "100"
+				}]
+			}
+		"""
+Scenario:4 供货商修改多规格商品后，jd通过商品ID调用多规格商品API，获得修改后多规格商品详情
+	#同步商品到自营平台（修改商品2中的价格，库存后进行同步）
+		Given 给自营平台同步商品
+				"""
+				{
+					"accounts":["zy1"],
+					"supplier_name":"供货商1",
+					"id": "000002",
+					"name": "商品2",
+					"promotion_title": "商品2促销",
+					"weight": 1,
+					"image": "love.png",
+					"detail": "商品1-1描述信息",
+					"model": {
+						"models":{
+								"M": {
+									"price": 302.00,
+									"stocks": 102
+								},
+								"S": {
+									"price": 300.00,
+									"stocks": 102
+								}
+							}
+						}
+				}
+				"""
+	When jd调用'商品详情'api
+		"""
+			{
+				"productId":"000002"
+			}
+		"""
+	Then jd获取'商品详情'api返回结果
+		"""
+			{
+				"id": "000002",
+				"name": "商品2",
+				"promotion_title": "商品2促销",
+				"weight": 1,
+				"image": "love.png",
+				"detail": "商品2描述信息",
+				"model": {
+						"models":{
+								"M": {
+									"price": 302.00,
+									"stocks": 102
+								},
+								"S": {
+									"price": 300.00,
+									"stocks": 102
 								}
 							}
 						},
