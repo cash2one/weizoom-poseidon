@@ -303,18 +303,9 @@ Scenairo:测试订单产生API的场景
 		"""
 		{
 		"order_id":"201609201000001",
-		"order_price":14.90,           #接口传回结算价
-		"name":"耐克男鞋",
-		"num":1.00,
-		"consumer":"bill",
-		"telephone":"13813984405",
-		"businessman","微众商城",
-		"date":"2016-09-22",
-		"freight":"0.00",
-		"statute":"待发货",
-		"address":"",
 		"logistics_company":"申通速递",
-		"code":"10475926547"
+		"code":"10475926547",
+		"tracking_information":"已敛货"
 		}
 		"""
 	When 访问api	
@@ -327,16 +318,6 @@ Scenairo:测试订单产生API的场景
 		"""
 		{
 		"order_id":"201609201000002",
-		"order_price":8.00,           #接口传回结算价
-		"name":"武汉鸭脖",
-		"num":1.00,
-		"consumer":"bill",
-		"telephone":"13813984407",
-		"businessman","微众家",
-		"date":"2016-09-22",
-		"freight":"0.00",
-		"statute":"待发货",
-		"address":"",
 		"logistics_company":"",
 		"code":""
 		}
