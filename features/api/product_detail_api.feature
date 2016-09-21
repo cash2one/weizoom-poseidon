@@ -1,4 +1,4 @@
-# __author__ : "BenChi"
+# __author__ : "BenChi" 2016921
 
 Feature: 提供商品详情的API
 """
