@@ -2,9 +2,14 @@
 __author__ = 'hj'
 
 SECOND_NAVS = [{
-	'name': 'interface-interfaces',
+	'name': 'interface-product',
 	'displayName': '商品API',
-	'href': '/interface/interfaces/'
+	'href': '/interface/product_api/'
+},
+{
+	'name': 'interface-order',
+	'displayName': '订单API',
+	'href': '/interface/order_api/'
 }]
 
 def get_second_navs():

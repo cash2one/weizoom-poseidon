@@ -16,12 +16,12 @@ from resource import models as resource_models
 from util import string_util
 
 FIRST_NAV = 'interface'
-SECOND_NAV = 'interface-interfaces'
+SECOND_NAV = 'interface-order'
 
 
-class Interfaces(resource.Resource):
+class OrderApi(resource.Resource):
 	app = 'interface'
-	resource = 'interfaces'
+	resource = 'order_api'
 
 	@login_required
 	def get(request):
@@ -34,4 +34,4 @@ class Interfaces(resource.Resource):
 			'second_nav_name': SECOND_NAV
 		})
 		
-		return render_to_response('interface/interfaces.html', c)
+		return render_to_response('interface/order_api.html', c)

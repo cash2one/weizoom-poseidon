@@ -27,7 +27,7 @@ def top_navs(request):
 		'name': 'interface',
 		'displayName': 'API目录',
 		'icon': 'fa-html5',
-		'href': '/interface/interfaces/'
+		'href': '/interface/product_api/'
 	}]
 
 	if request.user.has_perm('permission.__manage_system'):
