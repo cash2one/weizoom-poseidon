@@ -201,4 +201,120 @@ Scenario:1 通过列表页调用商品列表API
 			}
 		}]
 		"""
-
+Scenario:2 供货商修改单规格商品后，jd通过列表页调用单规格商品所在商品列表API，获得修改后单规格商品所在商品列表
+	#同步商品到自营平台（修改商品1中的价格，库存后进行同步）
+			Given 给自营平台同步商品
+				"""
+				{
+					"accounts":["zy1"],
+					"supplier_name":"供货商1",
+					"id": "000001",
+					"name": "商品1-1",
+					"promotion_title": "商品1-2促销",
+					"price": 50.01,
+					"weight": 1,
+					"image": "love.png",
+					"stocks": 101,
+					"detail": "商品2描述信息"
+				}
+				"""	
+	When jd调用'商品列表'api
+		"""
+			{
+				"cur_page":2,
+				"count_per_page":2
+			}
+		"""
+	Then jd获取'商品列表'api返回结果
+		"""
+		[{
+			"name": "商品1-2",
+			"is_enable_model": "不启用规格",
+			"model": {
+				"models": {
+					"standard": {
+						"price": 50.00,
+						"stock_type": "有限",
+						"stocks": 100
+					}
+				}
+			}
+		}, {
+			"name": "商品1-1",
+			"is_enable_model": "不启用规格",
+			"model": {
+				"models": {
+					"standard": {
+						"price": 50.01,
+						"stock_type": "有限",
+						"stocks": 101
+					}
+				}
+			}
+		}]
+		"""
+Scenario:3 供货商修改多规格商品后，jd通过列表页调用多规格商品所在商品列表API，获得修改后多规格商品所在商品列表
+	#同步商品到自营平台（修改商品2中的价格，库存后进行同步）
+		Given 给自营平台同步商品
+				"""
+				{
+					"accounts":["zy1"],
+					"supplier_name":"供货商1",
+					"id": "000002",
+					"name": "商品2",
+					"promotion_title": "商品2促销",
+					"weight": 1,
+					"image": "love.png",
+					"detail": "商品1-1描述信息",
+					"model": {
+						"models":{
+								"M": {
+									"price": 302.00,
+									"stocks": 102
+								},
+								"S": {
+									"price": 300.00,
+									"stocks": 102
+								}
+							}
+						}
+				}
+				"""
+	When jd调用'商品列表'api
+		"""
+			{
+				"cur_page":1,
+				"count_per_page":2
+			}
+		"""
+	Then jd获取'商品列表'api返回结果
+		"""
+		[{
+			"name": "商品2",
+			"is_enable_model": "启用规格",
+			"model": {
+				"models": {
+					"M": {
+						"price": 302.00,
+						"stocks": 102
+					},
+					"S": {
+						"price": 300.00,
+						"stocks": 102
+					}
+				}
+			}
+		}, {
+			"name": "商品1-3",
+			"is_enable_model": "不启用规格",
+			"model": {
+				"models": {
+					"standard": {
+						"price": 50.00,
+						"stock_type": "有限",
+						"stocks": 100
+					}
+				}
+			}
+		}]
+		"""
