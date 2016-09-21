@@ -1,5 +1,6 @@
 author:徐梓豪 2016-09-20
-Feature: 测试订单详情API的场景
+Feature: 测试订单产生API的场景
+Background:
 	Given manager登录系统:管理系统
 	When manager创建运营账号
 		"""
@@ -284,14 +285,6 @@ Scenairo:测试订单产生API的场景
 		|    order_id   |   date   | order_price | consumer | businessman | 
 		|201609201000001|2016-09-22|    10.00    |   bill   |  微众商城   |
 		|201609201000002|2016-09-20|    29.00    |   tom    |   微众家    |
-	When aini发货
-		"""
-		{
-		"order_id":"201609201000001",
-		"logistics_company":"申通速递",
-		"code":"10475926547"
-		}
-		"""
 
 	When 访问api	
 		"""
@@ -307,20 +300,16 @@ Scenairo:测试订单产生API的场景
 		"name":"耐克男鞋",
 		"num":1.00,
 		"consumer":"bill",
-		"telephone":"13813984405",
 		"businessman","微众商城",
 		"date":"2016-09-22",
 		"freight":"0.00",
-		"statute":"待发货",
-		"address":"",
-		"logistics_company":"申通速递",
-		"code":"10475926547"
+		"statute":"待发货"
 		}
 		"""
 	When 访问api	
 		"""
 		{
-		"order_id":"$order_id(201609201000002)$"
+		"order_id":"$order_id(201609201000001)$"
 		}
 		"""
 	Then 获取返回值
@@ -331,13 +320,9 @@ Scenairo:测试订单产生API的场景
 		"name":"武汉鸭脖",
 		"num":1.00,
 		"consumer":"bill",
-		"telephone":"13813984407",
 		"businessman","微众家",
 		"date":"2016-09-22",
 		"freight":"0.00",
-		"statute":"待发货",
-		"address":"",
-		"logistics_company":"",
-		"code":""
+		"statute":"待发货"
 		}
 		"""
