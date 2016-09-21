@@ -76,7 +76,7 @@ Background:
 				{
 					"accounts":["zy1"],
 					"supplier_name":"供货商1",
-					"id": "000002",
+					"id": "000004",
 					"name": "商品2",
 					"promotion_title": "商品2促销",
 					"weight": 1,
@@ -140,7 +140,6 @@ Scenario:1 通过列表页调用商品列表API
 		[{
 			"name": "商品2",
 			"is_enable_model": "启用规格",
-			"categories": [],
 			"model": {
 				"models": {
 					"M": {
