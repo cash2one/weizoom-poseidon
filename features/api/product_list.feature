@@ -138,6 +138,56 @@ Scenario:1 通过列表页调用商品列表API
 	Then jd获取'商品列表'api返回结果
 		"""
 			[{
+				"id": "000001",
+				"name": "商品1-1",
+				"promotion_title": "商品1-2促销",
+				"price": 50.00,
+				"weight": 1,
+				"image": "love.png",
+				"stocks": 100,
+				"detail": "商品1描述信息",
+				"postage":[{
+					"postage":10,
+					"condition_money": "100"
+				}]
+			},{
+				"id": "000002",
+				"name": "商品1-2",
+				"promotion_title": "商品1-2促销",
+				"price": 50.00,
+				"weight": 1,
+				"image": "love.png",
+				"stocks": 100,
+				"detail": "商品2描述信息",
+				"postage":[{
+					"postage":10,
+					"condition_money": "100"
+				}]
+			}]
+		"""
+	When jd调用'商品列表'api
+		"""
+			{
+				"cur_page":2,
+				"count_per_page":2
+			}
+		"""
+	Then jd获取'商品列表'api返回结果
+		"""
+			[{
+				"id": "000003",
+				"name": "商品1-3",
+				"promotion_title": "商品1-2促销",
+				"price": 50.00,
+				"weight": 1,
+				"image": "love.png",
+				"stocks": 100,
+				"detail": "商品3描述信息",
+				"postage":[{
+					"postage":10,
+					"condition_money": "100"
+				}]
+			},{
 				"id": "000004",
 				"name": "商品2",
 				"promotion_title": "商品2促销",
@@ -156,56 +206,6 @@ Scenario:1 通过列表页调用商品列表API
 								}
 							}
 						},
-				"postage":[{
-					"postage":10,
-					"condition_money": "100"
-				}]
-			},{
-				"id": "000003",
-				"name": "商品1-3",
-				"promotion_title": "商品1-2促销",
-				"price": 50.00,
-				"weight": 1,
-				"image": "love.png",
-				"stocks": 100,
-				"detail": "商品3描述信息",
-				"postage":[{
-					"postage":10,
-					"condition_money": "100"
-				}]
-			}]
-		"""
-	When jd调用'商品列表'api
-		"""
-			{
-				"cur_page":2,
-				"count_per_page":2
-			}
-		"""
-	Then jd获取'商品列表'api返回结果
-		"""
-			[{
-				"id": "000002",
-				"name": "商品1-2",
-				"promotion_title": "商品1-2促销",
-				"price": 50.00,
-				"weight": 1,
-				"image": "love.png",
-				"stocks": 100,
-				"detail": "商品2描述信息",
-				"postage":[{
-					"postage":10,
-					"condition_money": "100"
-				}]
-			},{
-				"id": "000001",
-				"name": "商品1-1",
-				"promotion_title": "商品1-2促销",
-				"price": 50.00,
-				"weight": 1,
-				"image": "love.png",
-				"stocks": 100,
-				"detail": "商品1描述信息",
 				"postage":[{
 					"postage":10,
 					"condition_money": "100"
@@ -232,26 +232,13 @@ Scenario:2 供货商修改单规格商品后，jd通过列表页调用单规格�
 		When jd调用'商品列表'api
 			"""
 				{
-					"cur_page":2,
+					"cur_page":1,
 					"count_per_page":2
 				}
 			"""
 		Then jd获取'商品列表'api返回结果
 			"""
 				[{
-					"id": "000002",
-					"name": "商品1-2",
-					"promotion_title": "商品1-2促销",
-					"price": 50.00,
-					"weight": 1,
-					"image": "love.png",
-					"stocks": 100,
-					"detail": "商品1-1描述信息",
-					"postage":[{
-						"postage":10,
-						"condition_money": "100"
-					}]
-				},{
 					"id": "000001",
 					"name": "商品1-1",
 					"promotion_title": "商品1-2促销",
@@ -260,6 +247,19 @@ Scenario:2 供货商修改单规格商品后，jd通过列表页调用单规格�
 					"image": "love.png",
 					"stocks": 101,
 					"detail": "商品2描述信息",
+					"postage":[{
+						"postage":10,
+						"condition_money": "100"
+					}]
+				},{
+					"id": "000002",
+					"name": "商品1-2",
+					"promotion_title": "商品1-2促销",
+					"price": 50.00,
+					"weight": 1,
+					"image": "love.png",
+					"stocks": 100,
+					"detail": "商品1-1描述信息",
 					"postage":[{
 						"postage":10,
 						"condition_money": "100"
@@ -296,13 +296,26 @@ Scenario:3 供货商修改多规格商品后，jd通过列表页调用多规格�
 		When jd调用'商品列表'api
 			"""
 				{
-					"cur_page":1,
+					"cur_page":2,
 					"count_per_page":2
 				}
 			"""
 		Then jd获取'商品列表'api返回结果
 			"""
 				[{
+					"id": "000003",
+					"name": "商品1-3",
+					"promotion_title": "商品1-2促销",
+					"price": 50.00,
+					"weight": 1,
+					"image": "love.png",
+					"stocks": 100,
+					"detail": "商品1-1描述信息",
+					"postage":[{
+						"postage":10,
+						"condition_money": "100"
+					}]
+				},{
 					"id": "000004",
 					"name": "商品2",
 					"promotion_title": "商品2促销",
@@ -321,19 +334,6 @@ Scenario:3 供货商修改多规格商品后，jd通过列表页调用多规格�
 									}
 								}
 							},
-					"postage":[{
-						"postage":10,
-						"condition_money": "100"
-					}]
-				},{
-					"id": "000003",
-					"name": "商品1-3",
-					"promotion_title": "商品1-2促销",
-					"price": 50.00,
-					"weight": 1,
-					"image": "love.png",
-					"stocks": 100,
-					"detail": "商品1-1描述信息",
 					"postage":[{
 						"postage":10,
 						"condition_money": "100"
