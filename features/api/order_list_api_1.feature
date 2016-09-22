@@ -74,7 +74,7 @@ Background:
 			"""
 				{
 					"order_no":"001",
-					"status":"待发货",
+					"status":"待支付",
 					"ship_name":"bill",
 					"ship_tel":"13811223344",
 					"ship_area": "北京市 北京市 海淀区",
@@ -91,8 +91,7 @@ Background:
 							"single_save":0.00
 						}],
 						"postage": 10.00,
-						"status":"待发货",
-						"actions": ["发货",申请退款"]
+						"status":"待支付",
 					}],
 					"products_count":1,
 					"total_price": 50.00,
@@ -101,8 +100,52 @@ Background:
 					"final_price": 60.00
 				}
 			"""
-Scenario:1 通过主订单ID提供订单列表API '待发货'
+Scenario:1 通过主订单ID提供订单详情API '待支付'
 	
+	When jd调用'订单详情'api
+		"""
+			{
+				"order_no":"001"
+			}
+		"""
+	Then jd获取'订单详情'api返回结果		
+		"""
+			{
+				"order_no":"001",
+				"status":"待支付",
+				"ship_name":"bill",
+				"ship_tel":"13811223344",
+				"ship_area": "北京市 北京市 海淀区",
+				"ship_address": "泰兴大厦",
+				"invoice":"",
+				"business_message":"",
+				"methods_of_payment":"",
+				"group":[{
+					"order_no":"001-供货商1",
+					"products":[{
+						"name":"商品1-1",
+						"price":50.00,
+						"count":1,
+						"single_save":0.00
+					}],
+					"postage": 10.00,
+					"status":"待支付"
+				}],
+				"products_count":1,
+				"total_price": 50.00,
+				"postage": 10.00,
+				"cash":50.00,
+				"final_price": 60.00
+			}
+		"""			
+Scenario:2 通过主订单ID提供订单列表API '待发货'
+	Given jd订单已支付
+		"""
+			{
+				"order_no":"001",
+				"methods_of_payment":"微信支付"
+			}
+		"""	
 	When jd调用'订单列表'api
 		"""
 			{
@@ -131,7 +174,6 @@ Scenario:1 通过主订单ID提供订单列表API '待发货'
 					}],
 					"postage": 10.00,
 					"status":"待发货",
-					"actions": ["发货",申请退款"]
 				}],
 				"products_count":1,
 				"total_price": 50.00,
@@ -140,7 +182,14 @@ Scenario:1 通过主订单ID提供订单列表API '待发货'
 				"final_price": 60.00
 			}
 		"""
-Scenario:2 通过主订单ID提供订单列表API '已发货'
+Scenario:3 通过主订单ID提供订单列表API '已发货'
+	Given jd订单已支付
+		"""
+			{
+				"order_no":"001",
+				"methods_of_payment":"微信支付"
+			}
+		"""
 	#Given 自营平台订单数据已同步到panda系统中
 	Given pd登录panda系统
 	When pd对订单进行发货
@@ -188,7 +237,14 @@ Scenario:2 通过主订单ID提供订单列表API '已发货'
 				"final_price": 60.00
 			}
 		"""
-Scenario:3 通过主订单ID提供订单列表API '已完成'
+Scenario:4 通过主订单ID提供订单列表API '已完成'
+	Given jd订单已支付
+		"""
+			{
+				"order_no":"001",
+				"methods_of_payment":"微信支付"
+			}
+		"""
 	#Given 自营平台订单数据已同步到panda系统中
 	Given pd登录panda系统
 	When pd完成订单'001-供货商1'
