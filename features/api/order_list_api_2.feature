@@ -141,47 +141,47 @@ Scenario:1 通过主订单ID提供订单列表API '待发货'
 			}
 		"""
 	Then jd获取'订单列表'api返回结果		
-			"""
-				{
-					"order_no":"001",
-					"status":"待发货",
-					"ship_name":"bill",
-					"ship_tel":"13811223344",
-					"ship_area": "北京市 北京市 海淀区",
-					"ship_address": "泰兴大厦",
-					"invoice":"",
-					"business_message":"",
-					"methods_of_payment":"微信支付",
-					"group":[{
-						"order_no":"001-供货商1",
-						"products":[{
-							"name":"商品1",
-							"price":50.00,
-							"count":1
-							"single_save":0.00
-						}],
-						"postage": 10.00,
-						"status":"待发货",
-						"actions": ["发货",申请退款"]
-					},{
-						"order_no":"002-供货商2",
-						"products":[{
-							"name":"商品2",
-							"price":50.00,
-							"count":1
-							"single_save":0.00
-						}],
-						"postage": 0.00,
-						"status":"待发货",
-						"actions": ["发货",申请退款"]
+		"""
+			{
+				"order_no":"001",
+				"status":"待发货",
+				"ship_name":"bill",
+				"ship_tel":"13811223344",
+				"ship_area": "北京市 北京市 海淀区",
+				"ship_address": "泰兴大厦",
+				"invoice":"",
+				"business_message":"",
+				"methods_of_payment":"微信支付",
+				"group":[{
+					"order_no":"001-供货商1",
+					"products":[{
+						"name":"商品1",
+						"price":50.00,
+						"count":1
+						"single_save":0.00
 					}],
-					"products_count":2,
-					"total_price": 100.00,
 					"postage": 10.00,
-					"cash":100.00,
-					"final_price": 110.00
-				}
-			"""
+					"status":"待发货",
+					"actions": ["发货",申请退款"]
+				},{
+					"order_no":"002-供货商2",
+					"products":[{
+						"name":"商品2",
+						"price":50.00,
+						"count":1
+						"single_save":0.00
+					}],
+					"postage": 0.00,
+					"status":"待发货",
+					"actions": ["发货",申请退款"]
+				}],
+				"products_count":2,
+				"total_price": 100.00,
+				"postage": 10.00,
+				"cash":100.00,
+				"final_price": 110.00
+			}
+		"""
 #商品1-1已发货，商品2-1待发货
 	#Given 自营平台订单数据已同步到panda系统中
 	Given pd登录panda系统
@@ -201,46 +201,46 @@ Scenario:1 通过主订单ID提供订单列表API '待发货'
 			}
 		"""
 	Then jd获取'订单列表'api返回结果		
-			"""
-				{
-					"order_no":"001",
-					"status":"待发货",
-					"ship_name":"bill",
-					"ship_tel":"13811223344",
-					"ship_area": "北京市 北京市 海淀区",
-					"ship_address": "泰兴大厦",
-					"invoice":"",
-					"business_message":"",
-					"methods_of_payment":"微信支付",
-					"group":[{
-						"order_no":"001-供货商1",
-						"products":[{
-							"name":"商品1",
-							"price":50.00,
-							"count":1
-							"single_save":0.00
-						}],
-						"postage": 10.00,
-						"status":"已发货"
-					},{
-						"order_no":"002-供货商2",
-						"products":[{
-							"name":"商品2",
-							"price":50.00,
-							"count":1
-							"single_save":0.00
-						}],
-						"postage": 0.00,
-						"status":"待发货",
-						"actions": ["发货",申请退款"]
+		"""
+			{
+				"order_no":"001",
+				"status":"待发货",
+				"ship_name":"bill",
+				"ship_tel":"13811223344",
+				"ship_area": "北京市 北京市 海淀区",
+				"ship_address": "泰兴大厦",
+				"invoice":"",
+				"business_message":"",
+				"methods_of_payment":"微信支付",
+				"group":[{
+					"order_no":"001-供货商1",
+					"products":[{
+						"name":"商品1",
+						"price":50.00,
+						"count":1
+						"single_save":0.00
 					}],
-					"products_count":2,
-					"total_price": 100.00,
 					"postage": 10.00,
-					"cash":100.00,
-					"final_price": 110.00
-				}
-			"""
+					"status":"已发货"
+				},{
+					"order_no":"002-供货商2",
+					"products":[{
+						"name":"商品2",
+						"price":50.00,
+						"count":1
+						"single_save":0.00
+					}],
+					"postage": 0.00,
+					"status":"待发货",
+					"actions": ["发货",申请退款"]
+				}],
+				"products_count":2,
+				"total_price": 100.00,
+				"postage": 10.00,
+				"cash":100.00,
+				"final_price": 110.00
+			}
+		"""
 #商品1-1已完成，商品2-1待发货	
 	#Given 自营平台订单数据已同步到panda系统中
 	Given pd登录panda系统
@@ -252,46 +252,46 @@ Scenario:1 通过主订单ID提供订单列表API '待发货'
 			}
 		"""										
 	Then jd获取'订单列表'api返回结果		
-			"""
-				{
-					"order_no":"001",
-					"status":"待发货",
-					"ship_name":"bill",
-					"ship_tel":"13811223344",
-					"ship_area": "北京市 北京市 海淀区",
-					"ship_address": "泰兴大厦",
-					"invoice":"",
-					"business_message":"",
-					"methods_of_payment":"微信支付",
-					"group":[{
-						"order_no":"001-供货商1",
-						"products":[{
-							"name":"商品1",
-							"price":50.00,
-							"count":1
-							"single_save":0.00
-						}],
-						"postage": 10.00,
-						"status":"已完成"
-					},{
-						"order_no":"002-供货商2",
-						"products":[{
-							"name":"商品2",
-							"price":50.00,
-							"count":1
-							"single_save":0.00
-						}],
-						"postage": 0.00,
-						"status":"待发货",
-						"actions": ["发货",申请退款"]
+		"""
+			{
+				"order_no":"001",
+				"status":"待发货",
+				"ship_name":"bill",
+				"ship_tel":"13811223344",
+				"ship_area": "北京市 北京市 海淀区",
+				"ship_address": "泰兴大厦",
+				"invoice":"",
+				"business_message":"",
+				"methods_of_payment":"微信支付",
+				"group":[{
+					"order_no":"001-供货商1",
+					"products":[{
+						"name":"商品1",
+						"price":50.00,
+						"count":1
+						"single_save":0.00
 					}],
-					"products_count":2,
-					"total_price": 100.00,
 					"postage": 10.00,
-					"cash":100.00,
-					"final_price": 110.00
-				}
-			"""
+					"status":"已完成"
+				},{
+					"order_no":"002-供货商2",
+					"products":[{
+						"name":"商品2",
+						"price":50.00,
+						"count":1
+						"single_save":0.00
+					}],
+					"postage": 0.00,
+					"status":"待发货",
+					"actions": ["发货",申请退款"]
+				}],
+				"products_count":2,
+				"total_price": 100.00,
+				"postage": 10.00,
+				"cash":100.00,
+				"final_price": 110.00
+			}
+		"""
 Scenario:2 通过主订单ID提供订单列表API '已发货'
 #商品1-1已发货，商品2-1已发货
 	#Given 自营平台订单数据已同步到panda系统中
@@ -317,45 +317,45 @@ Scenario:2 通过主订单ID提供订单列表API '已发货'
 			}
 		"""
 	Then jd获取'订单列表'api返回结果		
-			"""
-				{
-					"order_no":"001",
-					"status":"已发货",
-					"ship_name":"bill",
-					"ship_tel":"13811223344",
-					"ship_area": "北京市 北京市 海淀区",
-					"ship_address": "泰兴大厦",
-					"invoice":"",
-					"business_message":"",
-					"methods_of_payment":"微信支付",
-					"group":[{
-						"order_no":"001-供货商1",
-						"products":[{
-							"name":"商品1",
-							"price":50.00,
-							"count":1
-							"single_save":0.00
-						}],
-						"postage": 10.00,
-						"status":"已发货"
-					},{
-						"order_no":"002-供货商2",
-						"products":[{
-							"name":"商品2",
-							"price":50.00,
-							"count":1
-							"single_save":0.00
-						}],
-						"postage": 0.00,
-						"status":"已发货"
+		"""
+			{
+				"order_no":"001",
+				"status":"已发货",
+				"ship_name":"bill",
+				"ship_tel":"13811223344",
+				"ship_area": "北京市 北京市 海淀区",
+				"ship_address": "泰兴大厦",
+				"invoice":"",
+				"business_message":"",
+				"methods_of_payment":"微信支付",
+				"group":[{
+					"order_no":"001-供货商1",
+					"products":[{
+						"name":"商品1",
+						"price":50.00,
+						"count":1
+						"single_save":0.00
 					}],
-					"products_count":2,
-					"total_price": 100.00,
 					"postage": 10.00,
-					"cash":100.00,
-					"final_price": 110.00
-				}
-			"""
+					"status":"已发货"
+				},{
+					"order_no":"002-供货商2",
+					"products":[{
+						"name":"商品2",
+						"price":50.00,
+						"count":1
+						"single_save":0.00
+					}],
+					"postage": 0.00,
+					"status":"已发货"
+				}],
+				"products_count":2,
+				"total_price": 100.00,
+				"postage": 10.00,
+				"cash":100.00,
+				"final_price": 110.00
+			}
+		"""
 #商品1-1已完成，商品2-1已发货
 	#Given 自营平台订单数据已同步到panda系统中
 	Given pd登录panda系统
@@ -367,45 +367,45 @@ Scenario:2 通过主订单ID提供订单列表API '已发货'
 			}
 		"""
 	Then jd获取'订单列表'api返回结果		
-			"""
-				{
-					"order_no":"001",
-					"status":"已发货",
-					"ship_name":"bill",
-					"ship_tel":"13811223344",
-					"ship_area": "北京市 北京市 海淀区",
-					"ship_address": "泰兴大厦",
-					"invoice":"",
-					"business_message":"",
-					"methods_of_payment":"微信支付",
-					"group":[{
-						"order_no":"001-供货商1",
-						"products":[{
-							"name":"商品1",
-							"price":50.00,
-							"count":1
-							"single_save":0.00
-						}],
-						"postage": 10.00,
-						"status":"已完成"
-					},{
-						"order_no":"002-供货商2",
-						"products":[{
-							"name":"商品2",
-							"price":50.00,
-							"count":1
-							"single_save":0.00
-						}],
-						"postage": 0.00,
-						"status":"已发货"
+		"""
+			{
+				"order_no":"001",
+				"status":"已发货",
+				"ship_name":"bill",
+				"ship_tel":"13811223344",
+				"ship_area": "北京市 北京市 海淀区",
+				"ship_address": "泰兴大厦",
+				"invoice":"",
+				"business_message":"",
+				"methods_of_payment":"微信支付",
+				"group":[{
+					"order_no":"001-供货商1",
+					"products":[{
+						"name":"商品1",
+						"price":50.00,
+						"count":1
+						"single_save":0.00
 					}],
-					"products_count":2,
-					"total_price": 100.00,
 					"postage": 10.00,
-					"cash":100.00,
-					"final_price": 110.00
-				}
-			"""
+					"status":"已完成"
+				},{
+					"order_no":"002-供货商2",
+					"products":[{
+						"name":"商品2",
+						"price":50.00,
+						"count":1
+						"single_save":0.00
+					}],
+					"postage": 0.00,
+					"status":"已发货"
+				}],
+				"products_count":2,
+				"total_price": 100.00,
+				"postage": 10.00,
+				"cash":100.00,
+				"final_price": 110.00
+			}
+		"""
 Scenario:3 通过主订单ID提供订单列表API '已完成'
 	#Given 自营平台订单数据已同步到panda系统中
 	Given pd登录panda系统
@@ -420,42 +420,42 @@ Scenario:3 通过主订单ID提供订单列表API '已完成'
 			}
 		"""
 	Then jd获取'订单列表'api返回结果		
-			"""
-				{
-					"order_no":"001",
-					"status":"已完成",
-					"ship_name":"bill",
-					"ship_tel":"13811223344",
-					"ship_area": "北京市 北京市 海淀区",
-					"ship_address": "泰兴大厦",
-					"invoice":"",
-					"business_message":"",
-					"methods_of_payment":"微信支付",
-					"group":[{
-						"order_no":"001-供货商1",
-						"products":[{
-							"name":"商品1",
-							"price":50.00,
-							"count":1
-							"single_save":0.00
-						}],
-						"postage": 10.00,
-						"status":"已完成"
-					},{
-						"order_no":"002-供货商2",
-						"products":[{
-							"name":"商品2",
-							"price":50.00,
-							"count":1
-							"single_save":0.00
-						}],
-						"postage": 0.00,
-						"status":"已完成"
+		"""
+			{
+				"order_no":"001",
+				"status":"已完成",
+				"ship_name":"bill",
+				"ship_tel":"13811223344",
+				"ship_area": "北京市 北京市 海淀区",
+				"ship_address": "泰兴大厦",
+				"invoice":"",
+				"business_message":"",
+				"methods_of_payment":"微信支付",
+				"group":[{
+					"order_no":"001-供货商1",
+					"products":[{
+						"name":"商品1",
+						"price":50.00,
+						"count":1
+						"single_save":0.00
 					}],
-					"products_count":2,
-					"total_price": 100.00,
 					"postage": 10.00,
-					"cash":100.00,
-					"final_price": 110.00
-				}
-			"""
+					"status":"已完成"
+				},{
+					"order_no":"002-供货商2",
+					"products":[{
+						"name":"商品2",
+						"price":50.00,
+						"count":1
+						"single_save":0.00
+					}],
+					"postage": 0.00,
+					"status":"已完成"
+				}],
+				"products_count":2,
+				"total_price": 100.00,
+				"postage": 10.00,
+				"cash":100.00,
+				"final_price": 110.00
+			}
+		"""
