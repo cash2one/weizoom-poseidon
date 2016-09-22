@@ -1,3 +1,4 @@
+author:徐梓豪 2016-09-22
 Feature: 测试商品列表API的场景
 Background:
 	Given manager登录系统panda
