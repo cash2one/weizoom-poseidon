@@ -54,6 +54,7 @@ class User(resource.Resource):
 		return render_to_response('config/user.html', c)
 
 	@login_required
+	#创建账号
 	def api_put(request):
 		username = request.POST['name']
 		password = request.POST['password']
@@ -75,17 +76,13 @@ class User(resource.Resource):
 		return response.get_response()
 
 	@login_required
+	#编辑账号
 	def api_post(request):
 		user_id = request.POST['id']
 		username = request.POST['name']
 		password = request.POST.get('password','')
 		display_name = request.POST['display_name']
 		status = int(request.POST['status'])
-
-		if not check_username_valid(username):
-			response = create_response(500)
-			response.errMsg = u'登录账号已存在，请重新输入'
-			return response.get_response()
 		
 		user = auth_models.User.objects.get(id=user_id)
 		user.username = username

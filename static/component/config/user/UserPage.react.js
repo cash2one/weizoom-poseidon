@@ -59,21 +59,23 @@ var UserPage = React.createClass({
 			text: '否',
 			value: '0'
 		}];
-		
+
 		if (this.state.user.id === -1) {
-            var labelName = '登录密码:';
+			var labelName = '登录密码:';
 			var validate = "require-notempty";
-        } else {
-            var labelName = '修改密码:';
-			var validate = "";
-        }
+			var disabled = '';
+		} else {
+			var labelName = '修改密码:';
+			var validate = '';
+			var disabled = 'disabled';
+		}
 
 		return (
 		<div className="xui-outlineData-page xui-formPage">
 			<form className="form-horizontal mt15">
 				<fieldset>
 					<legend className="pl10 pt10 pb10">用户信息</legend>
-					<Reactman.FormInput label="登录名:" name="name" validate="require-notempty" placeholder="英文或数字任意组合" value={this.state.user.name} onChange={this.onChange} autoFocus={true} />
+					<Reactman.FormInput label="登录名:" readonly={disabled} name="name" validate="require-notempty" placeholder="英文或数字任意组合" value={this.state.user.name} onChange={this.onChange} autoFocus={true} />
 					<Reactman.FormInput label={labelName} name="password" validate={validate} placeholder="6-20位数字英文任意组合" value={this.state.user.password} onChange={this.onChange} />
 					<Reactman.FormInput label="账号主体:" name="displayName" validate="require-string" placeholder="开放平台个人或公司名称" value={this.state.user.displayName} onChange={this.onChange} />
 					<Reactman.FormRadio label="是否开启:" name="status" value={this.state.user.status} options={optionsForStatus} onChange={this.onChange} />
