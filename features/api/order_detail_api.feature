@@ -1,5 +1,6 @@
 author:徐梓豪 2016-09-20
 Feature: 测试订单详情API的场景
+Background:
 	Given manager登录系统:管理系统
 	When manager创建运营账号
 		"""
