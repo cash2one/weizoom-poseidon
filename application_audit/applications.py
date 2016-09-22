@@ -112,10 +112,9 @@ class ApplicationAudit(resource.Resource):
 		status = request.POST.get('method','')
 		if status == 'close':
 			change_to_status = account_models.STOPED
-			reason = u'应用已暂停使用'
 		else:
 			change_to_status = account_models.USING
-			reason = u'应用激活审核通过,可以正常使用'
+
 		try:
 			user_id = customer_models.CustomerMessage.objects.get(id=customer_id).user_id
 			customer_info = customer_models.CustomerMessage.objects.filter(id=customer_id)
@@ -136,13 +135,9 @@ class ApplicationAudit(resource.Resource):
 					)
 
 			#向客户发送短信通知
+			reason = ''
 			mobile_number = customer_info.first().mobile_number
-			try:
-				if mobile_number:
-					content = u'%s【聚众传媒】' % reason
-					rs = send_phone_msg.send_phone_captcha(phones=str(mobile_number), content=content)
-			except:
-				watchdog.info(u"发送驳回信息异常 id：%s" % customer_id)
+			send_phone_message(mobile_number, reason, change_to_status)
 
 			response = create_response(200)
 			return response.get_response()
@@ -170,14 +165,7 @@ class ApplicationAudit(resource.Resource):
 				)
 
 			#向客户发送短信通知
-			# send_phone_message(customer_message.mobile_number, reason, account_models.REJECT)
-			try:
-				if customer_message.mobile_number:
-					reason = u'应用激活申请被驳回,驳回原因:' + reason
-					content = u'%s【微众传媒】' % reason
-					rs = send_phone_msg.send_phone_captcha(phones=str(customer_message.mobile_number), content=content)
-			except:
-				watchdog.info(u"发送驳回信息异常 id：%s" % customer_id)
+			send_phone_message(customer_message.mobile_number, reason, account_models.REJECT)
 
 			response = create_response(200)
 			return response.get_response()
@@ -189,18 +177,16 @@ class ApplicationAudit(resource.Resource):
 
 
 def send_phone_message(mobile_number, reason, status):
-	if status == 2:
-		content = u'%s【微众传媒】' %  '应用激活审核通过,可以正常使用'
-	elif status == 4:
-		content = u'%s【微众传媒】' %  '应用已暂停使用'
+	if status == account_models.USING:
+		reason = u'应用激活审核通过,可以正常使用'
+	elif status == account_models.STOPED:
+		reason = u'应用已暂停使用'
 	else:
-		content = u'%s【微众传媒】应用激活申请被驳回:' % reason
+		reason = u'应用激活申请被驳回,驳回原因:' + reason
 
 	try:
 		if mobile_number:
-			print mobile_number,"============"
-			print content,"-------"
-			# content = u'%s【微众传媒】' %  reason
+			content = u'%s【微众传媒】' %  reason
 			rs = send_phone_msg.send_phone_captcha(phones=str(mobile_number), content=content)
 	except:
 		watchdog.info(u"发送驳回信息异常 id：%s" % customer_id)
