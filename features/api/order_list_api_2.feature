@@ -111,7 +111,8 @@ Background:
 							"single_save":0.00
 						}],
 						"postage": 10.00,
-						"status":"待发货"
+						"status":"待发货",
+						"actions": ["发货",申请退款"]
 					},{
 						"order_no":"002-供货商2",
 						"products":[{
@@ -121,7 +122,8 @@ Background:
 							"single_save":0.00
 						}],
 						"postage": 0.00,
-						"status":"待发货"
+						"status":"待发货",
+						"actions": ["发货",申请退款"]
 					}],
 					"products_count":2,
 					"total_price": 100.00,
@@ -159,7 +161,8 @@ Scenario:1 通过主订单ID提供订单列表API '待发货'
 							"single_save":0.00
 						}],
 						"postage": 10.00,
-						"status":"待发货"
+						"status":"待发货",
+						"actions": ["发货",申请退款"]
 					},{
 						"order_no":"002-供货商2",
 						"products":[{
@@ -169,7 +172,8 @@ Scenario:1 通过主订单ID提供订单列表API '待发货'
 							"single_save":0.00
 						}],
 						"postage": 0.00,
-						"status":"待发货"
+						"status":"待发货",
+						"actions": ["发货",申请退款"]
 					}],
 					"products_count":2,
 					"total_price": 100.00,
@@ -227,7 +231,8 @@ Scenario:1 通过主订单ID提供订单列表API '待发货'
 							"single_save":0.00
 						}],
 						"postage": 0.00,
-						"status":"待发货"
+						"status":"待发货",
+						"actions": ["发货",申请退款"]
 					}],
 					"products_count":2,
 					"total_price": 100.00,
@@ -277,7 +282,8 @@ Scenario:1 通过主订单ID提供订单列表API '待发货'
 							"single_save":0.00
 						}],
 						"postage": 0.00,
-						"status":"待发货"
+						"status":"待发货",
+						"actions": ["发货",申请退款"]
 					}],
 					"products_count":2,
 					"total_price": 100.00,

@@ -91,7 +91,8 @@ Background:
 							"single_save":0.00
 						}],
 						"postage": 10.00,
-						"status":"待发货"
+						"status":"待发货",
+						"actions": ["发货",申请退款"]
 					}],
 					"products_count":1,
 					"total_price": 50.00,
@@ -129,7 +130,8 @@ Scenario:1 通过主订单ID提供订单列表API '待发货'
 						"single_save":0.00
 					}],
 					"postage": 10.00,
-					"status":"待发货"
+					"status":"待发货",
+					"actions": ["发货",申请退款"]
 				}],
 				"products_count":1,
 				"total_price": 50.00,
