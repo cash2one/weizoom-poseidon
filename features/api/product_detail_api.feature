@@ -72,15 +72,9 @@ Background:
 				}
 			"""
 		
-
+@chengdg
 Scenario:1 通过商品ID调用单规格商品API
-	When jd调用'商品详情'api
-		"""
-			{
-				"productId":"000001"
-			}
-		"""
-	Then jd获取'商品详情'api返回结果
+	Then jd获取'000001'的商品详情
 		"""
 			{
 				"id": "000001",
@@ -99,28 +93,22 @@ Scenario:1 通过商品ID调用单规格商品API
 		"""
 Scenario:2 供货商修改单规格商品后，jd通过商品ID调用单规格商品API，获得修改后单规格商品详情
 	#同步商品到自营平台（修改商品1中的价格，库存后进行同步）
-			Given 给自营平台同步商品
-				"""
-				{
-					"accounts":["zy1"],
-					"supplier_name":"供货商1",
-					"id": "000001",
-					"name": "商品1-1",
-					"promotion_title": "商品1-2促销",
-					"price": 50.01,
-					"weight": 1,
-					"image": "love.png",
-					"stocks": 101,
-					"detail": "商品2描述信息"
-				}
-				"""	
-	When jd调用'商品详情'api
+	Given 给自营平台同步商品
 		"""
-			{
-				"productId":"000001"
-			}
-		"""
-	Then jd获取'商品详情'api返回结果
+		{
+			"accounts":["zy1"],
+			"supplier_name":"供货商1",
+			"id": "000001",
+			"name": "商品1-1",
+			"promotion_title": "商品1-2促销",
+			"price": 50.01,
+			"weight": 1,
+			"image": "love.png",
+			"stocks": 101,
+			"detail": "商品2描述信息"
+		}
+		"""	
+	Then jd获取'000001'的商品详情
 		"""
 			{
 				"id": "000001",
