@@ -1,6 +1,6 @@
 # __author__ : "李娜" 2016.09.22
 
-Feature: 提供订单列表的API（存在一个单供货商订单、一个多供货商订单）
+Feature: 提供订单列表的API（存在两个单供货商订单、一个多供货商订单）
 """
 	待支付，待发货，已发货，已完成
 """
@@ -113,7 +113,7 @@ Background:
 						"postage": 10.00,
 						"status":"待支付",
 					},{
-						"order_no":"002-供货商2",
+						"order_no":"001-供货商2",
 						"products":[{
 							"name":"商品2",
 							"price":50.00,
@@ -154,16 +154,43 @@ Background:
 					"postage": 10.00,
 					"cash":50.00,
 					"final_price": 60.00
+				},{
+					"order_no":"003",
+					"status":"待支付",
+					"ship_name":"bill",
+					"ship_tel":"13811223344",
+					"ship_area": "北京市 北京市 海淀区",
+					"ship_address": "泰兴大厦",
+					"invoice":"",
+					"business_message":"",
+					"methods_of_payment":"",
+					"group":[{
+						"order_no":"003-供货商1",
+						"products":[{
+							"name":"商品1-1",
+							"price":50.00,
+							"count":1
+							"single_save":0.00
+						}],
+						"postage": 10.00,
+						"status":"待支付",
+					}],
+					"products_count":1,
+					"total_price": 50.00,
+					"postage": 10.00,
+					"cash":50.00,
+					"final_price": 60.00
 				}]
 			"""
 Scenario:1 通过主订单ID提供订单列表API '待支付'
-	When jd调用'订单详情'api
+	When jd调用'订单列表'api
 		"""
 			{
-				"order_no":"001"
+				"cur_page":1,
+				"count_per_page":2
 			}
 		"""
-	Then jd获取'订单详情'api返回结果
+	Then jd获取'订单列表'api返回结果
 		"""
 			[{
 				"order_no":"001",
@@ -228,7 +255,44 @@ Scenario:1 通过主订单ID提供订单列表API '待支付'
 				"cash":50.00,
 				"final_price": 60.00
 			}]
-		"""				
+		"""	
+			When jd调用'订单列表'api
+		"""
+			{
+				"cur_page":2,
+				"count_per_page":2
+			}
+		"""
+	Then jd获取'订单列表'api返回结果
+		"""
+			[{
+				"order_no":"003",
+				"status":"待支付",
+				"ship_name":"bill",
+				"ship_tel":"13811223344",
+				"ship_area": "北京市 北京市 海淀区",
+				"ship_address": "泰兴大厦",
+				"invoice":"",
+				"business_message":"",
+				"methods_of_payment":"",
+				"group":[{
+					"order_no":"003-供货商1",
+					"products":[{
+						"name":"商品1-1",
+						"price":50.00,
+						"count":1
+						"single_save":0.00
+					}],
+					"postage": 10.00,
+					"status":"待支付",
+				}],
+				"products_count":1,
+				"total_price": 50.00,
+				"postage": 10.00,
+				"cash":50.00,
+				"final_price": 60.00
+			}]
+		"""	
 Scenario:2 通过主订单ID提供订单列表API '待发货'
 	Given jd订单已支付
 		"""
@@ -244,7 +308,8 @@ Scenario:2 通过主订单ID提供订单列表API '待发货'
 		When jd调用'订单列表'api
 			"""
 				{
-					"order_no":"001"
+					"order_no":"001",
+					"count_per_page":2
 				}
 			"""
 		Then jd获取'订单列表'api返回结果		
@@ -328,7 +393,8 @@ Scenario:2 通过主订单ID提供订单列表API '待发货'
 		When jd调用'订单列表'api
 			"""
 				{
-					"order_no":"001"
+					"order_no":"001",
+					"count_per_page":2
 				}
 			"""
 		Then jd获取'订单列表'api返回结果		
@@ -405,7 +471,8 @@ Scenario:2 通过主订单ID提供订单列表API '待发货'
 		When jd调用'订单列表'api
 			"""
 				{
-					"order_no":"001"
+					"order_no":"001",
+					"count_per_page":2
 				}
 			"""										
 		Then jd获取'订单列表'api返回结果		
@@ -510,7 +577,8 @@ Scenario:3 通过主订单ID提供订单列表API '已发货'
 		When jd调用'订单列表'api
 			"""
 				{
-					"order_no":"001"
+					"order_no":"001",
+					"count_per_page":2
 				}
 			"""
 		Then jd获取'订单列表'api返回结果		
@@ -586,7 +654,8 @@ Scenario:3 通过主订单ID提供订单列表API '已发货'
 		When jd调用'订单列表'api
 			"""
 				{
-					"order_no":"001"
+					"order_no":"001",
+					"count_per_page":2
 				}
 			"""
 		Then jd获取'订单列表'api返回结果		
@@ -672,7 +741,8 @@ Scenario:4 通过主订单ID提供订单列表API '已完成'
 	When jd调用'订单列表'api
 		"""
 			{
-				"order_no":"001"
+				"order_no":"001",
+				"count_per_page":2
 			}
 		"""
 	Then jd获取'订单列表'api返回结果		
