@@ -93,7 +93,7 @@ Background:
 		
 		Given 自营平台已获取jd订单
 			"""
-				[{
+				{
 					"order_no":"001",
 					"status":"待支付",
 					"ship_name":"bill",
@@ -129,7 +129,11 @@ Background:
 					"postage": 10.00,
 					"cash":100.00,
 					"final_price": 110.00
-				},{
+				}
+			"""
+		Given 自营平台已获取jd订单
+			"""
+				{
 					"order_no":"002",
 					"status":"待支付",
 					"ship_name":"bill",
@@ -155,7 +159,11 @@ Background:
 					"postage": 10.00,
 					"cash":50.00,
 					"final_price": 60.00
-				},{
+				}
+			"""
+		Given 自营平台已获取jd订单
+			"""
+				{
 					"order_no":"003",
 					"status":"待支付",
 					"ship_name":"bill",
@@ -181,7 +189,7 @@ Background:
 					"postage": 10.00,
 					"cash":50.00,
 					"final_price": 60.00
-				}]
+				}
 			"""
 Scenario:1 通过列表页调用订单列表API
 	When jd调用'订单列表'api
