@@ -265,7 +265,7 @@ Scenario:1 通过列表页调用订单列表API
 				"final_price": 60.00
 			}]
 		"""	
-			When jd调用'订单列表'api
+	When jd调用'订单列表'api
 		"""
 			{
 				"cur_page":2,
