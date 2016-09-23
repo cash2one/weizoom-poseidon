@@ -69,7 +69,7 @@ Background:
 				"account_main":"京东商城"
 				}
 			"""
-		
+	#第三方平台产生订单，自营平台生成对应的订单	
 		Given 自营平台已获取jd订单
 			"""
 				{
@@ -113,7 +113,7 @@ Scenario:1 通过主订单ID提供订单详情API '待支付'
 			{
 				"order_no":"001",
 				"status":"待支付",
-				"ship_name":"bill",
+				"_nshipame":"bill",
 				"ship_tel":"13811223344",
 				"ship_area": "北京市 北京市 海淀区",
 				"ship_address": "泰兴大厦",
