@@ -113,7 +113,7 @@ Background:
 						"postage": 10.00,
 						"status":"待支付"
 					},{
-						"order_no":"002-供货商2",
+						"order_no":"001-供货商2",
 						"products":[{
 							"name":"商品2",
 							"price":50.00,
@@ -161,7 +161,7 @@ Scenario:1 通过主订单ID提供订单详情API '待支付'
 					"postage": 10.00,
 					"status":"待支付"
 				},{
-					"order_no":"002-供货商2",
+					"order_no":"001-供货商2",
 					"products":[{
 						"name":"商品2",
 						"price":50.00,
@@ -216,7 +216,7 @@ Scenario:2 通过主订单ID提供订单详情API '待发货'
 						"postage": 10.00,
 						"status":"待发货"
 					},{
-						"order_no":"002-供货商2",
+						"order_no":"001-供货商2",
 						"products":[{
 							"name":"商品2",
 							"price":50.00,
@@ -274,7 +274,7 @@ Scenario:2 通过主订单ID提供订单详情API '待发货'
 						"postage": 10.00,
 						"status":"已发货"
 					},{
-						"order_no":"002-供货商2",
+						"order_no":"001-供货商2",
 						"products":[{
 							"name":"商品2",
 							"price":50.00,
@@ -324,7 +324,7 @@ Scenario:2 通过主订单ID提供订单详情API '待发货'
 						"postage": 10.00,
 						"status":"已完成"
 					},{
-						"order_no":"002-供货商2",
+						"order_no":"001-供货商2",
 						"products":[{
 							"name":"商品2",
 							"price":50.00,
@@ -395,7 +395,7 @@ Scenario:3 通过主订单ID提供订单详情API '已发货'
 						"postage": 10.00,
 						"status":"已发货"
 					},{
-						"order_no":"002-供货商2",
+						"order_no":"001-供货商2",
 						"products":[{
 							"name":"商品2",
 							"price":50.00,
@@ -445,7 +445,7 @@ Scenario:3 通过主订单ID提供订单详情API '已发货'
 						"postage": 10.00,
 						"status":"已完成"
 					},{
-						"order_no":"002-供货商2",
+						"order_no":"001-供货商2",
 						"products":[{
 							"name":"商品2",
 							"price":50.00,
@@ -505,7 +505,7 @@ Scenario:4 通过主订单ID提供订单详情API '已完成'
 					"postage": 10.00,
 					"status":"已完成"
 				},{
-					"order_no":"002-供货商2",
+					"order_no":"001-供货商2",
 					"products":[{
 						"name":"商品2",
 						"price":50.00,
