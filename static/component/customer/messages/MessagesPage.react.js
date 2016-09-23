@@ -34,14 +34,50 @@ var MessagesPage = React.createClass({
 
 	onSubmit: function() {
 		var data = Store.getData();
-		var mobile_reg = /^1[3|4|5|7|8][0-9]{9}$/; //验证手机
-		var email_reg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g; //验证邮箱
-		if(!mobile_reg.test(data.mobileNumber)){
-			Reactman.PageAction.showHint('error', '请输入正确的手机号!');
+		var mobileReg = /^1[3|4|5|7|8][0-9]{9}$/; //验证手机
+		var emailReg = /^([0-9A-Za-z\-_\.]+)@([0-9a-z]+\.[a-z]{2,3}(\.[a-z]{2})?)$/g; //验证邮箱
+		var ipReg = /^((2[0-4]\d|25[0-5]|[1-9]?\d|1\d{2})\.){3}(2[0-4]\d|25[0-5]|[01]?\d\d?)$/ //验证ip
+		var strRegex = "^((https|http|ftp|rtsp|mms)?://)"         
+                    + "?(([0-9a-zA-Z_!~*'().&=+$%-]+: )?[0-9a-zA-Z_!~*'().&=+$%-]+@)?" //ftp的user@        
+                    + "(([0-9]{1,3}\.){3}[0-9]{1,3}" // IP形式的URL- 199.194.52.184        
+                    + "|" // 允许IP和DOMAIN（域名）        
+                    + "([0-9a-zA-Z_!~*'()-]+\.)*" // 域名- www.        
+                    + "([0-9a-zA-Z][0-9a-zA-Z-]{0,61})?[0-9a-zA-Z]\." // 二级域名        
+                    + "[a-zA-Z]{2,6})" // first level domain- .com or .museum        
+                    + "(:[0-9]{1,4})?" // 端口- :80        
+                    + "((/?)|"         
+                    + "(/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+/?)$";  
+
+   		var urlReg = new RegExp(strRegex);
+
+		if(!mobileReg.test(data.mobileNumber)){
+			Reactman.PageAction.showHint('error', '请输入有效的手机号!');
 			return;
 		}
-		if(!email_reg.test(data.email)){
-			Reactman.PageAction.showHint('error', '请输入正确的邮箱!');
+		if(!emailReg.test(data.email)){
+			Reactman.PageAction.showHint('error', '请输入有效的邮箱!');
+			return;
+		}
+		if(!ipReg.test(data.serverIp)){
+			Reactman.PageAction.showHint('error', '请输入有效的IP!');
+			return;
+		}
+		if(!urlReg.test(data.interfaceUrl)){
+			Reactman.PageAction.showHint('error', '请输入有效的URL!');
+			return;
+		}
+
+		var serverIps = data.serverIps;
+		var isPass = true;
+
+		_.each(serverIps, function(serverIp){
+			if(!ipReg.test(serverIp.ipName)){
+				isPass = false;
+			}
+		})
+
+		if(!isPass){
+			Reactman.PageAction.showHint('error', '请输入有效的IP!');
 			return;
 		}
 		var messages = {
