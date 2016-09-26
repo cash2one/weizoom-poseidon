@@ -13,6 +13,22 @@ var Resource = Reactman.Resource;
 var Constant = require('./Constant');
 
 var Action = {
+	changeUserStatus: function(id, callback) {
+		Resource.post({
+			resource: 'config.users',
+			data: {
+				id: id
+			},
+			success: function() {
+				Reactman.PageAction.showHint('success', '修改状态成功');
+				callback();
+			},
+			error: function(data) {
+				Reactman.PageAction.showHint('error', data.errMsg);
+			}
+		});
+	},
+
 	deleteUser: function(id, callback) {
 		Resource.delete({
 			resource: 'config.user',
@@ -20,6 +36,7 @@ var Action = {
 				id: id
 			},
 			success: function(data) {
+				Reactman.PageAction.showHint('success', '删除成功');
 				callback();
 			}
 		});

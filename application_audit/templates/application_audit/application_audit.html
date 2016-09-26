@@ -1,0 +1,15 @@
+{% extends "page.html" %}
+
+{% block js %}
+<script type="text/javascript">
+	W.breadcrumb = [{
+		name: '应用审核',
+		href: '/application_audit/applications/'
+	}, {
+		name: '应用审核',
+		href: '#'
+	}];
+
+	W.pageContentComponent = './application_audit/applications/ApplicationsPage.react';
+</script>
+{% endblock %}

@@ -3,7 +3,7 @@
  */
 "use strict";
 
-var debug = require('debug')('m:config.permission::Store');
+var debug = require('debug')('m:application_audit.applications:Store');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 var _ = require('underscore');
@@ -11,30 +11,28 @@ var _ = require('underscore');
 var Reactman = require('reactman');
 var Dispatcher = Reactman.Dispatcher;
 var StoreUtil = Reactman.StoreUtil;
-var W = Reactman.W;
 
 var Constant = require('./Constant');
 
 var Store = StoreUtil.createStore(Dispatcher, {
 	actions: {
-		'handleUpdatePermission': Constant.CONFIG_PERMISSION_UPDATE_PERMISSION,
-		'handleSavePermission': Constant.CONFIG_PERMISSION_SAVE_PERMISSION
+		'handleUpdateApplication': Constant.UPDATE_APPLICATION,
+		'handleFilterApplication': Constant.FILTER_APPLICATION
 	},
 
 	init: function() {
 		this.data = {
-			id: -1,
-			name: ''
 		};
 	},
-
-	handleUpdatePermission: function(action) {
-		this.data[action.data.property] = action.data.value;
+	
+	handleFilterApplication: function(action) {
+		this.data.filterOptions = action.data;
 		this.__emitChange();
 	},
 
-	handleSavePermission: function() {
-		W.gotoPage('/config/permissions/');
+	handleUpdateApplication: function(action) {
+		this.data = action.data;
+		this.__emitChange();
 	},
 
 	getData: function() {

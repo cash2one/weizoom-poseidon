@@ -13,17 +13,6 @@ var Resource = Reactman.Resource;
 var Constant = require('./Constant');
 
 var Action = {
-	updatePermission: function(index, name, stocks) {
-		Dispatcher.dispatch({
-			actionType: Constant.CONFIG_USER_UPDATE_PERMISSION,
-			data: {
-				index: index,
-				name: name,
-				stocks: stocks
-			}
-		});
-	},
-
 	updateUser: function(property, value) {
 		Dispatcher.dispatch({
 			actionType: Constant.CONFIG_USER_UPDATE_USER,
@@ -39,17 +28,23 @@ var Action = {
 			name: data['name'],
 			password: data['password'],
 			display_name: data['displayName'],
-			email: data['email'],
-			group: data['group'],
-			permissions: JSON.stringify(data['permissions'])
+			status: data['status']
 		};
 		if (data.id === -1) {
 			Resource.put({
 				resource: 'config.user',
 				data: user,
-				dispatch: {
-					dispatcher: Dispatcher,
-					actionType: Constant.CONFIG_USER_SAVE_USER
+				success: function() {
+					Reactman.PageAction.showHint('success', '创建账号成功');
+					setTimeout(function(){
+						Dispatcher.dispatch({
+							actionType: Constant.CONFIG_USER_SAVE_USER,
+							data: data
+						});
+					},1000);
+				},
+				error: function(data) {
+					Reactman.PageAction.showHint('error', data.errMsg);
 				}
 			});
 		} else {
@@ -57,9 +52,17 @@ var Action = {
 			Resource.post({
 				resource: 'config.user',
 				data: user,
-				dispatch: {
-					dispatcher: Dispatcher,
-					actionType: Constant.CONFIG_USER_SAVE_USER
+				success: function() {
+					Reactman.PageAction.showHint('success', '编辑账号成功');
+					setTimeout(function(){
+						Dispatcher.dispatch({
+							actionType: Constant.CONFIG_USER_SAVE_USER,
+							data: data
+						});
+					},1000);
+				},
+				error: function(data) {
+					Reactman.PageAction.showHint('error', data.errMsg);
 				}
 			});
 		}		

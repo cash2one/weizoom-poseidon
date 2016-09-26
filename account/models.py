@@ -15,11 +15,26 @@ from django.db.models import F
 
 from core import dateutil
 
+UNACTIVE = 0
+UNREVIEW = 1
+USING = 2
+REJECT = 3
+STOPED = 4
+APP_STATUS = (
+	(UNACTIVE, u'未激活'),
+	(UNREVIEW, u'待审核'),
+	(USING, u'已启用'),
+	(REJECT, u'已驳回'),
+	(STOPED, u'已停用')
+)
+APP_STATUS2NAME = dict(APP_STATUS)
+
 class UserProfile(models.Model):
 	user = models.ForeignKey(User, unique=True)
 	manager_id = models.IntegerField(default=0) #创建该用户的系统用户的id
-	is_active = models.BooleanField(default=True, verbose_name='用户是否有效')
-	note = models.CharField(max_length=1024, default='')
+	app_status = models.IntegerField(default=UNACTIVE,choices=APP_STATUS)  #应用状态
+	status = models.IntegerField(default=1) #账号状态 1开启 0关闭
+	woid =  models.IntegerField(default=0) #woid（云商通自营帐号ID）
 
 	class Meta(object):
 		db_table = 'account_user_profile'
@@ -43,9 +58,6 @@ def create_profile(instance, created, **kwargs):
 			
 
 signals.post_save.connect(create_profile, sender=User, dispatch_uid = "account.create_profile")
-
-
-
 
 class App(models.Model):
 	"""

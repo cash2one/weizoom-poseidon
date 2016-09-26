@@ -161,7 +161,9 @@ INSTALLED_APPS = [
     'app',
     'resource',
     'config',
-
+    'customer',
+    'interface',
+    'application_audit',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -231,7 +233,17 @@ else:
     ALLOWED_HOSTS = ['*', ]
     DEBUG = False
 
+if 'deploy' == MODE:
+    MNS_ACCESS_KEY_ID = 'eJ8LylRwQERRqOot'
+    MNS_ACCESS_KEY_SECRET = 'xxPrfGcUlnsL7IPweJRqVekHTCu6Ad'
+    MNS_ENDPOINT = 'http://1615750970594173.mns.cn-hangzhou-internal.aliyuncs.com/'
 
+    MNS_SECURITY_TOKEN = ''
+else:
+    MNS_ACCESS_KEY_ID = 'eJ8LylRwQERRqOot'
+    MNS_ACCESS_KEY_SECRET = 'xxPrfGcUlnsL7IPweJRqVekHTCu6Ad'
+    MNS_ENDPOINT = 'http://1615750970594173.mns.cn-hangzhou.aliyuncs.com/'
+    #MNS_ENDPOINT = 'http://16
 
 UPLOAD_DIR = os.path.join(PROJECT_HOME, '../static', 'upload') #文件上传路径
 

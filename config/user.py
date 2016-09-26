@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+__author__ = 'lihanyi'
+
 import json
 import time
 
@@ -13,14 +15,12 @@ from django.contrib.contenttypes.models import ContentType
 from core import resource
 from core.jsonresponse import create_response
 import nav
-import models
+from account.models import *
+from customer import models as customer_models
 from core.frontend_data import FrontEndData
 
 FIRST_NAV = 'config'
 SECOND_NAV = 'config-user'
-
-GROUP_NAME_MAP = {
-}
 
 class User(resource.Resource):
 	app = 'config'
@@ -33,49 +33,18 @@ class User(resource.Resource):
 		frontend_data = FrontEndData()
 		if user_id:
 			user = auth_models.User.objects.get(id=user_id)
-			group = user.groups.all()[0]
-			permission_codes = [code.split('.')[1] for code in user.get_all_permissions()]
-			permissions = list(auth_models.Permission.objects.filter(codename__in=permission_codes))
-			permission_datas = []
-			for permission in permissions:
-				permission_datas.append(str(permission.id))
+			status = UserProfile.objects.get(user_id=user.id).status
 			user_data = {
 				'id': user.id,
 				'name': user.username,
 				'displayName': user.first_name,
-				'group': str(group.id),
-				'email': user.email,
-				'permissions': permission_datas
+				'status': str(status)
 			}
-
 			frontend_data.add('user', user_data)
 		else:
 			frontend_data.add('user', None)
-
-		#获得系统所有的group数据
-		groups = [group for group in auth_models.Group.objects.all() if group.name != 'SystemManager' and group.name != 'Staff']
-		group_datas = []
-		for group in groups:
-			group_datas.append({
-				'id': group.id,
-				'name': group.name,
-				'displayName': GROUP_NAME_MAP[group.name]
-			})
-		frontend_data.add('groups', group_datas)
-
-		#获得系统所有的permission数据
-		permission_content_type = ContentType.objects.get(name='MANAGE_SYSTEM')
-		permissions = [permission for permission in auth_models.Permission.objects.filter(content_type_id=permission_content_type.id)]
-		permission_datas = []
-		for permission in permissions:
-			if permission.codename.startswith('__manage_'):
-				continue
-			permission_datas.append({
-				'id': permission.id,
-				'name': permission.name,
-				'selectable': not permission.codename.startswith('__manage_')
-			})
-		frontend_data.add('permissions', permission_datas)
+			#TODO 增加woid（云商通自营帐号ID）
+			
 
 		c = RequestContext(request, {
 			'first_nav_name': FIRST_NAV,
@@ -87,63 +56,57 @@ class User(resource.Resource):
 		return render_to_response('config/user.html', c)
 
 	@login_required
+	#创建账号
 	def api_put(request):
 		username = request.POST['name']
 		password = request.POST['password']
 		display_name = request.POST['display_name']
-		email = request.POST['email']
-		user = auth_models.User.objects.create_user(username, email, password)
+		status = int(request.POST['status'])
+		
+		if not check_username_valid(username):
+			response = create_response(500)
+			response.errMsg = u'登录账号已存在，请重新输入'
+			return response.get_response()
+
+		user = auth_models.User.objects.create_user(username, username+'@weizoom.com', password)
 		auth_models.User.objects.filter(id=user.id).update(first_name=display_name)
-
-		group_id = request.POST.get('group', None)
-		if group_id:
-			group = auth_models.Group.objects.get(id=group_id)
-			user.groups.add(group)
-
-		#处理权限
-		permission_ids = json.loads(request.POST['permissions'])
-		permissions = auth_models.Permission.objects.filter(id__in=permission_ids)
-		for permission in permissions:
-			user.user_permissions.add(permission)
-
+		UserProfile.objects.filter(user_id=user.id).update(
+			manager_id = request.user.id,
+			status = status
+			)
 		response = create_response(200)
-
 		return response.get_response()
 
 	@login_required
+	#编辑账号
 	def api_post(request):
 		user_id = request.POST['id']
-		auth_models.User.objects.filter(id=user_id).update(
-			username = request.POST['name'],
-			first_name = request.POST['display_name'],
-			email = request.POST['email'],
-		)
-
+		username = request.POST['name']
+		password = request.POST.get('password','')
+		display_name = request.POST['display_name']
+		status = int(request.POST['status'])
+		
 		user = auth_models.User.objects.get(id=user_id)
-		group = auth_models.Group.objects.get(id=request.POST['group'])
-		user.groups.clear()
-		user.groups.add(group)
-
-		#处理权限
-		user.user_permissions.clear()
-		permission_ids = json.loads(request.POST['permissions'])
-		permissions = auth_models.Permission.objects.filter(id__in=permission_ids)
-		for permission in permissions:
-			if permission.codename.startswith('__manage_'):
-				#跳过跟group关联的permission
-				continue
-
-			user.user_permissions.add(permission)
-
+		user.username = username
+		user.first_name = display_name
+		if password != '':
+			user.set_password(password)
+		user.save()
+		UserProfile.objects.filter(user_id=user.id).update(status=status)
 		response = create_response(200)
-
 		return response.get_response()
 
 	@login_required
 	def api_delete(request):
 		is_active = int(request.POST.get("is_active", '0')) != 0
 		auth_models.User.objects.filter(id=request.POST['id']).update(is_active=is_active)
-
+		customer_models.CustomerMessage.objects.filter(user_id=request.POST['id']).update(is_deleted=True)
 		response = create_response(200)
-
 		return response.get_response()
+
+def check_username_valid(username):
+	"""
+	创建用户时，检查登录账号是否存在
+	"""
+	user = auth_models.User.objects.filter(username=username)
+	return False if user else True
