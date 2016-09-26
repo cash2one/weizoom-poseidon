@@ -74,6 +74,7 @@ Background:
 
 	Given aini登录系统:panda	
 	When aini添加规格
+	"""
 	[{
 	"standard_name":"尺码",
 	"show_type":"文字",
@@ -178,8 +179,7 @@ Background:
 	Given manager登录系统:开放平台
 	Then manager查看应用审核列表
 		|account_main|application_name|     appid    |   appsecret  |dev_name|mob_number |  email_address  | ip_address | interface_address    |statute|   operation   |
-		|  爱伲咖啡  |  默认应用      |审核后自动生成|审核后自动生成|爱伲咖啡|13813984405|ainicoffee@qq.com|192.168.1.3
-		|http://192.168.0.130|待审核 |确认通过/驳回修改|
+		|  爱伲咖啡  |  默认应用      |审核后自动生成|审核后自动生成|爱伲咖啡|13813984405|ainicoffee@qq.com|192.168.1.3|http://192.168.0.130|待审核 |确认通过/驳回修改|
 	When manager同意申请
 	"""
 		{
@@ -188,8 +188,7 @@ Background:
 	"""
 	Then manager查看应用审核列表
 		|account_main|application_name|     appid    |   appsecret  |dev_name|mob_number |  email_address  | ip_address | interface_address    |statute|   operation   |
-		|  爱伲咖啡  |  默认应用      |   3565989    |sd124wr45sfds |爱伲咖啡|13813984405|ainicoffee@qq.com|192.168.1.3
-		|http://192.168.0.130|已启用 |    暂停停用   |
+		|  爱伲咖啡  |  默认应用      |   3565989    |sd124wr45sfds |爱伲咖啡|13813984405|ainicoffee@qq.com|192.168.1.3|http://192.168.0.130|已启用 |    暂停停用   |
 
 @poseidon @api
 Scenario:通过API获取商品库存
