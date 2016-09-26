@@ -32,6 +32,7 @@ Background:
 					"id": "000001",
 					"name": "商品1-1",
 					"promotion_title": "商品1-2促销",
+					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
 					"image": "love.png",
@@ -111,7 +112,7 @@ Background:
 Scenario:1 通过主订单ID提供订单详情API '已发货'，包括物流详细信息
 	#Given 自营平台订单数据已同步到panda系统中
 	Given pd登录panda系统
-	When pd对订单进行发货
+	When pd对订单进行发货::weapp
 		"""
 		{
 			"order_no": "001-供货商1",

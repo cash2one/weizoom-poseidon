@@ -38,6 +38,7 @@ Background:
 					"id": "000001",
 					"name": "商品1",
 					"promotion_title": "商品1促销",
+					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
 					"image": "love.png",
@@ -53,6 +54,7 @@ Background:
 					"id": "000002",
 					"name": "商品2",
 					"promotion_title": "商品2促销",
+					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
 					"image": "love.png",
@@ -472,10 +474,9 @@ Scenario:4 通过主订单ID提供订单详情API '已完成'
 		"""
 	#Given 自营平台订单数据已同步到panda系统中
 	Given pd登录panda系统
-	When pd完成订单
-		"""
-		["001-供货商1","001-供货商2"]
-		"""
+	When pd完成订单'001-供货商1'::weapp
+	When pd完成订单'001-供货商2'::weapp
+
 	When jd调用'订单详情'api
 		"""
 			{

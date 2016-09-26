@@ -32,6 +32,7 @@ Background:
 					"id": "000001",
 					"name": "商品1-1",
 					"promotion_title": "商品1-2促销",
+					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
 					"image": "love.png",
@@ -248,7 +249,7 @@ Scenario:4 通过主订单ID提供订单详情API '已完成'
 	#Given 自营平台订单数据已同步到panda系统中
 	Given pd登录panda系统
 	When pd完成订单'001-供货商1'::weapp
-    When jd调用'订单详情'api
+	When jd调用'订单详情'api
 		"""
 			{
 				"order_no":"001"

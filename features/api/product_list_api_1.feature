@@ -34,6 +34,7 @@ Background:
 					"id": "000001",
 					"name": "商品1-1",
 					"promotion_title": "商品1-2促销",
+					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
 					"image": "love.png",
@@ -49,6 +50,7 @@ Background:
 					"id": "000002",
 					"name": "商品1-2",
 					"promotion_title": "商品1-2促销",
+					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
 					"image": "love.png",
@@ -64,6 +66,7 @@ Background:
 					"id": "000003",
 					"name": "商品1-3",
 					"promotion_title": "商品1-2促销",
+					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
 					"image": "love.png",
@@ -85,10 +88,12 @@ Background:
 					"model": {
 						"models":{
 								"M": {
+									"purchase_price": 301.00,
 									"price": 301.00,
 									"stocks": 101
 								},
 								"S": {
+									"purchase_price": 300.00,
 									"price": 300.00,
 									"stocks": 101
 								}
@@ -222,6 +227,7 @@ Scenario:2 供货商修改单规格商品后，jd通过列表页调用单规格�
 					"id": "000001",
 					"name": "商品1-1",
 					"promotion_title": "商品1-2促销",
+					"purchase_price": 50.01,
 					"price": 50.01,
 					"weight": 1,
 					"image": "love.png",
@@ -282,10 +288,12 @@ Scenario:3 供货商修改多规格商品后，jd通过列表页调用多规格�
 					"model": {
 						"models":{
 								"M": {
+									"purchase_price": 302.00,
 									"price": 302.00,
 									"stocks": 102
 								},
 								"S": {
+									"purchase_price": 300.00,
 									"price": 300.00,
 									"stocks": 102
 								}
