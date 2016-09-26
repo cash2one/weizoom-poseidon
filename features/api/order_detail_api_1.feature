@@ -70,7 +70,7 @@ Background:
 				}
 			"""
 	#第三方平台产生订单，自营平台生成对应的订单	
-		Given 自营平台已获取jd订单::weapp
+		Given 自营平台已获取jd订单
 			"""
 				{
 					"order_no":"001",
