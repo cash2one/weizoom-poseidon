@@ -2,6 +2,9 @@
 import json
 import time
 import base64
+import string
+import random
+from hashlib import md5
 
 from django.http import HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
@@ -69,14 +72,27 @@ class Messages(resource.Resource):
 		"""
 		print request.POST['serverIp'],"========"
 		print type(str(request.POST['serverIp']))
+		
+		app_id = "wz{}".format(md5(''.join(random.sample(string.ascii_letters + string.digits, 10)) + str(1)+time.strftime("%Y%m%d%H%m%s")).hexdigest()[8:-8])
+		app_secret  = md5(''.join(random.sample(string.ascii_letters + string.digits, 10)) + str(1)+time.strftime("%Y%m%d%H%m%s")).hexdigest()
 		customer_message = models.CustomerMessage.objects.create(
 			user = request.user, 
 			name = request.POST['name'], 
 			mobile_number = request.POST['mobileNumber'], 
 			email = request.POST['email'],
 			interface_url = request.POST['interfaceUrl'],
-			server_ip = request.POST['serverIp']
+			server_ip = request.POST['serverIp'],
+			app_id = app_id,
+			app_secret = app_secret
 		)
+
+		account_models.App.objects.create(
+			appid = app_id,
+			app_secret = app_secret,
+			is_active=False,
+			woid=request.user.get_profile().woid
+			)
+
 
 		#更新状态
 		account_models.UserProfile.objects.filter(user_id=request.user.id).update(
@@ -108,7 +124,7 @@ class Messages(resource.Resource):
 		account_models.UserProfile.objects.filter(user_id=request.user.id).update(
 			app_status = models.STATUS_CHECKING
 		)
-
+		
 		#删除、重建
 		server_ips = json.loads(request.POST['serverIps'])
 		models.CustomerServerIps.objects.filter(customer_id=customer_id).delete()

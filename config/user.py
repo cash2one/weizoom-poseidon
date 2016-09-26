@@ -43,6 +43,8 @@ class User(resource.Resource):
 			frontend_data.add('user', user_data)
 		else:
 			frontend_data.add('user', None)
+			#TODO 增加woid（云商通自营帐号ID）
+			
 
 		c = RequestContext(request, {
 			'first_nav_name': FIRST_NAV,

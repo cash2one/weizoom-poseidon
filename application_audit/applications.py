@@ -112,11 +112,14 @@ class ApplicationAudit(resource.Resource):
 		status = request.POST.get('method','')
 		if status == 'close':
 			change_to_status = account_models.STOPED
+			is_active = False
 		else:
 			change_to_status = account_models.USING
+			is_active = True
 
 		try:
-			user_id = customer_models.CustomerMessage.objects.get(id=customer_id).user_id
+			customer_message = customer_models.CustomerMessage.objects.get(id=customer_id)
+			user_id = customer_message.user_id
 			customer_info = customer_models.CustomerMessage.objects.filter(id=customer_id)
 			application_models.ApplicationLog.objects.create(
 				user_id = user_id,
@@ -127,12 +130,10 @@ class ApplicationAudit(resource.Resource):
 				app_status = change_to_status
 				)
 
-			#没有app_id等数据
-			if not customer_info.first().app_id and status == 'open':
-				customer_info.update(
-					app_id = '1111111111',
-					app_secret = 'sd124wr45sfds'
-					)
+			# TODO  is_active ＝ false 时 发送异步通知 清理access token缓存
+			account_models.App.objects.filter(appid=customer_message.app_id).update(is_active=is_active)
+			if is_active is False:
+				pass
 
 			#向客户发送短信通知
 			reason = ''

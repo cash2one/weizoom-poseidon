@@ -34,6 +34,7 @@ class UserProfile(models.Model):
 	manager_id = models.IntegerField(default=0) #创建该用户的系统用户的id
 	app_status = models.IntegerField(default=UNACTIVE,choices=APP_STATUS)  #应用状态
 	status = models.IntegerField(default=1) #账号状态 1开启 0关闭
+	woid =  models.IntegerField(default=0) #woid（云商通自营帐号ID）
 
 	class Meta(object):
 		db_table = 'account_user_profile'

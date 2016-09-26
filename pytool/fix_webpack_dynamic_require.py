@@ -33,6 +33,7 @@ def change_dynamic_require(dynamic_require_line):
 	dst_file.close()
 
 if __name__ == '__main__':
+	print ">>>>>>>>>>>>>>>>>>>os.name", os.name
 	if os.name == 'nt' or os.name == 'posix':
 		print '[fix_webpack_dynamic_require]: os is %s, use 8 depths path' % os.name
 		dynamic_require_line = "var dynamicRequire = require('../../../../../../../../static/component/dynamic_require');"
