@@ -21,8 +21,8 @@ Background:
 Scenario:1 管理员创建开放平台账号
 	
 	Then manager查看账号列表
-		| ID | account_name |  main_name  |   creat_time   |   statute   |   operation  |
-		| 01 |     aini     |   爱伲咖啡  |2016-09-13 15:20|    已启用   |   编辑/关闭  |
+		| ID | account_name |  main_name  |  create_time   |   state   |   operation  |
+		| 01 |     aini     |   爱伲咖啡  |2016-09-13 15:20|   已启用  |   编辑/关闭  |
 
 @poseidon
 Scenario:2 管理员编辑开放平台账号
