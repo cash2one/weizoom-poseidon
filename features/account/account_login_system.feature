@@ -1,5 +1,5 @@
-auther:徐梓豪 2016-09-14
-feature:普通账号登录系统
+#author:徐梓豪 2016-09-14
+Feature:普通账号登录系统
 Background:
 	Given manager登录开放平台系统
 	When manager创建开放平台账号
