@@ -1,5 +1,5 @@
-author:徐梓豪 2016-09-18
-feature:管理员查看应用审核列表
+#author:徐梓豪 2016-09-18
+Feature:管理员查看应用审核列表
 
 Background:
 	Given manager登录开放平台系统

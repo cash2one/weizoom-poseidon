@@ -1,5 +1,5 @@
-auther:徐梓豪 2016-09-14
-feature:管理员浏览账号列表
+#author:徐梓豪 2016-09-14
+Feature:管理员浏览账号列表
 
 Background:
 	Given manager登录开放平台系统
