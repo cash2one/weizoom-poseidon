@@ -7,13 +7,13 @@ Feature: 提供订单详情的API（多供货商）
 Background:
 	#panda系统中：创建供货商、设置供货商运费、同步商品到自营平台
 		#创建供货商
-			Given 创建一个特殊的供货商，就是专门针对商品池供货商
+			Given 创建一个特殊的供货商，就是专门针对商品池供货商::weapp
 				"""
 				{
 					"supplier_name":"供货商1"
 				}
 				"""
-			Given 创建一个特殊的供货商，就是专门针对商品池供货商
+			Given 创建一个特殊的供货商，就是专门针对商品池供货商::weapp
 				"""
 				{
 					"supplier_name":"供货商2"
@@ -21,7 +21,7 @@ Background:
 				"""
 		#设置供货商运费
 			#供货商1设置运费-满100包邮，否则收取运费10元
-			When 给供货商添加运费配置
+			When 给供货商添加运费配置::weapp
 				"""
 				{
 					"supplier_name": "供货商1",
@@ -30,7 +30,7 @@ Background:
 				}
 				"""
 		#同步商品到自营平台
-			Given 给自营平台同步商品
+			Given 给自营平台同步商品::weapp
 				"""
 				{
 					"accounts":["zy1"],
@@ -45,7 +45,7 @@ Background:
 					"detail": "商品1描述信息"
 				}
 				"""
-			Given 给自营平台同步商品
+			Given 给自营平台同步商品::weapp
 				"""
 				{
 					"accounts":["zy1"],
