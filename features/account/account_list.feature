@@ -6,20 +6,20 @@ Background:
 	When manager创建开放平台账号
 		"""
 		[{
-		"acoount_name":"aini",
-		"password":"123456",
-		"account_main":"爱伲咖啡",
-		"isopen":"是"
+			"account_name":"aini",
+			"password":"123456",
+			"account_main":"爱伲咖啡",
+			"isopen":"是"
 		},{
-		"acoount_name":"naike",
-		"password":"123456",
-		"account_main":"耐克男鞋",
-		"isopen":"是"
+			"account_name":"naike",
+			"password":"123456",
+			"account_main":"耐克男鞋",
+			"isopen":"是"
 		},{
-		"acoount_name":"zhouheiya",
-		"password":"123456",
-		"account_main":"周黑鸭",
-		"isopen":"是"
+			"account_name":"zhouheiya",
+			"password":"123456",
+			"account_main":"周黑鸭",
+			"isopen":"是"
 		}]
 		"""
 @poseidon
