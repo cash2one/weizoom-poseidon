@@ -34,6 +34,7 @@ Background:
 					"id": "000001",
 					"name": "商品1-1",
 					"promotion_title": "商品1-2促销",
+					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
 					"image": "love.png",
