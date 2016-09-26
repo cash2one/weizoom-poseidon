@@ -1,4 +1,4 @@
-author:徐梓豪 2016-09-20
+#author:徐梓豪 2016-09-20
 Feature: 测试商品库存API的场景
 Background:
 	Given manager登录系统:panda
