@@ -236,7 +236,7 @@ Scenario:2 通过主订单ID提供订单详情API '待发货'
 	#商品1-1已发货，商品2-1待发货
 		#Given 自营平台订单数据已同步到panda系统中
 		Given pd登录panda系统
-		When pd对订单进行发货
+		When pd对订单进行发货::weapp
 	        """
 	        {
 	          "order_no": "001-供货商1",
@@ -294,7 +294,7 @@ Scenario:2 通过主订单ID提供订单详情API '待发货'
 	#商品1-1已完成，商品2-1待发货	
 		#Given 自营平台订单数据已同步到panda系统中
 		Given pd登录panda系统
-		When pd完成订单'001-供货商1'
+		When pd完成订单'001-供货商1'::weapp
 		When jd调用'订单详情'api
 			"""
 				{
@@ -352,7 +352,7 @@ Scenario:3 通过主订单ID提供订单详情API '已发货'
 	#商品1-1已发货，商品2-1已发货
 		#Given 自营平台订单数据已同步到panda系统中
 		Given pd登录panda系统
-		When pd对订单进行发货
+		When pd对订单进行发货::weapp
 	        """
 	        [{
 	          "order_no": "001-供货商1",
@@ -415,7 +415,7 @@ Scenario:3 通过主订单ID提供订单详情API '已发货'
 	#商品1-1已完成，商品2-1已发货
 		#Given 自营平台订单数据已同步到panda系统中
 		Given pd登录panda系统
-		When pd完成订单'001-供货商1'
+		When pd完成订单'001-供货商1'::weapp
 		When jd调用'订单详情'api
 			"""
 				{
