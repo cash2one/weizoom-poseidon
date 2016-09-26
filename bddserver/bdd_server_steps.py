@@ -21,7 +21,7 @@ except:
 	raise ImportError('bdd_server import setting error.')
 
 if not hasattr(settings, 'BDD_SERVER2PORT'):
-	from weapp import settings
+	from poseidon import settings
 	assert hasattr(settings, 'BDD_SERVER2PORT'), 'BDD_SERVER2PORT import error!'
 
 
