@@ -312,8 +312,6 @@ def __datetime2str(dt_time):
 	时间转换为字符串【今天】
 	"""
 	date_now = datetime.now().strftime('%Y-%m-%d %H:%M')
-	print date_now
-	print dt_time
 	if date_now == dt_time:
 		return u'今天'
 	else:
