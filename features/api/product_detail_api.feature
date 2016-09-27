@@ -48,7 +48,7 @@ Background:
 		When manager创建开放平台账号
 		"""
 			[{
-			"acoount_name":"jd",
+			"account_name":"jd",
 			"password":"123456",
 			"account_main":"京东商城",
 			"isopen":"是"

@@ -68,7 +68,7 @@ Background:
 		When manager创建开放平台账号
 			"""
 				[{
-				"acoount_name":"jd",
+				"account_name":"jd",
 				"password":"123456",
 				"account_main":"京东商城",
 				"isopen":"是"
@@ -97,6 +97,7 @@ Background:
 			"""
 				{
 					"order_no":"001",
+					"deal_id":"01",
 					"status":"待支付",
 					"ship_name":"bill",
 					"ship_tel":"13811223344",
@@ -137,6 +138,7 @@ Background:
 			"""
 				{
 					"order_no":"002",
+					"deal_id":"02",
 					"status":"待支付",
 					"ship_name":"bill",
 					"ship_tel":"13811223344",
@@ -167,6 +169,7 @@ Background:
 			"""
 				{
 					"order_no":"003",
+					"deal_id":"03",
 					"status":"待支付",
 					"ship_name":"bill",
 					"ship_tel":"13811223344",
@@ -205,6 +208,7 @@ Scenario:1 通过列表页调用订单列表API
 		"""
 			[{
 				"order_no":"001",
+				"deal_id":"01",
 				"status":"待支付",
 				"ship_name":"bill",
 				"ship_tel":"13811223344",
@@ -241,6 +245,7 @@ Scenario:1 通过列表页调用订单列表API
 				"final_price": 110.00
 			},{
 				"order_no":"002",
+				"deal_id":"02",
 				"status":"待支付",
 				"ship_name":"bill",
 				"ship_tel":"13811223344",
@@ -278,6 +283,7 @@ Scenario:1 通过列表页调用订单列表API
 		"""
 			[{
 				"order_no":"003",
+				"deal_id":"03",
 				"status":"待支付",
 				"ship_name":"bill",
 				"ship_tel":"13811223344",

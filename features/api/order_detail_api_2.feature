@@ -67,7 +67,7 @@ Background:
 		When manager创建开放平台账号
 			"""
 				[{
-				"acoount_name":"jd",
+				"account_name":"jd",
 				"password":"123456",
 				"account_main":"京东商城",
 				"isopen":"是"
@@ -96,6 +96,7 @@ Background:
 			"""
 				{
 					"order_no":"001",
+					"deal_id":"01",
 					"status":"待支付",
 					"ship_name":"bill",
 					"ship_tel":"13811223344",
@@ -144,6 +145,7 @@ Scenario:1 通过主订单ID提供订单详情API '待支付'
 			"""
 			{
 				"order_no":"001",
+				"deal_id":"01",
 				"status":"待支付",
 				"ship_name":"bill",
 				"ship_tel":"13811223344",
@@ -199,6 +201,7 @@ Scenario:2 通过主订单ID提供订单详情API '待发货'
 			"""
 				{
 					"order_no":"001",
+					"deal_id":"01",
 					"status":"待发货",
 					"ship_name":"bill",
 					"ship_tel":"13811223344",
@@ -257,6 +260,7 @@ Scenario:2 通过主订单ID提供订单详情API '待发货'
 			"""
 				{
 					"order_no":"001",
+					"deal_id":"01",
 					"status":"待发货",
 					"ship_name":"bill",
 					"ship_tel":"13811223344",
@@ -307,6 +311,7 @@ Scenario:2 通过主订单ID提供订单详情API '待发货'
 			"""
 				{
 					"order_no":"001",
+					"deal_id":"01",
 					"status":"待发货",
 					"ship_name":"bill",
 					"ship_tel":"13811223344",
@@ -378,6 +383,7 @@ Scenario:3 通过主订单ID提供订单详情API '已发货'
 			"""
 				{
 					"order_no":"001",
+					"deal_id":"01",
 					"status":"已发货",
 					"ship_name":"bill",
 					"ship_tel":"13811223344",
@@ -428,6 +434,7 @@ Scenario:3 通过主订单ID提供订单详情API '已发货'
 			"""
 				{
 					"order_no":"001",
+					"deal_id":"01",
 					"status":"已发货",
 					"ship_name":"bill",
 					"ship_tel":"13811223344",
@@ -487,6 +494,7 @@ Scenario:4 通过主订单ID提供订单详情API '已完成'
 		"""
 			{
 				"order_no":"001",
+				"deal_id":"01",
 				"status":"已完成",
 				"ship_name":"bill",
 				"ship_tel":"13811223344",
