@@ -26,7 +26,6 @@ var Store = StoreUtil.createStore(Dispatcher, {
 		this.data = {
 			user: Reactman.loadJSON('user')
 		};
-		this.data.user['options'] = [];
 		if (!this.data.user) {
 			this.data.user = {
 				id: -1,
@@ -36,6 +35,8 @@ var Store = StoreUtil.createStore(Dispatcher, {
 				status: '1',
 				options: []
 			};
+		}else{
+			this.data.user['options'] = [];
 		}
 	},
 

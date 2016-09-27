@@ -131,14 +131,11 @@ class GetAllUnsyncedSelfShops(resource.Resource):
 				'data': params
 			}
 		)
-		rows = [{
-			'text': 'aaaaaaaa',
-			'value': '1'
-		}]
-		# if resp and resp.get('code') == 200:
-		# 	data = resp.get('data').get('profiles')
-		# 	rows = [{'text': profile.get('store_name'),
-		# 			 'value': profile.get('user_id')} for profile in data]
+		rows = []
+		if resp and resp.get('code') == 200:
+			data = resp.get('data').get('profiles')
+			rows = [{'text': profile.get('store_name'),
+					 'value': profile.get('user_id')} for profile in data]
 		data = {
 			'rows': rows
 		}
