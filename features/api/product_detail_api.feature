@@ -44,15 +44,15 @@ Background:
 				"""
 
 	#开放平台中：创建使用账号 ，激活，审批 准许使用API接口
-		Given manager登录系统:开放平台
-		When manager创建账号
+		Given manager登录开放平台系统
+		When manager创建开放平台账号
 		"""
-			{
+			[{
 			"acoount_name":"jd",
 			"password":"123456",
 			"account_main":"京东商城",
 			"isopen":"是"
-			}
+			}]
 		"""
 		Given jd使用密码123456登录系统
 		When jd激活应用
@@ -65,7 +65,7 @@ Background:
 				"interface_address":"http://192.168.0.130"
 				}
 			"""
-		Given manager登录系统:开放平台
+		Given manager登录开放平台系统
 		When manager同意申请
 			"""
 				{
@@ -94,7 +94,7 @@ Scenario:1 通过商品ID调用单规格商品API
 		"""
 Scenario:2 供货商修改单规格商品后，jd通过商品ID调用单规格商品API，获得修改后单规格商品详情
 	#同步商品到自营平台（修改商品1中的价格，库存后进行同步）
-	Given 给自营平台同步商品
+	Given 给自营平台同步商品::weapp
 		"""
 		{
 			"accounts":["zy1"],
