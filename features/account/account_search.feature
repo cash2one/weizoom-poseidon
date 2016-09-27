@@ -26,10 +26,10 @@ Background:
 		}]
 		"""
 	Then manager查看账号列表
-		| ID | account_name |  main_name  |   creat_time   |   statute   |   operation  |
-		| 01 |     aini     |  爱伲咖啡   |2016-09-14 12:20|    已启用   |   编辑/关闭  |
-		| 02 |    naike     |  耐克男鞋   |2016-09-14 12:21|    已启用   |   编辑/关闭  |
-		| 03 |   zhouheiya  |   周黑鸭    |2016-09-14 12:23|    已启用   |   编辑/关闭  |
+		| account_name |  main_name  |   creat_time   |   state   |   operation  |
+		|     aini     |  爱伲咖啡   |      今天      |  未激活   |   编辑/关闭  |
+		|    naike     |  耐克男鞋   |      今天      |  未激活   |   编辑/关闭  |
+		|   zhouheiya  |   周黑鸭    |      今天      |  未激活   |   编辑/关闭  |
 
 @poseidon @search
 Scenario:1 管理员通过登录名查询账号
@@ -40,8 +40,8 @@ Scenario:1 管理员通过登录名查询账号
 		}
 		"""
 	Then manager获取账号列表
-		| ID | account_name |  main_name  |   creat_time   |   statute   |   operation  |
-		| 01 |     aini     |  爱伲咖啡   |2016-09-14 12:20|    已启用   |   编辑/关闭  |
+		| account_name |  main_name  |   creat_time   |   state   |   operation  |
+		|     aini     |  爱伲咖啡   |      今天      |  未激活   |   编辑/关闭  |
 	When manager通过登录名查询账号
 		"""
 		{
@@ -49,9 +49,9 @@ Scenario:1 管理员通过登录名查询账号
 		}
 		"""
 	Then manager获取账号列表
-		| ID | account_name |  main_name  |   creat_time   |   statute   |   operation  |
-		| 01 |     aini     |  爱伲咖啡   |2016-09-14 12:20|    已启用   |   编辑/关闭  |
-		| 02 |    naike     |  耐克男鞋   |2016-09-14 12:21|    已启用   |   编辑/关闭  |
+		| account_name |  main_name  |   creat_time   |   state   |   operation  |
+		|     aini     |  爱伲咖啡   |      今天      |  未激活   |   编辑/关闭  |
+		|    naike     |  耐克男鞋   |      今天      |  未激活   |   编辑/关闭  |
 	When manager通过登录名查询账号
 		"""
 		{
@@ -59,7 +59,7 @@ Scenario:1 管理员通过登录名查询账号
 		}
 		"""
 	Then manager查看账号列表
-		
+		| account_name |  main_name  |   creat_time   |   state   |   operation  |
 
 @poseidon @search
 Scenario:2 管理员通过主题名查询账号
@@ -71,8 +71,8 @@ Scenario:2 管理员通过主题名查询账号
 		}
 		"""
 	Then manager查看账号列表
-		| ID | account_name |  main_name  |   creat_time   |   statute   |   operation  |
-		| 01 |     aini     |  爱伲咖啡   |2016-09-14 12:20|    已启用   |   编辑/关闭  |
+		| account_name |  main_name  |   creat_time   |   state   |   operation  |
+		|     aini     |  爱伲咖啡   |      今天      |  未激活   |   编辑/关闭  |
 	When manager通过主体名查询账号
 		"""
 		{
@@ -80,8 +80,8 @@ Scenario:2 管理员通过主题名查询账号
 		}
 		"""
 	Then manager查看账号列表
-		| ID | account_name |  main_name  |   creat_time   |   statute   |   operation  |
-		| 03 |   zhouheiya  |   周黑鸭    |2016-09-14 12:23|    已启用   |   编辑/关闭  |
+		| account_name |  main_name  |   creat_time   |   state   |   operation  |
+		|   zhouheiya  |   周黑鸭    |      今天      |  未激活   |   编辑/关闭  |
 	When manager通过主体名查询账号
 		"""
 		{
@@ -89,5 +89,5 @@ Scenario:2 管理员通过主题名查询账号
 		}
 		"""
 	Then manager查看账号列表
-		| ID | account_name |  main_name  |   creat_time   |   statute   |   operation  |
+		| account_name |  main_name  |   creat_time   |   state   |   operation  |
 		
