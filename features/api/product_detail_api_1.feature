@@ -84,20 +84,20 @@ Background:
 		Given jd使用密码123456登录系统
 		When jd激活应用
 			"""
-				{
+				[{
 				"dev_name":"京东商城",
 				"mobile_num":"13813984405",
 				"e_mail":"ainicoffee@qq.com",
 				"ip_address":"192.168.1.3",
 				"interface_address":"http://192.168.0.130"
-				}
+				}]
 			"""
 		Given manager登录开放平台系统
 		When manager同意申请
 			"""
-				{
+				[{
 				"account_main":"京东商城"
-				}
+				}]
 			"""
 		
 
