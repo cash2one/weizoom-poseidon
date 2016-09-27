@@ -238,14 +238,17 @@ LOGIN_URL = '/account/login/'
 if 'develop' == MODE:
     logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s', level=logging.INFO)
     WEBPACK_BUNDLE_JS = 'http://127.0.0.1:4199/static/bundle.js'
+    ZEUS_HOST = 'http://api.zeus.com'
     DEBUG = True
 elif 'test' == MODE:
     WEBPACK_BUNDLE_JS = '/static/build/bundle.js'
     ALLOWED_HOSTS = ['*', ]
+    ZEUS_HOST = 'http://api.zeus.com'
     DEBUG = False
 else:
     WEBPACK_BUNDLE_JS = '/static/build/bundle.js'
     ALLOWED_HOSTS = ['*', ]
+    ZEUS_HOST = 'http://api.zeus.com'
     DEBUG = False
 
 if 'deploy' == MODE:
@@ -269,3 +272,6 @@ APP_MONGO = {
     "HOST": 'mongo.weapp.com',
     "DB": 'app_data'
 }
+
+EAGLET_CLIENT_ZEUS_HOST = 'api.zeus.com'
+ZEUS_SERVICE_NAME = 'zeus'

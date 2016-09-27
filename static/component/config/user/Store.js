@@ -18,26 +18,37 @@ var Constant = require('./Constant');
 var Store = StoreUtil.createStore(Dispatcher, {
 	actions: {
 		'handleUpdateUser': Constant.CONFIG_USER_UPDATE_USER,
-		'handleSaveUser': Constant.CONFIG_USER_SAVE_USER
+		'handleSaveUser': Constant.CONFIG_USER_SAVE_USER,
+		'handleSelect': Constant.CONFIG_USER_SELECT_SELF_SHOP
 	},
 
 	init: function() {
 		this.data = {
 			user: Reactman.loadJSON('user')
 		};
+		this.data.user['options'] = [];
 		if (!this.data.user) {
 			this.data.user = {
 				id: -1,
 				name: '',
 				password: '',
 				displayName: '',
-				status: '1'
+				status: '1',
+				options: []
 			};
 		}
 	},
 
 	handleUpdateUser: function(action) {
 		this.data.user[action.data.property] = action.data.value;
+		this.__emitChange();
+	},
+
+	handleSelect: function(action) {
+		this.data.user['options'] = action.data.rows;
+		if(this.data.user['options'].length > 0){
+			this.data.user['selfUserName'] = this.data.user['options'][0]['value']
+		}
 		this.__emitChange();
 	},
 
