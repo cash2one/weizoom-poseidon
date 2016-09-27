@@ -13,10 +13,11 @@ def step_impl(context, user, product_id):
 	response = context.client.get('/mall/product/', {'product_id': product_id})
 	print  "========================================", repr(response.content)
 	actual_product = json.loads(response.content)['data']['items']
+	print  "========================================", repr(context.text)
 
-    expected = json.loads(context.text)
+	expected = json.loads(context.text)
 
-    bdd_util.assert_list(expected, actual_product)
+	bdd_util.assert_list(expected, actual_product)
 
 @When(u"{user}调用'商品列表'api")
 def step_impl(context, user):
@@ -28,5 +29,5 @@ def step_impl(context, user):
 
 @Then(u"{user}获取'商品列表'api返回结果")
 def step_impl(context, user, product_id):
-    expected = json.loads(context.text)
-    bdd_util.assert_list(expected, context["actual_product_list"])
+	expected = json.loads(context.text)
+	bdd_util.assert_list(expected, context["actual_product_list"])
