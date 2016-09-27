@@ -17,7 +17,7 @@ Background:
 			"isopen":"是"
 		}]
 		"""
-@poseidon	@kuki
+@poseidon
 Scenario:1 管理员创建开放平台账号
 	Then manager查看账号列表
 		| account_name |  main_name  |   create_time   |   status   |   operation  |
@@ -48,5 +48,5 @@ Scenario:3 管理员关闭平台账号
 		"""
 	Then manager查看账号列表
 		| account_name |  main_name  |   create_time   |    status   |   operation  |
-		|     aini     |   爱伲咖啡  |      今天       |    未激活   |   编辑/开启  |
+		|     aini     |   爱伲咖啡  |      今天       |    未激活   |   编辑/删除  |
 
