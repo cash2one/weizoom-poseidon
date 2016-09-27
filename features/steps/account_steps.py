@@ -24,11 +24,10 @@ def __get_actions(status):
 	根据账号状态
 	返回对于操作列表
 	"""
-	actions_list = [u"查看",u"预览",u"复制链接"]
 	if status == 1:
-		actions_list = [u"关闭",u"编辑"]
+		actions_list = u"编辑/关闭"
 	else:
-		actions_list = [u"删除",u"编辑"]
+		actions_list = u"编辑/删除"
 	return actions_list
 
 @when(u"{user}创建开放平台账号")
@@ -55,7 +54,7 @@ def step_impl(context, user):
 		p_dict = OrderedDict()
 		p_dict[u"account_name"] = row['username']
 		p_dict[u"main_name"] = row['displayName']
-		p_dict[u"create_time"] = row['createdAt']
+		p_dict[u"create_time"] = bdd_util.__datetime2str(row['createdAt'])
 		p_dict[u"status"] = row['AppStatus']
 		p_dict[u"operation"] = __get_actions(row['status'])
 		actual.append((p_dict))
