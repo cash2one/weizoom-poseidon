@@ -7,8 +7,7 @@ from collections import OrderedDict
 
 from behave import *
 import bdd_util
-
-from outline import models as outline_models
+from django.contrib.auth import models as auth_models
 
 __author__ = 'kuki'
 
@@ -18,6 +17,12 @@ def __get_status(type):
 		return type2type_dic[type]
 	else:
 		return 1
+
+def __get_user_id_by_display_name(account_main):
+	return auth_models.User.objects.get(first_name=account_main).id
+
+def __get_user_id_by_username(account_name):
+	return auth_models.User.objects.get(username=account_name).id
 
 def __get_actions(status):
 	"""
@@ -44,6 +49,31 @@ def step_impl(context, user):
 		response = context.client.put('/config/api/user/', params)
 		bdd_util.assert_api_call_success(response)
 
+@when(u"{user}编辑账号'{display_name}'")
+def step_impl(context, user, display_name):
+	infos = json.loads(context.text)
+	for info in infos:
+		params = {
+			'id': __get_user_id_by_display_name(display_name),
+			'name': info.get('account_name', ''),
+			'password': info.get('password', ''),
+			'display_name': info.get('account_main', ''),
+			'status': __get_status(info.get('isopen', ''))
+		}
+		print params
+		response = context.client.post('/config/api/user/', params)
+		bdd_util.assert_api_call_success(response)
+
+@when(u"{user}关闭账号")
+def step_impl(context, user):
+	infos = json.loads(context.text)
+	for info in infos:
+		params = {
+			'id': __get_user_id_by_username(info.get('account_name', ''))
+		}
+		print params
+		response = context.client.post('/config/api/users/', params)
+		bdd_util.assert_api_call_success(response)
 
 @then(u"{user}查看账号列表")
 def step_impl(context, user):
