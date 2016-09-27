@@ -58,6 +58,8 @@ class Accounts(resource.Resource):
 			'appSecret': customer_message.app_secret,
 			'serverIp': customer_message.server_ip,
 			'interfaceUrl': customer_message.interface_url,
+			'mobileNumber': customer_message.mobile_number,
+			'email': customer_message.email,
 			'logs': json.dumps(logs)
 		}
 
