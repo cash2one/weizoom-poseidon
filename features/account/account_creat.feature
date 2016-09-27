@@ -20,8 +20,8 @@ Background:
 @poseidon	@kuki
 Scenario:1 管理员创建开放平台账号
 	Then manager查看账号列表
-		| account_name |  main_name  |   create_time   |   state   |   operation  |
-		|     aini     |   爱伲咖啡  |     今天        |   未激活  |   编辑/关闭  |
+		| account_name |  main_name  |   create_time   |   status   |   operation  |
+		|     aini     |   爱伲咖啡  |     今天        |   未激活   |   编辑/关闭  |
 
 @poseidon
 Scenario:2 管理员编辑开放平台账号
@@ -35,8 +35,8 @@ Scenario:2 管理员编辑开放平台账号
 		}]
 		"""
 	Then manager查看账号列表
-		| account_name |  main_name  |   creat_time   |   statute   |   operation  |
-		|     aini     |  爱伲coffee |      今天      |    未激活   |   编辑/关闭  |
+		| account_name |  main_name  |   create_time   |    status   |   operation  |
+		|     aini     |  爱伲coffee |      今天       |    未激活   |   编辑/关闭  |
 	
 @poseidon
 Scenario:3 管理员关闭平台账号
@@ -47,6 +47,6 @@ Scenario:3 管理员关闭平台账号
 		}]
 		"""
 	Then manager查看账号列表
-		| account_name |  main_name  |   creat_time   |   statute   |   operation  |
-		|     aini     |   爱伲咖啡  |      今天      |    未激活   |   编辑/开启  |
+		| account_name |  main_name  |   create_time   |    status   |   operation  |
+		|     aini     |   爱伲咖啡  |      今天       |    未激活   |   编辑/开启  |
 
