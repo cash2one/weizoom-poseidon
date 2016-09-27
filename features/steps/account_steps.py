@@ -3,6 +3,7 @@ import json
 import time
 import logging
 from datetime import datetime, timedelta
+from collections import OrderedDict
 
 from behave import *
 import bdd_util
@@ -17,6 +18,18 @@ def __get_status(type):
 		return type2type_dic[type]
 	else:
 		return 1
+
+def __get_actions(status):
+	"""
+	根据账号状态
+	返回对于操作列表
+	"""
+	actions_list = [u"查看",u"预览",u"复制链接"]
+	if status == 1:
+		actions_list = [u"关闭",u"编辑"]
+	else:
+		actions_list = [u"删除",u"编辑"]
+	return actions_list
 
 @when(u"{user}创建开放平台账号")
 def step_impl(context, user):
@@ -33,21 +46,28 @@ def step_impl(context, user):
 		bdd_util.assert_api_call_success(response)
 
 
-# @when(u"{user}删除商品'{product_name}'")
-# def step_impl(context, user, product_name):
-# 	user_id = bdd_util.get_user_id_for(user)
-# 	product = outline_models.Product.objects.get(owner_id=user_id, name=product_name)
+@then(u"{user}查看账号列表")
+def step_impl(context, user):
+	actual = []
+	response = context.client.get('/config/api/users/')
+	rows = json.loads(response.content)['data']['rows']
+	for row in rows:
+		p_dict = OrderedDict()
+		p_dict[u"account_name"] = row['username']
+		p_dict[u"main_name"] = row['displayName']
+		p_dict[u"create_time"] = row['createdAt']
+		p_dict[u"status"] = row['AppStatus']
+		p_dict[u"operation"] = __get_actions(row['status'])
+		actual.append((p_dict))
+	logging.info(actual)
 
-# 	response = context.client.delete('/outline/api/data/', {'id': product.id})
-# 	bdd_util.assert_api_call_success(response)
+	expected = []
+	if context.table:
+		for row in context.table:
+			cur_p = row.as_dict()
+			expected.append(cur_p)
+	else:
+		expected = json.loads(context.text)
+	print("expected: {}".format(expected))
 
-
-# @then(u"{user}能获得商品列表")
-# def step_impl(context, user):
-# 	expected = json.loads(context.text)
-
-# 	response = context.client.get('/outline/api/datas/')
-# 	actual = json.loads(response.content)['data']['rows']
-# 	logging.info(actual)
-	
-# 	bdd_util.assert_list(expected, actual)
+	bdd_util.assert_list(expected, actual)

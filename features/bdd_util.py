@@ -229,3 +229,21 @@ def table2dict(context):
 			data[real_heading] = value
 		expected.append(data)
 	return expected
+
+# def __date2time(date_str):
+# 	"""
+# 	字符串 今天/明天……
+# 	转化为字符串 "%Y-%m-%d %H:%M"
+# 	"""
+# 	cr_date = date_str
+# 	p_date = bdd_util.get_date_str(cr_date)
+# 	p_time = "{} 00:00".format(bdd_util.get_date_str(cr_date))
+# 	return p_time
+
+# def __datetime2str(dt_time):
+# 	"""
+# 	datetime型数据，转为字符串型，日期
+# 	转化为字符串 "%Y-%m-%d %H:%M"
+# 	"""
+# 	dt_time = dt.datetime.strftime(dt_time, "%Y-%m-%d %H:%M")
+# 	return dt_time
