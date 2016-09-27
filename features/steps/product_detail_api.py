@@ -12,13 +12,21 @@ def step_impl(context, user, product_id):
 	user_id = bdd_util.get_user_id_for(user)
 	response = context.client.get('/mall/product/', {'product_id': product_id})
 	print  "========================================", repr(response.content)
-	#items = json.loads(response.content)['data']['items']
+	actual_product = json.loads(response.content)['data']['items']
 
-    # actual_orders = __get_order_items_for_self_order(items)
+    expected = json.loads(context.text)
 
-    # expected = json.loads(context.text)
-    # for order in expected:
-    #     if 'actions' in order:
-    #         order['actions'] = set(order['actions'])  # 暂时不验证顺序
+    bdd_util.assert_list(expected, actual_product)
 
-    # bdd_util.assert_list(expected, actual_orders)
+@When(u"{user}调用'商品列表'api")
+def step_impl(context, user):
+	user_id = bdd_util.get_user_id_for(user)
+	response = context.client.get('/mall/products/', {'woid': user_id})
+	print  "========================================", repr(response.content)
+	context["actual_product_list"] = json.loads(response.content)['data']['items']
+
+
+@Then(u"{user}获取'商品列表'api返回结果")
+def step_impl(context, user, product_id):
+    expected = json.loads(context.text)
+    bdd_util.assert_list(expected, context["actual_product_list"])
