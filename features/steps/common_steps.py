@@ -24,6 +24,6 @@ def step_impl(context, user):
 def step_impl(context, user):
 	context.client = bdd_util.login(user, password=None, context=context)
 
-# @When(u"{user}使用密码{password}登录系统")
-# def step_impl(context, user, password):
-# 	context.client = bdd_util.login(user, password=password, context=context)
+@Given(u"{user}使用密码{password}登录系统")
+def step_impl(context, user, password):
+	context.client = bdd_util.login(user, password=password, context=context)

@@ -63,7 +63,6 @@ Client.delete = __new_client_delete
 def login(user, password=None, **kwargs):
 	if not password:
 		password = 'test'
-
 	if 'context' in kwargs:
 		context = kwargs['context']
 		if hasattr(context, 'client'):
@@ -76,7 +75,7 @@ def login(user, password=None, **kwargs):
 
 	#client = WeappClient(HTTP_USER_AGENT='WebKit MicroMessenger Mozilla')
 	client = Client()
-	client.login(username=user, password='test')
+	client.login(username=user, password=password)
 	client.user = User.objects.get(username=user)
 	client.user.profile = UserProfile.objects.get(user=client.user)
 

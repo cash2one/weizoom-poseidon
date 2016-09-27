@@ -26,7 +26,7 @@ var Store = StoreUtil.createStore(Dispatcher, {
 	},
 
 	handleGetCustomerStatus: function(action) {
-		this.data = action.data;
+		this.data = action.data.datas;
 		this.__emitChange();
 	},
 
