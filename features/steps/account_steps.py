@@ -45,7 +45,6 @@ def step_impl(context, user):
 			'display_name': info.get('account_main', ''),
 			'status': __get_status(info.get('isopen', ''))
 		}
-		print params
 		response = context.client.put('/config/api/user/', params)
 		bdd_util.assert_api_call_success(response)
 
@@ -60,7 +59,6 @@ def step_impl(context, user, display_name):
 			'display_name': info.get('account_main', ''),
 			'status': __get_status(info.get('isopen', ''))
 		}
-		print params
 		response = context.client.post('/config/api/user/', params)
 		bdd_util.assert_api_call_success(response)
 
@@ -71,7 +69,6 @@ def step_impl(context, user):
 		params = {
 			'id': __get_user_id_by_username(info.get('account_name', ''))
 		}
-		print params
 		response = context.client.post('/config/api/users/', params)
 		bdd_util.assert_api_call_success(response)
 
@@ -79,6 +76,42 @@ def step_impl(context, user):
 def step_impl(context, user):
 	actual = []
 	response = context.client.get('/config/api/users/')
+	rows = json.loads(response.content)['data']['rows']
+	for row in rows:
+		p_dict = OrderedDict()
+		p_dict[u"account_name"] = row['username']
+		p_dict[u"main_name"] = row['displayName']
+		p_dict[u"create_time"] = bdd_util.__datetime2str(row['createdAt'])
+		p_dict[u"status"] = row['AppStatus']
+		p_dict[u"operation"] = __get_actions(row['status'])
+		actual.append((p_dict))
+	logging.info(actual)
+
+	expected = []
+	if context.table:
+		for row in context.table:
+			cur_p = row.as_dict()
+			expected.append(cur_p)
+	else:
+		expected = json.loads(context.text)
+	print("expected: {}".format(expected))
+
+	bdd_util.assert_list(expected, actual)
+
+@when(u"{user}通过登录名查询账号")
+def step_impl(context, user):
+	info = json.loads(context.text)
+	context.query_url = '__f-username-contain='+info.get('account_name', '')
+
+@when(u"{user}通过主体名查询账号")
+def step_impl(context, user):
+	info = json.loads(context.text)
+	context.query_url = '__f-displayName-contain='+info.get('main_name', '')
+
+@then(u"{user}获取账号列表")
+def step_impl(context, user):
+	actual = []
+	response = context.client.get('/config/api/users/?'+context.query_url)
 	rows = json.loads(response.content)['data']['rows']
 	for row in rows:
 		p_dict = OrderedDict()

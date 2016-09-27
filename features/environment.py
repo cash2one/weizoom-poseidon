@@ -105,6 +105,7 @@ def before_scenario(context, scenario):
 		context.driver = driver
 
 	__clear_all_app_data()
+	__clear_all_account_data()
 
 
 def after_scenario(context, scenario):
