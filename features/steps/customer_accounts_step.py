@@ -31,6 +31,12 @@ def step_impl(context, user):
 		for rule in actual:
 			if int(rule["status"]) == account_models.UNREVIEW:
 				status = u'待审核'
+			if int(rule["status"]) == account_models.REJECT:
+				status = u'已驳回'
+			if int(rule["status"]) == account_models.STOPED:
+				status = u'已停用'
+			if int(rule["status"]) == account_models.USING:
+				status = u'已启用'
 			actual_list.append({
 				"application_name": u'默认应用',
 				"app_id": u'随机生成',
@@ -48,8 +54,8 @@ def step_impl(context, user):
 			'name': info.get('dev_name', ''),
 			'mobileNumber': info.get('mobile_num', ''),
 			'email': info.get('e_mail', ''),
-			'interfaceUrl': info.get('ip_address', ''),
-			'serverIp': info.get('interface_address', ''),
+			'serverIp': info.get('ip_address', ''),
+			'interfaceUrl': info.get('interface_address', ''),
 			'serverIps': '[]'
 		}
 		response = context.client.put('/customer/api/messages/', params)
