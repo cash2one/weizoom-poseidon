@@ -48,32 +48,32 @@ Background:
 		When manager创建开放平台账号
 		"""
 			[{
-			"account_name":"jd",
-			"password":"123456",
-			"account_main":"京东商城",
-			"isopen":"是"
+				"account_name":"jd",
+				"password":"123456",
+				"account_main":"京东商城",
+				"isopen":"是"
 			}]
 		"""
 		Given jd使用密码123456登录系统
-		When jd激活应用
+		Then jd激活应用
 			"""
-				{
+				[{
 				"dev_name":"京东商城",
 				"mobile_num":"13813984405",
 				"e_mail":"ainicoffee@qq.com",
 				"ip_address":"192.168.1.3",
 				"interface_address":"http://192.168.0.130"
-				}
+				}]
 			"""
 		Given manager登录开放平台系统
 		When manager同意申请
 			"""
-				{
+				[{
 				"account_main":"京东商城"
-				}
+				}]
 			"""
 		
-@chengdg
+@chengdg @kuki
 Scenario:1 通过商品ID调用单规格商品API
 	Then jd获取'000001'的商品详情
 		"""
