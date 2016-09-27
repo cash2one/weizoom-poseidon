@@ -42,15 +42,15 @@ Background:
 				"""
 			
 	#开放平台中：创建使用账号 ，激活，审批 准许使用API接口
-		Given manager登录系统:开放平台
-		When manager创建账号
+		Given manager登录开放平台系统
+		When manager创建开放平台账号
 		"""
-			{
-			"acoount_name":"jd",
+			[{
+			"account_name":"jd",
 			"password":"123456",
 			"account_main":"京东商城",
 			"isopen":"是"
-			}
+			}]
 		"""
 		Given jd使用密码123456登录系统
 		When jd激活应用
@@ -63,7 +63,7 @@ Background:
 				"interface_address":"http://192.168.0.130"
 				}
 			"""
-		Given manager登录系统:开放平台
+		Given manager登录开放平台系统
 		When manager同意申请
 			"""
 				{
@@ -75,6 +75,7 @@ Background:
 			"""
 				{
 					"order_no":"001",
+					"deal_id":"01",
 					"status":"待支付",
 					"ship_name":"bill",
 					"ship_tel":"13811223344",
@@ -132,6 +133,7 @@ Scenario:1 通过主订单ID提供订单详情API '已发货'，包括物流详�
 		"""
 			{
 				"order_no":"001",
+				"deal_id":"01",
 				"status":"已发货",
 				"ship_name":"bill",
 				"ship_tel":"13811223344",

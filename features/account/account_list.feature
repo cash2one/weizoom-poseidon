@@ -26,8 +26,7 @@ Background:
 Scenario:1 管理员浏览账号列表
 	
 	Then manager查看账号列表
-		| account_name |  main_name  |   create_time  |    state    |   operation  |
-		|     aini     |  爱伲咖啡   |2016-09-14 12:20|    未激活   |   编辑/关闭  |
-		|    naike     |  耐克男鞋   |2016-09-14 12:21|    未激活   |   编辑/关闭  |
-		|   zhouheiya  |   周黑鸭    |2016-09-14 12:23|    未激活   |   编辑/关闭  |
-
+		| account_name |  main_name  |   create_time  |    status   |   operation  |
+		|   zhouheiya  |   周黑鸭    |      今天      |    未激活   |   编辑/关闭  |
+		|    naike     |  耐克男鞋   |      今天      |    未激活   |   编辑/关闭  |
+		|     aini     |  爱伲咖啡   |      今天      |    未激活   |   编辑/关闭  |
