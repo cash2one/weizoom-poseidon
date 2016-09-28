@@ -78,10 +78,10 @@ Background:
 		
 @chengdg
 Scenario:1 通过商品ID调用单规格商品API
+
 	Then jd获取'000001'的商品详情
 		"""
 			{
-				"id": "000001",
 				"name": "商品1-1",
 				"promotion_title": "商品1-2促销",
 				"price": 50.00,
