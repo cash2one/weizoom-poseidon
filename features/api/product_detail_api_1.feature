@@ -38,7 +38,7 @@ Background:
 					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
-					"image": "love.png",
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 100,
 					"detail": "商品2描述信息"
 				}
@@ -52,7 +52,7 @@ Background:
 					"name": "商品2",
 					"promotion_title": "商品2促销",
 					"weight": 1,
-					"image": "love.png",
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"detail": "商品1-1描述信息",
 					"model": {
 						"models":{
@@ -112,12 +112,10 @@ Scenario:1 通过商品ID调用单规格商品API
 	Then jd获取'000001'的商品详情
 		"""
 			{
-				"id": "000001",
 				"name": "商品1-1",
-				"promotion_title": "商品1-2促销",
 				"price": 50.00,
 				"weight": 1,
-				"image": "love.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"stocks": 100,
 				"detail": "商品1-1描述信息",
 				"postage":[{
@@ -126,15 +124,14 @@ Scenario:1 通过商品ID调用单规格商品API
 				}]
 			}
 		"""
+
 Scenario:2 通过商品ID调用多规格商品API
 	Then jd获取'000002'的商品详情
 		"""
 			{
-				"id": "000002",
 				"name": "商品2",
-				"promotion_title": "商品2促销",
 				"weight": 1,
-				"image": "love.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"detail": "商品2描述信息",
 				"model": {
 						"models":{
@@ -176,12 +173,10 @@ Scenario:3 供货商修改单规格商品后，jd通过商品ID调用单规格�
 		Then jd获取'000001'的商品详情
 			"""
 				{
-					"id": "000001",
 					"name": "商品1-1",
-					"promotion_title": "商品1-2促销",
 					"price": 50.01,
 					"weight": 1,
-					"image": "love.png",
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 101,
 					"detail": "商品1-1描述信息",
 					"postage":[{
@@ -223,11 +218,9 @@ Scenario:4 供货商修改多规格商品后，jd通过商品ID调用多规格�
 	Then jd获取'000002'的商品详情
 		"""
 			{
-				"id": "000002",
 				"name": "商品2",
-				"promotion_title": "商品2促销",
 				"weight": 1,
-				"image": "love.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"detail": "商品2描述信息",
 				"model": {
 						"models":{
