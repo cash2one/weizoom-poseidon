@@ -75,10 +75,10 @@ Background:
 				}
 				"""
 	#自营平台从商品池上架商品
-		Given zy1登录系统
-		When zy1上架商品池商品"商品1-1"
-		When zy1上架商品池商品"商品1-2"
-		When zy1上架商品池商品"商品1-3"
+		Given zy1登录系统::weapp
+		When zy1上架商品池商品"商品1-1"::weapp
+		When zy1上架商品池商品"商品1-2"::weapp
+		When zy1上架商品池商品"商品1-3"::weapp
 
 	#开放平台中：创建使用账号 ，激活，审批 准许使用API接口
 		Given manager登录开放平台系统
