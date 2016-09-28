@@ -11,8 +11,7 @@ from eaglet.utils.resource_client import Resource
 
 @Then(u"{user}获取'{product_id}'的商品详情")
 def step_impl(context, user, product_id):
-	user_id = bdd_util.get_user_id_for(user)
-	param_data = {'woid':user_id, 'product_id': product_id}
+	param_data = {'woid':context.woid, 'product_id': product_id,"access_token":context.openapi_access_token}
 	resp = Resource.use('openapi').get({
 		'resource':'mall.product',
 		'data':param_data
@@ -40,10 +39,11 @@ def step_impl(context, user, product_id):
 
 	bdd_util.assert_dict(expected, actual_product)
 
-@When(u"{user}调用'商品列表'api")
+@When(u"{user}调用商品列表")
 def step_impl(context, user):
 	user_id = bdd_util.get_user_id_for(user)
 	param_data = {'woid':user_id}
+	
 	resp = Resource.use('openapi').get({
 		'resource':'mall.products',
 		'data':param_data
@@ -51,20 +51,17 @@ def step_impl(context, user):
 	if resp and resp['code'] == 200:
 		data = resp['data']
 	data = data['data']['items']
-	actual_product_list = []
-	actual_product = {}
 	for product in data:
-		actual_product['name'] = product['name']
-		actual_product['price'] = float(product['display_price'])
-		actual_product['image'] = product['thumbnails_url'].replace(' ','')
-		actual_product['sales'] = product['sales']
-		actual_product_list.append(actual_product)
-	print  "========================================", repr(actual_product_list)
-	context.actual_product_list = actual_product_list
+		product['price'] = float(product['display_price'])
+		product['image'] = product['thumbnails_url']
+		product['sales'] = product['sales']
+		del product['display_price']
+	print  "========================================", repr(data)
+	context.actual_product_list = data
 
 
 
-@Then(u"{user}获取'商品列表'api返回结果")
-def step_impl(context, user, product_id):
+@Then(u"{user}获取商品列表返回结果")
+def step_impl(context, user):
 	expected = json.loads(context.text)
-	bdd_util.assert_list(expected, context["actual_product_list"])
+	bdd_util.assert_list(expected, context.actual_product_list )
