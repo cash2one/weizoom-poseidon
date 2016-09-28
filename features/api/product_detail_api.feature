@@ -37,9 +37,9 @@ Background:
 					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
-					"image": "love.png",
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 100,
-					"detail": "商品2描述信息"
+					"detail": "商品1-1描述信息"
 				}
 				"""
 	#自营平台从商品池上架商品
@@ -75,26 +75,25 @@ Background:
 				"account_main":"京东商城"
 				}]
 			"""
-		
-@chengdg
+@chengdg1	
 Scenario:1 通过商品ID调用单规格商品API
 
 	Then jd获取'000001'的商品详情
 		"""
 			{
 				"name": "商品1-1",
-				"promotion_title": "商品1-2促销",
 				"price": 50.00,
-				"weight": 1,
-				"image": "love.png",
+				"weight": 1.0,
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"stocks": 100,
 				"detail": "商品1-1描述信息",
 				"postage":[{
-					"postage":10,
-					"condition_money": "100"
+					"postage":10.0,
+					"condition_money": 100.0
 				}]
 			}
 		"""
+@chengdg2
 Scenario:2 供货商修改单规格商品后，jd通过商品ID调用单规格商品API，获得修改后单规格商品详情
 	#同步商品到自营平台（修改商品1中的价格，库存后进行同步）
 	Given 给自营平台同步商品::weapp
@@ -108,7 +107,7 @@ Scenario:2 供货商修改单规格商品后，jd通过商品ID调用单规格�
 			"purchase_price": 50.01,
 			"price": 50.01,
 			"weight": 1,
-			"image": "love.png",
+			"image": "http://chaozhi.weizoom.comlove.png",
 			"stocks": 101,
 			"detail": "商品2描述信息"
 		}
@@ -116,17 +115,15 @@ Scenario:2 供货商修改单规格商品后，jd通过商品ID调用单规格�
 	Then jd获取'000001'的商品详情
 		"""
 			{
-				"id": "000001",
 				"name": "商品1-1",
-				"promotion_title": "商品1-2促销",
 				"price": 50.01,
 				"weight": 1,
-				"image": "love.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"stocks": 101,
-				"detail": "商品1-1描述信息",
+				"detail": "商品2描述信息",
 				"postage":[{
 					"postage":10,
-					"condition_money": "100"
+					"condition_money": 100
 				}]
 			}
 		"""
