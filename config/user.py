@@ -64,6 +64,7 @@ class User(resource.Resource):
 		password = request.POST['password']
 		display_name = request.POST['display_name']
 		status = int(request.POST['status'])
+		woid = request.POST.get('woid','')
 		
 		if not check_username_valid(username):
 			response = create_response(500)
@@ -74,8 +75,11 @@ class User(resource.Resource):
 		auth_models.User.objects.filter(id=user.id).update(first_name=display_name)
 		UserProfile.objects.filter(user_id=user.id).update(
 			manager_id = request.user.id,
-			status = status,
-			woid = int(request.POST['woid'])
+			status = status
+			)
+		if woid != '':
+			UserProfile.objects.filter(user_id=user.id).update(
+				woid = int(woid)
 			)
 		response = create_response(200)
 		return response.get_response()
@@ -88,6 +92,7 @@ class User(resource.Resource):
 		password = request.POST.get('password','')
 		display_name = request.POST['display_name']
 		status = int(request.POST['status'])
+		woid = request.POST.get('woid','')
 		
 		user = auth_models.User.objects.get(id=user_id)
 		user.username = username
@@ -95,10 +100,10 @@ class User(resource.Resource):
 		if password != '':
 			user.set_password(password)
 		user.save()
-		UserProfile.objects.filter(user_id=user.id).update(
-			status=status,
-			woid = int(request.POST['woid'])
-			)
+		args = {"status":status}
+		if woid != '':
+			args["woid"] = int(woid)
+		UserProfile.objects.filter(user_id=user.id).update(**args)
 		response = create_response(200)
 		return response.get_response()
 
@@ -118,15 +123,15 @@ def check_username_valid(username):
 	return False if user else True
 
 
-#得到所有还未同步的自营平台
-class GetAllUnsyncedSelfShops(resource.Resource):
+#得到所有的自营平台
+class GetAllSelfShops(resource.Resource):
 	app = 'config'
-	resource = 'get_all_unsynced_self_shops'
+	resource = 'get_all_self_shops'
 
 	@login_required
 	def api_get(request):
 		params = {
-			'status': 'new'
+			'status': 'all'
 		}
 		resp = Resource.use(ZEUS_SERVICE_NAME, EAGLET_CLIENT_ZEUS_HOST).get(
 			{

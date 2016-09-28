@@ -73,8 +73,8 @@ var AccountsPage = React.createClass({
 			statusBtn = <a href="javascript:void(0);" style={{display:'inline-block', width:'100%'}} onClick={this.editMessage}>立即激活</a>;
 		}
 
-		if(customerStatus == 2 || customerStatus == 3 || customerStatus == 4){
-			logs = JSON.parse(logs);
+		logs = JSON.parse(logs);	
+		if(logs.length>0){
 			var applyRecord = '';
 			if(logs.length>0) {
 				applyRecord = logs.map(function(log, index){
@@ -85,7 +85,7 @@ var AccountsPage = React.createClass({
 					}else if(status == 3) {
 						var reason = log.reason;
 						resultText = '应用激活申请被驳回，' + reason;
-					}else {
+					}else if(status == 4) {
 						resultText = '应用已暂停使用';
 					}
 

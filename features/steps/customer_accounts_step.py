@@ -16,7 +16,10 @@ def step_impl(context, user):
 	context_json = table_to_list(context)
 	filter_dict = {}
 	user_id = User.objects.get(username=user).id
-	app_status = account_models.UserProfile.objects.get(user_id=user_id).app_status
+	user_profile = account_models.UserProfile.objects.get(user_id=user_id)
+	app_status = user_profile.app_status
+	#获取access token 使用
+	context.woid = user_profile.woid
 	actual_list = []
 	if app_status == account_models.UNACTIVE:
 		actual_list.append({
@@ -28,6 +31,9 @@ def step_impl(context, user):
 	else:
 		response = context.client.get('/customer/api/accounts/')
 		actual = json.loads(response.content)['data']['rows']
+		current_info = actual[0]
+		context.app_id = current_info["appId"]
+		context.app_secret = current_info["appSecret"]
 		for rule in actual:
 			if int(rule["status"]) == account_models.UNREVIEW:
 				status = u'待审核'

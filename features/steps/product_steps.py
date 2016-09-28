@@ -63,6 +63,7 @@ def step_impl(context, user):
 	context.actual_product_list = actual_product_list
 
 
+
 @Then(u"{user}获取'商品列表'api返回结果")
 def step_impl(context, user, product_id):
 	expected = json.loads(context.text)
