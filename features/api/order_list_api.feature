@@ -249,8 +249,8 @@ Scenario:1 通过列表页调用订单列表API
 	Then jd获取'订单列表'api返回结果
 		"""
 			[{
-				"order_no":"001",
-				"deal_id":"01",
+				"order_no":"003",
+				"deal_id":"03",
 				"status":"待支付",
 				"ship_name":"bill",
 				"ship_tel":"13811223344",
@@ -260,31 +260,21 @@ Scenario:1 通过列表页调用订单列表API
 				"business_message":"",
 				"methods_of_payment":"",
 				"group":[{
-					"order_no":"001-供货商1",
+					"order_no":"003-供货商1",
 					"products":[{
-						"name":"商品1",
+						"name":"商品1-1",
 						"price":50.00,
 						"count":1,
 						"single_save":0.00
 					}],
 					"postage": 10.00,
 					"status":"待支付"
-				},{
-					"order_no":"001-供货商2",
-					"products":[{
-						"name":"商品2",
-						"price":50.00,
-						"count":1,
-						"single_save":0.00
-					}],
-					"postage": 0.00,
-					"status":"待支付"
 				}],
-				"products_count":2,
-				"total_price": 100.00,
+				"products_count":1,
+				"total_price": 50.00,
 				"postage": 10.00,
-				"cash":100.00,
-				"final_price": 110.00
+				"cash":50.00,
+				"final_price": 60.00
 			},{
 				"order_no":"002",
 				"deal_id":"02",
@@ -324,8 +314,8 @@ Scenario:1 通过列表页调用订单列表API
 	Then jd获取'订单列表'api返回结果
 		"""
 			[{
-				"order_no":"003",
-				"deal_id":"03",
+				"order_no":"001",
+				"deal_id":"01",
 				"status":"待支付",
 				"ship_name":"bill",
 				"ship_tel":"13811223344",
@@ -335,20 +325,30 @@ Scenario:1 通过列表页调用订单列表API
 				"business_message":"",
 				"methods_of_payment":"",
 				"group":[{
-					"order_no":"003-供货商1",
+					"order_no":"001-供货商1",
 					"products":[{
-						"name":"商品1-1",
+						"name":"商品1",
 						"price":50.00,
 						"count":1,
 						"single_save":0.00
 					}],
 					"postage": 10.00,
 					"status":"待支付"
+				},{
+					"order_no":"001-供货商2",
+					"products":[{
+						"name":"商品2",
+						"price":50.00,
+						"count":1,
+						"single_save":0.00
+					}],
+					"postage": 0.00,
+					"status":"待支付"
 				}],
-				"products_count":1,
-				"total_price": 50.00,
+				"products_count":2,
+				"total_price": 100.00,
 				"postage": 10.00,
-				"cash":50.00,
-				"final_price": 60.00
+				"cash":100.00,
+				"final_price": 110.00
 			}]
 		"""	
