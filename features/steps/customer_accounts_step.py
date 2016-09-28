@@ -28,6 +28,9 @@ def step_impl(context, user):
 	else:
 		response = context.client.get('/customer/api/accounts/')
 		actual = json.loads(response.content)['data']['rows']
+		current_info = actual[0]
+		context.app_id = current_info["appId"]
+		context.app_secret = current_info["appSecret"]
 		for rule in actual:
 			if int(rule["status"]) == account_models.UNREVIEW:
 				status = u'待审核'
