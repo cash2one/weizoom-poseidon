@@ -44,7 +44,7 @@ class Accounts(resource.Resource):
 		customer_message = models.CustomerMessage.objects.get(user=request.user)
 		user_profile = account_models.UserProfile.objects.filter(user=request.user)
 		application_logs = application_audit_models.ApplicationLog.objects.filter(user_id=request.user.id).order_by('review_time')
-
+		rows = []
 		logs = [{
 			'status': application_log.status,
 			'reason': application_log.reason,
@@ -58,10 +58,15 @@ class Accounts(resource.Resource):
 			'appSecret': customer_message.app_secret,
 			'serverIp': customer_message.server_ip,
 			'interfaceUrl': customer_message.interface_url,
+			'mobileNumber': customer_message.mobile_number,
+			'email': customer_message.email,
 			'logs': json.dumps(logs)
 		}
-
+		rows.append(data)
 		#构造response
 		response = create_response(200)
-		response.data = data
+		response.data = {
+			'rows': rows,
+			'datas': data
+		}
 		return response.get_response()

@@ -93,7 +93,8 @@ class ApplicationAudit(resource.Resource):
 				'serverIp': application.server_ip,
 				'interfaceUrl': application.interface_url,
 				'status': account_models.APP_STATUS2NAME[cur_account_info.app_status],
-				'reason': u'驳回原因：' + reject_logs.last().reason if cur_account_info.app_status == account_models.REJECT else ''
+				'status_value': cur_account_info.app_status,
+				'reason': u'驳回原因:' + reject_logs.last().reason if cur_account_info.app_status == account_models.REJECT else ''
 			})
 		data = {
 			'rows': rows,

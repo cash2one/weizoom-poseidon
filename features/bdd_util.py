@@ -2,7 +2,7 @@
 import json
 import time
 import logging
-
+from datetime import datetime, timedelta
 from django.test.client import Client
 from django.http import SimpleCookie
 from django.contrib.auth.models import User
@@ -63,7 +63,6 @@ Client.delete = __new_client_delete
 def login(user, password=None, **kwargs):
 	if not password:
 		password = 'test'
-
 	if 'context' in kwargs:
 		context = kwargs['context']
 		if hasattr(context, 'client'):
@@ -76,7 +75,7 @@ def login(user, password=None, **kwargs):
 
 	#client = WeappClient(HTTP_USER_AGENT='WebKit MicroMessenger Mozilla')
 	client = Client()
-	client.login(username=user, password='test')
+	client.login(username=user, password=password)
 	client.user = User.objects.get(username=user)
 	client.user.profile = UserProfile.objects.get(user=client.user)
 
@@ -211,6 +210,75 @@ def print_json(obj):
 	print json.dumps(obj, indent=True)
 
 
+def get_date(str):
+	"""
+		将字符串转成datetime对象
+		今天 -> 2014-4-18
+	"""
+	#处理expected中的参数
+	today = datetime.now()
+	if str == u'今天':
+		delta = 0
+	elif str == u'昨天':
+		delta = -1
+	elif str == u'前天':
+		delta = -2
+	elif str == u'明天':
+		delta = 1
+	elif str == u'后天':
+		delta = 2
+	elif u'天后' in str:
+		delta = int(str[:-2])
+	elif u'天前' in str:
+		delta = 0-int(str[:-2])
+	else:
+		tmp = str.split(' ')
+		if len(tmp) == 1:
+			strp = "%Y-%m-%d"
+		elif len(tmp[1]) == 8:
+			strp = "%Y-%m-%d %H:%M:%S"
+		elif len(tmp[1]) == 5:
+			strp = "%Y-%m-%d %H:%M"
+		return datetime.strptime(str, strp)
+
+	return today + timedelta(delta)
+
+def get_date_to_time_interval (str):
+	"""
+		将如下格式转化为字符串形式的时间间隔
+		今天 -> 2014-2-13|2014-2-14
+		"3天前-1天前" 也转为相同的格式
+	"""
+	date_interval = None
+	if u'-' in str:
+		m = re.match(ur"(\d*)([\u4e00-\u9fa5]{1,2})[-](\d*)([\u4e00-\u9fa5]{1,2})", unicode(str))
+		result = m.group(1, 2, 3, 4)
+		if result:
+			if result[1] == u'天前' and result[3] == u'天前':
+				date_interval = "%s|%s" % (datetime.strftime(datetime.now()-timedelta(days=int(result[0])), "%Y-%m-%d"), datetime.strftime(datetime.now() - timedelta(days=int(result[2])),"%Y-%m-%d"))
+			if result[1] == u'天前' and result[2] == u'' and result[3] == u'今天':
+				date_interval = "%s|%s" % (datetime.strftime(datetime.now() - timedelta(days=int(result[0])),"%Y-%m-%d"), datetime.strftime(datetime.now(),"%Y-%m-%d"))
+			if result[1] == u'今天' and result[3] == u'明天':
+				date_interval = "%s|%s" % (datetime.strftime(datetime.now(), "%Y-%m-%d"), datetime.strftime(datetime.now() + timedelta(days=1),"%Y-%m-%d"))
+	return date_interval
+
+#def parse_datetime(str):
+#	return datetime.strptime(str, "%Y/%m/%d %H:%M:%S")
+
+def get_date_str(str):
+	date = get_date(str)
+	return date.strftime('%Y-%m-%d')
+
+def get_datetime_str(str):
+	"""保留小时数
+	"""
+	date = get_date(str)
+	return '%s 00:00:00' % date.strftime('%Y-%m-%d')
+
+def get_datetime_no_second_str(str):
+	date = get_date(str)
+	return '%s 00:00' % date.strftime('%Y-%m-%d')
+
 def table2dict(context):
 	expected = []
 	for row in context.table:
@@ -229,3 +297,22 @@ def table2dict(context):
 			data[real_heading] = value
 		expected.append(data)
 	return expected
+
+def __date2time(date_str):
+	"""
+	字符串 今天/明天……
+	转化为字符串 "%Y-%m-%d %H:%M"
+	"""
+	cr_date = date_str
+	p_time = "{} 00:00".format(get_date_str(cr_date))
+	return p_time
+
+def __datetime2str(dt_time):
+	"""
+	时间转换为字符串【今天】
+	"""
+	date_now = datetime.now().strftime('%Y-%m-%d %H:%M')
+	if date_now == dt_time:
+		return u'今天'
+	else:
+		return u'其他'

@@ -62,10 +62,10 @@ def __create_system_user(username):
 
 def before_all(context):
 	__clear_all_account_data()
-	__create_system_user('jobs')
-	__create_system_user('bill')
-	__create_system_user('tom')
-	__create_system_user('nokia')
+	# __create_system_user('jobs')
+	# __create_system_user('bill')
+	# __create_system_user('tom')
+	# __create_system_user('nokia')
 
 	#创建test case，使用assert
 	context.tc = unittest.TestCase('__init__')
@@ -105,6 +105,7 @@ def before_scenario(context, scenario):
 		context.driver = driver
 
 	__clear_all_app_data()
+	__clear_all_account_data()
 
 
 def after_scenario(context, scenario):

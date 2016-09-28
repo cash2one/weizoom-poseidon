@@ -100,13 +100,10 @@ class User(resource.Resource):
 		if password != '':
 			user.set_password(password)
 		user.save()
-		UserProfile.objects.filter(user_id=user.id).update(
-			status=status
-			)
+		args = {"status":status}
 		if woid != '':
-			UserProfile.objects.filter(user_id=user.id).update(
-				woid = int(woid)
-			)
+			args["woid"] = int(woid)
+		UserProfile.objects.filter(user_id=user.id).update(**args)
 		response = create_response(200)
 		return response.get_response()
 
