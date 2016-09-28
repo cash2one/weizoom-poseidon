@@ -39,7 +39,7 @@ def __get_actions(status):
 def step_impl(context, user):
 	infos = json.loads(context.text)
 
-	response = context.client.get('/config/api/get_all_unsynced_self_shops/', {})
+	response = context.client.get('/config/api/get_all_self_shops/', {})
 	content = json.loads(response.content)
 
 	storename2id = {}

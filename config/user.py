@@ -123,10 +123,10 @@ def check_username_valid(username):
 	return False if user else True
 
 
-#得到所有还未同步的自营平台
-class GetAllUnsyncedSelfShops(resource.Resource):
+#得到所有的自营平台
+class GetAllSelfShops(resource.Resource):
 	app = 'config'
-	resource = 'get_all_unsynced_self_shops'
+	resource = 'get_all_self_shops'
 
 	@login_required
 	def api_get(request):
