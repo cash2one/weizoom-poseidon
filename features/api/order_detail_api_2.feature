@@ -66,7 +66,13 @@ Background:
 		Given zy1登录系统::weapp
 		When zy1上架商品池商品"商品1"::weapp
 		When zy1上架商品池商品"商品2"::weapp
-
+		When zy1已添加支付方式::weapp
+			"""
+			[{
+				"type": "微信支付",
+				"is_active": "启用"
+			}]
+			"""
 	#开放平台中：创建使用账号 ，激活，审批 准许使用API接口
 		Given manager登录开放平台系统
 		When manager创建开放平台账号
