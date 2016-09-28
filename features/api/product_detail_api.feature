@@ -73,7 +73,7 @@ Background:
 				}]
 			"""
 		
-@chengdg1 @kuki
+@chengdg
 Scenario:1 通过商品ID调用单规格商品API
 
 	Then jd获取'000001'的商品详情

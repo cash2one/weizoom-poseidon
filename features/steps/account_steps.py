@@ -43,7 +43,8 @@ def step_impl(context, user):
 			'name': info.get('account_name', ''),
 			'password': info.get('password', ''),
 			'display_name': info.get('account_main', ''),
-			'status': __get_status(info.get('isopen', ''))
+			'status': __get_status(info.get('isopen', '')),
+			'woid': 0 #TODO 自营平台woid暂时存0
 		}
 		response = context.client.put('/config/api/user/', params)
 		bdd_util.assert_api_call_success(response)
@@ -57,7 +58,8 @@ def step_impl(context, user, display_name):
 			'name': info.get('account_name', ''),
 			'password': info.get('password', ''),
 			'display_name': info.get('account_main', ''),
-			'status': __get_status(info.get('isopen', ''))
+			'status': __get_status(info.get('isopen', '')),
+			'woid': 0 #TODO 自营平台woid暂时存0
 		}
 		response = context.client.post('/config/api/user/', params)
 		bdd_util.assert_api_call_success(response)

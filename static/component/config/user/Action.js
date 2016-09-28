@@ -22,13 +22,23 @@ var Action = {
 			}
 		});
 	},
-
+	selectSelfShop: function(){
+		Resource.get({
+			resource: 'config.get_all_unsynced_self_shops',
+			data: {},
+			dispatch: {
+				dispatcher: Dispatcher,
+				actionType: Constant.CONFIG_USER_SELECT_SELF_SHOP
+			}
+		})
+	},
 	saveUser: function(data) {
 		var user = {
 			name: data['name'],
 			password: data['password'],
 			display_name: data['displayName'],
-			status: data['status']
+			status: data['status'],
+			woid: data['selfUserName']
 		};
 		if (data.id === -1) {
 			Resource.put({

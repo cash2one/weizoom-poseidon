@@ -18,7 +18,8 @@ var Constant = require('./Constant');
 var Store = StoreUtil.createStore(Dispatcher, {
 	actions: {
 		'handleUpdateUser': Constant.CONFIG_USER_UPDATE_USER,
-		'handleSaveUser': Constant.CONFIG_USER_SAVE_USER
+		'handleSaveUser': Constant.CONFIG_USER_SAVE_USER,
+		'handleSelect': Constant.CONFIG_USER_SELECT_SELF_SHOP
 	},
 
 	init: function() {
@@ -31,13 +32,24 @@ var Store = StoreUtil.createStore(Dispatcher, {
 				name: '',
 				password: '',
 				displayName: '',
-				status: '1'
+				status: '1',
+				options: []
 			};
+		}else{
+			this.data.user['options'] = [];
 		}
 	},
 
 	handleUpdateUser: function(action) {
 		this.data.user[action.data.property] = action.data.value;
+		this.__emitChange();
+	},
+
+	handleSelect: function(action) {
+		this.data.user['options'] = action.data.rows;
+		if(this.data.user['options'].length > 0){
+			this.data.user['selfUserName'] = this.data.user['options'][0]['value']
+		}
 		this.__emitChange();
 	},
 

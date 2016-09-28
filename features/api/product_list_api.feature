@@ -87,7 +87,7 @@ Background:
 			}]
 		"""
 		Given jd使用密码123456登录系统
-		When jd激活应用
+		Then jd激活应用
 			"""
 				[{
 				"dev_name":"京东商城",
