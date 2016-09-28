@@ -20,10 +20,20 @@ def step_impl(context, user, product_id):
 	data = []
 	if resp and resp['code'] == 200:
 		data = resp['data']
-	print  "========================================", repr(data['data']['items'])
-	expected = json.loads(context.text)
 
-	bdd_util.assert_list(expected, data['data']['items'])
+	data = data['data']['items']
+	actual_product = {}
+	actual_product['name'] = data['name']
+	actual_product['price'] = float(data['price_info']['display_price'])
+	actual_product['weight'] = float(data['models'][0]['weight'])
+	actual_product['image'] = data['thumbnails_url'].replace(' ','')
+	actual_product['stocks'] = float(data['total_stocks'])
+	actual_product['detail'] = data['detail'][15:-18]
+	actual_product['postage'] = [{'postage':float(data['supplier_postage_config']['postage']),'condition_money':float(data['supplier_postage_config']['condition_money'])}]
+	
+	expected = json.loads(context.text)
+	
+	bdd_util.assert_dict(expected, actual_product)
 
 @When(u"{user}调用'商品列表'api")
 def step_impl(context, user):
