@@ -81,14 +81,14 @@ Background:
 				"weight": 1,
 				"image": "love.png",
 				"stocks": 100,
-				"detail": "商品1-1描述信息",
+				"detail": "商品1描述信息",
 				"postage":[{
 					"postage":10,
 					"condition_money": "100"
 				}]
 			}
 		"""
-		Given 自营平台已获取jd订单
+		Given 自营平台'zy1'已获取jd订单
 			"""
 				{
 					"order_no":"001",

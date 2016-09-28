@@ -96,12 +96,12 @@ Background:
 				{
 					"id": "000001",
 					"name": "商品1",
-					"promotion_title": "商品1-2促销",
+					"promotion_title": "商品1促销",
 					"price": 50.00,
 					"weight": 1,
 					"image": "love.png",
 					"stocks": 100,
-					"detail": "商品1-1描述信息",
+					"detail": "商品1描述信息",
 					"postage":[{
 						"postage":10,
 						"condition_money": "100"
@@ -113,16 +113,16 @@ Background:
 				{
 					"id": "000002",
 					"name": "商品2",
-					"promotion_title": "商品1-2促销",
+					"promotion_title": "商品2促销",
 					"price": 50.00,
 					"weight": 1,
 					"image": "love.png",
 					"stocks": 100,
-					"detail": "商品1-1描述信息",
+					"detail": "商品2描述信息",
 					
 				}
 			"""
-		Given 自营平台已获取jd订单
+		Given 自营平台'zy1'已获取jd订单
 			"""
 				{
 					"order_no":"001",
