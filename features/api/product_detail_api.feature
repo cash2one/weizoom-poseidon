@@ -43,8 +43,8 @@ Background:
 				}
 				"""
 	#自营平台从商品池上架商品
-		Given zy1登录系统
-		When zy1上架商品池商品"商品1-1"
+		Given zy1登录系统::weapp
+		When zy1上架商品池商品"商品1-1"::weapp
 		
 	#开放平台中：创建使用账号 ，激活，审批 准许使用API接口
 		Given manager登录开放平台系统
@@ -54,7 +54,8 @@ Background:
 				"account_name":"jd",
 				"password":"123456",
 				"account_main":"京东商城",
-				"isopen":"是"
+				"isopen":"是",
+				"zy_account":"zy1"
 			}]
 		"""
 		Given jd使用密码123456登录系统

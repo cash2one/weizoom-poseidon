@@ -38,7 +38,7 @@ Background:
 					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
-					"image": "love.png",
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 100,
 					"detail": "商品2描述信息"
 				}
@@ -52,7 +52,7 @@ Background:
 					"name": "商品2",
 					"promotion_title": "商品2促销",
 					"weight": 1,
-					"image": "love.png",
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"detail": "商品1-1描述信息",
 					"model": {
 						"models":{
@@ -71,9 +71,9 @@ Background:
 				}
 				"""
 	#自营平台从商品池上架商品
-		Given zy1登录系统
-		When zy1上架商品池商品"商品1-1"
-		When zy1上架商品池商品"商品2"
+		Given zy1登录系统::weapp
+		When zy1上架商品池商品"商品1-1"::weapp
+		When zy1上架商品池商品"商品2"::weapp
 
 
 	#开放平台中：创建使用账号 ，激活，审批 准许使用API接口
@@ -84,7 +84,8 @@ Background:
 			"account_name":"jd",
 			"password":"123456",
 			"account_main":"京东商城",
-			"isopen":"是"
+			"isopen":"是",
+			"zy_account":"zy1"
 			}]
 		"""
 		Given jd使用密码123456登录系统
@@ -111,12 +112,10 @@ Scenario:1 通过商品ID调用单规格商品API
 	Then jd获取'000001'的商品详情
 		"""
 			{
-				"id": "000001",
 				"name": "商品1-1",
-				"promotion_title": "商品1-2促销",
 				"price": 50.00,
 				"weight": 1,
-				"image": "love.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"stocks": 100,
 				"detail": "商品1-1描述信息",
 				"postage":[{
@@ -125,15 +124,14 @@ Scenario:1 通过商品ID调用单规格商品API
 				}]
 			}
 		"""
+
 Scenario:2 通过商品ID调用多规格商品API
 	Then jd获取'000002'的商品详情
 		"""
 			{
-				"id": "000002",
 				"name": "商品2",
-				"promotion_title": "商品2促销",
 				"weight": 1,
-				"image": "love.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"detail": "商品2描述信息",
 				"model": {
 						"models":{
@@ -175,12 +173,10 @@ Scenario:3 供货商修改单规格商品后，jd通过商品ID调用单规格�
 		Then jd获取'000001'的商品详情
 			"""
 				{
-					"id": "000001",
 					"name": "商品1-1",
-					"promotion_title": "商品1-2促销",
 					"price": 50.01,
 					"weight": 1,
-					"image": "love.png",
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 101,
 					"detail": "商品1-1描述信息",
 					"postage":[{
@@ -222,11 +218,9 @@ Scenario:4 供货商修改多规格商品后，jd通过商品ID调用多规格�
 	Then jd获取'000002'的商品详情
 		"""
 			{
-				"id": "000002",
 				"name": "商品2",
-				"promotion_title": "商品2促销",
 				"weight": 1,
-				"image": "love.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"detail": "商品2描述信息",
 				"model": {
 						"models":{
