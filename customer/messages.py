@@ -73,8 +73,8 @@ class Messages(resource.Resource):
 		print request.POST['serverIp'],"========"
 		print type(str(request.POST['serverIp']))
 		
-		app_id = "wz{}".format(md5(''.join(random.sample(string.ascii_letters + string.digits, 10)) + str(1)+time.strftime("%Y%m%d%H%m%s")).hexdigest()[8:-8])
-		app_secret  = md5(''.join(random.sample(string.ascii_letters + string.digits, 10)) + str(1)+time.strftime("%Y%m%d%H%m%s")).hexdigest()
+		app_id = "wz{}".format(md5(''.join(random.sample(string.ascii_letters + string.digits, 10)) + str(1)+time.strftime("%Y%m%d%H%M%S")).hexdigest()[8:-8])
+		app_secret  = md5(''.join(random.sample(string.ascii_letters + string.digits, 10)) + str(1)+time.strftime("%Y%m%d%H%M%S")).hexdigest()
 		customer_message = models.CustomerMessage.objects.create(
 			user = request.user, 
 			name = request.POST['name'], 
