@@ -24,7 +24,7 @@ var Action = {
 	},
 	selectSelfShop: function(){
 		Resource.get({
-			resource: 'config.get_all_unsynced_self_shops',
+			resource: 'config.get_all_self_shops',
 			data: {},
 			dispatch: {
 				dispatcher: Dispatcher,

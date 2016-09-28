@@ -21,7 +21,8 @@ var Store = StoreUtil.createStore(Dispatcher, {
 
 	init: function() {
 		this.data = {
-			'customerId': -1
+			'customerId': -1,
+			'logs': '[]'
 		};
 	},
 
