@@ -70,7 +70,24 @@ Background:
 				"account_main":"京东商城"
 				}]
 			"""
-	#第三方平台产生订单，自营平台生成对应的订单	
+	#第三方平台产生订单，自营平台生成对应的订单
+		Then jd获取'000001'的商品详情
+		"""
+			{
+				"id": "000001",
+				"name": "商品1-1",
+				"promotion_title": "商品1-2促销",
+				"price": 50.00,
+				"weight": 1,
+				"image": "love.png",
+				"stocks": 100,
+				"detail": "商品1-1描述信息",
+				"postage":[{
+					"postage":10,
+					"condition_money": "100"
+				}]
+			}
+		"""
 		Given 自营平台已获取jd订单
 			"""
 				{
@@ -89,7 +106,7 @@ Background:
 						"products":[{
 							"name":"商品1-1",
 							"price":50.00,
-							"count":1
+							"count":1,
 							"single_save":0.00
 						}],
 						"postage": 10.00,

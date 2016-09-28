@@ -92,7 +92,37 @@ Background:
 				"account_main":"京东商城"
 				}]
 			"""
-		
+		Then jd获取'000001'的商品详情
+			"""
+				{
+					"id": "000001",
+					"name": "商品1",
+					"promotion_title": "商品1-2促销",
+					"price": 50.00,
+					"weight": 1,
+					"image": "love.png",
+					"stocks": 100,
+					"detail": "商品1-1描述信息",
+					"postage":[{
+						"postage":10,
+						"condition_money": "100"
+					}]
+				}
+			"""
+		Then jd获取'000002'的商品详情
+			"""
+				{
+					"id": "000002",
+					"name": "商品2",
+					"promotion_title": "商品1-2促销",
+					"price": 50.00,
+					"weight": 1,
+					"image": "love.png",
+					"stocks": 100,
+					"detail": "商品1-1描述信息",
+					
+				}
+			"""
 		Given 自营平台已获取jd订单
 			"""
 				{
@@ -111,21 +141,21 @@ Background:
 						"products":[{
 							"name":"商品1",
 							"price":50.00,
-							"count":1
+							"count":1,
 							"single_save":0.00
 						}],
 						"postage": 10.00,
-						"status":"待支付",
+						"status":"待支付"
 					},{
 						"order_no":"001-供货商2",
 						"products":[{
 							"name":"商品2",
 							"price":50.00,
-							"count":1
+							"count":1,
 							"single_save":0.00
 						}],
 						"postage": 0.00,
-						"status":"待支付",
+						"status":"待支付"
 					}],
 					"products_count":2,
 					"total_price": 100.00,
@@ -152,11 +182,11 @@ Background:
 						"products":[{
 							"name":"商品1-1",
 							"price":50.00,
-							"count":1
+							"count":1,
 							"single_save":0.00
 						}],
 						"postage": 10.00,
-						"status":"待支付",
+						"status":"待支付"
 					}],
 					"products_count":1,
 					"total_price": 50.00,
@@ -183,11 +213,11 @@ Background:
 						"products":[{
 							"name":"商品1-1",
 							"price":50.00,
-							"count":1
+							"count":1,
 							"single_save":0.00
 						}],
 						"postage": 10.00,
-						"status":"待支付",
+						"status":"待支付"
 					}],
 					"products_count":1,
 					"total_price": 50.00,
@@ -222,11 +252,11 @@ Scenario:1 通过列表页调用订单列表API
 					"products":[{
 						"name":"商品1",
 						"price":50.00,
-						"count":1
+						"count":1,
 						"single_save":0.00
 					}],
 					"postage": 10.00,
-					"status":"待支付",
+					"status":"待支付"
 				},{
 					"order_no":"001-供货商2",
 					"products":[{
@@ -236,7 +266,7 @@ Scenario:1 通过列表页调用订单列表API
 						"single_save":0.00
 					}],
 					"postage": 0.00,
-					"status":"待支付",
+					"status":"待支付"
 				}],
 				"products_count":2,
 				"total_price": 100.00,
@@ -259,11 +289,11 @@ Scenario:1 通过列表页调用订单列表API
 					"products":[{
 						"name":"商品1-1",
 						"price":50.00,
-						"count":1
+						"count":1,
 						"single_save":0.00
 					}],
 					"postage": 10.00,
-					"status":"待支付",
+					"status":"待支付"
 				}],
 				"products_count":1,
 				"total_price": 50.00,
@@ -297,11 +327,11 @@ Scenario:1 通过列表页调用订单列表API
 					"products":[{
 						"name":"商品1-1",
 						"price":50.00,
-						"count":1
+						"count":1,
 						"single_save":0.00
 					}],
 					"postage": 10.00,
-					"status":"待支付",
+					"status":"待支付"
 				}],
 				"products_count":1,
 				"total_price": 50.00,
