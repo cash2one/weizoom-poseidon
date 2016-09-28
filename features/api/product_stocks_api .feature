@@ -72,7 +72,8 @@ Background:
 			"account_name":"jd",
 			"password":"123456",
 			"account_main":"京东商城",
-			"isopen":"是"
+			"isopen":"是",
+			"zy_account":"zy1"
 			}]
 		"""
 		Given jd使用密码123456登录系统
