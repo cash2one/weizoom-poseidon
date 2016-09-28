@@ -59,6 +59,10 @@ Background:
 					"detail": "商品2描述信息"
 				}
 				"""
+	#自营平台从商品池上架商品
+		Given zy1登录系统::weapp
+		When zy1上架商品池商品"商品1-1"::weapp
+		When zy1上架商品池商品"商品2"::weapp
 
 	#开放平台中：创建使用账号 ，激活，审批 准许使用API接口
 		Given manager登录开放平台系统
@@ -68,11 +72,12 @@ Background:
 			"account_name":"jd",
 			"password":"123456",
 			"account_main":"京东商城",
-			"isopen":"是"
+			"isopen":"是",
+			"zy_account":"zy1"
 			}]
 		"""
 		Given jd使用密码123456登录系统
-		When jd激活应用
+		Then jd激活应用
 			"""
 				[{
 				"dev_name":"京东商城",
@@ -125,7 +130,7 @@ Scenario:2 第三方平台产生订单后，库存有限的商品，库存扣减
 						"products":[{
 							"name":"商品1-1",
 							"price":50.00,
-							"count":1
+							"count":1,
 							"single_save":0.00
 						}],
 						"postage": 10.00,
@@ -162,7 +167,7 @@ Scenario:2 第三方平台产生订单后，库存有限的商品，库存扣减
 						"products":[{
 							"name":"商品2",
 							"price":50.00,
-							"count":1
+							"count":1,
 							"single_save":0.00
 						}],
 						"postage": 10.00,

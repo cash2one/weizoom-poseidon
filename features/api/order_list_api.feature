@@ -62,7 +62,12 @@ Background:
 					"stocks": 100,
 					"detail": "商品2描述信息"
 				}
-				"""			
+				"""
+	#自营平台从商品池上架商品
+		Given zy1登录系统::weapp
+		When zy1上架商品池商品"商品1"::weapp
+		When zy1上架商品池商品"商品2"::weapp
+
 	#开放平台中：创建使用账号 ，激活，审批 准许使用API接口
 		Given manager登录开放平台系统
 		When manager创建开放平台账号
@@ -71,11 +76,12 @@ Background:
 				"account_name":"jd",
 				"password":"123456",
 				"account_main":"京东商城",
-				"isopen":"是"
+				"isopen":"是",
+				"zy_account":"zy1"
 				}]
 			"""
 		Given jd使用密码123456登录系统
-		When jd激活应用
+		Then jd激活应用
 			"""
 				[{
 				"dev_name":"京东商城",
@@ -92,8 +98,38 @@ Background:
 				"account_main":"京东商城"
 				}]
 			"""
-		
-		Given 自营平台已获取jd订单
+		Then jd获取'000001'的商品详情
+			"""
+				{
+					"id": "000001",
+					"name": "商品1",
+					"promotion_title": "商品1促销",
+					"price": 50.00,
+					"weight": 1,
+					"image": "love.png",
+					"stocks": 100,
+					"detail": "商品1描述信息",
+					"postage":[{
+						"postage":10,
+						"condition_money": "100"
+					}]
+				}
+			"""
+		Then jd获取'000002'的商品详情
+			"""
+				{
+					"id": "000002",
+					"name": "商品2",
+					"promotion_title": "商品2促销",
+					"price": 50.00,
+					"weight": 1,
+					"image": "love.png",
+					"stocks": 100,
+					"detail": "商品2描述信息"
+					
+				}
+			"""
+		Given 自营平台'zy1'已获取jd订单
 			"""
 				{
 					"order_no":"001",
@@ -111,21 +147,21 @@ Background:
 						"products":[{
 							"name":"商品1",
 							"price":50.00,
-							"count":1
+							"count":1,
 							"single_save":0.00
 						}],
 						"postage": 10.00,
-						"status":"待支付",
+						"status":"待支付"
 					},{
 						"order_no":"001-供货商2",
 						"products":[{
 							"name":"商品2",
 							"price":50.00,
-							"count":1
+							"count":1,
 							"single_save":0.00
 						}],
 						"postage": 0.00,
-						"status":"待支付",
+						"status":"待支付"
 					}],
 					"products_count":2,
 					"total_price": 100.00,
@@ -134,7 +170,7 @@ Background:
 					"final_price": 110.00
 				}
 			"""
-		Given 自营平台已获取jd订单
+		Given 自营平台'zy1'已获取jd订单
 			"""
 				{
 					"order_no":"002",
@@ -150,13 +186,13 @@ Background:
 					"group":[{
 						"order_no":"002-供货商1",
 						"products":[{
-							"name":"商品1-1",
+							"name":"商品1",
 							"price":50.00,
-							"count":1
+							"count":1,
 							"single_save":0.00
 						}],
 						"postage": 10.00,
-						"status":"待支付",
+						"status":"待支付"
 					}],
 					"products_count":1,
 					"total_price": 50.00,
@@ -165,7 +201,7 @@ Background:
 					"final_price": 60.00
 				}
 			"""
-		Given 自营平台已获取jd订单
+		Given 自营平台'zy1'已获取jd订单
 			"""
 				{
 					"order_no":"003",
@@ -181,13 +217,13 @@ Background:
 					"group":[{
 						"order_no":"003-供货商1",
 						"products":[{
-							"name":"商品1-1",
+							"name":"商品1",
 							"price":50.00,
-							"count":1
+							"count":1,
 							"single_save":0.00
 						}],
 						"postage": 10.00,
-						"status":"待支付",
+						"status":"待支付"
 					}],
 					"products_count":1,
 					"total_price": 50.00,
@@ -222,21 +258,21 @@ Scenario:1 通过列表页调用订单列表API
 					"products":[{
 						"name":"商品1",
 						"price":50.00,
-						"count":1
+						"count":1,
 						"single_save":0.00
 					}],
 					"postage": 10.00,
-					"status":"待支付",
+					"status":"待支付"
 				},{
 					"order_no":"001-供货商2",
 					"products":[{
 						"name":"商品2",
 						"price":50.00,
-						"count":1
+						"count":1,
 						"single_save":0.00
 					}],
 					"postage": 0.00,
-					"status":"待支付",
+					"status":"待支付"
 				}],
 				"products_count":2,
 				"total_price": 100.00,
@@ -259,11 +295,11 @@ Scenario:1 通过列表页调用订单列表API
 					"products":[{
 						"name":"商品1-1",
 						"price":50.00,
-						"count":1
+						"count":1,
 						"single_save":0.00
 					}],
 					"postage": 10.00,
-					"status":"待支付",
+					"status":"待支付"
 				}],
 				"products_count":1,
 				"total_price": 50.00,
@@ -297,11 +333,11 @@ Scenario:1 通过列表页调用订单列表API
 					"products":[{
 						"name":"商品1-1",
 						"price":50.00,
-						"count":1
+						"count":1,
 						"single_save":0.00
 					}],
 					"postage": 10.00,
-					"status":"待支付",
+					"status":"待支付"
 				}],
 				"products_count":1,
 				"total_price": 50.00,

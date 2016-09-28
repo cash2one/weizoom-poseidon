@@ -11,6 +11,7 @@ from django.db.models import F
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import models as auth_models
 from django.contrib.contenttypes.models import ContentType
+from eaglet.utils.resource_client import Resource
 
 from core import resource
 from core.jsonresponse import create_response
@@ -18,6 +19,7 @@ import nav
 from account.models import *
 from customer import models as customer_models
 from core.frontend_data import FrontEndData
+from poseidon.settings import ZEUS_SERVICE_NAME, EAGLET_CLIENT_ZEUS_HOST
 
 FIRST_NAV = 'config'
 SECOND_NAV = 'config-user'
@@ -33,18 +35,18 @@ class User(resource.Resource):
 		frontend_data = FrontEndData()
 		if user_id:
 			user = auth_models.User.objects.get(id=user_id)
-			status = UserProfile.objects.get(user_id=user.id).status
+			user_profile = UserProfile.objects.get(user_id=user.id)
+			status = user_profile.status
 			user_data = {
 				'id': user.id,
 				'name': user.username,
 				'displayName': user.first_name,
-				'status': str(status)
+				'status': str(status),
+				'selfUserName': user_profile.woid
 			}
 			frontend_data.add('user', user_data)
 		else:
-			frontend_data.add('user', None)
-			#TODO 增加woid（云商通自营帐号ID）
-			
+			frontend_data.add('user', None)	
 
 		c = RequestContext(request, {
 			'first_nav_name': FIRST_NAV,
@@ -72,7 +74,8 @@ class User(resource.Resource):
 		auth_models.User.objects.filter(id=user.id).update(first_name=display_name)
 		UserProfile.objects.filter(user_id=user.id).update(
 			manager_id = request.user.id,
-			status = status
+			status = status,
+			woid = int(request.POST['woid'])
 			)
 		response = create_response(200)
 		return response.get_response()
@@ -92,7 +95,10 @@ class User(resource.Resource):
 		if password != '':
 			user.set_password(password)
 		user.save()
-		UserProfile.objects.filter(user_id=user.id).update(status=status)
+		UserProfile.objects.filter(user_id=user.id).update(
+			status=status,
+			woid = int(request.POST['woid'])
+			)
 		response = create_response(200)
 		return response.get_response()
 
@@ -110,3 +116,32 @@ def check_username_valid(username):
 	"""
 	user = auth_models.User.objects.filter(username=username)
 	return False if user else True
+
+
+#得到所有还未同步的自营平台
+class GetAllUnsyncedSelfShops(resource.Resource):
+	app = 'config'
+	resource = 'get_all_unsynced_self_shops'
+
+	@login_required
+	def api_get(request):
+		params = {
+			'status': 'new'
+		}
+		resp = Resource.use(ZEUS_SERVICE_NAME, EAGLET_CLIENT_ZEUS_HOST).get(
+			{
+				'resource': 'panda.proprietary_account_list',
+				'data': params
+			}
+		)
+		rows = []
+		if resp and resp.get('code') == 200:
+			data = resp.get('data').get('profiles')
+			rows = [{'text': profile.get('store_name'),
+					 'value': profile.get('user_id')} for profile in data]
+		data = {
+			'rows': rows
+		}
+		response = create_response(200)
+		response.data = data
+		return response.get_response()
