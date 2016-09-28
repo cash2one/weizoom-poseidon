@@ -118,7 +118,7 @@ Background:
 					"weight": 1,
 					"image": "love.png",
 					"stocks": 100,
-					"detail": "商品2描述信息",
+					"detail": "商品2描述信息"
 					
 				}
 			"""

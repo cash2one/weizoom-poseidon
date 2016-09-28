@@ -106,7 +106,7 @@ Background:
 						"products":[{
 							"name":"商品1-1",
 							"price":50.00,
-							"count":1
+							"count":1,
 							"single_save":0.00
 						}],
 						"postage": 10.00,

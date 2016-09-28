@@ -119,7 +119,7 @@ Background:
 					"weight": 1,
 					"image": "love.png",
 					"stocks": 100,
-					"detail": "商品2描述信息",
+					"detail": "商品2描述信息"
 					
 				}
 			"""
@@ -262,7 +262,7 @@ Scenario:1 通过列表页调用订单列表API
 					"products":[{
 						"name":"商品2",
 						"price":50.00,
-						"count":1
+						"count":1,
 						"single_save":0.00
 					}],
 					"postage": 0.00,
