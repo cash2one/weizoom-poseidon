@@ -42,7 +42,7 @@ def step_impl(context, user, product_id):
 @When(u"{user}调用商品列表")
 def step_impl(context, user):
 	user_id = bdd_util.get_user_id_for(user)
-	param_data = {'woid':user_id}
+	param_data = {'woid':user_id,"access_token":context.openapi_access_token}
 	
 	resp = Resource.use('openapi').get({
 		'resource':'mall.products',
