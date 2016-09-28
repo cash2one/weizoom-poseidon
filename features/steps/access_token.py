@@ -28,10 +28,22 @@ def step_impl(context, user):
 			'data': params
 		}
 	)
-	rows = []
 	if resp and resp.get('code') == 200:
-		access_token = resp.get('data').get('access_token')
-		logging.info("access_token : %s"% access_token)
-		context.access_token = access_token
+		openapi_access_token = resp.get('data').get('access_token')
+		logging.info("openapi_access_token : %s"% openapi_access_token)
+		context.openapi_access_token = openapi_access_token
 
-	
+	woid = context.woid
+	params = {
+			'woid': woid
+	}
+	resp = Resource.use("apiserver").put(
+		{
+			'resource': 'user.token',
+			'data': params
+		}
+	)
+	if resp and resp.get('code') == 200:
+		apiserver_access_token = resp.get('data').get('access_token')
+		logging.info("apiserver_access_token : %s"% apiserver_access_token)
+		context.apiserver_access_token = apiserver_access_token
