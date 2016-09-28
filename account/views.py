@@ -31,8 +31,13 @@ random.seed(time.time())
 # index : 用户首页
 #===============================================================================
 def index(request):
-	if request.user.is_authenticated():
-		return HttpResponseRedirect('/customer/accounts/')
+	user = User.objects.filter(id=request.user.id, is_active=True)
+	if user:
+		is_staff = user_profile[0].is_staff
+		if is_staff:
+			return HttpResponseRedirect('/config/users/')
+		else:
+			return HttpResponseRedirect('/customer/accounts/')
 	else:
 		return HttpResponseRedirect('/account/login/')
 

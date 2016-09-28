@@ -126,7 +126,7 @@ class GetAllUnsyncedSelfShops(resource.Resource):
 	@login_required
 	def api_get(request):
 		params = {
-			'status': 'new'
+			'status': 'all'
 		}
 		resp = Resource.use(ZEUS_SERVICE_NAME, EAGLET_CLIENT_ZEUS_HOST).get(
 			{
