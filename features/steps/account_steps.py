@@ -38,13 +38,25 @@ def __get_actions(status):
 @when(u"{user}创建开放平台账号")
 def step_impl(context, user):
 	infos = json.loads(context.text)
+
+	response = context.client.get('/config/api/get_all_unsynced_self_shops/', {})
+	content = json.loads(response.content)
+
+	storename2id = {}
+	for weapp_user in content["data"]["rows"]:
+		storename2id[weapp_user["text"]] = weapp_user["value"]
+
 	for info in infos:
+		if info.get("zy_account", None) and info["zy_account"] in storename2id.keys():
+			woid = storename2id[info["zy_account"]]
+		else:
+			woid = 0
 		params = {
 			'name': info.get('account_name', ''),
 			'password': info.get('password', ''),
 			'display_name': info.get('account_main', ''),
 			'status': __get_status(info.get('isopen', '')),
-			'woid': 0 #TODO 自营平台woid暂时存0
+			'woid': woid #TODO 自营平台woid暂时存0
 		}
 		response = context.client.put('/config/api/user/', params)
 		bdd_util.assert_api_call_success(response)

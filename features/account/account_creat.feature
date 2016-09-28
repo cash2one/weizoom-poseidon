@@ -7,6 +7,7 @@ Feature:管理员管理开放平台
 3.管理员关闭开放平台账号
 """
 Background:
+	#同步商品到自营平台
 	Given manager登录开放平台系统
 	When manager创建开放平台账号
 		"""
@@ -14,16 +15,17 @@ Background:
 			"account_name":"aini",
 			"password":"123456",
 			"account_main":"爱伲咖啡",
-			"isopen":"是"
+			"isopen":"是",
+			"zy_account":"zy1"
 		}]
 		"""
-@poseidon @account_create
+@poseidon @account_create @test
 Scenario:1 管理员创建开放平台账号
 	Then manager查看账号列表
 		| account_name |  main_name  |   create_time   |   status   |   operation  |
 		|     aini     |   爱伲咖啡  |     今天        |   未激活   |   编辑/关闭  |
 
-@poseidon @account_create
+@poseidon @account_create @tt
 Scenario:2 管理员编辑开放平台账号
 	When manager编辑账号'爱伲咖啡'
 		"""
