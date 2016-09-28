@@ -13,3 +13,5 @@ def clean():
 	customer_models.CustomerMessage.objects.all().delete()
 	customer_models.CustomerServerIps.objects.all().delete()
 	application_models.ApplicationLog.objects.all().delete()
+	account_models.AccessToken.objects.all().delete()
+	account_models.App.objects.all().delete()
