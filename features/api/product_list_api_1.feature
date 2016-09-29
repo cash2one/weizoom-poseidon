@@ -26,8 +26,8 @@ Background:
 				"""
 				{
 					"supplier_name": "供货商1",
-					"postage":10,
-					"condition_money": "100"
+					"postage":10.0,
+					"condition_money":100.0
 				}
 				"""
 		#同步商品到自营平台
@@ -41,8 +41,8 @@ Background:
 					"promotion_title": "商品1-2促销",
 					"purchase_price": 50.00,
 					"price": 50.00,
-					"weight": 1,
-					"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
+					"weight": 1.0,
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 100,
 					"detail": "商品1描述信息"
 				}
@@ -57,8 +57,8 @@ Background:
 					"promotion_title": "商品1-2促销",
 					"purchase_price": 50.00,
 					"price": 50.00,
-					"weight": 1,
-					"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
+					"weight": 1.0,
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 100,
 					"detail": "商品2描述信息"
 				}
@@ -73,8 +73,8 @@ Background:
 					"promotion_title": "商品1-2促销",
 					"purchase_price": 50.00,
 					"price": 50.00,
-					"weight": 1,
-					"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
+					"weight": 1.0,
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 100,
 					"detail": "商品3描述信息"
 				}
@@ -87,8 +87,8 @@ Background:
 					"id": "000004",
 					"name": "商品2",
 					"promotion_title": "商品2促销",
-					"weight": 1,
-					"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
+					"weight": 1.0,
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"detail": "商品1-1描述信息",
 					"model": {
 						"models":{
@@ -126,6 +126,9 @@ Background:
 			}]
 		"""
 		Given aini使用密码123456登录系统
+		Then aini查看应用列表
+			|application_name|    app_id    |   app_secret   |   status    |
+			|    默认应用    |激活后自动生成| 激活后自动生成 |    未激活   |
 		Then aini激活应用
 			"""
 				[{
@@ -137,13 +140,22 @@ Background:
 				}]
 			"""
 		Given manager登录开放平台系统
+		Then manager查看应用审核列表
+			|account_main|application_name|     appid    |   appsecret  |dev_name|mob_number |  email_address  | ip_address | interface_address  |status |   operation     |
+			|  爱伲咖啡  |  默认应用      |审核后自动生成|审核后自动生成|爱伲咖啡|13813984405|ainicoffee@qq.com|192.168.1.3 |http://192.168.0.130|待审核 |确认通过/驳回修改|
 		When manager同意申请
 			"""
 				[{
 				"account_main":"爱伲咖啡"
 				}]
 			"""
-		
+		Given aini使用密码123456登录系统
+		Then aini查看应用列表
+			|application_name|    app_id    |   app_secret   |   status    |
+			|    默认应用    |    随机生成  |   随机生成     |    已启用   | 
+
+		#aini获取acess_token
+		When aini获取access_token		
 
 Scenario:1 通过列表页调用商品列表API
 	When aini调用商品列表
@@ -152,7 +164,7 @@ Scenario:1 通过列表页调用商品列表API
 		"""
 			[{
 				"name": "商品2",
-				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"model": {
 						"models":{
 								"M": {
@@ -168,17 +180,17 @@ Scenario:1 通过列表页调用商品列表API
 			},{
 				"name": "商品1-3",
 				"price": 50.00,
-				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"sales": 0				
 			},{
 				"name": "商品1-2",
 				"price": 50.00,
-				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"sales": 0
 			},{
 				"name": "商品1-1",
 				"price": 50.00,
-				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"sales": 0
 			}]
 		"""
@@ -194,8 +206,8 @@ Scenario:2 供货商修改单规格商品后，aini通过列表页调用单规�
 					"promotion_title": "商品1-2促销",
 					"purchase_price": 50.01,
 					"price": 50.01,
-					"weight": 1,
-					"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
+					"weight": 1.0,
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 101,
 					"detail": "商品2描述信息"
 				}
@@ -205,7 +217,7 @@ Scenario:2 供货商修改单规格商品后，aini通过列表页调用单规�
 		"""
 			[{
 				"name": "商品2",
-				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"model": {
 						"models":{
 								"M": {
@@ -221,17 +233,17 @@ Scenario:2 供货商修改单规格商品后，aini通过列表页调用单规�
 			},{
 				"name": "商品1-3",
 				"price": 50.00,
-				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"sales": 0				
 			},{
 				"name": "商品1-2",
 				"price": 50.00,
-				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"sales": 0
 			},{
 				"name": "商品1-1",
 				"price": 50.01,
-				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"sales": 0
 			}]
 		"""
@@ -245,8 +257,8 @@ Scenario:3 供货商修改多规格商品后，aini通过列表页调用多规�
 					"id": "000004",
 					"name": "商品2",
 					"promotion_title": "商品2促销",
-					"weight": 1,
-					"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
+					"weight": 1.0,
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"detail": "商品1-1描述信息",
 					"model": {
 						"models":{
@@ -269,7 +281,7 @@ Scenario:3 供货商修改多规格商品后，aini通过列表页调用多规�
 		"""
 			[{
 				"name": "商品2",
-				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"model": {
 						"models":{
 								"M": {
@@ -285,17 +297,17 @@ Scenario:3 供货商修改多规格商品后，aini通过列表页调用多规�
 			},{
 				"name": "商品1-3",
 				"price": 50.00,
-				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"sales": 0				
 			},{
 				"name": "商品1-2",
 				"price": 50.00,
-				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"sales": 0
 			},{
 				"name": "商品1-1",
 				"price": 50.01,
-				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"sales": 0
 			}]
 		"""
