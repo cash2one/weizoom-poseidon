@@ -45,8 +45,11 @@ def step_impl(context, user, product_name):
 			actual_product['image'] = data['thumbnails_url'].replace(' ','')
 			actual_product['stocks'] = float(data['total_stocks'])
 			actual_product['detail'] = data['detail'][15:-18] if data['detail'].startswith("<html>") else data['detail']
-			actual_product['postage'] = [{'postage':float(data['supplier_postage_config']['postage']),'condition_money':float(data['supplier_postage_config']['condition_money'])}]
-			if not hasattr(context, 'products'):
+			try:
+				actual_product['postage'] = [{'postage':float(data['supplier_postage_config']['postage']),'condition_money':float(data['supplier_postage_config']['condition_money'])}]
+			except:
+				pass
+			if not hasattr(context, 'product_name2id'):
 				context.product_name2id = {}
 			context.product_name2id[data['name']] = product_id
 			expected = json.loads(context.text)

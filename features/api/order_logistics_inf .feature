@@ -9,6 +9,7 @@ Background:
 		Given 重置'weapp'的bdd环境
 		Given 设置zy1为自营平台账号::weapp
 		Given zy1登录系统::weapp
+
 	
 	#panda系统中：创建供货商、设置供货商运费、同步商品到自营平台
 		#创建供货商
@@ -58,38 +59,38 @@ Background:
 	#开放平台中：创建使用账号 ，激活，审批 准许使用API接口
 		Given manager登录开放平台系统
 		When manager创建开放平台账号
-		"""
+			"""
 			[{
-			"account_name":"aini",
-			"password":"123456",
-			"account_main":"爱伲咖啡",
-			"isopen":"是",
-			"zy_account":"zy1"
+				"account_name":"aini",
+				"password":"123456",
+				"account_main":"爱伲咖啡",
+				"isopen":"是",
+				"zy_account":"zy1"
 			}]
-		"""
+			"""
 		Given aini使用密码123456登录系统
 		Then aini查看应用列表
 			|application_name|    app_id    |   app_secret   |   status    |
 			|    默认应用    |激活后自动生成| 激活后自动生成 |    未激活   |
 		Then aini激活应用
 			"""
-				[{
-				"dev_name":"爱伲咖啡",
-				"mobile_num":"13813984405",
-				"e_mail":"ainicoffee@qq.com",
-				"ip_address":"192.168.1.3",
-				"interface_address":"http://192.168.0.130"
-				}]
+			[{
+			"dev_name":"爱伲咖啡",
+			"mobile_num":"13813984405",
+			"e_mail":"ainicoffee@qq.com",
+			"ip_address":"192.168.1.3",
+			"interface_address":"http://192.168.0.130"
+			}]
 			"""
 		Given manager登录开放平台系统
 		Then manager查看应用审核列表
-			|account_main|application_name|     appid    |   appsecret  |dev_name|mob_number |  email_address  | ip_address | interface_address  |status |   operation     |
-			|  爱伲咖啡  |  默认应用      |审核后自动生成|审核后自动生成|爱伲咖啡|13813984405|ainicoffee@qq.com|192.168.1.3 |http://192.168.0.130|待审核 |确认通过/驳回修改|
+			|account_main|application_name|     appid    |   appsecret  |dev_name|mob_number |  email_address  | ip_address | interface_address    |status|   operation   |
+			|  爱伲咖啡  |  默认应用      |审核后自动生成|审核后自动生成|爱伲咖啡|13813984405|ainicoffee@qq.com|192.168.1.3|http://192.168.0.130|待审核 |确认通过/驳回修改|
 		When manager同意申请
 			"""
-				[{
-				"account_main":"爱伲咖啡"
-				}]
+			[{
+			"account_main":"爱伲咖啡"
+			}]
 			"""
 		Given aini使用密码123456登录系统
 		Then aini查看应用列表
@@ -98,6 +99,7 @@ Background:
 
 		#aini获取acess_token
 		When aini获取access_token
+		
 	#第三方平台产生订单，自营平台生成对应的订单
 		Then aini获取'商品1-1'的商品详情
 			"""
@@ -145,6 +147,7 @@ Background:
 					"final_price": 60.00
 				}
 			"""
+		When zy1修改订单编号"001"::weapp
 	#第三方平台中购买商品的用户，对订单进行完支付
 		Given aini订单已支付
 			"""
@@ -153,6 +156,7 @@ Background:
 					"methods_of_payment":"微信支付"
 				}
 			"""
+@openapi @order @houtf
 Scenario:1 通过主订单ID提供订单详情API '已发货'，包括物流详细信息
 	#Given 自营平台订单数据已同步到panda系统中
 	Given zy1登录系统::weapp
@@ -185,16 +189,11 @@ Scenario:1 通过主订单ID提供订单详情API '已发货'，包括物流详�
 				"invoice":"",
 				"business_message":"",
 				"methods_of_payment":"微信支付",
-				"group":[{
-					"order_no":"001-供货商1",
-					"products":[{
-						"name":"商品1-1",
-						"price":50.00,
-						"count":1,
-						"single_save":0.00
-					}],
-					"postage": 10.0,
-					"status":"已发货"
+				"products":[{
+					"name":"商品1-1",
+					"price":50.00,
+					"count":1,
+					"single_save":0.00
 				}],
 				"products_count":1,
 				"total_price": 50.00,
