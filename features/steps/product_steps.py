@@ -8,6 +8,7 @@ from behave import *
 import bdd_util
 from eaglet.utils.resource_client import Resource
 
+from bs4 import BeautifulSoup
 
 @Then(u"{user}获取'{product_name}'的商品详情")
 def step_impl(context, user, product_name):
@@ -43,13 +44,13 @@ def step_impl(context, user, product_name):
 			actual_product['weight'] = float(data['models'][0]['weight'])
 			actual_product['image'] = data['thumbnails_url'].replace(' ','')
 			actual_product['stocks'] = float(data['total_stocks'])
-			actual_product['detail'] = data['detail'][15:-18]
+			actual_product['detail'] = data['detail'][15:-18] if data['detail'].startswith("<html>") else data['detail']
 			actual_product['postage'] = [{'postage':float(data['supplier_postage_config']['postage']),'condition_money':float(data['supplier_postage_config']['condition_money'])}]
 			if not hasattr(context, 'products'):
 				context.product_name2id = {}
 			context.product_name2id[data['name']] = product_id
 			expected = json.loads(context.text)
-
+			
 			bdd_util.assert_dict(expected, actual_product)
 	else:
 		1/0
