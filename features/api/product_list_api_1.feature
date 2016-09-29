@@ -7,6 +7,7 @@ Feature: 提供商品列表的API
 	三、（商品修改的验证应该在panda里进行验证，无需在开放平台再重复验证，先保留着，后续实现时讨论一下再删掉 by bc）
 """
 Background:
+	Given 重置'apiserver'的bdd环境
 	#panda系统中：创建供货商、设置供货商运费、同步商品到自营平台
 		#创建供货商
 			Given 创建一个特殊的供货商，就是专门针对商品池供货商::weapp
@@ -37,7 +38,7 @@ Background:
 					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
-					"image": "love.png",
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 100,
 					"detail": "商品1描述信息"
 				}
@@ -53,7 +54,7 @@ Background:
 					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
-					"image": "love.png",
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 100,
 					"detail": "商品2描述信息"
 				}
@@ -69,7 +70,7 @@ Background:
 					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
-					"image": "love.png",
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 100,
 					"detail": "商品3描述信息"
 				}
@@ -83,7 +84,7 @@ Background:
 					"name": "商品2",
 					"promotion_title": "商品2促销",
 					"weight": 1,
-					"image": "love.png",
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"detail": "商品1-1描述信息",
 					"model": {
 						"models":{
@@ -141,75 +142,42 @@ Background:
 		
 
 Scenario:1 通过列表页调用商品列表API
-	When jd调用'商品列表'api
+	When jd调用商品列表
 
-	Then jd获取'商品列表'api返回结果
+	Then jd获取商品列表返回结果
 		"""
 			[{
-				"id": "000001",
-				"name": "商品1-1",
-				"promotion_title": "商品1-2促销",
-				"price": 50.00,
-				"weight": 1,
-				"image": "love.png",
-				"stocks": 100,
-				"detail": "商品1描述信息",
-				"postage":[{
-					"postage":10,
-					"condition_money": "100"
-				}]
-			},{
-				"id": "000002",
-				"name": "商品1-2",
-				"promotion_title": "商品1-2促销",
-				"price": 50.00,
-				"weight": 1,
-				"image": "love.png",
-				"stocks": 100,
-				"detail": "商品2描述信息",
-				"postage":[{
-					"postage":10,
-					"condition_money": "100"
-				}]
-			},{
-				"id": "000003",
-				"name": "商品1-3",
-				"promotion_title": "商品1-2促销",
-				"price": 50.00,
-				"weight": 1,
-				"image": "love.png",
-				"stocks": 100,
-				"detail": "商品3描述信息",
-				"postage":[{
-					"postage":10,
-					"condition_money": "100"
-				}]
-			},{
-				"id": "000004",
 				"name": "商品2",
-				"promotion_title": "商品2促销",
-				"weight": 1,
-				"image": "love.png",
-				"detail": "商品1-1描述信息",
+				"image": "http://chaozhi.weizoom.comlove.png",
 				"model": {
 						"models":{
 								"M": {
 									"price": 301.00,
-									"stocks": 101
+									"sales": 0
 								},
 								"S": {
 									"price": 300.00,
-									"stocks": 101
+									"sales": 0
 								}
 							}
-						},
-				"postage":[{
-					"postage":10,
-					"condition_money": "100"
-				}]
+						}				
+			},{
+				"name": "商品1-3",
+				"price": 50.00,
+				"image": "http://chaozhi.weizoom.comlove.png",
+				"sales": 0				
+			},{
+				"name": "商品1-2",
+				"price": 50.00,
+				"image": "http://chaozhi.weizoom.comlove.png",
+				"sales": 0
+			},{
+				"name": "商品1-1",
+				"price": 50.00,
+				"image": "http://chaozhi.weizoom.comlove.png",
+				"sales": 0
 			}]
 		"""
-
 Scenario:2 供货商修改单规格商品后，jd通过列表页调用单规格商品所在商品列表API，获得修改后单规格商品所在商品列表
 	#同步商品到自营平台（修改商品1中的价格，库存后进行同步）
 		Given 给自营平台同步商品::weapp
@@ -223,79 +191,46 @@ Scenario:2 供货商修改单规格商品后，jd通过列表页调用单规格�
 					"purchase_price": 50.01,
 					"price": 50.01,
 					"weight": 1,
-					"image": "love.png",
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 101,
 					"detail": "商品2描述信息"
 				}
 				"""	
-		When jd调用'商品列表'api
-
-		Then jd获取'商品列表'api返回结果
-			"""
-				[{
-					"id": "000001",
-					"name": "商品1-1",
-					"promotion_title": "商品1-2促销",
-					"price": 50.01,
-					"weight": 1,
-					"image": "love.png",
-					"stocks": 101,
-					"detail": "商品2描述信息",
-					"postage":[{
-						"postage":10,
-						"condition_money": "100"
-					}]
-				},{
-					"id": "000002",
-					"name": "商品1-2",
-					"promotion_title": "商品1-2促销",
-					"price": 50.00,
-					"weight": 1,
-					"image": "love.png",
-					"stocks": 100,
-					"detail": "商品1-1描述信息",
-					"postage":[{
-						"postage":10,
-						"condition_money": "100"
-					}]
-				},{
-					"id": "000003",
-					"name": "商品1-3",
-					"promotion_title": "商品1-2促销",
-					"price": 50.00,
-					"weight": 1,
-					"image": "love.png",
-					"stocks": 100,
-					"detail": "商品3描述信息",
-					"postage":[{
-						"postage":10,
-						"condition_money": "100"
-					}]
-				},{
-					"id": "000004",
-					"name": "商品2",
-					"promotion_title": "商品2促销",
-					"weight": 1,
-					"image": "love.png",
-					"detail": "商品1-1描述信息",
-					"model": {
-							"models":{
-									"M": {
-										"price": 301.00,
-										"stocks": 101
-									},
-									"S": {
-										"price": 300.00,
-										"stocks": 101
-									}
+		When jd调用商品列表
+		Then jd获取商品列表返回结果
+		"""
+			[{
+				"name": "商品2",
+				"image": "http://chaozhi.weizoom.comlove.png",
+				"model": {
+						"models":{
+								"M": {
+									"price": 301.00,
+									"sales": 0
+								},
+								"S": {
+									"price": 300.00,
+									"sales": 0
 								}
-							},
-					"postage":[{
-						"postage":10,
-						"condition_money": "100"
-					}]
-				}]
-			"""
+							}
+						}				
+			},{
+				"name": "商品1-3",
+				"price": 50.00,
+				"image": "http://chaozhi.weizoom.comlove.png",
+				"sales": 0				
+			},{
+				"name": "商品1-2",
+				"price": 50.00,
+				"image": "http://chaozhi.weizoom.comlove.png",
+				"sales": 0
+			},{
+				"name": "商品1-1",
+				"price": 50.01,
+				"image": "http://chaozhi.weizoom.comlove.png",
+				"sales": 0
+			}]
+		"""
 Scenario:3 供货商修改多规格商品后，jd通过列表页调用多规格商品所在商品列表API，获得修改后多规格商品所在商品列表
 	#同步商品到自营平台（修改商品2中的价格，库存后进行同步）
 		Given 给自营平台同步商品::weapp
@@ -307,7 +242,7 @@ Scenario:3 供货商修改多规格商品后，jd通过列表页调用多规格�
 					"name": "商品2",
 					"promotion_title": "商品2促销",
 					"weight": 1,
-					"image": "love.png",
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"detail": "商品1-1描述信息",
 					"model": {
 						"models":{
@@ -325,71 +260,38 @@ Scenario:3 供货商修改多规格商品后，jd通过列表页调用多规格�
 						}
 				}
 			"""
-		When jd调用'商品列表'api
-
-		Then jd获取'商品列表'api返回结果
-			"""
-				[{
-					"id": "000001",
-					"name": "商品1-1",
-					"promotion_title": "商品1-2促销",
-					"price": 50.01,
-					"weight": 1,
-					"image": "love.png",
-					"stocks": 101,
-					"detail": "商品2描述信息",
-					"postage":[{
-						"postage":10,
-						"condition_money": "100"
-					}]
-				},{
-					"id": "000002",
-					"name": "商品1-2",
-					"promotion_title": "商品1-2促销",
-					"price": 50.00,
-					"weight": 1,
-					"image": "love.png",
-					"stocks": 100,
-					"detail": "商品1-1描述信息",
-					"postage":[{
-						"postage":10,
-						"condition_money": "100"
-					}]
-				},{
-					"id": "000003",
-					"name": "商品1-3",
-					"promotion_title": "商品1-2促销",
-					"price": 50.00,
-					"weight": 1,
-					"image": "love.png",
-					"stocks": 100,
-					"detail": "商品1-1描述信息",
-					"postage":[{
-						"postage":10,
-						"condition_money": "100"
-					}]
-				},{
-					"id": "000004",
-					"name": "商品2",
-					"promotion_title": "商品2促销",
-					"weight": 1,
-					"image": "love.png",
-					"detail": "商品1-1描述信息",
-					"model": {
-							"models":{
-									"M": {
-										"price": 302.00,
-										"stocks": 102
-									},
-									"S": {
-										"price": 300.00,
-										"stocks": 102
-									}
+		When jd调用商品列表
+		Then jd获取商品列表返回结果
+		"""
+			[{
+				"name": "商品2",
+				"image": "http://chaozhi.weizoom.comlove.png",
+				"model": {
+						"models":{
+								"M": {
+									"price": 302.00,
+									"sales": 0
+								},
+								"S": {
+									"price": 300.00,
+									"sales": 0
 								}
-							},
-					"postage":[{
-						"postage":10,
-						"condition_money": "100"
-					}]
-				}]
-			"""
+							}
+						}				
+			},{
+				"name": "商品1-3",
+				"price": 50.00,
+				"image": "http://chaozhi.weizoom.comlove.png",
+				"sales": 0				
+			},{
+				"name": "商品1-2",
+				"price": 50.00,
+				"image": "http://chaozhi.weizoom.comlove.png",
+				"sales": 0
+			},{
+				"name": "商品1-1",
+				"price": 50.01,
+				"image": "http://chaozhi.weizoom.comlove.png",
+				"sales": 0
+			}]
+		"""

@@ -5,6 +5,7 @@ Feature: 提供订单详情的API（多供货商）
 	待支付，待发货，已发货，已完成
 """
 Background:
+	Given 重置'apiserver'的bdd环境
 	#panda系统中：创建供货商、设置供货商运费、同步商品到自营平台
 		#创建供货商
 			Given 创建一个特殊的供货商，就是专门针对商品池供货商::weapp

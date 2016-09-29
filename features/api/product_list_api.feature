@@ -7,6 +7,7 @@ Feature: 提供商品列表的API
 	三、（商品修改的验证应该在panda里进行验证，无需在开放平台再重复验证，先保留着，后续实现时讨论一下再删掉 by bc）
 """
 Background:
+	Given 重置'apiserver'的bdd环境
 	#panda系统中：创建供货商、设置供货商运费、同步商品到自营平台
 		#创建供货商
 			Given 创建一个特殊的供货商，就是专门针对商品池供货商::weapp
