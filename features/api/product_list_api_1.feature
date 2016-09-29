@@ -42,7 +42,7 @@ Background:
 					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
-					"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+					"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
 					"stocks": 100,
 					"detail": "商品1描述信息"
 				}
@@ -58,7 +58,7 @@ Background:
 					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
-					"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+					"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
 					"stocks": 100,
 					"detail": "商品2描述信息"
 				}
@@ -74,7 +74,7 @@ Background:
 					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
-					"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+					"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
 					"stocks": 100,
 					"detail": "商品3描述信息"
 				}
@@ -88,7 +88,7 @@ Background:
 					"name": "商品2",
 					"promotion_title": "商品2促销",
 					"weight": 1,
-					"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+					"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
 					"detail": "商品1-1描述信息",
 					"model": {
 						"models":{
@@ -152,7 +152,7 @@ Scenario:1 通过列表页调用商品列表API
 		"""
 			[{
 				"name": "商品2",
-				"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
 				"model": {
 						"models":{
 								"M": {
@@ -168,17 +168,17 @@ Scenario:1 通过列表页调用商品列表API
 			},{
 				"name": "商品1-3",
 				"price": 50.00,
-				"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
 				"sales": 0				
 			},{
 				"name": "商品1-2",
 				"price": 50.00,
-				"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
 				"sales": 0
 			},{
 				"name": "商品1-1",
 				"price": 50.00,
-				"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
 				"sales": 0
 			}]
 		"""
@@ -195,7 +195,7 @@ Scenario:2 供货商修改单规格商品后，aini通过列表页调用单规�
 					"purchase_price": 50.01,
 					"price": 50.01,
 					"weight": 1,
-					"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+					"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
 					"stocks": 101,
 					"detail": "商品2描述信息"
 				}
@@ -205,7 +205,7 @@ Scenario:2 供货商修改单规格商品后，aini通过列表页调用单规�
 		"""
 			[{
 				"name": "商品2",
-				"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
 				"model": {
 						"models":{
 								"M": {
@@ -221,17 +221,17 @@ Scenario:2 供货商修改单规格商品后，aini通过列表页调用单规�
 			},{
 				"name": "商品1-3",
 				"price": 50.00,
-				"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
 				"sales": 0				
 			},{
 				"name": "商品1-2",
 				"price": 50.00,
-				"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
 				"sales": 0
 			},{
 				"name": "商品1-1",
 				"price": 50.01,
-				"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
 				"sales": 0
 			}]
 		"""
@@ -246,7 +246,7 @@ Scenario:3 供货商修改多规格商品后，aini通过列表页调用多规�
 					"name": "商品2",
 					"promotion_title": "商品2促销",
 					"weight": 1,
-					"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+					"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
 					"detail": "商品1-1描述信息",
 					"model": {
 						"models":{
@@ -269,7 +269,7 @@ Scenario:3 供货商修改多规格商品后，aini通过列表页调用多规�
 		"""
 			[{
 				"name": "商品2",
-				"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
 				"model": {
 						"models":{
 								"M": {
@@ -285,17 +285,17 @@ Scenario:3 供货商修改多规格商品后，aini通过列表页调用多规�
 			},{
 				"name": "商品1-3",
 				"price": 50.00,
-				"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
 				"sales": 0				
 			},{
 				"name": "商品1-2",
 				"price": 50.00,
-				"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
 				"sales": 0
 			},{
 				"name": "商品1-1",
 				"price": 50.01,
-				"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+				"image": "http://chaozhi.weizoom.comlove.pnghttp://chaozhi.weizoom.comlove.pnglove.png",
 				"sales": 0
 			}]
 		"""
