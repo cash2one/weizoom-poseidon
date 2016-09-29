@@ -7,7 +7,11 @@ Feature: 提供商品库存的API
 	三、除下单外其它场景（取消订单，修改库存，退款完成）导致库存变化的场景，应该在具体的业务场景中验证，不在api场景中验证
 """
 Background:
-	Given 重置'apiserver'的bdd环境
+	#重置weapp的bdd环境
+		Given 重置'weapp'的bdd环境
+		Given 设置zy1为自营平台账号::weapp
+		Given zy1登录系统::weapp
+	
 	#panda系统中：创建供货商、设置供货商运费、同步商品到自营平台
 		#创建供货商
 			Given 创建一个特殊的供货商，就是专门针对商品池供货商::weapp
@@ -70,18 +74,18 @@ Background:
 		When manager创建开放平台账号
 		"""
 			[{
-			"account_name":"jd",
+			"account_name":"aini",
 			"password":"123456",
-			"account_main":"京东商城",
+			"account_main":"爱伲咖啡",
 			"isopen":"是",
 			"zy_account":"zy1"
 			}]
 		"""
-		Given jd使用密码123456登录系统
-		Then jd激活应用
+		Given aini使用密码123456登录系统
+		Then aini激活应用
 			"""
 				[{
-				"dev_name":"京东商城",
+				"dev_name":"爱伲咖啡",
 				"mobile_num":"13813984405",
 				"e_mail":"ainicoffee@qq.com",
 				"ip_address":"192.168.1.3",
@@ -92,19 +96,19 @@ Background:
 		When manager同意申请
 			"""
 				[{
-				"account_main":"京东商城"
+				"account_main":"爱伲咖啡"
 				}]
 			"""
 
 Scenario:1 通过商品ID调用单规格商品API
-	Then jd获取'000001'的库存
+	Then aini获取'000001'的库存
 		"""
 			{
 				"id": "000001",
 				"stocks": 100
 			}
 		"""
-	Then jd获取'000002'的库存
+	Then aini获取'000002'的库存
 		"""
 			{
 				"id": "000002",
@@ -113,7 +117,7 @@ Scenario:1 通过商品ID调用单规格商品API
 		"""
 Scenario:2 第三方平台产生订单后，库存有限的商品，库存扣减掉相应的购买量；库存无限的商品，库存类型不变，还是无限
 	#第三方平台产生订单，自营平台生成对应的订单	
-		Given 自营平台已获取jd订单
+		Given 自营平台已获取aini订单
 			"""
 				{
 					"order_no":"001",
@@ -143,14 +147,14 @@ Scenario:2 第三方平台产生订单后，库存有限的商品，库存扣减
 					"final_price": 60.00
 				}
 			"""
-		Then jd获取'000001'的库存
+		Then aini获取'000001'的库存
 		"""
 			{
 				"id": "000001",
 				"stocks": 99
 			}
 		"""
-		Given 自营平台已获取jd订单
+		Given 自营平台已获取aini订单
 			"""
 				{
 					"order_no":"002",
@@ -180,7 +184,7 @@ Scenario:2 第三方平台产生订单后，库存有限的商品，库存扣减
 					"final_price": 60.00
 				}
 			"""
-		Then jd获取'000002'的库存
+		Then aini获取'000002'的库存
 		"""
 			{
 				"id": "000002",

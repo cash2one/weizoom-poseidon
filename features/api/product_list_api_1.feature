@@ -7,7 +7,11 @@ Feature: 提供商品列表的API
 	三、（商品修改的验证应该在panda里进行验证，无需在开放平台再重复验证，先保留着，后续实现时讨论一下再删掉 by bc）
 """
 Background:
-	Given 重置'apiserver'的bdd环境
+	#重置weapp的bdd环境
+		Given 重置'weapp'的bdd环境
+		Given 设置zy1为自营平台账号::weapp
+		Given zy1登录系统::weapp
+	
 	#panda系统中：创建供货商、设置供货商运费、同步商品到自营平台
 		#创建供货商
 			Given 创建一个特殊的供货商，就是专门针对商品池供货商::weapp
@@ -114,18 +118,18 @@ Background:
 		When manager创建开放平台账号
 		"""
 			[{
-			"account_name":"jd",
+			"account_name":"aini",
 			"password":"123456",
-			"account_main":"京东商城",
+			"account_main":"爱伲咖啡",
 			"isopen":"是",
 			"zy_account":"zy1"
 			}]
 		"""
-		Given jd使用密码123456登录系统
-		Then jd激活应用
+		Given aini使用密码123456登录系统
+		Then aini激活应用
 			"""
 				[{
-				"dev_name":"京东商城",
+				"dev_name":"爱伲咖啡",
 				"mobile_num":"13813984405",
 				"e_mail":"ainicoffee@qq.com",
 				"ip_address":"192.168.1.3",
@@ -136,15 +140,15 @@ Background:
 		When manager同意申请
 			"""
 				[{
-				"account_main":"京东商城"
+				"account_main":"爱伲咖啡"
 				}]
 			"""
 		
 
 Scenario:1 通过列表页调用商品列表API
-	When jd调用商品列表
+	When aini调用商品列表
 
-	Then jd获取商品列表返回结果
+	Then aini获取商品列表返回结果
 		"""
 			[{
 				"name": "商品2",
@@ -178,7 +182,7 @@ Scenario:1 通过列表页调用商品列表API
 				"sales": 0
 			}]
 		"""
-Scenario:2 供货商修改单规格商品后，jd通过列表页调用单规格商品所在商品列表API，获得修改后单规格商品所在商品列表
+Scenario:2 供货商修改单规格商品后，aini通过列表页调用单规格商品所在商品列表API，获得修改后单规格商品所在商品列表
 	#同步商品到自营平台（修改商品1中的价格，库存后进行同步）
 		Given 给自营平台同步商品::weapp
 				"""
@@ -196,8 +200,8 @@ Scenario:2 供货商修改单规格商品后，jd通过列表页调用单规格�
 					"detail": "商品2描述信息"
 				}
 				"""	
-		When jd调用商品列表
-		Then jd获取商品列表返回结果
+		When aini调用商品列表
+		Then aini获取商品列表返回结果
 		"""
 			[{
 				"name": "商品2",
@@ -231,7 +235,7 @@ Scenario:2 供货商修改单规格商品后，jd通过列表页调用单规格�
 				"sales": 0
 			}]
 		"""
-Scenario:3 供货商修改多规格商品后，jd通过列表页调用多规格商品所在商品列表API，获得修改后多规格商品所在商品列表
+Scenario:3 供货商修改多规格商品后，aini通过列表页调用多规格商品所在商品列表API，获得修改后多规格商品所在商品列表
 	#同步商品到自营平台（修改商品2中的价格，库存后进行同步）
 		Given 给自营平台同步商品::weapp
 			"""
@@ -260,8 +264,8 @@ Scenario:3 供货商修改多规格商品后，jd通过列表页调用多规格�
 						}
 				}
 			"""
-		When jd调用商品列表
-		Then jd获取商品列表返回结果
+		When aini调用商品列表
+		Then aini获取商品列表返回结果
 		"""
 			[{
 				"name": "商品2",

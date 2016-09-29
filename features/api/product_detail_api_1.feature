@@ -8,7 +8,11 @@ Feature: 提供商品详情的API
 	四、供货商对多规格商品修改（该场景应该在商品管理的feature场景中验证，无需在api中验证）
 """
 Background:
-	Given 重置'apiserver'的bdd环境
+	#重置weapp的bdd环境
+		Given 重置'weapp'的bdd环境
+		Given 设置zy1为自营平台账号::weapp
+		Given zy1登录系统::weapp
+	
 	#panda系统中：创建供货商、设置供货商运费、同步商品到自营平台
 		#创建供货商
 			Given 创建一个特殊的供货商，就是专门针对商品池供货商::weapp
@@ -82,18 +86,18 @@ Background:
 		When manager创建开放平台账号
 		"""
 			[{
-			"account_name":"jd",
+			"account_name":"aini",
 			"password":"123456",
-			"account_main":"京东商城",
+			"account_main":"爱伲咖啡",
 			"isopen":"是",
 			"zy_account":"zy1"
 			}]
 		"""
-		Given jd使用密码123456登录系统
-		Then jd激活应用
+		Given aini使用密码123456登录系统
+		Then aini激活应用
 			"""
 				[{
-				"dev_name":"京东商城",
+				"dev_name":"爱伲咖啡",
 				"mobile_num":"13813984405",
 				"e_mail":"ainicoffee@qq.com",
 				"ip_address":"192.168.1.3",
@@ -104,19 +108,19 @@ Background:
 		When manager同意申请
 			"""
 				[{
-				"account_main":"京东商城"
+				"account_main":"爱伲咖啡"
 				}]
 			"""
 		
 
 Scenario:1 通过商品ID调用单规格商品API
-	Then jd获取'000001'的商品详情
+	Then aini获取'000001'的商品详情
 		"""
 			{
 				"name": "商品1-1",
 				"price": 50.00,
 				"weight": 1,
-				"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+				"image": "http://chaozhi.weizoom.com",
 				"stocks": 100,
 				"detail": "商品1-1描述信息",
 				"postage":[{
@@ -127,7 +131,7 @@ Scenario:1 通过商品ID调用单规格商品API
 		"""
 
 Scenario:2 通过商品ID调用多规格商品API
-	Then jd获取'000002'的商品详情
+	Then aini获取'000002'的商品详情
 		"""
 			{
 				"name": "商品2",
@@ -152,7 +156,7 @@ Scenario:2 通过商品ID调用多规格商品API
 				}]
 			}
 		"""
-Scenario:3 供货商修改单规格商品后，jd通过商品ID调用单规格商品API，获得修改后单规格商品详情
+Scenario:3 供货商修改单规格商品后，aini通过商品ID调用单规格商品API，获得修改后单规格商品详情
 	#同步商品到自营平台（修改商品1中的价格，库存后进行同步）
 		Given 给自营平台同步商品::weapp
 			"""
@@ -171,7 +175,7 @@ Scenario:3 供货商修改单规格商品后，jd通过商品ID调用单规格�
 			}
 			"""
 
-		Then jd获取'000001'的商品详情
+		Then aini获取'000001'的商品详情
 			"""
 				{
 					"name": "商品1-1",
@@ -186,7 +190,7 @@ Scenario:3 供货商修改单规格商品后，jd通过商品ID调用单规格�
 					}]
 				}
 			"""
-Scenario:4 供货商修改多规格商品后，jd通过商品ID调用多规格商品API，获得修改后多规格商品详情
+Scenario:4 供货商修改多规格商品后，aini通过商品ID调用多规格商品API，获得修改后多规格商品详情
 	#同步商品到自营平台（修改商品2中的价格，库存后进行同步）
 		Given 给自营平台同步商品::weapp
 				"""
@@ -216,7 +220,7 @@ Scenario:4 供货商修改多规格商品后，jd通过商品ID调用多规格�
 				}
 				"""
 
-	Then jd获取'000002'的商品详情
+	Then aini获取'000002'的商品详情
 		"""
 			{
 				"name": "商品2",

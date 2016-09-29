@@ -5,7 +5,11 @@ Feature: 提供订单详情的API（多供货商）
 	待支付，待发货，已发货，已完成
 """
 Background:
-	Given 重置'apiserver'的bdd环境
+	#重置weapp的bdd环境
+		Given 重置'weapp'的bdd环境
+		Given 设置zy1为自营平台账号::weapp
+		Given zy1登录系统::weapp
+	
 	#panda系统中：创建供货商、设置供货商运费、同步商品到自营平台
 		#创建供货商
 			Given 创建一个特殊的供货商，就是专门针对商品池供货商::weapp
@@ -79,18 +83,18 @@ Background:
 		When manager创建开放平台账号
 			"""
 				[{
-				"account_name":"jd",
+				"account_name":"aini",
 				"password":"123456",
-				"account_main":"京东商城",
+				"account_main":"爱伲咖啡",
 				"isopen":"是",
 				"zy_account":"zy1"
 				}]
 			"""
-		Given jd使用密码123456登录系统
-		Then jd激活应用
+		Given aini使用密码123456登录系统
+		Then aini激活应用
 			"""
 				[{
-				"dev_name":"京东商城",
+				"dev_name":"爱伲咖啡",
 				"mobile_num":"13813984405",
 				"e_mail":"ainicoffee@qq.com",
 				"ip_address":"192.168.1.3",
@@ -101,10 +105,10 @@ Background:
 		When manager同意申请
 			"""
 				[{
-				"account_main":"京东商城"
+				"account_main":"爱伲咖啡"
 				}]
 			"""
-		Then jd获取'000001'的商品详情
+		Then aini获取'000001'的商品详情
 			"""
 				{
 					"id": "000001",
@@ -121,7 +125,7 @@ Background:
 					}]
 				}
 			"""
-		Then jd获取'000002'的商品详情
+		Then aini获取'000002'的商品详情
 			"""
 				{
 					"id": "000002",
@@ -135,7 +139,7 @@ Background:
 					
 				}
 			"""
-		Given 自营平台'zy1'已获取jd订单
+		Given 自营平台'zy1'已获取aini订单
 			"""
 				{
 					"order_no":"001",
@@ -178,13 +182,13 @@ Background:
 			"""
 Scenario:1 通过主订单ID提供订单详情API '待支付'
 	
-	When jd调用'订单详情'api
+	When aini调用'订单详情'api
 		"""
 			{
 				"order_no":"001"
 			}
 		"""
-	Then jd获取'订单详情'api返回结果
+	Then aini获取'订单详情'api返回结果
 			"""
 			{
 				"order_no":"001",
@@ -226,7 +230,7 @@ Scenario:1 通过主订单ID提供订单详情API '待支付'
 			}
 		"""
 Scenario:2 通过主订单ID提供订单详情API '待发货'
-	Given jd订单已支付
+	Given aini订单已支付
 		"""
 			{
 				"order_no":"001",
@@ -234,13 +238,13 @@ Scenario:2 通过主订单ID提供订单详情API '待发货'
 			}
 		"""
 	#商品1-1待发货，商品2-1待发货	
-		When jd调用'订单详情'api
+		When aini调用'订单详情'api
 			"""
 				{
 					"order_no":"001"
 				}
 			"""
-		Then jd获取'订单详情'api返回结果		
+		Then aini获取'订单详情'api返回结果		
 			"""
 				{
 					"order_no":"001",
@@ -293,13 +297,13 @@ Scenario:2 通过主订单ID提供订单详情API '待发货'
 	          "shipper": "pd"
 	        }
 	        """
-		When jd调用'订单详情'api
+		When aini调用'订单详情'api
 			"""
 				{
 					"order_no":"001"
 				}
 			"""
-		Then jd获取'订单详情'api返回结果		
+		Then aini获取'订单详情'api返回结果		
 			"""
 				{
 					"order_no":"001",
@@ -344,13 +348,13 @@ Scenario:2 通过主订单ID提供订单详情API '待发货'
 		#Given 自营平台订单数据已同步到panda系统中
 		Given pd登录panda系统
 		When pd完成订单'001-供货商1'::weapp
-		When jd调用'订单详情'api
+		When aini调用'订单详情'api
 			"""
 				{
 					"order_no":"001"
 				}
 			"""										
-		Then jd获取'订单详情'api返回结果		
+		Then aini获取'订单详情'api返回结果		
 			"""
 				{
 					"order_no":"001",
@@ -392,7 +396,7 @@ Scenario:2 通过主订单ID提供订单详情API '待发货'
 				}
 			"""
 Scenario:3 通过主订单ID提供订单详情API '已发货'
-	Given jd订单已支付
+	Given aini订单已支付
 		"""
 			{
 				"order_no":"001",
@@ -416,13 +420,13 @@ Scenario:3 通过主订单ID提供订单详情API '已发货'
 	          "shipper": "pd"
 	        }]
 	        """
-		When jd调用'订单详情'api
+		When aini调用'订单详情'api
 			"""
 				{
 					"order_no":"001"
 				}
 			"""
-		Then jd获取'订单详情'api返回结果		
+		Then aini获取'订单详情'api返回结果		
 			"""
 				{
 					"order_no":"001",
@@ -467,13 +471,13 @@ Scenario:3 通过主订单ID提供订单详情API '已发货'
 		#Given 自营平台订单数据已同步到panda系统中
 		Given pd登录panda系统
 		When pd完成订单'001-供货商1'::weapp
-		When jd调用'订单详情'api
+		When aini调用'订单详情'api
 			"""
 				{
 					"order_no":"001"
 				}
 			"""
-		Then jd获取'订单详情'api返回结果		
+		Then aini获取'订单详情'api返回结果		
 			"""
 				{
 					"order_no":"001",
@@ -515,7 +519,7 @@ Scenario:3 通过主订单ID提供订单详情API '已发货'
 				}
 			"""
 Scenario:4 通过主订单ID提供订单详情API '已完成'
-	Given jd订单已支付
+	Given aini订单已支付
 		"""
 			{
 				"order_no":"001",
@@ -527,13 +531,13 @@ Scenario:4 通过主订单ID提供订单详情API '已完成'
 	When pd完成订单'001-供货商1'::weapp
 	When pd完成订单'001-供货商2'::weapp
 
-	When jd调用'订单详情'api
+	When aini调用'订单详情'api
 		"""
 			{
 				"order_no":"001"
 			}
 		"""
-	Then jd获取'订单详情'api返回结果		
+	Then aini获取'订单详情'api返回结果		
 		"""
 			{
 				"order_no":"001",
