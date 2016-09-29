@@ -5,6 +5,7 @@ Feature: 提供订单物流信息的API（单供货商）
 	
 """
 Background:
+	Given 重置'apiserver'的bdd环境
 	#panda系统中：创建供货商、设置供货商运费、同步商品到自营平台
 		#创建供货商
 			Given 创建一个特殊的供货商，就是专门针对商品池供货商::weapp
@@ -35,7 +36,7 @@ Background:
 					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
-					"image": "love.png",
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 100,
 					"detail": "商品1描述信息"
 				}
@@ -89,7 +90,7 @@ Background:
 					"promotion_title": "商品1-2促销",
 					"price": 50.00,
 					"weight": 1,
-					"image": "love.png",
+					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 100,
 					"detail": "商品1描述信息",
 					"postage":[{

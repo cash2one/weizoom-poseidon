@@ -67,6 +67,7 @@ class App(models.Model):
 	app_secret = models.CharField(max_length=100)
 	woid = models.CharField(max_length=100)
 	is_active = models.BooleanField(default=False)
+	apiserver_access_token = models.CharField(max_length=256, default="") #alter table poseidon.app add column apiserver_access_token varchar(256) default "" ;
 	#TODO copid
 	name = models.CharField(max_length=100)
 	created_at = models.DateTimeField(default=datetime.datetime.now)
