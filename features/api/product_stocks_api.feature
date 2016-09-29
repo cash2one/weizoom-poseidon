@@ -94,8 +94,7 @@ Background:
 				"account_main":"京东商城"
 				}]
 			"""
-		
-@chengdg
+
 Scenario:1 通过商品ID调用单规格商品API
 	Then jd获取'000001'的库存
 		"""
