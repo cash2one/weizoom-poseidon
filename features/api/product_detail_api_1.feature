@@ -127,28 +127,28 @@ Background:
 		When aini获取access_token
 
 Scenario:1 通过商品ID调用单规格商品API
-	Then aini获取'000001'的商品详情
+	Then aini获取'商品1-1'的商品详情
 		"""
 			{
 				"name": "商品1-1",
 				"price": 50.00,
-				"weight": 1,
+				"weight": 1.0,
 				"image": "http://chaozhi.weizoom.com",
 				"stocks": 100,
 				"detail": "商品1-1描述信息",
 				"postage":[{
-					"postage":10,
-					"condition_money": "100"
+					"postage":10.0,
+					"condition_money": "100.0"
 				}]
 			}
 		"""
 
 Scenario:2 通过商品ID调用多规格商品API
-	Then aini获取'000002'的商品详情
+	Then aini获取'商品2'的商品详情
 		"""
 			{
 				"name": "商品2",
-				"weight": 1,
+				"weight": 1.0,
 				"image": "http://chaozhi.weizoom.com",
 				"detail": "商品2描述信息",
 				"model": {
@@ -164,8 +164,8 @@ Scenario:2 通过商品ID调用多规格商品API
 							}
 						},
 				"postage":[{
-					"postage":10,
-					"condition_money": "100"
+					"postage":10.0,
+					"condition_money": "100.0"
 				}]
 			}
 		"""
@@ -188,18 +188,18 @@ Scenario:3 供货商修改单规格商品后，aini通过商品ID调用单规格
 			}
 			"""
 
-		Then aini获取'000001'的商品详情
+		Then aini获取'商品1-1'的商品详情
 			"""
 				{
 					"name": "商品1-1",
 					"price": 50.01,
-					"weight": 1,
+					"weight": 1.0,
 					"image": "http://chaozhi.weizoom.com",
 					"stocks": 101,
 					"detail": "商品1-1描述信息",
 					"postage":[{
-						"postage":10,
-						"condition_money": "100"
+						"postage":10.0,
+						"condition_money": "100.0"
 					}]
 				}
 			"""
@@ -233,11 +233,11 @@ Scenario:4 供货商修改多规格商品后，aini通过商品ID调用多规格
 				}
 				"""
 
-	Then aini获取'000002'的商品详情
+	Then aini获取'商品2'的商品详情
 		"""
 			{
 				"name": "商品2",
-				"weight": 1,
+				"weight": 1.0,
 				"image": "http://chaozhi.weizoom.com",
 				"detail": "商品2描述信息",
 				"model": {
@@ -253,8 +253,8 @@ Scenario:4 供货商修改多规格商品后，aini通过商品ID调用多规格
 							}
 						},
 				"postage":[{
-					"postage":10,
-					"condition_money": "100"
+					"postage":10.0,
+					"condition_money": "100.0"
 				}]
 			}
 		"""
