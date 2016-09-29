@@ -156,7 +156,7 @@ Background:
 					"methods_of_payment":"微信支付"
 				}
 			"""
-@openapi @order @houtf
+@openapi @order @houtf @ttt
 Scenario:1 通过主订单ID提供订单详情API '已发货'，包括物流详细信息
 	#Given 自营平台订单数据已同步到panda系统中
 	Given zy1登录系统::weapp

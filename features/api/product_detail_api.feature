@@ -95,7 +95,7 @@ Background:
 		#aini获取acess_token
 		When aini获取access_token
 
-@chengdg	
+@openapi @chengdg
 Scenario:1 通过商品ID调用单规格商品API
 
 	Then aini获取'商品1-1'的商品详情
