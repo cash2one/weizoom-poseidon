@@ -7,7 +7,6 @@ Feature:管理员管理开放平台
 3.管理员关闭开放平台账号
 """
 Background:
-	#同步商品到自营平台
 	Given manager登录开放平台系统
 	When manager创建开放平台账号
 		"""
@@ -19,13 +18,13 @@ Background:
 			"zy_account":"zy1"
 		}]
 		"""
-@poseidon @account_create @test
+@poseidon	@kuki
 Scenario:1 管理员创建开放平台账号
 	Then manager查看账号列表
-		| account_name |  main_name  |   create_time   |   status   |   operation  |
-		|     aini     |   爱伲咖啡  |     今天        |   未激活   |   编辑/关闭  |
+		| account_name |  main_name  |   create_time   |   state   |   operation  |
+		|     aini     |   爱伲咖啡  |     今天        |   未激活  |   编辑/关闭  |
 
-@poseidon @account_create @tt
+@poseidon
 Scenario:2 管理员编辑开放平台账号
 	When manager编辑账号'爱伲咖啡'
 		"""
@@ -37,10 +36,10 @@ Scenario:2 管理员编辑开放平台账号
 		}]
 		"""
 	Then manager查看账号列表
-		| account_name |  main_name  |   create_time   |    status   |   operation  |
-		|     aini     |  爱伲coffee |      今天       |    未激活   |   编辑/关闭  |
+		| account_name |  main_name  |   creat_time   |   state   |   operation  |
+		|     aini     |  爱伲coffee |      今天      |    未激活   |   编辑/关闭  |
 	
-@poseidon @account_create
+@poseidon
 Scenario:3 管理员关闭平台账号
 	When manager关闭账号
 		"""
@@ -49,6 +48,6 @@ Scenario:3 管理员关闭平台账号
 		}]
 		"""
 	Then manager查看账号列表
-		| account_name |  main_name  |   create_time   |    status   |   operation  |
-		|     aini     |   爱伲咖啡  |      今天       |    未激活   |   编辑/删除  |
+		| account_name |  main_name  |   creat_time   |   state   |   operation  |
+		|     aini     |   爱伲咖啡  |      今天      |    未激活   |   编辑/开启  |
 

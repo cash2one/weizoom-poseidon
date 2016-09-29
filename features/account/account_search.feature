@@ -12,17 +12,20 @@ Background:
 			"account_name":"aini",
 			"password":"123456",
 			"account_main":"爱伲咖啡",
-			"isopen":"是"
+			"isopen":"是",
+			"zy_account":"zy1"
 		},{
 			"account_name":"naike",
 			"password":"123456",
 			"account_main":"耐克男鞋",
-			"isopen":"是"
+			"isopen":"是",
+			"zy_account":"zy1"
 		},{
 			"account_name":"zhouheiya",
 			"password":"123456",
 			"account_main":"周黑鸭",
-			"isopen":"是"
+			"isopen":"是",
+			"zy_account":"zy1"
 		}]
 		"""
 	Then manager查看账号列表
