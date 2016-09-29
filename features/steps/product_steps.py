@@ -9,8 +9,8 @@ import bdd_util
 from eaglet.utils.resource_client import Resource
 
 
-@Then(u"{user}获取'{product_id}'的商品详情")
-def step_impl(context, user, product_id):
+@Then(u"{user}获取'{product_name}'的商品详情")
+def step_impl(context, user, product_name):
 	param_data = {'woid':context.woid,"access_token":context.openapi_access_token}
 	
 	resp = Resource.use('openapi').get({
@@ -18,13 +18,12 @@ def step_impl(context, user, product_id):
 		'data':param_data
 	})
 	data = []
-	product_expected = json.loads(context.text)
 	product_id = None
 	if resp and resp['code'] == 200:
 		data = resp['data']
 		data = data['data']['items']
 		for product in data:
-			if product_expected['name'] == product['name']:
+			if product['name'] == product_name:
 				product_id= product['id']
 				break
 	if product_id:
@@ -78,7 +77,6 @@ def step_impl(context, user):
 			product['image'] = product['thumbnails_url']
 			product['sales'] = product['sales']
 			del product['display_price']
-		print  "========================================", repr(data)
 		context.actual_product_list = data
 	else:
 		1/0
