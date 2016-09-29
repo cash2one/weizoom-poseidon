@@ -46,11 +46,8 @@ def step_impl(context, user, product_name):
 			actual_product['detail'] = data['detail'][15:-18]
 			actual_product['postage'] = [{'postage':float(data['supplier_postage_config']['postage']),'condition_money':float(data['supplier_postage_config']['condition_money'])}]
 			if not hasattr(context, 'products'):
-				context.products = []
-			context.products.append({
-				'product_id': product_id,
-				'product_name': data['name']
-				})
+				context.product_name2id = {}
+			context.product_name2id[data['name']] = product_id
 			expected = json.loads(context.text)
 
 			bdd_util.assert_dict(expected, actual_product)
