@@ -90,7 +90,7 @@ Background:
 		#aini获取acess_token
 		When aini获取access_token
 
-@chengdg1	
+@chengdg	
 Scenario:1 通过商品ID调用单规格商品API
 
 	Then aini获取'000001'的商品详情
@@ -108,7 +108,7 @@ Scenario:1 通过商品ID调用单规格商品API
 				}]
 			}
 		"""
-@chengdg2
+
 Scenario:2 供货商修改单规格商品后，jd通过商品ID调用单规格商品API，获得修改后单规格商品详情
 	#同步商品到自营平台（修改商品1中的价格，库存后进行同步）
 	Given 给自营平台同步商品::weapp
@@ -127,7 +127,7 @@ Scenario:2 供货商修改单规格商品后，jd通过商品ID调用单规格�
 			"detail": "商品2描述信息"
 		}
 		"""	
-	Then jd获取'000001'的商品详情
+	Then aini获取'000001'的商品详情
 		"""
 			{
 				"name": "商品1-1",

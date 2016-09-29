@@ -124,7 +124,7 @@ Background:
 		#aini获取acess_token
 		When aini获取access_token
 		
-@chengdg3
+@chengdg
 Scenario:1 通过列表页调用商品列表API
 
 	When aini调用商品列表
@@ -148,7 +148,7 @@ Scenario:1 通过列表页调用商品列表API
 				"sales": 0
 			}]
 		"""
-@chengdg4
+
 Scenario:2 供货商修改单规格商品后，jd通过列表页调用单规格商品所在商品列表API，获得修改后单规格商品所在商品列表
 	#同步商品到自营平台（修改商品1中的价格，库存后进行同步）
 		Given 给自营平台同步商品::weapp
