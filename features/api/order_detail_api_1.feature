@@ -184,7 +184,7 @@ Scenario:1 通过主订单ID提供订单详情API '待支付'
 				}],
 				"products_count":1,
 				"total_price": 50.00,
-				"postage": 10.00,
+				"postage": 10.0,
 				"cash":50.00,
 				"final_price": 60.00
 			}
