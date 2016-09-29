@@ -42,7 +42,7 @@ Background:
 					"purchase_price": 50.00,
 					"price": 50.00,
 					"weight": 1,
-					"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+					"image": "http://chaozhi.weizoom.com",
 					"stocks": 100,
 					"detail": "商品1-1描述信息"
 				}
@@ -104,7 +104,7 @@ Scenario:1 通过商品ID调用单规格商品API
 				"name": "商品1-1",
 				"price": 50.00,
 				"weight": 1.0,
-				"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+				"image": "http://chaozhi.weizoom.com",
 				"stocks": 100,
 				"detail": "商品1-1描述信息",
 				"postage":[{
@@ -144,7 +144,7 @@ Scenario:2 供货商修改单规格商品后，aini通过商品ID调用单规格
 			"purchase_price": 50.01,
 			"price": 50.01,
 			"weight": 1,
-			"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+			"image": "http://chaozhi.weizoom.com",
 			"stocks": 101,
 			"detail": "商品2描述信息"
 		}
@@ -155,7 +155,7 @@ Scenario:2 供货商修改单规格商品后，aini通过商品ID调用单规格
 				"name": "商品1-1",
 				"price": 50.01,
 				"weight": 1,
-				"image": "http://chaozhi.weizoom.comhttp://chaozhi.weizoom.comlove.png",
+				"image": "http://chaozhi.weizoom.com",
 				"stocks": 101,
 				"detail": "商品2描述信息",
 				"postage":[{
