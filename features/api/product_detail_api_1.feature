@@ -27,8 +27,8 @@ Background:
 				"""
 				{
 					"supplier_name": "供货商1",
-					"postage":10,
-					"condition_money": "100"
+					"postage":10.0,
+					"condition_money": "100.0"
 				}
 				"""
 		#同步商品到自营平台
@@ -42,7 +42,7 @@ Background:
 					"promotion_title": "商品1-2促销",
 					"purchase_price": 50.00,
 					"price": 50.00,
-					"weight": 1,
+					"weight": 1.0,
 					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 100,
 					"detail": "商品2描述信息"
@@ -56,7 +56,7 @@ Background:
 					"id": "000002",
 					"name": "商品2",
 					"promotion_title": "商品2促销",
-					"weight": 1,
+					"weight": 1.0,
 					"image": "http://chaozhi.weizoom.comlove.png",
 					"detail": "商品1-1描述信息",
 					"model": {
@@ -181,7 +181,7 @@ Scenario:3 供货商修改单规格商品后，aini通过商品ID调用单规格
 				"promotion_title": "商品1-2促销",
 				"purchase_price": 50.01,
 				"price": 50.01,
-				"weight": 1,
+				"weight": 1.0,
 				"image": "http://chaozhi.weizoom.comlove.png",
 				"stocks": 101,
 				"detail": "商品2描述信息"
@@ -213,7 +213,7 @@ Scenario:4 供货商修改多规格商品后，aini通过商品ID调用多规格
 					"id": "000002",
 					"name": "商品2",
 					"promotion_title": "商品2促销",
-					"weight": 1,
+					"weight": 1.0,
 					"image": "http://chaozhi.weizoom.comlove.png",
 					"detail": "商品1-1描述信息",
 					"model": {

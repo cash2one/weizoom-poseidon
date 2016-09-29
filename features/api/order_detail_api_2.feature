@@ -30,8 +30,8 @@ Background:
 				"""
 				{
 					"supplier_name": "供货商1",
-					"postage":10,
-					"condition_money": "100"
+					"postage":10.0,
+					"condition_money": "100.0"
 				}
 				"""
 		#同步商品到自营平台
@@ -45,7 +45,7 @@ Background:
 					"promotion_title": "商品1促销",
 					"purchase_price": 50.00,
 					"price": 50.00,
-					"weight": 1,
+					"weight": 1.0,
 					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 100,
 					"detail": "商品1描述信息"
@@ -61,7 +61,7 @@ Background:
 					"promotion_title": "商品2促销",
 					"purchase_price": 50.00,
 					"price": 50.00,
-					"weight": 1,
+					"weight": 1.0,
 					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 100,
 					"detail": "商品2描述信息"
@@ -106,7 +106,7 @@ Background:
 			"""
 		Given manager登录开放平台系统
 		Then manager查看应用审核列表
-			|account_main|application_name|     appid    |   appsecret  |dev_name|mob_number |  email_address  | ip_address | interface_address    |status|   operation   |
+			|account_main|application_name|     appid    |   appsecret  |dev_name|mob_number |  email_address  | ip_address| interface_address  |status |   operation     |
 			|  爱伲咖啡  |  默认应用      |审核后自动生成|审核后自动生成|爱伲咖啡|13813984405|ainicoffee@qq.com|192.168.1.3|http://192.168.0.130|待审核 |确认通过/驳回修改|
 		When manager同意申请
 			"""
@@ -127,13 +127,13 @@ Background:
 				{
 					"name": "商品1",
 					"price": 50.00,
-					"weight": 1,
+					"weight": 1.0,
 					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 100,
 					"detail": "商品1描述信息",
 					"postage":[{
-						"postage":10,
-						"condition_money": 100
+						"postage":10.0,
+						"condition_money": 100.0
 					}]
 				}
 			"""
@@ -142,7 +142,7 @@ Background:
 				{
 					"name": "商品2",
 					"price": 50.00,
-					"weight": 1,
+					"weight": 1.0,
 					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 100,
 					"detail": "商品2描述信息"
@@ -170,7 +170,7 @@ Background:
 							"count":1,
 							"single_save":0.00
 						}],
-						"postage": 10.00,
+						"postage": 10.0,
 						"status":"待支付"
 					},{
 						"order_no":"001-供货商2",
@@ -180,12 +180,12 @@ Background:
 							"count":1,
 							"single_save":0.00
 						}],
-						"postage": 0.00,
+						"postage": 0.0,
 						"status":"待支付"
 					}],
 					"products_count":2,
 					"total_price": 100.00,
-					"postage": 10.00,
+					"postage": 10.0,
 					"cash":100.00,
 					"final_price": 110.00
 				}
@@ -220,7 +220,7 @@ Scenario:1 通过主订单ID提供订单详情API '待支付'
 						"count":1,
 						"single_save":0.00
 					}],
-					"postage": 10.00,
+					"postage": 10.0,
 					"status":"待支付"
 				},{
 					"order_no":"001-供货商2",
@@ -230,12 +230,12 @@ Scenario:1 通过主订单ID提供订单详情API '待支付'
 						"count":1,
 						"single_save":0.00
 					}],
-					"postage": 0.00,
+					"postage": 0.0,
 					"status":"待支付"
 				}],
 				"products_count":2,
 				"total_price": 100.00,
-				"postage": 10.00,
+				"postage": 10.0,
 				"cash":100.00,
 				"final_price": 110.00
 			}
@@ -276,7 +276,7 @@ Scenario:2 通过主订单ID提供订单详情API '待发货'
 							"count":1,
 							"single_save":0.00
 						}],
-						"postage": 10.00,
+						"postage": 10.0,
 						"status":"待发货"
 					},{
 						"order_no":"001-供货商2",
@@ -286,12 +286,12 @@ Scenario:2 通过主订单ID提供订单详情API '待发货'
 							"count":1,
 							"single_save":0.00
 						}],
-						"postage": 0.00,
+						"postage": 0.0,
 						"status":"待发货"
 					}],
 					"products_count":2,
 					"total_price": 100.00,
-					"postage": 10.00,
+					"postage": 10.0,
 					"cash":100.00,
 					"final_price": 110.00
 				}
@@ -335,7 +335,7 @@ Scenario:2 通过主订单ID提供订单详情API '待发货'
 							"count":1,
 							"single_save":0.00
 						}],
-						"postage": 10.00,
+						"postage": 10.0,
 						"status":"已发货"
 					},{
 						"order_no":"001-供货商2",
@@ -345,12 +345,12 @@ Scenario:2 通过主订单ID提供订单详情API '待发货'
 							"count":1,
 							"single_save":0.00
 						}],
-						"postage": 0.00,
+						"postage": 0.0,
 						"status":"待发货"
 					}],
 					"products_count":2,
 					"total_price": 100.00,
-					"postage": 10.00,
+					"postage": 10.0,
 					"cash":100.00,
 					"final_price": 110.00
 				}
@@ -386,7 +386,7 @@ Scenario:2 通过主订单ID提供订单详情API '待发货'
 							"count":1,
 							"single_save":0.00
 						}],
-						"postage": 10.00,
+						"postage": 10.0,
 						"status":"已完成"
 					},{
 						"order_no":"001-供货商2",
@@ -396,12 +396,12 @@ Scenario:2 通过主订单ID提供订单详情API '待发货'
 							"count":1,
 							"single_save":0.00
 						}],
-						"postage": 0.00,
+						"postage": 0.0,
 						"status":"待发货"
 					}],
 					"products_count":2,
 					"total_price": 100.00,
-					"postage": 10.00,
+					"postage": 10.0,
 					"cash":100.00,
 					"final_price": 110.00
 				}
@@ -458,7 +458,7 @@ Scenario:3 通过主订单ID提供订单详情API '已发货'
 							"count":1,
 							"single_save":0.00
 						}],
-						"postage": 10.00,
+						"postage": 10.0,
 						"status":"已发货"
 					},{
 						"order_no":"001-供货商2",
@@ -468,12 +468,12 @@ Scenario:3 通过主订单ID提供订单详情API '已发货'
 							"count":1,
 							"single_save":0.00
 						}],
-						"postage": 0.00,
+						"postage": 0.0,
 						"status":"已发货"
 					}],
 					"products_count":2,
 					"total_price": 100.00,
-					"postage": 10.00,
+					"postage": 10.0,
 					"cash":100.00,
 					"final_price": 110.00
 				}
@@ -509,7 +509,7 @@ Scenario:3 通过主订单ID提供订单详情API '已发货'
 							"count":1,
 							"single_save":0.00
 						}],
-						"postage": 10.00,
+						"postage": 10.0,
 						"status":"已完成"
 					},{
 						"order_no":"001-供货商2",
@@ -519,12 +519,12 @@ Scenario:3 通过主订单ID提供订单详情API '已发货'
 							"count":1,
 							"single_save":0.00
 						}],
-						"postage": 0.00,
+						"postage": 0.0,
 						"status":"已发货"
 					}],
 					"products_count":2,
 					"total_price": 100.00,
-					"postage": 10.00,
+					"postage": 10.0,
 					"cash":100.00,
 					"final_price": 110.00
 				}
@@ -569,7 +569,7 @@ Scenario:4 通过主订单ID提供订单详情API '已完成'
 						"count":1,
 						"single_save":0.00
 					}],
-					"postage": 10.00,
+					"postage": 10.0,
 					"status":"已完成"
 				},{
 					"order_no":"001-供货商2",
@@ -579,12 +579,12 @@ Scenario:4 通过主订单ID提供订单详情API '已完成'
 						"count":1,
 						"single_save":0.00
 					}],
-					"postage": 0.00,
+					"postage": 0.0,
 					"status":"已完成"
 				}],
 				"products_count":2,
 				"total_price": 100.00,
-				"postage": 10.00,
+				"postage": 10.0,
 				"cash":100.00,
 				"final_price": 110.00
 			}
