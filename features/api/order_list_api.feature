@@ -32,7 +32,7 @@ Background:
 				{
 					"supplier_name": "供货商1",
 					"postage":10.0,
-					"condition_money": "100.0"
+					"condition_money": 100.0
 				}
 				"""
 		#同步商品到自营平台
