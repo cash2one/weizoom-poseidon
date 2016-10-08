@@ -20,39 +20,39 @@ from core.exceptionutil import unicode_full_stack
 from account.models import UserProfile	
 	
 
-class ExceptionMiddleware(object):
-	def process_request(self, request):
-		# 解决本地没有开启varnish，导致商品删除等操作报错
-		if request.META.get('REQUEST_METHOD','') == 'PURGE':
-			return HttpResponse('')
+# class ExceptionMiddleware(object):
+# 	def process_request(self, request):
+# 		# 解决本地没有开启varnish，导致商品删除等操作报错
+# 		if request.META.get('REQUEST_METHOD','') == 'PURGE':
+# 			return HttpResponse('')
 
-	def process_exception(self, request, exception):
-		# print '>>>>>>> process exception <<<<<<<'
-		# exception_stack_str = unicode_full_stack()
+# 	def process_exception(self, request, exception):
+# 		# print '>>>>>>> process exception <<<<<<<'
+# 		# exception_stack_str = unicode_full_stack()
 
-		# alert_message = u"request url:{}\nrequest params:\n{}\n cause:\n{}"\
-		# 	.format(request.get_full_path(), request.REQUEST, exception_stack_str)
-		# watchdog_alert(alert_message)
+# 		# alert_message = u"request url:{}\nrequest params:\n{}\n cause:\n{}"\
+# 		# 	.format(request.get_full_path(), request.REQUEST, exception_stack_str)
+# 		# watchdog_alert(alert_message)
 
-		# type, value, tb = sys.exc_info()
-		# output = StringIO.StringIO()
-		# print >> output, type, ' : ', value.message
-		# traceback.print_tb(tb, None, output)
-		# watchdog('exception', output.getvalue(), severity=WATCHDOG_ERROR)
-		# output.close()
+# 		# type, value, tb = sys.exc_info()
+# 		# output = StringIO.StringIO()
+# 		# print >> output, type, ' : ', value.message
+# 		# traceback.print_tb(tb, None, output)
+# 		# watchdog('exception', output.getvalue(), severity=WATCHDOG_ERROR)
+# 		# output.close()
 
-		if settings.DEBUG:
-			from django.views import debug
-			debug_response = debug.technical_500_response(request, *sys.exc_info())
-			debug_html = debug_response.content
+# 		if settings.DEBUG:
+# 			from django.views import debug
+# 			debug_response = debug.technical_500_response(request, *sys.exc_info())
+# 			debug_html = debug_response.content
 
-			dst_file = open('error.html', 'wb')
-			print >> dst_file, debug_html
-			dst_file.close()
-			return None
-		else:
-			from account.views import show_error_page
-			return show_error_page(request)
+# 			dst_file = open('error.html', 'wb')
+# 			print >> dst_file, debug_html
+# 			dst_file.close()
+# 			return None
+# 		else:
+# 			from account.views import show_error_page
+# 			return show_error_page(request)
 
 
 class ManagerDetectMiddleware(object):
