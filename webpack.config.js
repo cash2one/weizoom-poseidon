@@ -19,6 +19,12 @@ module.exports = {
 		filename: 'bundle.js',
 		publicPath: '/static/'
 	},
+	resolve: {
+        alias: {
+            dynamicRequire: 'dynamic_require'
+        },
+        root: [path.resolve(__dirname, './static/component')]
+    },
 	module: {
 		loaders: [{
 			test: /\.jsx?$/,
