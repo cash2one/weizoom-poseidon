@@ -130,6 +130,7 @@ class GetAllSelfShops(resource.Resource):
 
 	@login_required
 	def api_get(request):
+		print 'get_all_self_shops========================='
 		params = {
 			'status': 'all'
 		}

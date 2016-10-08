@@ -23,6 +23,7 @@ var Store = StoreUtil.createStore(Dispatcher, {
 	},
 
 	init: function() {
+		console.log('--init111111111--------------------');
 		this.data = {
 			user: Reactman.loadJSON('user')
 		};
@@ -47,6 +48,8 @@ var Store = StoreUtil.createStore(Dispatcher, {
 
 	handleSelect: function(action) {
 		this.data.user['options'] = action.data.rows;
+		console.log(this.data.user['options']);
+		console.log('----------------------');
 		if(this.data.user['options'].length > 0){
 			this.data.user['selfUserName'] = this.data.user['options'][0]['value']
 		}
