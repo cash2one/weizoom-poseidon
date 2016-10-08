@@ -30,5 +30,5 @@ urlpatterns = patterns('',
 
 urlpatterns += staticfiles_urlpatterns()
 
-handler404 = 'account.views.show_error_page'
-handler500 = 'account.views.show_error_page'
+# handler404 = 'account.views.show_error_page'
+# handler500 = 'account.views.show_error_page'
