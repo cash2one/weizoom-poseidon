@@ -47,6 +47,6 @@ Background:
 		|application_name|    app_id    |   app_secret   |   status    |
 		|    默认应用    |    随机生成  |   随机生成     |    已启用   | 
 
-@poseidon @access_token
+@poseidon @access_token @bert
 Scenario:1 openapi授权
 	When aini获取access_token
