@@ -164,7 +164,8 @@ def step_impl(context, user):
 		'ship_address': ship_address,
 		'ship_name': expected['ship_name'],
 		'ship_tel': expected['ship_tel'],
-		'postage':expected['postage'],
+		'postage': expected['postage'],
+		'final_price': expected['final_price'],
 		'sub_orders': []
 	}
 	if expected_order['order_status'] != 0 and actual_order['sub_orders']:
