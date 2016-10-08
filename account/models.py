@@ -29,12 +29,18 @@ APP_STATUS = (
 )
 APP_STATUS2NAME = dict(APP_STATUS)
 
+
+ACCOUNT_TYPE_PPOOL = 1 #帐号类型为商品池类型
+ACCOUNT_TYPE_SUPPLIER = 2 #帐号类型为供货商类型
+
 class UserProfile(models.Model):
 	user = models.ForeignKey(User, unique=True)
 	manager_id = models.IntegerField(default=0) #创建该用户的系统用户的id
 	app_status = models.IntegerField(default=UNACTIVE,choices=APP_STATUS)  #应用状态
 	status = models.IntegerField(default=1) #账号状态 1开启 0关闭
 	woid =  models.IntegerField(default=0) #woid（云商通自营帐号ID）
+	type = models.IntegerField(default=ACCOUNT_TYPE_PPOOL) #帐号类型 alter table poseidon.account_user_profile add column type int(11) default 1 ;
+	supplier_ids = models.CharField(max_length=256, default="") #alter table poseidon.account_user_profile add column supplier_ids varchar(256) default "" ;
 
 	class Meta(object):
 		db_table = 'account_user_profile'
@@ -71,6 +77,7 @@ class App(models.Model):
 	#TODO copid
 	name = models.CharField(max_length=100)
 	created_at = models.DateTimeField(default=datetime.datetime.now)
+	supplier_ids = models.CharField(max_length=256, default="") #alter table poseidon.app add column supplier_ids varchar(256) default "" ;
 
 	class Meta:
 		db_table = 'app'
