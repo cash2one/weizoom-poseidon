@@ -290,3 +290,8 @@ APP_MONGO = {
 
 EAGLET_CLIENT_ZEUS_HOST = 'api.zeus.com'
 ZEUS_SERVICE_NAME = 'zeus'
+
+#openapi mongo配置,bdd清理数据使用
+OPENAPI_MONGO_HOST = 'mongo.apps.com'
+OPENAPI_MONGO_PORT = 27017
+OPENAPI_MONGO_DB = 'open'

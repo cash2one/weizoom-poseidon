@@ -51,6 +51,14 @@ def __clear_all_app_data():
 	for clean_module in clean_modules:
 		clean_module.clean()
 
+def __clear_all_openapi_data():
+	'''
+	清理openapi mongo
+	'''
+	
+	print('************* clear OEPNAPI MONGODB *************')
+	connection = Connection(settings.OPENAPI_MONGO_HOST, settings.OPENAPI_MONGO_PORT)
+	connection.drop_database(settings.OPENAPI_MONGO_DB)
 
 def __create_system_user(username):
 	"""
@@ -106,6 +114,7 @@ def before_scenario(context, scenario):
 
 	__clear_all_app_data()
 	__clear_all_account_data()
+	__clear_all_openapi_data()
 
 
 def after_scenario(context, scenario):
