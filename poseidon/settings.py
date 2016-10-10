@@ -158,7 +158,6 @@ INSTALLED_APPS = [
 
     'account',
     'outline',
-    'app',
     'resource',
     'config',
     'customer',
@@ -280,13 +279,6 @@ BDD_SERVER2PORT = {
     'openapi': 8173,
     'poseidon': 8174
 }
-
-#app机制相关配置
-# APPS_DIR = os.path.join(PROJECT_HOME, '../app/apps')
-# APP_MONGO = {
-#     "HOST": 'mongo.weapp.com',
-#     "DB": 'app_data'
-# }
 
 EAGLET_CLIENT_ZEUS_HOST = 'api.zeus.com'
 ZEUS_SERVICE_NAME = 'zeus'
