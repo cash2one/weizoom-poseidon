@@ -34,8 +34,8 @@ class RestfulUrlMiddleware(object):
 			method = _method.upper()
 
 		request.original_path_info = path_info
-		if path_info.startswith('/ding/'):
-			pass
+		if len(path_info) == 1:
+			pass #不处理path为/的情况
 		elif path_info[-1] == '/':
 			request.path_info = '%s%s' % (path_info, method)
 		else:
