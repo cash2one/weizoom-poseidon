@@ -134,8 +134,8 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     'core.context_processors.webpack_bundle_js'
 ]
 
-APP_TEMPLATES_DIR = '%s/../app/apps' % PROJECT_HOME
-APP_REACT_TEMPLATES_DIR = '%s/../static/component/app/app'
+# APP_TEMPLATES_DIR = '%s/../app/apps' % PROJECT_HOME
+# APP_REACT_TEMPLATES_DIR = '%s/../static/component/app/app'
 TEMPLATE_DIRS = [
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
@@ -143,8 +143,8 @@ TEMPLATE_DIRS = [
     '%s/templates' % PROJECT_HOME,
     './templates',
     '../templates',
-    APP_TEMPLATES_DIR,
-    APP_REACT_TEMPLATES_DIR
+    # APP_TEMPLATES_DIR,
+    # APP_REACT_TEMPLATES_DIR
 ]
 
 
