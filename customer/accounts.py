@@ -43,7 +43,7 @@ class Accounts(resource.Resource):
 	def api_get(request):
 		customer_message = models.CustomerMessage.objects.get(user=request.user)
 		user_profile = account_models.UserProfile.objects.filter(user=request.user)
-		application_logs = application_audit_models.ApplicationLog.objects.filter(user_id=request.user.id).order_by('review_time')
+		application_logs = application_audit_models.ApplicationLog.objects.filter(user_id=request.user.id).order_by('-review_time')
 		rows = []
 		logs = [{
 			'status': application_log.status,
