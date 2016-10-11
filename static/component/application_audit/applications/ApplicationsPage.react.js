@@ -86,7 +86,24 @@ var ApplicationsPage = React.createClass({
 					</div>
 				);
 			}
-		} else {
+		} else if (field === 'serverIp'){
+			var serverIps = data['serverIp'];
+			console.log(serverIps);
+			var serverIpLi = '';
+
+			if(serverIps.length>0){
+				serverIpLi = serverIps.map(function(serverIp, index){
+					return(
+						<p>{serverIp}</p>
+					)
+				})
+			}
+			return (
+				<div>
+					{serverIpLi}
+				</div>
+			);
+		}else{
 			return value;
 		}
 	},

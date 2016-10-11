@@ -72,14 +72,19 @@ class ApplicationAudit(resource.Resource):
 
 		pageinfo, applications = paginator.paginate(applications, cur_page, COUNT_PER_PAGE)
 		user_ids = [application.user_id for application in applications]
+		application_ids = [application.id for application in applications]
+		server_ip_infos = customer_models.CustomerServerIps.objects.filter(customer_id__in=application_ids) #额外的ip数据
 		user_infos = User.objects.filter(id__in=user_ids)
 		account_infos = account_models.UserProfile.objects.filter(user_id__in=user_ids)
+		reject_logs = application_models.ApplicationLog.objects.filter(user_id__in=user_ids, status=account_models.REJECT)
 		#组装数据
 		rows = []
 		for application in applications:
 			cur_user_info = user_infos.get(id=application.user_id)
 			cur_account_info = account_infos.get(user_id=application.user_id)
-			reject_logs = application_models.ApplicationLog.objects.filter(user_id=application.user_id, status=account_models.REJECT)
+			reject_logs = reject_logs.filter(user_id=application.user_id, status=account_models.REJECT)
+			server_ips = [s.name for s in server_ip_infos.filter(customer_id=application.id)]	#为毛不把ip存在一张表里。。。
+			server_ips.insert(0,application.server_ip)
 			rows.append({
 				'id': application.id,
 				'username': cur_user_info.username,
@@ -90,7 +95,8 @@ class ApplicationAudit(resource.Resource):
 				'DeveloperName': application.name,
 				'phone': application.mobile_number,
 				'email': application.email,
-				'serverIp': application.server_ip,
+				# 'serverIp': ('/').join(server_ips),
+				'serverIp': server_ips,
 				'interfaceUrl': application.interface_url,
 				'status': account_models.APP_STATUS2NAME[cur_account_info.app_status],
 				'status_value': cur_account_info.app_status,
