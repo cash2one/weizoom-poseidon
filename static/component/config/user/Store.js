@@ -47,7 +47,7 @@ var Store = StoreUtil.createStore(Dispatcher, {
 
 	handleSelect: function(action) {
 		this.data.user['options'] = action.data.rows;
-		if(this.data.user['options'].length > 0){
+		if(this.data.user['options'].length > 0 && !this.data.user['selfUserName']){
 			this.data.user['selfUserName'] = this.data.user['options'][0]['value']
 		}
 		this.__emitChange();

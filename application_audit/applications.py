@@ -95,7 +95,6 @@ class ApplicationAudit(resource.Resource):
 				'DeveloperName': application.name,
 				'phone': application.mobile_number,
 				'email': application.email,
-				# 'serverIp': ('/').join(server_ips),
 				'serverIp': server_ips,
 				'interfaceUrl': application.interface_url,
 				'status': account_models.APP_STATUS2NAME[cur_account_info.app_status],
