@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="/static/css/strapdown.css" rel="stylesheet">
+    <link href="/static/css/united.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+</head>
+<title>通知</title>
+<xmp theme="united" style="display:none;">
+## 订单发货通知
+针对订单发货，微众会像开发者在开放平台绑定的回调地址发送XML格式消息。
+
+```
+<xml>
+<OrderId><![CDATA[20161015^12]]></OrderId>
+<ExpressCompanyName><![CDATA[]]></ExpressCompanyName> 
+<ExpressNumber><![CDATA[123456]]></ExpressNumber>
+<Type><![CDATA[delivered]]></Type>
+<MsgId>1234567</MsgId>
+</xml>
+OrderId：订单编号
+ExpressCompanyName：sf｜shentong 
+Type: 消息类型（delivered：发货， update_delivered:修改发货信息）
+MsgId：信息ID
+```
+ExpressCompanyName命名定义：
+[点击下载express_company.json](http://dev.poseidon.com/static/wiki/express_company.json)
+
+</xmp>
+<script src="/static/js/strapdown.js"></script>
+</html>
