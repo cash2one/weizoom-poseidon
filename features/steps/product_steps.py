@@ -21,8 +21,7 @@ def step_impl(context, user, product_name):
 	data = []
 	product_id = None
 	if resp and resp['code'] == 200:
-		data = resp['data']
-		data = data['data']['items']
+		data = resp['data']['items']
 		for product in data:
 			if product['name'] == product_name:
 				product_id= product['id']
@@ -36,8 +35,6 @@ def step_impl(context, user, product_name):
 		data = []
 		if resp and resp['code'] == 200:
 			data = resp['data']
-
-			data = data['data']['items']
 			actual_product = {}
 			actual_product['name'] = data['name']
 			actual_product['price'] = float(data['price_info']['display_price'])
@@ -68,11 +65,7 @@ def step_impl(context, user):
 	})
 	data = []
 	if resp and resp['code'] == 200:
-		data = resp['data']
-		logging.info(">>>>>>>>!")
-		logging.info(data)
-		logging.info(">>>>>>>#####")
-		data = data['data']['items']
+		data = resp['data']['items']
 		for product in data:
 			product['price'] = float(product['display_price'])
 			product['image'] = product['thumbnails_url']
