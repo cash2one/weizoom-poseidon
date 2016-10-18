@@ -77,12 +77,15 @@ class ApplicationAudit(resource.Resource):
 		user_infos = User.objects.filter(id__in=user_ids)
 		account_infos = account_models.UserProfile.objects.filter(user_id__in=user_ids)
 		reject_logs = application_models.ApplicationLog.objects.filter(user_id__in=user_ids, status=account_models.REJECT)
+
 		#组装数据
 		rows = []
 		for application in applications:
 			cur_user_info = user_infos.get(id=application.user_id)
 			cur_account_info = account_infos.get(user_id=application.user_id)
-			reject_logs = reject_logs.filter(user_id=application.user_id, status=account_models.REJECT)
+			if cur_account_info.app_status == account_models.REJECT:
+				reject_logs = reject_logs.filter(user_id=int(application.user_id))
+				last_reason = reject_logs.last().reason
 			server_ips = [s.name for s in server_ip_infos.filter(customer_id=application.id)]	#为毛不把ip存在一张表里。。。
 			server_ips.insert(0,application.server_ip)
 			rows.append({
@@ -99,7 +102,7 @@ class ApplicationAudit(resource.Resource):
 				'interfaceUrl': application.interface_url,
 				'status': account_models.APP_STATUS2NAME[cur_account_info.app_status],
 				'status_value': cur_account_info.app_status,
-				'reason': u'驳回原因:' + reject_logs.last().reason if cur_account_info.app_status == account_models.REJECT else ''
+				'reason': u'驳回原因:' + last_reason if cur_account_info.app_status == account_models.REJECT else ''
 			})
 		data = {
 			'rows': rows,

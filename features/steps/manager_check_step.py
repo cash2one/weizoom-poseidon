@@ -38,6 +38,7 @@ def step_impl(context, user):
 			operation = u'启用'
 			appid = u'随机生成'
 			appsecret = u'随机生成'
+		ip_address = (',').join(data.get('serverIp', ''))
 		actual_list.append({
 			"account_main": data.get('displayName', ''),
 			"application_name": data.get('appName', ''),
@@ -46,7 +47,7 @@ def step_impl(context, user):
 			"dev_name":  data.get('DeveloperName', ''),
 			"mob_number": data.get('phone', ''),
 			"email_address": data.get('email', ''),
-			"ip_address": data.get('serverIp', ''),
+			"ip_address": ip_address,
 			"interface_address": data.get('interfaceUrl', ''),
 			"status": data.get('status', ''),
 			"operation": operation
