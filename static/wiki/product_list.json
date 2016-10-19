@@ -1,0 +1,155 @@
+"/mall/products/": {
+    "get": {
+        "tags": [
+            "product"
+        ],
+        "summary": "获取商品列表",
+        "description": "获取商品列表",
+        "consumes": [
+            "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+            "application/json"
+        ],
+        "parameters": [
+            {
+                "in": "query",
+                "name": "access_token",
+                "type": "string",
+                "description": "授权信息",
+                "required": true
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "Successful response",
+                "schema": {
+                    "$ref": "#/definitions/Products"
+                },
+                "examples": {
+                    "application/json": {
+                        "code": 200,
+                        "errMsg": "",
+                        "innerErrMsg": "",
+                        "data": {
+                            "items": [
+                                {
+                                  "name": "短袖T恤",
+                                  "display_price": 220.00,
+                                  "sales": 26,
+                                  "thumbnails_url": "http://chaozhi.weizoom.com/static/upload/20160921/1474450258043_377.jpg",
+                                  "supplier": 2,
+                                  "id": 11
+                                },
+                                {
+                                  "name": "吊裆裤",
+                                  "display_price": 399.00,
+                                  "sales": 44,
+                                  "thumbnails_url": "http://chaozhi.weizoom.com/static/upload/20160921/1474448967063_375.jpg",
+                                  "supplier": 2,
+                                  "id": 10
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "531": {
+                "description": "请求存在错误的时候的返回,具体字段格式参考下面的'ErrorModel'描述",
+                "schema": {
+                  "$ref": "#/definitions/ErrorModel"
+                },
+                "examples": {
+                    "application/json": {
+                        "code": 531,
+                        "errMsg": "系统服务错误",
+                        "innerErrMsg": "",
+                        "data": {
+                            "errcode": 41002,
+                            "errmsg": "查询商品列表失败，请联系管理员"
+                        }
+                    }
+                }
+            }
+        }
+    }
+},
+"Products":{
+  "type": "object",
+  "properties": {
+      "code": {
+          "type": "integer",
+          "format": "int32"
+      },
+      "innerErrMsg": {
+          "type": "string"
+      },
+      "errMsg": {
+          "type": "string"
+      },
+      "data": {
+          "type": "object",
+          "properties": {
+              "items": {
+                  "type": "object",
+                  "description": "商品列表,数据结构为：[{},{},...]", 
+                  "properties": {
+                      "name": {
+                          "type": "string",
+                          "description": "商品名称"
+                      },
+                      "thumbnails_url": {
+                          "type": "string",
+                          "description": "商品缩略图的url地址"
+                      },
+                      "display_price": {
+                          "type": "number",
+                          "description": "商品总库存"
+                      },
+                      "id": {
+                          "type": "string",
+                          "description": "商品ID"
+                      },
+                      "sales": {
+                          "type": "number",
+                          "description": "商品销量"
+                      },
+                      "supplier": {
+                          "type": "string",
+                          "description": "供货商ID"
+                      }
+                  }
+              }
+          }
+      }
+  }
+},
+"ErrorModel": {
+    "type": "object",
+    "description": "系统错误返回格式ErrorModel",
+    "properties": {
+        "code": {
+            "type": "string",
+            "description": "响应码"
+        },
+        "errMsg": {
+            "type": "string"
+        },
+        "innerErrMsg": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                "errcode": {
+                  "type": "number",
+                  "description": "错误编码"
+                },
+                "errmsg": {
+                    "description": "错误描述",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

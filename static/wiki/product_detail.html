@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="/static/css/strapdown.css" rel="stylesheet">
+	<link href="/static/css/united.min.css" rel="stylesheet">
+	<link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+</head>
+<title>商品详情</title>
+<xmp theme="united" style="display:none;">
+## 获取商品详情product_detail
+```
+目前是通过 access_token + product_id 来获取商品Product的详细信息product_detail。
+access_token：访问开放平台的token;
+product_id：商品ID;
+访问地址举例：http://提供的域名/mall/product?product_id=xxx&access_token=xxxx
+```
+
+## product_detail详细举例说明
+例子：
+```
+{
+    "is_use_cod_pay_interface": False,
+    "limit_zone_type": 1,
+    "sales": 122,
+    "thumbnails_url": "http: //dev.weapp.com/static/upload/7_20161014/1476426699093_712.jpg",
+    "order_thumbnails_url": "http: //dev.weapp.com/static/upload/7_20161014/1476426699093_712.jpg",
+    "swipe_images": [
+        {
+            "url": "http: //dev.weapp.com/static/upload/7_20161014/1476426699093_712.jpg",
+            "width": 310,
+            "linkUrl": "",
+            "id": 14,
+            "height": 207
+        }
+    ],
+    "total_stocks": 54,
+    "id": 10,
+    "is_sellout": False,
+    "unified_postage_money": 20,
+    "postage_type": "unified_postage_type",
+    "supplier_postage_config": {
+        "special_factor": {
+            "province_26": {
+                "firstWeight": 10.0,
+                "firstWeightPrice": 10.0,
+                "addedWeight": 1.0,
+                "addedWeightPrice": 30.0
+            },
+            "province_31": {
+                "firstWeight": 10.0,
+                "firstWeightPrice": 10.0,
+                "addedWeight": 1.0,
+                "addedWeightPrice": 30.0
+            }
+        },
+        "isEnableAddedWeight": True,
+        "addedWeight": 1.0,
+        "firstWeight": 10.0,
+        "addedWeightPrice": 20.0,
+        "firstWeightPrice": 5.0,
+        "free_factor": {
+            "province_33": [
+                {
+                    "condition_value": 100.0,
+                    "condition": "money"
+                }
+            ],
+            "province_32": [
+                {
+                    "condition_value": 100.0,
+                    "condition": "money"
+                }
+            ],
+            "province_34": [
+                {
+                    "condition_value": 100.0,
+                    "condition": "money"
+                }
+            ]
+        }
+    },
+    "is_delivery": True,
+    "detail": "<html><body><p>买！买！买！</p></body></html>",
+    "product_classification": {
+        "second_level_id": 2,
+        "first_level_name": "衣服",
+        "second_level_name": "短袖",
+        "first_level_id": 1
+    },
+    "pic_url": "http: //dev.weapp.com",
+    "min_limit": 0,
+    "supplier": 5,
+    "limit_zone": 1,
+    "limit_zone_detail": [
+        {
+            "cities": [],
+            "provinceId": 22,
+            "provinceName": "重庆市",
+            "zoneName": "直辖市"
+        },
+        {
+            "cities": [
+                {
+                    "cityId": 320,
+                    "cityName": "银川市"
+                },
+                {
+                    "cityId": 321,
+                    "cityName": "石嘴山市"
+                },
+                {
+                    "cityId": 322,
+                    "cityName": "吴忠市"
+                }
+            ],
+            "provinceId": 30,
+            "provinceName": "宁夏",
+            "zoneName": "西北西南"
+        },
+        {
+            "cities": [],
+            "provinceId": 31,
+            "provinceName": "新疆",
+            "zoneName": "西北西南"
+        },
+        {
+            "cities": [],
+            "provinceId": 32,
+            "provinceName": "香港",
+            "zoneName": "其他"
+        },
+        {
+            "cities": [],
+            "provinceId": 33,
+            "provinceName": "澳门",
+            "zoneName": "其他"
+        },
+        {
+            "cities": [],
+            "provinceId": 34,
+            "provinceName": "太晚",
+            "zoneName": "其他"
+        }
+    ],
+    "models": [
+        {
+            "original_price": 12.0,
+            "is_deleted": False,
+            "name": "3: 7_4: 9",
+            "weight": 12.0,
+            "price": 12.0,
+            "market_price": 0.0,
+            "id": 16,
+            "user_code": "",
+            "stock_type": 1,
+            "property2value": {
+                "颜色": {
+                    "id": 9,
+                    "name": "红色"
+                },
+                "尺寸": {
+                    "id": 7,
+                    "name": "L"
+                }
+            },
+            "property_values": [
+                {
+                    "name": "L",
+                    "propertyName": "尺寸",
+                    "id": 7,
+                    "type": "product_model_property_value",
+                    "image": "",
+                    "propertyId": 3
+                },
+                {
+                    "name": "红色",
+                    "propertyName": "颜色",
+                    "id": 9,
+                    "type": "product_model_property_value",
+                    "image": "http: //chaozhi.weizoom.com/static/upload/20161014/1476426118074_261.jpg",
+                    "propertyId": 4
+                }
+            ],
+            "stocks": 12,
+            "purchase_price": 7.8,
+            "product_id": 10
+        },
+        {
+            "original_price": 13.0,
+            "is_deleted": False,
+            "name": "3: 8_4: 9",
+            "weight": 13.0,
+            "price": 13.0,
+            "market_price": 0.0,
+            "id": 17,
+            "user_code": "",
+            "stock_type": 1,
+            "property2value": {
+                "颜色": {
+                    "id": 9,
+                    "name": "红色"
+                },
+                "尺寸": {
+                    "id": 8,
+                    "name": "M"
+                }
+            },
+            "property_values": [
+                {
+                    "name": "M",
+                    "propertyName": "尺寸",
+                    "id": 8,
+                    "type": "product_model_property_value",
+                    "image": "",
+                    "propertyId": 3
+                },
+                {
+                    "name": "红色",
+                    "propertyName": "颜色",
+                    "id": 9,
+                    "type": "product_model_property_value",
+                    "image": "http: //chaozhi.weizoom.com/static/upload/20161014/1476426118074_261.jpg",
+                    "propertyId": 4
+                }
+            ],
+            "stocks": 13,
+            "purchase_price": 8.45,
+            "product_id": 10
+        },
+        {
+            "original_price": 14.0,
+            "is_deleted": False,
+            "name": "3: 7_4: 10",
+            "weight": 14.0,
+            "price": 14.0,
+            "market_price": 0.0,
+            "id": 18,
+            "user_code": "",
+            "stock_type": 1,
+            "property2value": {
+                "颜色": {
+                    "id": 10,
+                    "name": "蓝色"
+                },
+                "尺寸": {
+                    "id": 7,
+                    "name": "L"
+                }
+            },
+            "property_values": [
+                {
+                    "name": "L",
+                    "propertyName": "尺寸",
+                    "id": 7,
+                    "type": "product_model_property_value",
+                    "image": "",
+                    "propertyId": 3
+                },
+                {
+                    "name": "蓝色",
+                    "propertyName": "颜色",
+                    "id": 10,
+                    "type": "product_model_property_value",
+                    "image": "http: //chaozhi.weizoom.com/static/upload/20161014/1476426130035_882.jpg",
+                    "propertyId": 4
+                }
+            ],
+            "stocks": 14,
+            "purchase_price": 9.1,
+            "product_id": 10
+        },
+        {
+            "original_price": 15.0,
+            "is_deleted": False,
+            "name": "3: 8_4: 10",
+            "weight": 15.0,
+            "price": 15.0,
+            "market_price": 0.0,
+            "id": 19,
+            "user_code": "",
+            "stock_type": 1,
+            "property2value": {
+                "颜色": {
+                    "id": 10,
+                    "name": "蓝色"
+                },
+                "尺寸": {
+                    "id": 8,
+                    "name": "M"
+                }
+            },
+            "property_values": [
+                {
+                    "name": "M",
+                    "propertyName": "尺寸",
+                    "id": 8,
+                    "type": "product_model_property_value",
+                    "image": "",
+                    "propertyId": 3
+                },
+                {
+                    "name": "蓝色",
+                    "propertyName": "颜色",
+                    "id": 10,
+                    "type": "product_model_property_value",
+                    "image": "http: //chaozhi.weizoom.com/static/upload/20161014/1476426130035_882.jpg",
+                    "propertyId": 4
+                }
+            ],
+            "stocks": 15,
+            "purchase_price": 9.75,
+            "product_id": 10
+        }
+    ],
+    "is_use_custom_model": True,
+    "is_enable_bill": False,
+    "name": "\u97e9\u7248\u77ed\u8896",
+    "created_at": "2016-10-1414: 25",
+    "price_info": {
+        "display_original_price": 12.0,
+        "display_price": 12.0,
+        "display_market_price": "0.00",
+        "max_price": 15.0,
+        "min_price": 12.0
+    }
+}
+```
+## 字段描述信息：
+```
+{
+  "name": "商品名称",
+  "id":  "商品ID",
+  "is_delivery": "是否勾选配送时间,如：true或false",
+  "sales":  "商品销量",
+  "limit_zone_type": "商品限售区域类型,0不限制 1禁售 2仅售",
+  "created_at": "商品创建时间",
+  "is_use_cod_pay_interface": "是否货到付款,如：true或false",
+  "limit_zone_detail":"限制发货区域详细信息，当商品没有限制区域或者禁售区域时，该字段不存在！格式：[{}]"
+    [{
+        "cities": "城市信息,格式：[{}]",
+            [{
+                "cityId": "城市ID",
+                "cityName":  "城市名称"
+            }],
+        "provinceId": "省份ID"
+        "zoneName": "区域名称，如：华东地区",
+        "provinceName": "省份名称，如：山东省"
+    },
+  "swipe_images": "轮播图，格式：{}"
+    {
+        "url":  "图片请求地址",
+        "width":  "图片宽度",
+        "linkUrl": "图片关联的地址",
+        "id": "图片ID",
+        "height": "图片高度",
+    }],
+  "price_info":  "商品价格信息，格式：{}"
+    {
+        "display_original_price": "原价",
+        "display_price":  "售价",
+        "max_price":  "最高价",
+        "min_price": "最低价"
+    },
+  "unified_postage_money": "统一邮费金额",
+  "postage_type": "运费类型,unified_postage_type统一运费 或者 custom_postage_type自定义运费即使用的是供货商的运费模板（需要根据supplier_postage_config进行计算）",
+  "supplier_postage_config": "供货商运费模板配置信息，以此来计算当postage_type为custom_postage_type类型时的运费价格"
+    {
+      "isEnableAddedWeight": "是否启用续重机制",
+      "addedWeight": "续重,单位为kg",
+      "firstWeight": "首重,单位为kg",
+      "addedWeightPrice": "续重价格，单位为元",
+      "firstWeightPrice": "首重价格，单位为元",
+      "free_factor": "免运费配置信息,数据结构为：{ key1:[], key2:[],.... }"
+          {
+              "province_33":"免运费配置的地区信息，格式：province_省编号(具体参考限定区域的省编号)，数据结构为：[{},{},...]",
+                [{
+                  "condition_value": "包邮条件值(数字)，单位为件或者元",
+                  "condition":"包邮条件，count或者money"
+                }]
+          },
+      "special_factor": "特殊运费配置,数据结构为：{{},{},...}",
+          {
+             "province_33":"特殊运费配置的地区信息，格式：province_省编号(具体参考限定区域的省编号)，数据结构为：{}",
+                {
+                    "firstWeight":"首重,单位为kg",
+                    "firstWeightPrice":"首重价格，单位为元",
+                    "addedWeight":"续重,单位为kg",
+                    "addedWeightPrice":"续重价格，单位为元"
+                }
+          }
+    },
+  "total_stocks": "总库存数,当stock_type库存类型为'无限'时，该字段值为'无限'；当stock_type库存类型为'有限'时，该字段值为number类型的数字",
+  "supplier": "供货商ID",
+  "thumbnails_url": "商品缩略图",
+  "order_thumbnails_url": "订单列表商品的缩略图",
+  "pic_url": "封面图",
+  "is_sellout":  "是否售光,如：true或false",
+  "min_limit": "起购的最少数量",
+  "detail": "商品详情:商品描述信息",
+  "limit_zone": "商品限制地区的模板id",
+  "is_enable_bill": "是否开具发票,如：true或false",
+  "is_use_custom_model": "是否为通用规格,如：true或false",
+  "product_classification":"商品分类信息，格式：{}"
+    {
+        "first_level_id":"商品一级分类信息",
+        "first_level_name":"商品一级分类名称",
+        "second_level_id":"商品二级分类信息",
+        "second_level_name":"商品二级分类名称"
+    },
+  "models": "商品规格信息，格式：[{model1},{model2}],下述的一整个{}为一个model的组成结构"
+    [{
+        "product_id": "商品ID"  ,
+        "original_price": "商品原价",
+        "is_deleted": "是否删除",
+        "name": "规格name组装字符串，如果商品无规格,该值固定为：standard",
+        "weight": "重量",
+        "price": "售价",
+        "id": "规格id",
+        "stock_type": "库存类型0:无限 1:有限",
+        "stocks": "库存数",
+        "property2value"::"规格属性"
+            {
+                "property_name": "规格名称，如尺寸、颜色",
+                    {
+                        "id":  "规格属性ID",
+                        "name": "规格详细名称如果：尺寸下的M，L，S"
+                    }
+            },
+         "property_values": "规格与值的对应关系，可理解为property2value的详细信息"
+            {
+                "id": "规格属性ID",
+                "name": "规格详细名称如果：尺寸下的M，L，S",
+                "propertyName": "规格名称，如尺寸",
+                "image": "图片",
+                "propertyId": "规格属性ID"
+            }
+    }]
+}
+```
+## product_detail文件下载
+[product_detail.json文件地址](http://dev.poseidon.com/static/wiki/product_detail.json)
+</xmp>
+<script src="/static/js/strapdown.js"></script>
+</html>
