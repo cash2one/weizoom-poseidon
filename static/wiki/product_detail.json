@@ -1,0 +1,846 @@
+"/mall/product/": {
+    "get": {
+        "tags": [
+            "product"
+        ],
+        "summary": "获取商品详情",
+        "description": "获取商品详情",
+        "consumes": [
+            "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+            "application/json"
+        ],
+        "parameters": [
+            {
+                "in": "query",
+                "name": "access_token",
+                "type": "string",
+                "description": "授权信息",
+                "required": true
+            },
+            {
+                "in": "query",
+                "name": "product_id",
+                "type": "string",
+                "description": "商品ID",
+                "required": true
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "具体字段格式参考下面的'商品详情格式Product'描述",
+                "examples": {
+                    "application/json": {
+                        "code": 200,
+                        "errMsg": "",
+                        "innerErrMsg": "",
+                        "data": {
+                            "unified_postage_money": 20,
+                            "postage_type": "unified_postage_type",
+                            "supplier_postage_config": {
+                                "special_factor": {
+                                    "province_26": {
+                                        "firstWeight": 10.0,
+                                        "firstWeightPrice": 10.0,
+                                        "addedWeight": 1.0,
+                                        "addedWeightPrice": 30.0
+                                    },
+                                    "province_31": {
+                                        "firstWeight": 10.0,
+                                        "firstWeightPrice": 10.0,
+                                        "addedWeight": 1.0,
+                                        "addedWeightPrice": 30.0
+                                    }
+                                },
+                                "isEnableAddedWeight": true,
+                                "addedWeight": 1.0,
+                                "firstWeight": 10.0,
+                                "addedWeightPrice": 20.0,
+                                "firstWeightPrice": 5.0,
+                                "free_factor": {
+                                    "province_33": [
+                                        {
+                                            "condition_value": 100.0,
+                                            "condition": "money"
+                                        }
+                                    ],
+                                    "province_32": [
+                                        {
+                                            "condition_value": 100.0,
+                                            "condition": "money"
+                                        }
+                                    ],
+                                    "province_34": [
+                                        {
+                                            "condition_value": 100.0,
+                                            "condition": "money"
+                                        }
+                                    ]
+                                }
+                            },
+                            "total_stocks": 63,
+                            "detail": "<html><body><p>商品描述信息</p></body></html>",
+                            "pic_url": "http://dev.weapp.com",
+                            "min_limit": 0,
+                            "supplier": 2,
+                            "limit_zone": 0,
+                            "is_use_custom_model": true,
+                            "is_enable_bill": false,
+                            "name": "夏季韩版短袖",
+                            "created_at": "2016-09-21 17:31",
+                            "is_use_cod_pay_interface": false,
+                            "limit_zone_type": 0,
+                            "sales": null,
+                            "thumbnails_url": "http://chaozhi.weizoom.com/static/upload/20160921/1474450258043_377.jpg",
+                            "order_thumbnails_url": "http://chaozhi.weizoom.com/static/upload/20160921/1474450258043_377.jpg",
+                            "swipe_images": [
+                              {
+                                "url": "http://chaozhi.weizoom.com/static/upload/20160921/1474450258043_377.jpg",
+                                "width": 100,
+                                "linkUrl": "",
+                                "id": 13,
+                                "height": 100
+                              },
+                              {
+                                "url": "http://chaozhi.weizoom.com/static/upload/20160921/147445026606_576.jpg",
+                                "width": 100,
+                                "linkUrl": "",
+                                "id": 14,
+                                "height": 100
+                              },
+                              {
+                                "url": "http://chaozhi.weizoom.com/static/upload/20160921/1474450271012_241.png",
+                                "width": 100,
+                                "linkUrl": "",
+                                "id": 15,
+                                "height": 100
+                              }
+                            ],
+                            "is_delivery": false,
+                            "id": 11,
+                            "is_sellout": false,
+                            "product_classification":{
+                                "second_level_id": 2,
+                                "first_level_name": "衣服",
+                                "second_level_name": "短袖",
+                                "first_level_id": 1
+                            },
+                            "price_info": {
+                                "display_original_price": 22,
+                                "display_price": 22,
+                                "display_market_price": "0.00",
+                                "max_price": 44,
+                                "min_price": 22
+                            },
+                            "limit_zone_detail": [
+                              {
+                                "cities": [],
+                                "provinceId": 1,
+                                "zoneName": "直辖市",
+                                "provinceName": "北京市"
+                              },
+                              {
+                                "cities": [],
+                                "provinceId": 2,
+                                "zoneName": "直辖市",
+                                "provinceName": "天津市"
+                              },
+                              {
+                                "cities": [],
+                                "provinceId": 3,
+                                "zoneName": "华北-东北",
+                                "provinceName": "河北省"
+                              },
+                              {
+                                "cities": [],
+                                "provinceId": 9,
+                                "zoneName": "直辖市",
+                                "provinceName": "上海市"
+                              },
+                              {
+                                "cities": [
+                                  {
+                                    "cityId": 77,
+                                    "cityName": "常州市"
+                                  },
+                                  {
+                                    "cityId": 79,
+                                    "cityName": "南通市"
+                                  },
+                                  {
+                                    "cityId": 81,
+                                    "cityName": "淮安市"
+                                  }
+                                ],
+                                "provinceId": 10,
+                                "zoneName": "华东地区",
+                                "provinceName": "江苏省"
+                              }
+                            ],
+                            "models": [
+                              {
+                                "original_price": 22,
+                                "is_deleted": false,
+                                "name": "4:7_5:10",
+                                "weight": 2,
+                                "price": 22,
+                                "user_code": "",
+                                "market_price": 0,
+                                "stock_type": 1,
+                                "property2value": {
+                                  "尺寸": {
+                                    "id": 7,
+                                    "name": "L"
+                                  },
+                                  "颜色": {
+                                    "id": 10,
+                                    "name": "红色"
+                                  }
+                                },
+                                "property_values": [
+                                  {
+                                    "name": "L",
+                                    "propertyName": "尺寸",
+                                    "id": 7,
+                                    "type": "product_model_property_value",
+                                    "image": "",
+                                    "propertyId": 4
+                                  },
+                                  {
+                                    "name": "红色",
+                                    "propertyName": "颜色",
+                                    "id": 10,
+                                    "type": "product_model_property_value",
+                                    "image": "",
+                                    "propertyId": 5
+                                  }
+                                ],
+                                "stocks": 13,
+                                "id": 17,
+                                "product_id": 11
+                              },
+                              {
+                                "original_price": 33,
+                                "is_deleted": false,
+                                "name": "4:8_5:10",
+                                "weight": 2,
+                                "price": 33,
+                                "user_code": "",
+                                "market_price": 0,
+                                "stock_type": 1,
+                                "property2value": {
+                                  "尺寸": {
+                                    "id": 8,
+                                    "name": "M"
+                                  },
+                                  "颜色": {
+                                    "id": 10,
+                                    "name": "红色"
+                                  }
+                                },
+                                "property_values": [
+                                  {
+                                    "name": "M",
+                                    "propertyName": "尺寸",
+                                    "id": 8,
+                                    "type": "product_model_property_value",
+                                    "image": "",
+                                    "propertyId": 4
+                                  },
+                                  {
+                                    "name": "红色",
+                                    "propertyName": "颜色",
+                                    "id": 10,
+                                    "type": "product_model_property_value",
+                                    "image": "",
+                                    "propertyId": 5
+                                  }
+                                ],
+                                "stocks": 12,
+                                "id": 18,
+                                "product_id": 11
+                              },
+                              {
+                                "original_price": 44,
+                                "is_deleted": false,
+                                "name": "4:9_5:10",
+                                "weight": 2,
+                                "price": 44,
+                                "user_code": "",
+                                "market_price": 0,
+                                "stock_type": 1,
+                                "property2value": {
+                                  "尺寸": {
+                                    "id": 9,
+                                    "name": "S"
+                                  },
+                                  "颜色": {
+                                    "id": 10,
+                                    "name": "红色"
+                                  }
+                                },
+                                "property_values": [
+                                  {
+                                    "name": "S",
+                                    "propertyName": "尺寸",
+                                    "id": 9,
+                                    "type": "product_model_property_value",
+                                    "image": "",
+                                    "propertyId": 4
+                                  },
+                                  {
+                                    "name": "红色",
+                                    "propertyName": "颜色",
+                                    "id": 10,
+                                    "type": "product_model_property_value",
+                                    "image": "",
+                                    "propertyId": 5
+                                  }
+                                ],
+                                "stocks": 22,
+                                "id": 19,
+                                "product_id": 11
+                              },
+                              {
+                                "original_price": 22,
+                                "is_deleted": false,
+                                "name": "4:7_5:11",
+                                "weight": 2,
+                                "price": 22,
+                                "user_code": "",
+                                "market_price": 0,
+                                "stock_type": 1,
+                                "property2value": {
+                                  "尺寸": {
+                                    "id": 7,
+                                    "name": "L"
+                                  },
+                                  "颜色": {
+                                    "id": 11,
+                                    "name": "黄色"
+                                  }
+                                },
+                                "property_values": [
+                                  {
+                                    "name": "L",
+                                    "propertyName": "尺寸",
+                                    "id": 7,
+                                    "type": "product_model_property_value",
+                                    "image": "",
+                                    "propertyId": 4
+                                  },
+                                  {
+                                    "name": "黄色",
+                                    "propertyName": "颜色",
+                                    "id": 11,
+                                    "type": "product_model_property_value",
+                                    "image": "",
+                                    "propertyId": 5
+                                  }
+                                ],
+                                "stocks": 2,
+                                "id": 20,
+                                "product_id": 11
+                              },
+                              {
+                                "original_price": 33,
+                                "is_deleted": false,
+                                "name": "4:8_5:11",
+                                "weight": 2,
+                                "price": 33,
+                                "user_code": "",
+                                "market_price": 0,
+                                "stock_type": 1,
+                                "property2value": {
+                                  "尺寸": {
+                                    "id": 8,
+                                    "name": "M"
+                                  },
+                                  "颜色": {
+                                    "id": 11,
+                                    "name": "黄色"
+                                  }
+                                },
+                                "property_values": [
+                                  {
+                                    "name": "M",
+                                    "propertyName": "尺寸",
+                                    "id": 8,
+                                    "type": "product_model_property_value",
+                                    "image": "",
+                                    "propertyId": 4
+                                  },
+                                  {
+                                    "name": "黄色",
+                                    "propertyName": "颜色",
+                                    "id": 11,
+                                    "type": "product_model_property_value",
+                                    "image": "",
+                                    "propertyId": 5
+                                  }
+                                ],
+                                "stocks": 2,
+                                "id": 21,
+                                "product_id": 11
+                              },
+                              {
+                                "original_price": 44,
+                                "is_deleted": false,
+                                "name": "4:9_5:11",
+                                "weight": 2,
+                                "price": 44,
+                                "user_code": "",
+                                "market_price": 0,
+                                "stock_type": 1,
+                                "property2value": {
+                                  "尺寸": {
+                                    "id": 9,
+                                    "name": "S"
+                                  },
+                                  "颜色": {
+                                    "id": 11,
+                                    "name": "黄色"
+                                  }
+                                },
+                                "property_values": [
+                                  {
+                                    "name": "S",
+                                    "propertyName": "尺寸",
+                                    "id": 9,
+                                    "type": "product_model_property_value",
+                                    "image": "",
+                                    "propertyId": 4
+                                  },
+                                  {
+                                    "name": "黄色",
+                                    "propertyName": "颜色",
+                                    "id": 11,
+                                    "type": "product_model_property_value",
+                                    "image": "",
+                                    "propertyId": 5
+                                  }
+                                ],
+                                "stocks": 12,
+                                "id": 22,
+                                "product_id": 11
+                              }
+                            ]
+                            
+                            
+                        }
+                    }
+                }
+            },
+            "531": {
+                "description": "请求存在错误的时候的返回,具体字段格式参考下面的'系统错误返回格式ErrorModel'描述",
+                "examples": {
+                    "application/json": {
+                        "code": 531,
+                        "errMsg": "系统服务错误",
+                        "innerErrMsg": "",
+                        "data": {
+                            "errcode": 41001,
+                            "errmsg": "查询商品详情失败，请联系管理员"
+                        }
+                    }
+                }
+            }
+        }
+    }
+},
+"Product": {
+    "type": "object",
+    "description": "商品详情格式Product",
+    "properties": {
+        "code": {
+            "type": "string",
+            "description": "响应码"
+        },
+        "errMsg": {
+            "type": "string"
+        },
+        "innerErrMsg": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                  "name": {
+                      "type": "string",
+                      "description": "商品名称"
+                   },
+                  "id": {
+                      "type": "string",
+                      "description": "商品ID"
+                  },
+                  "is_delivery": {
+                      "type": "string",
+                      "description": "是否勾选配送时间,如：true或false"
+                  },
+                  "sales": {
+                      "type": "number",
+                      "description": "商品销量"
+                  },
+                  "limit_zone_type": {
+                      "type": "string",
+                      "description": "商品限售区域类型,0不限制 1禁售 2仅售"
+                  },
+                  "created_at": {
+                      "type": "string",
+                      "description": "商品创建时间"
+                  },
+                  "is_use_cod_pay_interface": {
+                      "type": "boolean",
+                      "description": "是否货到付款,如：true或false"
+                   },
+                  "limit_zone_detail":{
+                      "type": "object",
+                      "description": "限制发货区域详细信息，当商品没有限制区域或者禁售区域时，该字段不存在！",
+                      "properties": {
+                          "cities": {
+                              "type": "object",
+                              "description": "城市信息",
+                              "properties": {
+                                  "cityId": {
+                                      "type": "object",
+                                      "description": "城市ID"
+                                  },
+                                  "cityName": {
+                                      "type": "string",
+                                      "description": "城市名称"
+                                  }
+                               }
+                          },
+                          "provinceId": {
+                              "type": "string",
+                              "description": "省份ID"
+                          },
+                          "zoneName":{
+                              "type": "string",
+                              "description": "区域名称，如：华东地区"
+                          },
+                          "provinceName": {
+                              "type": "string",
+                              "description": "省份名称，如：山东省"
+                          }
+                       }
+                  },
+                  "swipe_images": {
+                      "type": "object",
+                      "description": "轮播图",
+                      "properties": {
+                          "url": {
+                              "type": "string",
+                              "description": "图片请求地址"
+                          },
+                          "width": {
+                              "type": "string",
+                              "description": "图片宽度"
+                          },
+                          "linkUrl":{
+                              "type": "string",
+                              "description": "图片关联的地址"
+                          },
+                          "id": {
+                              "type": "string",
+                              "description": "图片ID"
+                          },
+                          "height": {
+                              "type": "string",
+                              "description": "图片高度"
+                          }
+                       }
+                  },
+                  "price_info": {
+                      "type": "object",
+                      "description": "商品价格信息",
+                      "properties": {
+                          "display_original_price": {
+                              "type": "string",
+                              "description": "原价"
+                          },
+                          "display_price": {
+                              "type": "string",
+                              "description": "售价"
+                          },
+                          "max_price": {
+                              "type": "string",
+                              "description": "最高价"
+                          },
+                          "min_price": {
+                              "type": "string",
+                              "description": "最低价"
+                          }
+                       }
+                  },
+                  "unified_postage_money": {
+                      "type": "number",
+                      "description": "统一邮费金额"
+                   },
+                  "postage_type": {
+                      "type": "string",
+                      "description": "运费类型,unified_postage_type统一运费 或者 custom_postage_type自定义运费即使用的是供货商的运费模板（需要根据supplier_postage_config进行计算）"
+                  },
+                  "supplier_postage_config": {
+                      "type": "object",
+                      "description": "供货商运费模板配置信息，以此来计算当postage_type为custom_postage_type类型时的运费价格",
+                      "properties": {
+                          "isEnableAddedWeight": {
+                              "type": "string",
+                              "description": "是否启用续重机制"
+                          },
+                          "addedWeight": {
+                              "type": "number",
+                              "description": "续重,单位为kg"
+                          },
+                          "firstWeight": {
+                              "type": "number",
+                              "description": "首重,单位为kg"
+                          },
+                          "addedWeightPrice": {
+                              "type": "number",
+                              "description": "续重价格，单位为元"
+                          },
+                          "firstWeightPrice": {
+                              "type": "number",
+                              "description": "首重价格，单位为元"
+                          },
+                          "free_factor": {
+                              "type": "object",
+                              "description": "免运费配置信息,数据结构为：{ key1:[], key2:[],.... }",
+                              "properties": {
+                                  "province_33":{
+                                      "type": "object",
+                                      "description": "免运费配置的地区信息，格式：province_省编号(具体参考限定区域的省编号)，数据结构为：[{},{},...]",
+                                      "properties":{
+                                            "condition_value":{
+                                              "type": "number",
+                                              "description": "包邮条件值(数字)，单位为件或者元"
+                                            },
+                                            "condition":{
+                                              "type": "string",
+                                              "description": "包邮条件，count或者money"
+                                            }
+                                      }
+                                  }
+                              }
+                          },
+                          "special_factor": {
+                              "type": "object",
+                              "description": "特殊运费配置,数据结构为：{{},{},...}",
+                              "properties": {
+                                 "province_33":{
+                                    "type": "number",
+                                    "description": "特殊运费配置的地区信息，格式：province_省编号(具体参考限定区域的省编号)，数据结构为：{}",
+                                    "properties":{
+                                        "firstWeight":{
+                                          "type": "number",
+                                          "description": "首重，单位为kg"
+                                        },
+                                        "firstWeightPrice":{
+                                          "type": "string",
+                                          "description": "首重价格，单位为元"
+                                        },
+                                        "addedWeight":{
+                                          "type": "number",
+                                          "description": "续重价格，单位为kg"
+                                        },
+                                        "addedWeightPrice":{
+                                          "type": "number",
+                                          "description": "续重价格，单位为元"
+                                        }
+                                    }
+                                  }
+                              }
+                          }
+                       }
+                  },
+                  "total_stocks": {
+                      "type": "string",
+                      "description": "总库存数,当stock_type库存类型为'无限'时，该字段值为'无限'；当stock_type库存类型为'有限'时，该字段值为number类型的数字"
+                  },
+                  "supplier": {
+                      "type": "string",
+                      "description": "供货商ID"
+                  },
+                  "thumbnails_url": {
+                      "type": "string",
+                      "description": "商品缩略图"
+                  },
+                  "order_thumbnails_url": {
+                      "type": "string",
+                      "description": "订单列表商品的缩略图"
+                  },
+                  "pic_url": {
+                      "type": "string",
+                      "description": "封面图"
+                  },
+                  "is_sellout": {
+                      "type": "boolean",
+                      "description": "是否售光,如：true或false"
+                  },
+                  "min_limit":{
+                      "type": "string",
+                      "description": "起购的最少数量"
+                  },
+                  "detail": {
+                      "type": "string",
+                      "description": "商品详情:商品描述信息"
+                  },
+                  "limit_zone": {
+                      "type": "string",
+                      "description": "商品限制地区的模板id"
+                  },
+                  "is_enable_bill": {
+                      "type": "number",
+                      "description": "是否开具发票,如：true或false"
+                  },
+                  "is_use_custom_model": {
+                      "type": "boolean",
+                      "description": "是否为通用规格,如：true或false"
+                  },
+                  "product_classification":{
+                    "type":"object",
+                    "description": "商品分类信息",
+                         "properties": {
+                           "first_level_id":{
+                                "type": "string",
+                                "description": "商品一级分类信息"  
+                            },
+                            "first_level_name":{
+                                "type": "string",
+                                "description": "商品一级分类名称"  
+                            },
+                            "second_level_id":{
+                                "type": "string",
+                                "description": "商品二级分类信息"  
+                            },
+                            "second_level_name":{
+                                "type": "string",
+                                "description": "商品二级分类名称"  
+                            }
+                         }
+                  },
+                  "models": {
+                      "type":"object",
+                      "description": "商品规格信息",
+                         "properties": {
+                         "product_id":{
+                              "type": "string",
+                              "description": "商品ID"  
+                          },
+                         "original_price":{
+                              "type": "number",
+                              "description": "商品原价"  
+                          },
+                          "is_deleted":{
+                              "type": "boolean",
+                              "description": "是否删除"  
+                          },
+                          "name":{
+                              "type": "string",
+                              "description": "规格name组装字符串，如果商品无规格,该值固定为：standard" 
+                          },
+                          "weight":{
+                              "type": "number",
+                              "description": "重量"  
+                          },
+                          "price":{
+                              "type": "string",
+                              "description": "售价"  
+                          },
+                          "id":{
+                              "type": "number",
+                              "description": "规格id"  
+                          },
+                          "stock_type":{
+                              "type": "number",
+                              "description": "库存类型0:无限 1:有限"  
+                          },
+                          "stocks":{
+                              "type": "number",
+                              "description": "库存数"
+                          },
+                          "property2value":{
+                              "type": "object",
+                              "description":"规格属性",
+                              "properties":{
+                                  "property_name": {
+                                      "type":"object",
+                                      "description":"规格名称，如尺寸、颜色",
+                                      "properties": {
+                                            "id": {
+                                                "type":"number",
+                                                "description": "规格属性ID"
+                                              },
+                                            "name":{
+                                                "type":"string",
+                                                "description": "规格详细名称如果：尺寸下的M，L，S"  
+                                              }
+                                      }
+                                  }
+                              }
+                          },
+                         "property_values": {
+                              "type": "object",
+                              "description":"规格与值的对应关系，可理解为property2value的详细信息",
+                              "properties":{
+                                  "id": {
+                                      "type":"number",
+                                      "description": "规格属性ID"
+                                    },
+                                  "name":{
+                                      "type":"string",
+                                      "description": "规格详细名称如果：尺寸下的M，L，S"  
+                                    },
+                                  "propertyName":{
+                                      "type":"string",
+                                      "description": "规格名称，如尺寸"  
+                                    },
+                                  "image":{
+                                      "type":"string",
+                                      "description": "图片"  
+                                    },
+                                  "propertyId":{
+                                      "type":"string",
+                                      "description": "规格属性ID"  
+                                    }
+                              }
+                           
+                          }
+                       }
+                  }
+            }
+          }
+      }
+},
+"ErrorModel": {
+    "type": "object",
+    "description": "系统错误返回格式ErrorModel",
+    "properties": {
+        "code": {
+            "type": "string",
+            "description": "响应码"
+        },
+        "errMsg": {
+            "type": "string"
+        },
+        "innerErrMsg": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                "errcode": {
+                  "type": "number",
+                  "description": "错误编码"
+                },
+                "errmsg": {
+                    "description": "错误描述",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="/static/css/strapdown.css" rel="stylesheet">
+	<link href="/static/css/united.min.css" rel="stylesheet">
+	<link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+</head>
+<title>商品详情</title>
+<xmp theme="united" style="display:none;">
+## 获取商品列表拍product_list
+```
+目前是通过 access_token来获取商品Product的列表product_list。
+access_token：访问开放平台的token;
+访问地址举例：http://提供的域名/mall/products?access_token=xxxx
+```
+
+## product_list详细举例说明
+例子：
+```
+[{
+  "name": "短袖T恤",
+  "display_price": 220.00,
+  "sales": 26,
+  "thumbnails_url": "http://chaozhi.weizoom.com/static/upload/20160921/1474450258043_377.jpg",
+  "supplier": 2,
+  "id": 11
+},
+{
+  "name": "吊裆裤",
+  "display_price": 399.00,
+  "sales": 44,
+  "thumbnails_url": "http://chaozhi.weizoom.com/static/upload/20160921/1474448967063_375.jpg",
+  "supplier": 2,
+  "id": 10
+}]
+```
+## product_list字段描述信息：
+```
+"items": "商品列表,数据结构为：[{},{},...]", 
+    [{
+        "name":  "商品名称",
+        "thumbnails_url": "商品缩略图的url地址",
+        "display_price": "商品总库存",
+        "id": "商品ID",
+        "sales": "商品销量",
+        "supplier": "供货商ID"
+    }]
+```
+## product_list文件下载
+[product_list.json文件地址](http://dev.poseidon.com/static/wiki/product_list.json)
+</xmp>
+<script src="/static/js/strapdown.js"></script>
+</html>

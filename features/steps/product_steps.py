@@ -35,6 +35,7 @@ def step_impl(context, user, product_name):
 		data = []
 		if resp and resp['code'] == 200:
 			data = resp['data']
+			print '=========data============',data
 			actual_product = {}
 			actual_product['name'] = data['name']
 			actual_product['price'] = float(data['price_info']['display_price'])
@@ -42,12 +43,13 @@ def step_impl(context, user, product_name):
 			actual_product['image'] = data['thumbnails_url'].replace(' ','')
 			actual_product['stocks'] = float(data['total_stocks'])
 			actual_product['detail'] = data['detail'][15:-18] if data['detail'].startswith("<html>") else data['detail']
-			try:
-				actual_product['postage'] = [{'postage':float(data['supplier_postage_config']['postage']),'condition_money':float(data['supplier_postage_config']['condition_money'])}]
-			except:
-				pass
+			actual_product['unified_postage_money'] = data['unified_postage_money']
+			actual_product['postage_type'] = data['postage_type']
+			actual_product['supplier_postage_config'] = data['supplier_postage_config']
+			
 			if not hasattr(context, 'product_name2id'):
 				context.product_name2id = {}
+
 			context.product_name2id[data['name']] = product_id
 			expected = json.loads(context.text)
 			
