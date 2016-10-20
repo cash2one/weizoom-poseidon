@@ -443,44 +443,137 @@ product_id：商品ID;
 postage_type=unified_postage_type
 unified_postage_money = 运费金额
 此时运费金额为unified_postage_money所显示的金额数
-
+	如：免运费
+		"unified_postage_money": 0.0,
+		"postage_type": "unified_postage_type",
+		"supplier_postage_config": {}
+	如：统一运费20元
+		"unified_postage_money": 20.0,
+		"postage_type": "unified_postage_type",
+		"supplier_postage_config": {}
 情景二：当运费类型是'自定义运费模板'时
 postage_type=custom_postage_type
-unified_postage_money = 0.0
+unified_postage_money = 0.0或者10.0或者20.0等等
 此时运费金额要根据supplier_postage_config里面的信息进行计算：
-	计算情况一：
-		
+	计算情况一：只有首重
+		如：1、首重1kg以内为10元，超过1kg每增加1kg运费增加5元，超过1kg但超过的重量不足1kg的也不增加运费
+			"unified_postage_money": 0.0,
+			"postage_type": "custom_postage_type",
+			"supplier_postage_config": {
+		        "special_factor": {},
+		        "isEnableAddedWeight": true,
+		        "addedWeight": 1,
+		        "firstWeight": 1,
+		        "addedWeightPrice": 5.0,
+		        "firstWeightPrice": 10.0,
+		        "free_factor": {}
+		    }
+		如：1、首重1kg以内为10元，超过1kg的多出来的不收运费
+			"unified_postage_money": 0.0,
+			"postage_type": "custom_postage_type",
+			"supplier_postage_config": {
+		        "special_factor": {},
+		        "isEnableAddedWeight": true,
+		        "addedWeight": 0,
+		        "firstWeight": 1,
+		        "addedWeightPrice": 0.0,
+		        "firstWeightPrice": 10.0,
+		        "free_factor": {}
+		    }
 
+	计算情况二：首重+包邮
+		如：1、首重1kg以内为10元，超过1kg每增加1kg运费增加5元，超过1kg但超过的重量不足1kg的也不增加运费
+			2、省编码为1的满足3件不收邮费，购买该供货商的商品金额满100的也不收取邮费
+		    "unified_postage_money": 0.0,
+			"postage_type": "custom_postage_type",
+			"supplier_postage_config": {
+				"special_factor": {},
+		        "isEnableAddedWeight": true,
+		        "addedWeight": 1,
+		        "firstWeight": 1,
+		        "addedWeightPrice": 5.0,
+		        "firstWeightPrice": 10.0,
+		        "free_factor": {
+		            "province_1": [
+		                {
+		                    "condition_value": 3,
+		                    "condition": "count"
+		                },
+		                {
+		                    "condition_value": 100.0,
+		                    "condition": "money"
+		                }
+		            ]
+		        }
+		    }
 
-1、当postage_type": "运费类型, 或者 自定义运费即使用的是供货商的运费模板（需要根据supplier_postage_config进行计算）",
-"unified_postage_money": "",
+	计算情况三：首重+特殊地区
+		如：1、首重1kg以内为10元，超过1kg每增加1kg运费增加5元，超过1kg但超过的重量不足1kg的也不增加运费
+			2、省编码为1和10的首重1kg以内为20元，超过1kg每增加1kg运费增加10元
+		    "unified_postage_money": 0.0,
+			"postage_type": "custom_postage_type",
+			"supplier_postage_config": {
+		        "special_factor": {
+		            "province_1": {
+		                "firstWeight": 1.0,
+		                "firstWeightPrice": 20.0,
+		                "addedWeight": 1.0,
+		                "addedWeightPrice": 10.0
+		            },
+		            "province_10": {
+		                "firstWeight": 1.0,
+		                "firstWeightPrice": 20.0,
+		                "addedWeight": 1.0,
+		                "addedWeightPrice": 10.0
+		            }
+		        },
+		        "isEnableAddedWeight": true,
+		        "addedWeight": 1,
+		        "firstWeight": 1,
+		        "addedWeightPrice": 5.0,
+		        "firstWeightPrice": 10.0,
+		        "free_factor": {}
+		    }
 
-"supplier_postage_config": "供货商运费模板配置信息，以此来计算当postage_type为custom_postage_type类型时的运费价格"
-{
-  "isEnableAddedWeight": "是否启用续重机制",
-  "addedWeight": "续重,单位为kg",
-  "firstWeight": "首重,单位为kg",
-  "addedWeightPrice": "续重价格，单位为元",
-  "firstWeightPrice": "首重价格，单位为元",
-  "free_factor": "免运费配置信息,数据结构为：{ key1:[], key2:[],.... }"
-      {
-          "province_33":"免运费配置的地区信息，格式：province_省编号(具体参考限定区域的省编号)，数据结构为：[{},{},...]",
-            [{
-              "condition_value": "包邮条件值(数字)，单位为件或者元",
-              "condition":"包邮条件，count或者money"
-            }]
-      },
-  "special_factor": "特殊运费配置,数据结构为：{{},{},...}",
-      {
-         "province_33":"特殊运费配置的地区信息，格式：province_省编号(具体参考限定区域的省编号)，数据结构为：{}",
-            {
-                "firstWeight":"首重,单位为kg",
-                "firstWeightPrice":"首重价格，单位为元",
-                "addedWeight":"续重,单位为kg",
-                "addedWeightPrice":"续重价格，单位为元"
-            }
-      }
-},
+	计算情况四：首重+特殊地区+包邮
+		如：1、首重1kg以内为10元，超过1kg每增加1kg运费增加5元，超过1kg但超过的重量不足1kg的也不增加运费
+		    2、省编码为1和10的首重1kg以内为20元，超过1kg每增加1kg运费增加10元
+		    3、省编码为11的购买该供货商的商品满足3件不收邮费，购买该供货商的商品金额满100的也不收取邮费
+		    "unified_postage_money": 0.0,
+			"postage_type": "custom_postage_type",
+			"supplier_postage_config": {
+		        "special_factor": {
+		            "province_1": {
+		                "firstWeight": 1.0,
+		                "firstWeightPrice": 20.0,
+		                "addedWeight": 1.0,
+		                "addedWeightPrice": 10.0
+		            },
+		            "province_10": {
+		                "firstWeight": 1.0,
+		                "firstWeightPrice": 20.0,
+		                "addedWeight": 1.0,
+		                "addedWeightPrice": 10.0
+		            }
+		        },
+		        "isEnableAddedWeight": true,
+		        "addedWeight": 1,
+		        "firstWeight": 1,
+		        "addedWeightPrice": 5.0,
+		        "firstWeightPrice": 10.0，
+		        "free_factor": {
+		            "province_11": [
+		                {
+		                    "condition_value": 3,
+		                    "condition": "count"
+		                },
+		                {
+		                    "condition_value": 100.0,
+		                    "condition": "money"
+		                }
+		            ]
+		        }
+		    }
 ```
 ## product_detail文件下载
 [product_detail.json文件地址](http://dev.poseidon.com/static/wiki/product_detail.json)
