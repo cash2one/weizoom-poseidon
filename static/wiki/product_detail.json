@@ -702,7 +702,7 @@
                   },
                   "product_classification":{
                     "type":"object",
-                    "description": "商品分类信息",
+                    "description": "商品分类信息,当商品无分类信息时，该字段为0",
                          "properties": {
                            "first_level_id":{
                                 "type": "string",

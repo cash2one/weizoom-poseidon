@@ -65,13 +65,13 @@ Background:
 				"""
 		#设置供货商运费
 			#供货商1设置运费-满100包邮，否则收取运费10元
-			When 给供货商添加运费配置::weapp
+			When 给供货商'供货商1'添加运费配置::weapp
 				"""
-				{
-					"supplier_name": "供货商1",
-					"postage":10,
-					"condition_money": "100"
-				}
+				[{
+					"name": "顺丰",
+					"first_weight": 0,
+					"first_weight_price": 10.00
+				}]
 				"""
 		#同步商品到自营平台
 			Given 给自营平台同步商品::weapp
@@ -86,6 +86,7 @@ Background:
 					"price": 50.00,
 					"weight": 1,
 					"image": "http://chaozhi.weizoom.comlove.png",
+					"postage": "系统",
 					"stocks": 100,
 					"detail": "商品1描述信息"
 				}
@@ -104,6 +105,14 @@ Background:
 
 	#第三方平台产生订单，自营平台生成对应的订单
 
+		When 给供货商选择运费配置::weapp
+		"""
+		{
+			"supplier_name": "供货商1",
+			"postage_name": "顺丰"
+		}
+		"""
+
 		Then jd获取'商品1-1'的商品详情
 		"""
 			{
@@ -114,10 +123,13 @@ Background:
 				"image": "http://chaozhi.weizoom.comlove.png",
 				"stocks": 100,
 				"detail": "商品1描述信息",
-				"postage":[{
-					"postage":10,
-					"condition_money": 100
-				}]
+				"unified_postage_money": 0.0,
+				"postage_type": "custom_postage_type",
+				"supplier_postage_config": {
+			        "isEnableAddedWeight": true,
+			        "firstWeight": 0.0,
+			        "firstWeightPrice": 10.0
+			    }
 			}
 		"""
 

@@ -73,13 +73,24 @@ Background:
 				"""
 		#设置供货商运费
 			#供货商1设置运费-满100包邮，否则收取运费10元
-			When 给供货商添加运费配置::weapp
+			When 给供货商'供货商1'添加运费配置::weapp
 				"""
-				{
-					"supplier_name": "供货商1",
-					"postage":10,
-					"condition_money": "100"
-				}
+				[{
+					"name":"圆通",
+					"first_weight": 0,
+					"first_weight_price": 10.00,
+					"added_weight": 0,
+					"added_weight_price": 0.00,
+					"free_postages": [{
+						"to_the":"北京市",
+						"condition": "count",
+						"value": 2
+					}, {
+						"to_the":"北京市",
+						"condition": "money",
+						"value": 100.00
+					}]
+				}]
 				"""
 		#同步商品到自营平台
 			Given 给自营平台同步商品::weapp
@@ -94,6 +105,7 @@ Background:
 					"price": 50.00,
 					"weight": 1,
 					"image": "http://chaozhi.weizoom.comlove.png",
+					"postage": "系统",
 					"stocks": 100,
 					"detail": "商品1描述信息"
 				}
@@ -110,6 +122,7 @@ Background:
 					"price": 50.00,
 					"weight": 1,
 					"image": "http://chaozhi.weizoom.comlove.png",
+					"postage": "0.0",
 					"stocks": 100,
 					"detail": "商品2描述信息"
 				}
@@ -126,6 +139,14 @@ Background:
 			}]
 			"""
 
+		When 给供货商选择运费配置::weapp
+		"""
+		{
+			"supplier_name": "供货商1",
+			"postage_name": "圆通"
+		}
+		"""
+
 		Then jd获取'商品1'的商品详情
 			"""
 				{
@@ -135,10 +156,27 @@ Background:
 					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 100,
 					"detail": "商品1描述信息",
-					"postage":[{
-						"postage":10,
-						"condition_money": 100
-					}]
+					"unified_postage_money": 0.0,
+					"postage_type": "custom_postage_type",
+					"supplier_postage_config": {
+				        "isEnableAddedWeight": true,
+				        "addedWeight": 0.0,
+				        "firstWeight": 0.0,
+				        "addedWeightPrice": 0.0,
+				        "firstWeightPrice": 10.0,
+				        "free_factor": {
+				            "province_1": [
+				                {
+				                    "condition_value": 2,
+				                    "condition": "count"
+				                },
+				                {
+				                    "condition_value": 100.0,
+				                    "condition": "money"
+				                }
+				            ]
+				        }
+				    }
 				}
 			"""
 		Then jd获取'商品2'的商品详情
@@ -149,7 +187,10 @@ Background:
 					"weight": 1,
 					"image": "http://chaozhi.weizoom.comlove.png",
 					"stocks": 100,
-					"detail": "商品2描述信息"
+					"detail": "商品2描述信息",
+					"unified_postage_money": 0.0,
+					"postage_type": "unified_postage_type",
+					"supplier_postage_config": {}
 				}
 			"""
 		Given 自营平台'zy1'已获取jd订单

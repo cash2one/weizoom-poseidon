@@ -353,7 +353,7 @@ Scenario:4 通过商品ID调用单规格商品API,模板运费：只有首重
 			        "addedWeightPrice": 0.0,
 			        "firstWeightPrice": 10.0,
 			        "free_factor": {}
-			    }
+			    } 
 			}
 		"""
 
