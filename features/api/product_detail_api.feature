@@ -183,7 +183,7 @@ Background:
 		#aini获取acess_token
 		When aini获取access_token
 
-@openapi @chengdg
+@openapi1 @chengdg
 Scenario:1 通过商品ID调用单规格商品API,模板运费：首重+特殊地区+包邮
 	When 给供货商选择运费配置::weapp
 		"""
@@ -239,7 +239,7 @@ Scenario:1 通过商品ID调用单规格商品API,模板运费：首重+特殊�
 			}
 		"""
 
-@openapi @chengdg
+@openapi1 @chengdg
 Scenario:2 通过商品ID调用单规格商品API,模板运费：首重+特殊地区
 	When 给供货商选择运费配置::weapp
 		"""
@@ -283,7 +283,7 @@ Scenario:2 通过商品ID调用单规格商品API,模板运费：首重+特殊�
 			}
 		"""
 
-@openapi @chengdg
+@openapi1 @chengdg
 Scenario:3 通过商品ID调用单规格商品API,模板运费：首重+包邮
 	When 给供货商选择运费配置::weapp
 		"""
@@ -325,7 +325,7 @@ Scenario:3 通过商品ID调用单规格商品API,模板运费：首重+包邮
 			}
 		"""
 
-@openapi @chengdg
+@openapi1 @chengdg
 Scenario:4 通过商品ID调用单规格商品API,模板运费：只有首重
 	When 给供货商选择运费配置::weapp
 		"""
@@ -357,7 +357,7 @@ Scenario:4 通过商品ID调用单规格商品API,模板运费：只有首重
 			}
 		"""
 
-@openapi @chengdg
+@openapi1 @chengdg
 Scenario:5 通过商品ID调用单规格商品API,统一运费
 	Then aini获取'商品2-1'的商品详情
 		"""
@@ -374,7 +374,7 @@ Scenario:5 通过商品ID调用单规格商品API,统一运费
 			}
 		"""
 
-@openapi @chengdg
+@openapi1 @chengdg
 Scenario:6 通过商品ID调用单规格商品API,免运费
 	Then aini获取'商品3-1'的商品详情
 		"""
