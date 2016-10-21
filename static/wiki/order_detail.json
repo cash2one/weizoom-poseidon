@@ -1,0 +1,64 @@
+{
+    "order_id": "20160308135616870",
+    "order_status": 3,
+    "sub_orders": [
+        {
+            "order_id": "20161009220753655^3s",
+            "order_status": 3,
+            "postage": 10,
+            "delivery_time": "",
+            "express_company_name": "",
+            "express_number": "",
+            "products": [
+                {
+                    "product_id": 3,
+                    "price": 50,
+                    "product_name": "商品1",
+                    "product_model_name": "standard",
+                    "product_count": 1,
+                    "pic_url": "http://chaozhi.weizoom.comlove.png"
+                }
+            ]
+        },
+        {
+            "order_id": "20161009220753655^4s",
+            "order_status": 3,
+            "postage": 0,
+            "delivery_time": "",
+            "express_company_name": "",
+            "express_number": "",
+            "products": [
+                {
+                    "product_id": 4,
+                    "price": 50,
+                    "product_name": "商品2",
+                    "product_model_name": "standard",
+                    "product_count": 1,
+                    "pic_url": "http://chaozhi.weizoom.comlove.png"
+                }
+            ]
+        }
+    ],
+    "products": [
+        {
+            "product_count": 1,
+            "product_name": "商品1",
+            "price": 50,
+            "product_model_name": "standard",
+            "product_id": 3
+        },
+        {
+            "product_count": 1,
+            "product_name": "商品2",
+            "price": 50,
+            "product_model_name": "standard",
+            "product_id": 4
+        }
+    ],
+    "final_price": 100,
+    "postage": 10,
+    "ship_name": "张三",
+    "ship_address": "张三的地址",
+    "ship_tel": "13766665555",
+    "created_at": "2016-10-09 22:07:53"
+}

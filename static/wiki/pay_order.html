@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="/static/css/strapdown.css" rel="stylesheet">
+	<link href="/static/css/united.min.css" rel="stylesheet">
+	<link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+</head>
+<title>订单支付</title>
+<xmp theme="united" style="display:none;">
+## 订单支付
+> 注意：只能对主订单支付
+
+### 接口地址
+    POST: /pay/third_pay/?_method=put
+### 必要的参数
+    access_token：access_token,访问令牌
+    order_id：子订单编号
+### 例如
+    {
+        "access_token": "/oZ%2B%2BmPtgmDPNtr5UP0mBfWq7Sey1Z66L2%2BHG7nRLzAuObp7MyYdp3Sv7Fx33/gvY%2BRskIet1zoleyLqabDuNiWesdEak4FtPJ8KD5M8IVoMMZjbrWmWzTrYa/ucG4e3",
+        "order_id": "20160926194620603"
+    }
+### 返回数据
+#### 请求成功
+```
+    {
+        "code": 200,
+        "data": {
+            "order_id": "20160926194620603"
+        },
+        "errMsg": "",
+        "innerErrMsg": ""
+    }
+```
+#### 请求失败
+```
+{
+    "code": 200,
+    "data": {
+        "errcode": 995995,
+        "errmsg":"系统自身异常"
+    },
+    "errMsg": "",
+    "innerErrMsg": ""
+}
+```
+</xmp>
+<script src="/static/js/strapdown.js"></script>
+</html>

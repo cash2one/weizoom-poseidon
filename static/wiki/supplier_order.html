@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="/static/css/strapdown.css" rel="stylesheet">
+	<link href="/static/css/united.min.css" rel="stylesheet">
+	<link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+</head>
+<title>获取供货商的订单列表</title>
+<xmp theme="united" style="display:none;">
+## 获取供货商的订单列表
+> 获取供货商的订单列表：针对的是供货商的账号
+
+### 接口地址
+    GET: /mall/supplier_order/
+### 请求的参数
+    access_token：access_token,访问令牌（必须）
+    order_id：子订单编号（可选）
+    found_begin_time：订单创建时间-开始（可选）
+    found_end_time：订单创建时间-结束，通过found_begin_time和found_end_time查询一段时间内的订单（可选）
+    cur_page：当前页数，如果不填写，默认为第1页。每页默认10条（可选）
+    order_status：订单状态：1表示已取消：取消订单(回退销量)；3表示待发货：已付款，未发货；4表示已发货：已付款，已发货；5表示已完成：为已完成状态；6表示退款中；7表示退款完成（可选）
+### 例如
+    {
+        "access_token": "/oZ%2B%2BmPtgmDPNtr5UP0mBfWq7Sey1Z66L2%2BHG7nRLzAuObp7MyYdp3Sv7Fx33/gvY%2BRskIet1zoleyLqabDuNiWesdEak4FtPJ8KD5M8IVoMMZjbrWmWzTrYa/ucG4e3",
+        "order_id": "20160926194620603^12s",
+        "found_begin_time": "2016-10-10: 10:10:10",
+        "found_end_time": "2016-10-11: 10:10:10",
+        "cur_page": 1,
+        "order_status": 3
+    }
+### 返回数据
+#### 请求成功
+```
+{
+    "code": 200,
+    "data": {
+        "page_info": {
+            "max_page": 1,
+            "total_count": 1,
+            "cur_page": 1
+        },
+        "orders": [
+            {
+                "postage": 10,
+                "payment_time": "2016-10-10 16:47:09",
+                "buyer_name": "",
+                "express_company_name": "",
+                "order_id": "20160926194620603^12s",
+                "created_at": "2016-10-08 16:47:09",
+                "pay_mode": 2,
+                "ship_name": "bill",
+                "ship_address": "北京市 北京市 海淀区泰兴大厦",
+                "products": [
+                    {
+                        "count": 1,
+                        "total_price": 50,
+                        "product_id": 485,
+                        "price": 50,
+                        "model_names": [],
+                        "name": "商品2"
+                    }
+                ],
+                "final_price": "60.00",
+                "ship_tel": "13811223344",
+                "order_status": 3,
+                "invoice_title": "",
+                "customer_message": "",
+                "express_number": ""
+            }
+        ],
+    },
+    "errMsg": "",
+    "innerErrMsg": ""
+}
+```
+#### 请求失败
+```
+{
+    "code": 200,
+    "data": {
+        "errcode": 995995,
+        "errmsg":"系统自身异常"
+    },
+    "errMsg": "",
+    "innerErrMsg": ""
+}
+```
+### 文件下载
+[supplier_order.json文件地址](http://dev.poseidon.com/static/wiki/supplier_order.json)
+</xmp>
+<script src="/static/js/strapdown.js"></script>
+</html>

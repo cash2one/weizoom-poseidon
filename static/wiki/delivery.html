@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="/static/css/strapdown.css" rel="stylesheet">
+	<link href="/static/css/united.min.css" rel="stylesheet">
+	<link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+</head>
+<title>给订单发货</title>
+<xmp theme="united" style="display:none;">
+## 发货接口
+> 发货接口：目前针对的是供货商的账号
+
+### 接口地址
+    POST: /mall/delivery/?_method=put
+### 请求的参数
+    access_token：access_token,访问令牌（必须）
+    order_id：子订单编号（可选）
+    express_company_name：快递公司名称
+    express_number：快递号
+### 例如
+    {
+        "access_token": "/oZ%2B%2BmPtgmDPNtr5UP0mBfWq7Sey1Z66L2%2BHG7nRLzAuObp7MyYdp3Sv7Fx33/gvY%2BRskIet1zoleyLqabDuNiWesdEak4FtPJ8KD5M8IVoMMZjbrWmWzTrYa/ucG4e3",
+        "order_id": "20160926194620603^12s",
+        "express_company_name": "yuantong",
+        "express_number": "123456"
+    }
+### 返回数据
+#### 请求成功
+```
+{
+    "code": 200,
+    "data": {
+        "errcode": 0
+    },
+    "errMsg": "",
+    "innerErrMsg": ""
+}
+errcode=0表示请求成功
+```
+#### 请求失败
+```
+{
+    "code": 200,
+    "data": {
+        "errcode": 995995,
+        "errmsg":"系统自身异常"
+    },
+    "errMsg": "",
+    "innerErrMsg": ""
+}
+```
+</xmp>
+<script src="/static/js/strapdown.js"></script>
+</html>
