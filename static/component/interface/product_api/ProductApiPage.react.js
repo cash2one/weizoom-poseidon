@@ -36,7 +36,7 @@ var ProductApiPage = React.createClass({
 							<td colSpan="2" style={{background:'#FF6600', color:'#FFF'}}>API列表</td>
 						</tr>
 						<tr>
-							<td><a href="/../../../static/wiki/product_list.html">++++list.product.get</a></td>
+							<td><a href="/../../../static/wiki/product_list.html">list.product.get</a></td>
 							<td>获取全部商品列表</td>
 						</tr>
 						<tr>
