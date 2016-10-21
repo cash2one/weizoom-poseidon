@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="/static/css/strapdown.css" rel="stylesheet">
+	<link href="/static/css/united.min.css" rel="stylesheet">
+	<link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+</head>
+<title>商品详情</title>
+<xmp theme="united" style="display:none;">
+## 获取商品分类product_classification
+```
+目前是通过 access_token来获取商品Product的分类product_classification。
+access_token：访问开放平台的token;
+访问地址举例：http://提供的域名/mall/product_classification?access_token=xxxx
+```
+
+## product_classification详细举例说明
+例子：
+```
+{
+  "classifications": [
+      {
+          "first_level_name": "电脑",
+          "first_level_id": 6,
+          "second_level_info": [
+              {
+                  "second_level_id": 8,
+                  "second_level_name": "台式机"
+              },
+              {
+                  "second_level_id": 8,
+                  "second_level_name": "台式机"
+              }
+          ]
+      },
+      {
+          "first_level_name": "电脑",
+          "first_level_id": 6,
+          "second_level_info": [
+              {
+                  "second_level_id": 8,
+                  "second_level_name": "台式机"
+              },
+              {
+                  "second_level_id": 8,
+                  "second_level_name": "台式机"
+              }
+          ]
+      }
+  ]
+}
+```
+## product_classification字段描述信息：
+```
+{
+  "classifications": "商品全部分类信息,数据结构为：[{},{},...]", 
+    {
+      "first_level_name": "商品一级分类名称",
+          "first_level_id": "商品一级分类ID",
+          "second_level_info": "商品二级分类信息,数据结构为：[{},{},...]",
+            {
+              "second_level_id": "商品二级分类ID",
+              "second_level_name":"商品二级分类名称"
+            }
+    }
+}
+```
+## product_list文件下载
+[product_list.json文件地址](http://dev.poseidon.com/static/wiki/product_list.json)
+</xmp>
+<script src="/static/js/strapdown.js"></script>
+</html>
