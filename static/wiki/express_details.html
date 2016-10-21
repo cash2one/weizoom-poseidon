@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="/static/css/strapdown.css" rel="stylesheet">
+	<link href="/static/css/united.min.css" rel="stylesheet">
+	<link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+</head>
+<title>订单物流信息</title>
+<xmp theme="united" style="display:none;">
+## 获取订单的物流信息
+> 如果订单有多个子订单，订单的物流信息分散在各个子订单当中。如果只有一个子订单，那么子订单的物流就是主订单的物流。
+
+### 接口地址
+    GET: /mall/express_details/
+### 必要的参数
+    access_token：access_token,访问令牌
+    order_id：子订单编号
+### 例如
+    {
+        "access_token": "/oZ%2B%2BmPtgmDPNtr5UP0mBfWq7Sey1Z66L2%2BHG7nRLzAuObp7MyYdp3Sv7Fx33/gvY%2BRskIet1zoleyLqabDuNiWesdEak4FtPJ8KD5M8IVoMMZjbrWmWzTrYa/ucG4e3",
+        "order_id": "20160926194620603^1s"
+    }
+### 返回数据
+#### 例如
+```
+{
+    "code": 200,
+    "data": {
+        "express": {
+            "order_id": "20160926194620603^1s",
+            "status": "已发货",
+            "express_number": "99999999",
+            "express_details": [
+                {
+                    "context": "呼和浩特市邮政速递物流分公司金川揽投部安排投递（投递员姓名：安长虹;联系电话：18047140142）",
+                    "display_index": 8,
+                    "time": "2015-03-11 09:53:48"
+                },
+                {
+                    "context": "到达  呼和浩特市 处理中心",
+                    "display_index": 7,
+                    "time": "2015-03-10 18:06:00"
+                },
+                {
+                    "context": "离开北京市 发往呼和浩特市（经转）",
+                    "display_index": 6,
+                    "time": "2015-03-09 18:39:00"
+                },
+                {
+                    "context": "到达北京黄村转运站处理中心（经转）",
+                    "display_index": 5,
+                    "time": "2015-03-09 09:01:00"
+                },
+                {
+                    "context": "离开广州市 发往北京市（经转）",
+                    "display_index": 4,
+                    "time": "2015-03-08 01:15:00"
+                },
+                {
+                    "context": "<nihao123>深圳市横岗速递营销部已收件，（揽投员姓名：钟定基;联系电话：）",
+                    "display_index": 1,
+                    "time": "2015-03-06 21:16:58"
+                }
+            ],
+            "express_company_name": "申通快递"
+        }
+    }
+}
+```
+### 订单物流信息文件下载
+[express_details.json文件地址](http://dev.poseidon.com/static/wiki/express_details.json)
+</xmp>
+<script src="/static/js/strapdown.js"></script>
+</html>
