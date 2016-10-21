@@ -1,0 +1,165 @@
+"/mall/product_classification/": {
+    "get": {
+        "tags": [
+            "product"
+        ],
+        "summary": "获取商品全部分类信息",
+        "description": "获取商品全部分类信息",
+        "consumes": [
+            "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+            "application/json"
+        ],
+        "parameters": [
+            {
+                "in": "query",
+                "name": "access_token",
+                "type": "string",
+                "description": "授权信息",
+                "required": true
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "Successful response",
+                "schema": {
+                    "$ref": "#/definitions/ProductClassification"
+                },
+                "examples": {
+                    "application/json": {
+                        "code": 200,
+                        "errMsg": "",
+                        "innerErrMsg": "",
+                        "data": {
+                            "classifications": [
+                                {
+                                    "first_level_name": "电脑",
+                                    "first_level_id": 6,
+                                    "second_level_info": [
+                                        {
+                                            "second_level_id": 8,
+                                            "second_level_name": "台式机"
+                                        },
+                                        {
+                                            "second_level_id": 8,
+                                            "second_level_name": "台式机"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "first_level_name": "电脑",
+                                    "first_level_id": 6,
+                                    "second_level_info": [
+                                        {
+                                            "second_level_id": 8,
+                                            "second_level_name": "台式机"
+                                        },
+                                        {
+                                            "second_level_id": 8,
+                                            "second_level_name": "台式机"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "531": {
+                "description": "请求存在错误的时候的返回,具体字段格式参考下面的'ErrorModel'描述",
+                "schema": {
+                  "$ref": "#/definitions/ErrorModel"
+                },
+                "examples": {
+                    "application/json": {
+                        "code": 531,
+                        "errMsg": "系统服务错误",
+                        "innerErrMsg": "",
+                        "data": {
+                            "errcode": 41002,
+                            "errmsg": "查询商品列表失败，请联系管理员"
+                        }
+                    }
+                }
+            }
+        }
+    }
+},
+"ProductClassification":{
+  "type": "object",
+  "properties": {
+      "code": {
+          "type": "integer",
+          "format": "int32"
+      },
+      "innerErrMsg": {
+          "type": "string"
+      },
+      "errMsg": {
+          "type": "string"
+      },
+      "data": {
+          "type": "object",
+          "properties": {
+              "classifications": {
+                  "type": "object",
+                  "description": "商品全部分类信息,数据结构为：[{},{},...]", 
+                  "properties": {
+                      "first_level_name": {
+                          "type": "string",
+                          "description": "商品一级分类名称"
+                      },
+                      "first_level_id": {
+                          "type": "number",
+                          "description": "商品一级分类ID"
+                      },
+                      "second_level_info": {
+                          "type": "object",
+                          "description": "商品二级分类信息,数据结构为：[{},{},...]",
+                          "properties": {
+                              "second_level_id": {
+                                  "type": "number",
+                                  "description": "商品二级分类ID"
+                              },
+                              "second_level_name":{
+                                  "type": "string",
+                                  "description": "商品二级分类名称"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      }
+  }
+},
+"ErrorModel": {
+    "type": "object",
+    "description": "系统错误返回格式ErrorModel",
+    "properties": {
+        "code": {
+            "type": "string",
+            "description": "响应码"
+        },
+        "errMsg": {
+            "type": "string"
+        },
+        "innerErrMsg": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                "errcode": {
+                  "type": "number",
+                  "description": "错误编码"
+                },
+                "errmsg": {
+                    "description": "错误描述",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
