@@ -36,11 +36,11 @@ var OrderApiPage = React.createClass({
 							<td colSpan="2" style={{background:'#FF6600', color:'#FFF'}}>API列表</td>
 						</tr>
 						<tr>
-							<td><a href="/../../../static/wiki/order.html">detail.order.push</a></td>
+							<td><a href="/../../../static/wiki/order.html">/mall/order</a></td>
 							<td>推送订单详情</td>
 						</tr>
 						<tr>
-							<td><a href="/../../../static/wiki/express_details.html">express.order.get</a></td>
+							<td><a href="/../../../static/wiki/express_details.html">/mall/express_details</a></td>
 							<td>获取订单物流信息</td>
 						</tr>
 					</tbody>
