@@ -79,6 +79,7 @@ order_id: 订单编号
     "postage": 10,
     "ship_name": "张三",
     "ship_address": "张三的地址",
+    "ship_area": "北京市 北京市 海淀区",
     "ship_tel": "13766665555",
     "created_at": "2016-10-09 22:07:53"
 }
@@ -88,8 +89,8 @@ order_id: 订单编号
 {
     "code": 200,
     "data": {
-        "errcode": 73000,
-        "errmsg":"有子订单的状态不是待发货,不能取消订单"
+        "errcode": 72000,
+        "errmsg":"获取订单详情请求参数错误或缺少参数"
     },
     "errMsg": "",
     "innerErrMsg": ""
@@ -98,13 +99,32 @@ order_id: 订单编号
 ### 字段说明
 ```
 order_id: 订单编号（其中包含'^'字符和后缀是子订单的编号）。
-order_status: 订单状态。值为0，表示待支付；值为1，表示已取消；值为3，表示待发货；值为4，表示已发货；值为5，表示已完成；值为6或者8，表示退款中；值为7或者9，表示退款完成。
-sub_orders：子订单的详细信息。其中包含，子订单编号order_id；子订单状态order_status；子订单运费postage；发货时间delivery_time；快递公司名称express_company_name；快递单号express_number；子订单包好的商品products。
-products：订单的商品信息。其中包含，商品id，product_id；商品名称product_name；商品价格price；商品数量product_count；商品规格product_model_name。
+order_status: 订单状态：
+        值为0，表示待支付；
+        值为1，表示已取消；
+        值为3，表示待发货；
+        值为4，表示已发货；
+        值为5，表示已完成；
+        值为6或者8，表示退款中；
+        值为7或者9，表示退款完成。
+sub_orders：子订单的详细信息。其中包含，子订单编号
+order_id；子订单状态
+order_status；子订单运费
+postage；发货时间
+delivery_time；快递公司名称
+express_company_name；快递单号
+express_number；子订单包含的商品products。
+products：订单的商品信息。其中包含：
+          商品id，product_id；
+          商品名称product_name；
+          商品价格price；
+          商品数量product_count；
+          商品规格product_model_name。
 final_price：订单总金额。
 postage：订单总运费。
 ship_name：收货人姓名。
-ship_address：收获人地址。
+ship_address：收获人详细地址。
+ship_area: 收货人的省市区编码表参考“地址区域”接口描述中的json文件。
 ship_tel：收货人电话。
 created_at：订单创建时间。
 ```
@@ -120,8 +140,9 @@ created_at：订单创建时间。
     ship_name: 收货人姓名
     ship_tel: 收货人电话
     ship_address: 收货人地址
-    area: 收货人省市县3级，例如1_1_8，代表的是北京市 北京市 海淀区
-    products: 商品集合
+    area: 收货人省市县3级，例如1_1_8，代表的是北京市 北京市 海淀区，编码表参考“地址区域”接口描述中的json文件
+    products: 商品集合,一条商品信息包含商品ID+商品规格名+商品数量，
+            如：[{"product_id":25232,"product_model_name":"10:14","product_count":1,},....]
 ### 例如
 ```
 {
@@ -226,7 +247,13 @@ created_at：订单创建时间。
 ### 必要的参数
     access_token：access_token,访问令牌
     cur_page：分页器当前请求页
-    order_status: 订单状态。0 待支付（只创建订单尚但尚未支付）；1表示已取消：取消订单(回退销量)；3表示待发货：已付款，未发货；4表示已发货：已付款，已发货；5表示已完成：为已完成状态；7表示退款完成：订单状态，对第三方而言并未退款
+    order_status: 订单状态。包含：
+        0 待支付（只创建订单尚但尚未支付）；
+        1表示已取消：取消订单(回退销量)；
+        3表示待发货：已付款，未发货；
+        4表示已发货：已付款，已发货；
+        5表示已完成：为已完成状态；
+        7表示退款完成：订单状态，对第三方而言并未退款
 ### 返回数据
 #### 请求成功
 ```

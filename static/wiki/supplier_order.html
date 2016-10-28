@@ -18,7 +18,14 @@
     found_begin_time：订单创建时间-开始（可选）
     found_end_time：订单创建时间-结束，通过found_begin_time和found_end_time查询一段时间内的订单（可选）
     cur_page：当前页数，如果不填写，默认为第1页。每页默认10条（可选）
-    order_status：订单状态：1表示已取消：取消订单(回退销量)；3表示待发货：已付款，未发货；4表示已发货：已付款，已发货；5表示已完成：为已完成状态；6表示退款中；7表示退款完成（可选）
+    order_status：订单状态（可选，默认查看全部状态的订单）：
+        0表示待支付：尚未付款的订单；
+        1表示已取消：取消订单(回退销量)；
+        3表示待发货：已付款，未发货；
+        4表示已发货：已付款，已发货；
+        5表示已完成：为已完成状态；
+        6表示退款中；
+        7表示退款完成。
 ### 例如
     {
         "access_token": "/oZ%2B%2BmPtgmDPNtr5UP0mBfWq7Sey1Z66L2%2BHG7nRLzAuObp7MyYdp3Sv7Fx33/gvY%2BRskIet1zoleyLqabDuNiWesdEak4FtPJ8KD5M8IVoMMZjbrWmWzTrYa/ucG4e3",
@@ -49,7 +56,8 @@
                 "created_at": "2016-10-08 16:47:09",
                 "pay_mode": 2,
                 "ship_name": "bill",
-                "ship_address": "北京市 北京市 海淀区泰兴大厦",
+                "ship_address": "泰兴大厦",
+                "ship_area": "北京市 北京市 海淀区",
                 "products": [
                     {
                         "count": 1,

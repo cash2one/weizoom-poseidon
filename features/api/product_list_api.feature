@@ -129,7 +129,7 @@ Background:
 		#aini获取acess_token
 		When aini获取access_token
 		
-@openapi @chengdg1
+@openapi @chengdg
 Scenario:1 通过列表页调用商品列表API
 
 	When aini调用商品列表

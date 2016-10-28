@@ -201,7 +201,7 @@ Background:
 					"status":"待支付",
 					"ship_name":"bill",
 					"ship_tel":"13811223344",
-					"ship_area": "北京市 北京市 海淀区",
+					"ship_area": "1_1_8",
 					"ship_address": "泰兴大厦",
 					"invoice":"",
 					"business_message":"",
