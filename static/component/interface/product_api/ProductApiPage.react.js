@@ -44,7 +44,7 @@ var ProductApiPage = React.createClass({
 							<td>获取单个商品详情</td>
 						</tr>
 						<tr>
-							<td><a href="/../../../static/wiki/product_classification.html">/mall/product_classifications</a></td>
+							<td><a href="/../../../static/wiki/product_classification.html">/mall/product_classification</a></td>
 							<td>获取商品分类</td>
 						</tr>
 					</tbody>
