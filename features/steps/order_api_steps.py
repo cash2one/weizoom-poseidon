@@ -26,7 +26,9 @@ ORDER_STATUS2ID = {
 @Given(u"自营平台'{account}'已获取{user}订单")
 def step_impl(context, user, account):
 	info = json.loads(context.text)
-	ship_address = info['ship_area'] + info['ship_address']
+	ship_address = info['ship_address']
+	ship_area = info['ship_area']
+	print "=====================",ship_area
 	products = []
 	for item in info['group']:
 		for product_item in item['products']:
@@ -45,6 +47,7 @@ def step_impl(context, user, account):
 		'ship_name': info['ship_name'],
 		'ship_tel': info['ship_tel'],
 		'ship_address': ship_address,
+		'area': ship_area,
 		'products': products
 	}
 	
@@ -158,10 +161,12 @@ def step_impl(context, user):
 			actual_order = resp['data']['order']
 
 	expected = json.loads(context.text)
-	ship_address = expected['ship_area'] + expected['ship_address']
+	ship_address = expected['ship_address']
+	ship_area = expected['ship_area']
 	expected_order = {
 		'order_status': ORDER_STATUS2ID[expected['status']],
 		'ship_address': ship_address,
+		'ship_area': ship_area,
 		'ship_name': expected['ship_name'],
 		'ship_tel': expected['ship_tel'],
 		'postage': expected['postage'],
