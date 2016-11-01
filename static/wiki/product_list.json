@@ -56,12 +56,9 @@
             },
             "531": {
                 "description": "请求存在错误的时候的返回,具体字段格式参考下面的'ErrorModel'描述",
-                "schema": {
-                  "$ref": "#/definitions/ErrorModel"
-                },
                 "examples": {
                     "application/json": {
-                        "code": 531,
+                        "code": 200,
                         "errMsg": "系统服务错误",
                         "innerErrMsg": "",
                         "data": {

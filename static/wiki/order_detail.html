@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="/static/css/strapdown.css" rel="stylesheet">
+	<link href="/static/css/united.min.css" rel="stylesheet">
+	<link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+</head>
+<title>订单</title>
+<xmp theme="united" style="display:none;">
+## 获取订单详情
+### 接口地址
+    GET: /mall/order/
+### 必要参数
+```
+access_token: 访问令牌（必须）
+order_id: 订单编号（必须）
+```
+### 返回数据
+#### 请求成功
+```
+{
+    "order_id": "20160308135616870",
+    "order_status": 3,
+    "sub_orders": [
+        {
+            "order_id": "20161009220753655^3s",
+            "order_status": 3,
+            "postage": 10,
+            "delivery_time": "",
+            "express_company_name": "",
+            "express_number": "",
+            "products": [
+                {
+                    "product_id": 3,
+                    "price": 50,
+                    "product_name": "商品1",
+                    "product_model_name": "standard",
+                    "product_count": 1,
+                    "pic_url": "http://chaozhi.weizoom.comlove.png"
+                }
+            ]
+        },
+        {
+            "order_id": "20161009220753655^4s",
+            "order_status": 3,
+            "postage": 0,
+            "delivery_time": "",
+            "express_company_name": "",
+            "express_number": "",
+            "products": [
+                {
+                    "product_id": 4,
+                    "price": 50,
+                    "product_name": "商品2",
+                    "product_model_name": "standard",
+                    "product_count": 1,
+                    "pic_url": "http://chaozhi.weizoom.comlove.png"
+                }
+            ]
+        }
+    ],
+    "products": [
+        {
+            "product_count": 1,
+            "product_name": "商品1",
+            "price": 50,
+            "product_model_name": "standard",
+            "product_id": 3
+        },
+        {
+            "product_count": 1,
+            "product_name": "商品2",
+            "price": 50,
+            "product_model_name": "standard",
+            "product_id": 4
+        }
+    ],
+    "final_price": 100,
+    "postage": 10,
+    "ship_name": "张三",
+    "ship_address": "张三的地址",
+    "ship_area": "北京市 北京市 海淀区",
+    "ship_tel": "13766665555",
+    "created_at": "2016-10-09 22:07:53"
+}
+```
+#### 请求失败
+```
+{
+    "code": 200,
+    "data": {
+        "errcode": 72000,
+        "errmsg":"获取订单详情请求参数错误或缺少参数"
+    },
+    "errMsg": "",
+    "innerErrMsg": ""
+}
+```
+### 字段说明
+```
+order_id: 订单编号（其中包含'^'字符和后缀是子订单的编号）。
+order_status: 订单状态：
+        值为0，表示待支付；
+        值为1，表示已取消；
+        值为3，表示待发货；
+        值为4，表示已发货；
+        值为5，表示已完成；
+        值为6，表示退款中；
+        值为7，表示退款完成。
+sub_orders：子订单的详细信息。其中包含，子订单编号
+order_id；子订单状态
+order_status；子订单运费
+postage；发货时间
+delivery_time；快递公司名称
+express_company_name；快递单号
+express_number；子订单包含的商品products。
+products：订单的商品信息。其中包含：
+          商品id，product_id；
+          商品名称product_name；
+          商品价格price；
+          商品数量product_count；
+          商品规格product_model_name。
+final_price：订单总金额。
+postage：订单总运费。
+ship_name：收货人姓名。
+ship_address：收获人详细地址。
+ship_area: 收货人的省市区编码表参考“地址区域”接口描述中的json文件。
+ship_tel：收货人电话。
+created_at：订单创建时间。
+```
+### order_detail文件下载
+[order_detail.json文件地址](http://dev.poseidon.com/static/wiki/order_detail.json)
+</xmp>
+<script src="/static/js/strapdown.js"></script>
+</html>

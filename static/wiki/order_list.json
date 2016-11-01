@@ -1,37 +1,225 @@
-{
-    "code": 200,
-    "data": {
-        "page_info": {
-            "max_page": 1,
-            "total_count": 1,
-            "cur_page": 1
-        },
-        "orders": [
+"/mall/order_list/": {
+    "get": {
+        "summary": "获取订单列表",
+        "description": "获取订单列表",
+        "parameters": [
             {
-                "final_price": 7.0,
-                "order_id": "20160926165124218",
-                "created_at": "2016.09.26 16:51",
-                "products": [
-                    {
-                        "product_id": 12,
-                        "price": 1.0,
-                        "product_name": "pad1",
-                        "product_model_name": "standard",
-                        "product_count": 2,
-                        "pic_url": "http://chaozhi.weizoom.com/static/upload/20160926/1474871164035_765.jpg"
-                    },
-                    {
-                        "product_id": 10,
-                        "price": 10.0,
-                        "product_name": "test1product",
-                        "product_model_name": "standard",
-                        "product_count": 1,
-                        "pic_url": "http://chaozhi.weizoom.com/static/upload/20160926/1474871228062_547.jpg"
-                    }
-                ],
-                "product_count": 3,
-                "order_status": 4
+                "name": "access_token",
+                "in": "query",
+                "description": "access_token,访问令牌",
+                "required": true,
+                "type": "string"
+            },
+            {
+                "name": "cur_page",
+                "in": "query",
+                "description": "分页器当前请求页",
+                "required": true,
+                "type": "integer"
+            },
+            {
+                "name": "order_status",
+                "in": "query",
+                "description": "订单状态：  0 待支付（只创建订单尚但尚未支付） \n1  已取消：取消订单(回退销量)  \n3  待发货：已付款，未发货  \n4  已发货：已付款，已发货  \n5  已完成：为已完成状态 \n  7  退款完成：订单状态，对第三方而言并未退款",
+                "required": false,
+                "type": "integer"
             }
-        ]
+        ],
+        "tags": [
+            "order"
+        ],
+        "responses": {
+            "200": {
+                "description": "请求成功的时候的返回",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "integer",
+                            "description": "返回码"
+                        },
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "orders": {
+                                    "description":"具体字段格式参考下面的'PutOrderProduct'描述",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                },
+                                "page_info": {
+                                    "description":"具体字段格式参考下面的'PageInfo'描述",
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "errMsg": {
+                            "type": "string"
+                        },
+                        "innerErrMsg": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "examples": {
+                    "application/json": {
+                        "code": 200,
+                        "data": {
+                            "page_info": {
+                                "max_page": 1,
+                                "total_count": 1,
+                                "cur_page": 1
+                            },
+                            "orders": [
+                                {
+                                    "final_price": 7.0,
+                                    "order_id": "20160926165124218",
+                                    "created_at": "2016.09.26 16:51",
+                                    "products": [
+                                        {
+                                            "product_id": 12,
+                                            "price": 1.0,
+                                            "product_name": "pad1",
+                                            "product_model_name": "standard",
+                                            "product_count": 2,
+                                            "pic_url": "http://chaozhi.weizoom.com/static/upload/20160926/1474871164035_765.jpg"
+                                        }, 
+                                        {
+                                            "product_id": 10,
+                                            "price": 10.0,
+                                            "product_name": "test1product",
+                                            "product_model_name": "standard",
+                                            "product_count": 1,
+                                            "pic_url": "http://chaozhi.weizoom.com/static/upload/20160926/1474871228062_547.jpg"
+                                        }
+                                    ],
+                                    "product_count": 3,
+                                    "order_status": 4
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "default": {
+                "description": "请求存在错误的时候的返回，具体字段格式参考下面的'ErrorModel'描述",
+                "examples": {
+                    "application/json": {
+                        "code": 200,
+                        "data": {
+                            "errcode": 74001,
+                            "errmsg":"\u83b7\u53d6\u8ba2\u5355\u5217\u8868\u5b58\u5728\u95ee\u9898"
+                        },
+                        "errMsg": "",
+                        "innerErrMsg": ""
+                    }
+                }
+            }
+        }
+    }
+},
+"Order": {
+    "type": "object",
+    "properties": {
+        "order_id": {
+            "type": "string",
+            "description": "订单编号."
+        },
+        "final_price": {
+            "type": "string",
+            "description": "订单金额（实付金额RMB）."
+        },
+        "order_status": {
+            "type": "string",
+            "description": "订单状态"
+        },
+        "product_count": {
+            "type": "string",
+            "description": "购买商品数量"
+        },
+        "created_at": {
+            "type": "string",
+            "description": "订单创建时间"
+        },
+        "products": {
+            "items": {
+                "description": "具体字段格式参考下面的'OrderProduct'描述",
+                "type": "object"
+            }
+        }
+    }
+},
+"OrderProduct": {
+    "type": "object",
+    "properties": {
+        "product_id": {
+            "description": "商品id",
+            "type": "number"
+        },
+        "product_name": {
+            "description": "商品名称",
+            "type": "string"
+        },
+        "price": {
+            "description": "商品价格",
+            "type": "string"
+        },
+        "product_model_name": {
+            "description": "商品规格名称",
+            "type": "string"
+        },
+        "product_count": {
+            "description": "商品数量",
+            "type": "number"
+        },
+        "pic_url": {
+            "description": "商品图片",
+            "type": "string"
+        }
+    }
+},
+"PageInfo": {
+    "type": "object",
+    "properties": {
+        "max_page": {
+            "description": "最大页数",
+            "type": "number"
+        },
+        "cur_page": {
+            "description": "当前页数",
+            "type": "number"
+        },
+        "total_count": {
+            "description": "订单总数",
+            "type": "number"
+        }
+    }
+},
+"ErrorModel": {
+    "type": "object",
+    "properties": {
+        "code": {
+            "type": "string",
+            "description": "响应码"
+        },
+        "errMsg": {
+            "type": "string"
+        },
+        "innerErrMsg": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                "errcode": {
+                  "type": "number",
+                  "description": "错误编码"
+                },
+                "errmsg": {
+                    "description": "错误描述",
+                    "type": "string"
+                }
+            }
+        }
     }
 }

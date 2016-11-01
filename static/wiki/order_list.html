@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="/static/css/strapdown.css" rel="stylesheet">
+	<link href="/static/css/united.min.css" rel="stylesheet">
+	<link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+</head>
+<title>订单</title>
+<xmp theme="united" style="display:none;">
+## 获取订单列表
+### 接口地址
+    GET:/mall/order_list/
+### 必要的参数
+    access_token：access_token,访问令牌
+    cur_page：分页器当前请求页
+    order_status: 订单状态。包含：
+        0 待支付（只创建订单尚但尚未支付）；
+        1表示已取消：取消订单(回退销量)；
+        3表示待发货：已付款，未发货；
+        4表示已发货：已付款，已发货；
+        5表示已完成：为已完成状态；
+        7表示退款完成：订单状态，对第三方而言并未退款
+### 返回数据
+#### 请求成功
+```
+{
+    "code": 200,
+    "data": {
+        "page_info": {
+            "max_page": 1,
+            "total_count": 1,
+            "cur_page": 1
+        },
+        "orders": [
+            {
+                "final_price": 7.0,
+                "order_id": "20160926165124218",
+                "created_at": "2016.09.26 16:51",
+                "products": [
+                    {
+                        "product_id": 12,
+                        "price": 1.0,
+                        "product_name": "pad1",
+                        "product_model_name": "standard",
+                        "product_count": 2,
+                        "pic_url": "http://chaozhi.weizoom.com/static/upload/20160926/1474871164035_765.jpg"
+                    },
+                    {
+                        "product_id": 10,
+                        "price": 10.0,
+                        "product_name": "test1product",
+                        "product_model_name": "standard",
+                        "product_count": 1,
+                        "pic_url": "http://chaozhi.weizoom.com/static/upload/20160926/1474871228062_547.jpg"
+                    }
+                ],
+                "product_count": 3,
+                "order_status": 4
+            }
+        ]
+    }
+}
+```
+
+#### 请求失败
+```
+{
+    "code": 200,
+    "data": {
+        "errcode": 995995,
+        "errmsg":"系统自身异常"
+    },
+    "errMsg": "",
+    "innerErrMsg": ""
+}
+```
+### 订单列表返回数据下载
+[order_list.json文件地址](http://dev.poseidon.com/static/wiki/order_list.json)
+</xmp>
+<script src="/static/js/strapdown.js"></script>
+</html>

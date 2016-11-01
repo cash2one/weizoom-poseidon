@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="/static/css/strapdown.css" rel="stylesheet">
+	<link href="/static/css/united.min.css" rel="stylesheet">
+	<link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+</head>
+<title>订单创建</title>
+<xmp theme="united" style="display:none;">
+## 订单创建
+### 接口地址
+    POST: /mall/order/?_method=put
+### 必要参数
+    access_token: 访问令牌（必须）
+    deal_id: 交易流水号:第三方创建出订单的订单号，唯一（必须）
+    ship_name: 收货人姓名（必须）
+    ship_tel: 收货人电话（必须）
+    ship_address: 收货人地址（必须）
+    area: 收货人省市县3级，例如1_1_8，代表的是北京市 北京市 海淀区，编码表参考“地址区域”接口描述中的json文件（必须）
+    products: 商品集合,一条商品信息包含商品ID+商品规格名+商品数量，
+            如：[{"product_id":25232,"product_model_name":"10:14","product_count":1,},....]（必须）
+### 例如
+```
+{
+    "access_token": "/oZ%2B%2BmPtgmDPNtr5UP0mBfWq7Sey1Z66L2%2BHG7nRLzAuObp7MyYdp3Sv7Fx33/gvY%2BRskIet1zoleyLqabDuNiWesdEak4FtPJ8KD5M8IVoMMZjbrWmWzTrYa/ucG4e3",
+    "deal_id": "1476669901123428",
+    "ship_name": "bill",
+    "ship_tel": "18612187381",
+    "ship_address": "中关村南大街海淀科技大厦",
+    "area": "1_1_8",
+    "products": [
+        {
+            "product_id":12,
+            "product_model_name":"standard",
+            "product_count":1
+        }
+    ]
+}
+```
+
+### 返回数据
+#### 请求成功
+> 成功: 返回订单编号（order_id）。
+
+```
+{
+    "code": 200,
+    "data": {
+        "order_id": "20160927152821329"
+    },
+    "errMsg": "",
+    "innerErrMsg": ""
+}
+```+
+
+#### 请求失败
+> 失败：返回错误代码（errcode）和错误信息（errmsg）.
+
+```
+{想·
+    {
+        "code": 200,
+        "data": {
+            "errcode": 71000,
+            "errmsg":"创建订单请求中有商品库存不足"
+        },
+        "errMsg": "",
+        "innerErrMsg": ""
+    }
+}
+```
+### 创建订单参数文件下载
+[order_create.json文件地址](http://dev.poseidon.com/static/wiki/order_create.json)
+</xmp>
+<script src="/static/js/strapdown.js"></script>
+</html>

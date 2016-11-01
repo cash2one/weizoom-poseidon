@@ -1,0 +1,104 @@
+"/pay/third_pay/": {
+    "put": {
+        "summary": "支付接口",
+        "description": "支付接口",
+        "parameters": [
+            {
+                "name": "access_token",
+                "in": "query",
+                "description": "access_token,访问令牌",
+                "required": true,
+                "type": "string"
+            },
+            {
+                "name": "order_id",
+                "in": "query",
+                "description": "订单编号",
+                "required": true,
+                "type": "string"
+            }
+        ],
+        "tags": [
+            "pay"
+        ],
+        "responses": {
+            "200": {
+                "description": "请求成功时返回",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "order_id": {
+                                    "type": "string",
+                                    "description": "订单编号"
+                                }
+                            }
+                        },
+                        "errMsg": {
+                            "type": "string"
+                        },
+                        "innerErrMsg": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "examples": {
+                    "application/json": {
+                        "code": 200,
+                        "data": {
+                            "order_id": "20160926165121411"
+                        }
+                    }
+                }
+            },
+            "200": {
+                "description": "请求存在错误的时候的返回，具体字段格式参考下面的'ErrorModel'描述",
+                "examples": {
+                    "application/json": {
+                        "code": 200,
+                        "data": {
+                            "errcode": 995995,
+                            "errmsg":"系统自身错误"
+                        },
+                        "errMsg": "",
+                        "innerErrMsg": ""
+                    }
+                }
+            }
+        }
+    }
+},
+"ErrorModel": {
+    "type": "object",
+    "properties": {
+        "code": {
+            "type": "string",
+            "description": "响应码"
+        },
+        "errMsg": {
+            "type": "string"
+        },
+        "innerErrMsg": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                "errcode": {
+                  "type": "number",
+                  "description": "错误编码"
+                },
+                "errmsg": {
+                    "description": "错误描述",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

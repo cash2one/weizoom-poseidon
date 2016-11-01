@@ -20,6 +20,11 @@ SECOND_NAVS = [{
 	'name': 'interface-notify',
 	'displayName': '通知',
 	'href': '/static/wiki/notify.html'
+},
+{
+	'name': 'interface-supplier',
+	'displayName': '供货商API',
+	'href': '/interface/supplier_api/'
 }
 ]
 

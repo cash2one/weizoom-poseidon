@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="/static/css/strapdown.css" rel="stylesheet">
+	<link href="/static/css/united.min.css" rel="stylesheet">
+	<link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+</head>
+<title>订单取消</title>
+<xmp theme="united" style="display:none;">
+## 订单取消order_cancel
+### 接口地址
+    POST: /mall/order/
+### 必要参数
+
+    access_token：访问令牌
+    order_id：订单编号，可以是主订单或者子订单。子订单:一个主订单可能有多个仓库进行发货的，我们将一个主订单进行拆分成多个仓库的子订单
+
+### 接口描述
+```
+取消订单接口: 
+    1、订单在支付之前无子订单，只有主订单，订单支付之后才会存在子订单；
+    2、主订单的状态取自子订单集合中的订单状态最小值,子订单状态优先级由低到高
+    依次为：待支付-->待发货-->已发货-->退款中-->已完成-->退款完成-->已取消；
+    3、取消待支付状态的订单：此时订单为主订单，可以取消；
+    4、取消待发货状态的订单，主订单为待发货状态的分以下情况：
+         1).只有一个子订单：此时子订单状态一定为待发货，按照主订单单号取消；
+         2).有多个子订单：
+             a.子订单都是待发货状态：此时可以按照主订单一次性取消，也可以单个取消子订单；
+             b.子订单存在待发货和已发货两种状态时：此时不可以按照主订单一次性取消，只能单个取消状态为待发货的子订单；
+```
+### 举例
+```
+{
+    "access_token": "/oZ%2B%2BmPtgmDPNtr5UP0mBfWq7Sey1Z66L2%2BHG7nRLzAuObp7MyYdp3Sv7Fx33/gvY%2BRskIet1zoleyLqabDuNiWesdEak4FtPJ8KD5M8IVoMMZjbrWmWzTrYa/ucG4e3",
+    "order_id": "20160308135616870" 或者 "20160308135616870^2342s"
+}
+```
+
+### 返回数据
+#### 请求成功
+
+>注意：data中的errcode=0表示操作成功。操作成功没有errmsg信息
+
+```
+{
+    "code": 200,
+    "data": {
+    "errcode": 0
+    },
+    "errMsg": "",
+    "innerErrMsg": ""
+}
+```
+
+#### 请求失败
+```
+{
+    "code": 200,
+    "data": {
+        "errcode": 73000,
+        "errmsg":"有子订单的状态不是待发货,不能取消订单"
+    },
+    "errMsg": "",
+    "innerErrMsg": ""
+}
+```
+### 订单取消返回数据下载
+[order_cancel.json文件地址](http://dev.poseidon.com/static/wiki/order_cancel.json)
+</xmp>
+<script src="/static/js/strapdown.js"></script>
+</html>

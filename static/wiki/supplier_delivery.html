@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="/static/css/strapdown.css" rel="stylesheet">
+	<link href="/static/css/united.min.css" rel="stylesheet">
+	<link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+</head>
+<title>供货商发货通知</title>
+<xmp theme="united" style="display:none;">
+## 供货商发货通知
+> 供货商发货通知：目前针对的是供货商的账号
+
+### 接口地址
+    PUT: /mall/delivery/
+### 请求的参数
+    access_token：access_token,访问令牌（必须）
+    order_id：订单编号（必须）
+    express_company_name：快递公司名称（必须）
+    express_number：快递单号号（必须）
+### 例如
+    {
+        "access_token": "/oZ%2B%2BmPtgmDPNtr5UP0mBfWq7Sey1Z66L2%2BHG7nRLzAuObp7MyYdp3Sv7Fx33/gvY%2BRskIet1zoleyLqabDuNiWesdEak4FtPJ8KD5M8IVoMMZjbrWmWzTrYa/ucG4e3",
+        "order_id": "20160926194620603^12s",
+        "express_company_name": "顺丰快递",
+        "express_number": "1002023012120"
+    }
+### 返回数据
+#### 请求成功
+
+>注意：data中的errcode=0表示操作成功。操作成功没有errmsg信息
+
+```
+{
+    "code": 200,
+    "data": {
+        "errcode": 0
+    }
+}
+```
+#### 请求失败
+```
+{
+    "code": 200,
+    "data": {
+        "errcode": 995995,
+        "errmsg":"系统自身异常"
+    },
+    "errMsg": "",
+    "innerErrMsg": ""
+}
+```
+### 文件下载
+[supplier_order.json文件地址](http://dev.poseidon.com/static/wiki/supplier_order.json)
+</xmp>
+<script src="/static/js/strapdown.js"></script>
+</html>

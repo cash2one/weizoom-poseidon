@@ -1,65 +1,291 @@
-{
-    "order_id": "20160308135616870",
-    "order_status": 3,
-    "sub_orders": [
-        {
-            "order_id": "20161009220753655^3s",
-            "order_status": 3,
-            "postage": 10,
-            "delivery_time": "",
-            "express_company_name": "",
-            "express_number": "",
-            "products": [
-                {
-                    "product_id": 3,
-                    "price": 50,
-                    "product_name": "商品1",
-                    "product_model_name": "standard",
-                    "product_count": 1,
-                    "pic_url": "http://chaozhi.weizoom.comlove.png"
+"/mall/order/": {
+    "get": {
+        "summary": "获取订单详情接口",
+        "description": "获取订单详情接口:如果订单中需要多个仓库进行发货,订单在支付后才会拆分出子订单。",
+        "parameters": [
+            {
+                "name": "access_token",
+                "in": "query",
+                "description": "access_token,访问令牌",
+                "required": true,
+                "type": "string"
+            },
+            {
+                "name": "order_id",
+                "in": "query",
+                "description": "订单编号",
+                "required": true,
+                "type": "string"
+            }
+        ],
+        "tags": [
+            "order"
+        ],
+        "responses": {
+            "200": {
+                "description": "请求成功的时候的返回",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "data": {
+                            "type": "object",
+                            "description":"具体字段格式参考下面的'OrderDetail'描述",
+                            "properties": {
+                                "order": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "errMsg": {
+                            "type": "string"
+                        },
+                        "innerErrMsg": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "examples": {
+                    "application/json": {
+                        "code": 200,
+                        "data": {
+                            "order": {
+                                "order_id": "20160308135616870",
+                                "order_status": 3,
+                                "sub_orders": [
+                                    {
+                                        "order_id": "20161009220753655^3s",
+                                        "order_status": 3,
+                                        "postage": 10,
+                                        "delivery_time": "",
+                                        "express_company_name": "",
+                                        "express_number": "",
+                                        "products": [
+                                            {
+                                                "product_id": 3,
+                                                "price": 50,
+                                                "product_name": "商品1",
+                                                "product_model_name": "standard",
+                                                "product_count": 1,
+                                                "pic_url": "http://chaozhi.weizoom.comlove.png"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "order_id": "20161009220753655^4s",
+                                        "order_status": 3,
+                                        "postage": 0,
+                                        "delivery_time": "",
+                                        "express_company_name": "",
+                                        "express_number": "",
+                                        "products": [
+                                            {
+                                                "product_id": 4,
+                                                "price": 50,
+                                                "product_name": "商品2",
+                                                "product_model_name": "standard",
+                                                "product_count": 1,
+                                                "pic_url": "http://chaozhi.weizoom.comlove.png"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "products": [
+                                    {
+                                        "product_count": 1,
+                                        "product_name": "商品1",
+                                        "price": 50,
+                                        "product_model_name": "standard",
+                                        "product_id": 3
+                                    },
+                                    {
+                                        "product_count": 1,
+                                        "product_name": "商品2",
+                                        "price": 50,
+                                        "product_model_name": "standard",
+                                        "product_id": 4
+                                    }
+                                ],
+                                "final_price": 100,
+                                "postage": 10,
+                                "ship_name": "张三",
+                                "ship_address": "张三的地址",
+                                "ship_area": "北京市 北京市 海淀区",
+                                "ship_tel": "13766665555",
+                                "created_at": "2016-10-09 22:07:53"
+                            },
+                        "errMsg": "",
+                        "innerErrMsg": ""
+                        }
+                    }
                 }
-            ]
-        },
-        {
-            "order_id": "20161009220753655^4s",
-            "order_status": 3,
-            "postage": 0,
-            "delivery_time": "",
-            "express_company_name": "",
-            "express_number": "",
-            "products": [
-                {
-                    "product_id": 4,
-                    "price": 50,
-                    "product_name": "商品2",
-                    "product_model_name": "standard",
-                    "product_count": 1,
-                    "pic_url": "http://chaozhi.weizoom.comlove.png"
+            },
+            "200": {
+                "description": "请求存在错误的时候的返回，具体字段格式参考下面的'ErrorModel'描述",
+                "examples": {
+                    "application/json": {
+                        "code": 200,
+                        "data": {
+                            "errcode": 72001,
+                            "errmsg":"\u83b7\u53d6\u8ba2\u5355\u8be6\u60c5\u8bf7\u6c42\u5b58\u5728\u95ee\u9898\uff0c\u8bf7\u8054\u7cfb\u7ba1\u7406\u5458"
+                        },
+                        "errMsg": "",
+                        "innerErrMsg": ""
+                    }
                 }
-            ]
+            }
         }
-    ],
-    "products": [
-        {
-            "product_count": 1,
-            "product_name": "商品1",
-            "price": 50,
-            "product_model_name": "standard",
-            "product_id": 3
+    }
+},
+"OrderDetail": {
+    "type": "object",
+    "properties": {
+        "order_id": {
+            "type": "string",
+            "description": "订单编号."
         },
-        {
-            "product_count": 1,
-            "product_name": "商品2",
-            "price": 50,
-            "product_model_name": "standard",
-            "product_id": 4
+        "final_price": {
+            "type": "string",
+            "description": "订单金额（实付金额RMB）."
+        },
+        "ship_name": {
+            "type": "string",
+            "description": "收货人"
+        },
+        "ship_address": {
+            "type": "string",
+            "description": "收获地址，如：中关村南大街3号海淀科技大厦1层101"
+        },
+        "ship_area": {
+            "type": "string",
+            "description": "收获地址省市区信息，如：北京市 北京市 海淀区"
+        },
+        "ship_tel": {
+            "type": "string",
+            "description": "收获电话"
+        },
+        "order_status": {
+            "type": "string",
+            "description": "订单状态"
+        },
+        "created_at": {
+            "type": "string",
+            "description": "订单创建时间"
+        },
+        "postage": {
+            "type": "string",
+            "description": "邮费"
+        },
+        "sub_orders": {
+            "description": "具体字段格式参考下面的'SubOrders'描述",
+            "items": {
+                "type": "object"
+            }
+        },
+        "products": {
+            "description": "具体字段格式参考下面的'SubOrderProduct'描述",
+            "items": {
+                "type": "object"
+            }
         }
-    ],
-    "final_price": 100,
-    "postage": 10,
-    "ship_name": "张三",
-    "ship_address": "张三的地址",
-    "ship_area": "北京市 北京市 海淀区",
-    "ship_tel": "13766665555",
-    "created_at": "2016-10-09 22:07:53"
+    }
+},
+"SubOrders": {
+    "type": "object",
+    "properties": {
+        "order_id": {
+            "description": "订单编号",
+            "type": "string"
+        },
+        "order_status": {
+            "description": "订单状态",
+            "type": "number"
+        },
+        "product_model_name": {
+            "description": "商品规格名称",
+            "type": "string"
+        },
+        "product_count": {
+            "description": "商品数量",
+            "type": "number"
+        },
+        "express_company_name": {
+            "type": "string",
+            "description": "快递名称"
+        },
+        "express_number": {
+            "type": "string",
+            "description": "快递号"
+        },
+        "postage": {
+            "type": "string",
+            "description": "邮费"
+        },
+        "products": {
+            "description": "具体字段格式参考下面的'SubOrderProduct'描述",
+            "items": {
+               "type": "object"
+            }
+        }
+    }
+},
+"SubOrderProduct": {
+    "type": "object",
+    "properties": {
+        "product_id": {
+            "description": "商品id",
+            "type": "number"
+        },
+        "product_name": {
+            "description": "商品名称",
+            "type": "string"
+        },
+        "price": {
+            "description": "商品价格",
+            "type": "string"
+        },
+        "product_model_name": {
+            "description": "商品规格名称",
+            "type": "string"
+        },
+        "product_count": {
+            "description": "商品数量",
+            "type": "number"
+        },
+        "pic_url": {
+            "description": "商品图片",
+            "type": "string"
+        }
+    }
+},
+"ErrorModel": {
+    "type": "object",
+    "properties": {
+        "code": {
+            "type": "string",
+            "description": "响应码"
+        },
+        "errMsg": {
+            "type": "string"
+        },
+        "innerErrMsg": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                "errcode": {
+                  "type": "number",
+                  "description": "错误编码"
+                },
+                "errmsg": {
+                    "description": "错误描述",
+                    "type": "string"
+                }
+            }
+        }
+    }
 }

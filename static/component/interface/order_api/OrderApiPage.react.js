@@ -36,8 +36,24 @@ var OrderApiPage = React.createClass({
 							<td colSpan="2" style={{background:'#FF6600', color:'#FFF'}}>API列表</td>
 						</tr>
 						<tr>
-							<td><a href="/../../../static/wiki/order.html">/mall/order</a></td>
-							<td>推送订单详情</td>
+							<td><a href="/../../../static/wiki/order_detail.html">/mall/order</a></td>
+							<td>获取订单详情</td>
+						</tr>
+						<tr>
+							<td><a href="/../../../static/wiki/order_list.html">/mall/order_list</a></td>
+							<td>获取订单列表</td>
+						</tr>
+						<tr>
+							<td><a href="/../../../static/wiki/order_create.html">/mall/order</a></td>
+							<td>创建订单</td>
+						</tr>
+						<tr>
+							<td><a href="/../../../static/wiki/order_cancel.html">/mall/order</a></td>
+							<td>取消订单</td>
+						</tr>
+						<tr>
+							<td><a href="/../../../static/wiki/order_pay.html">/pay/third_pay</a></td>
+							<td>订单支付</td>
 						</tr>
 						<tr>
 							<td><a href="/../../../static/wiki/express_details.html">/mall/express_details</a></td>

@@ -1,0 +1,105 @@
+"/mall/order/": {
+    "post": {
+        "summary": "取消订单接口",
+        "description": "取消订单接口:\n 1、可取消主订单和子订单,主订单状态取自子订单集合中的订单状态最小值。\n 2、只能取消待支付、待发货状态的订单 \n 3、当子订单中存在非待支付、待发货状态的订单，不能取消主订单",
+        "parameters": [
+            {
+                "name": "access_token",
+                "in": "query",
+                "description": "access_token,访问令牌",
+                "required": true,
+                "type": "string"
+            },
+            {
+                "name": "order_id",
+                "in": "query",
+                "description": "订单编号，可以是主订单或者子订单。子订单:一个主订单可能有多个仓库进行发货的，我们将一个主订单进行拆分成多个仓库的子订单",
+                "required": true,
+                "type": "string"
+            }
+        ],
+        "tags": [
+            "order"
+        ],
+        "responses": {
+            "200": {
+                "description": "Successful response",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "errcode": {
+                                    "type": "number",
+                                    "description": "错误编码, 0代表成功"
+                                }
+                            }
+                        },
+                        "errMsg": {
+                            "type": "string"
+                        },
+                        "innerErrMsg": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "examples": {
+                    "application/json": {
+                        "code": 200,
+                        "data": {
+                            "errcode":0
+                        }
+                    }
+                }
+            },
+            "200": {
+                "description": "请求存在错误的时候的返回，具体字段格式参考下面的'ErrorModel'描述",
+                "examples": {
+                    "application/json": {
+                        "code": 200,
+                        "data": {
+                            "errcode": 73000,
+                            "errmsg":"\u6709\u5b50\u8ba2\u5355\u7684\u72b6\u6001\u4e0d\u662f\u5f85\u53d1\u8d27\u002c\u4e0d\u80fd\u53d6\u6d88\u8ba2\u5355"
+                        },
+                        "errMsg": "",
+                        "innerErrMsg": ""
+                    }
+                }
+            }
+        }
+    }
+},
+
+"ErrorModel": {
+    "type": "object",
+    "properties": {
+        "code": {
+            "type": "string",
+            "description": "响应码"
+        },
+        "errMsg": {
+            "type": "string"
+        },
+        "innerErrMsg": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                "errcode": {
+                  "type": "number",
+                  "description": "错误编码"
+                },
+                "errmsg": {
+                    "description": "错误描述",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

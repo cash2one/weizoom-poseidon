@@ -1,0 +1,160 @@
+"/mall/order/": {
+    "put": {
+        "summary": "创建订单接口",
+        "description": "创建订单接口",
+        "parameters": [
+            {
+                "name": "access_token",
+                "in": "query",
+                "description": "access_token,访问令牌",
+                "required": true,
+                "type": "string"
+            },
+            {
+                "name": "deal_id",
+                "in": "query",
+                "description": "交易流水号:第三方创建出订单的订单号，唯一。",
+                "required": true,
+                "type": "string"
+            },
+            {
+                "name": "ship_name",
+                "in": "query",
+                "description": "收货人姓名",
+                "required": true,
+                "type": "string"
+            },
+            {
+                "name": "ship_tel",
+                "in": "query",
+                "description": "收货人电话",
+                "required": true,
+                "type": "string"
+            },
+            {
+                "name": "ship_address",
+                "in": "query",
+                "description": "收货人地址",
+                "required": true,
+                "type": "string"
+            },
+            {
+                "name": "area",
+                "in": "query",
+                "description": "收货人省市县3级，例如1_1_8，代表的是北京市 北京市 海淀区 ",
+                "required": true,
+                "type": "string"
+            },
+            {
+                "name": "products",
+                "in": "body",
+                "description": "\n
+                    具体字段格式参考下面的'PutOrderProduct'描述,\n
+                    商品集合,如:[{'product_id':12,'product_model_name':'standard','product_count':2,},{'product_id':11,'product_model_name':'standard','product_count':1, }],是一个json化的list",
+                "required": true
+            }
+        ],
+        "tags": [
+            "order"
+        ],
+        "responses": {
+            "200": {
+                "description": "Successful response",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "code": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "data": {
+                            "type": "object",
+                            "properties": {
+                                "order_id": {
+                                    "type": "string",
+                                    "description": "订单编号"
+                                }
+                            }
+                        },
+                        "errMsg": {
+                            "type": "string"
+                        },
+                        "innerErrMsg": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "examples": {
+                    "application/json": {
+                        "code": 200,
+                        "data": {
+                            "order_id": "20160927152821329",
+                        }
+                    }
+                }
+            },
+            "200": {
+                "description": "请求存在错误的时候的返回，具体字段格式参考下面的'ErrorModel'描述",
+                "schema": {
+                  "$ref": "#/definitions/ErrorModel"
+                },
+                "examples": {
+                    "application/json": {
+                        "code": 200,
+                        "data": {
+                            "errcode": 71000,
+                            "errmsg":"\u521b\u5efa\u8ba2\u5355\u8bf7\u6c42\u4e2d\u6709\u5546\u54c1\u5e93\u5b58\u4e0d\u8db3"
+                        },
+                        "errMsg": "",
+                        "innerErrMsg": ""
+                    }
+                }
+            }
+        }
+    }
+},
+"PutOrderProduct": {
+    "type": "object",
+    "properties": {
+        "product_id": {
+            "description": "商品id",
+            "type": "number"
+        },
+        "product_model_name": {
+            "description": "商品规格名称",
+            "type": "string"
+        },
+        "product_count": {
+            "description": "商品数量",
+            "type": "number"
+        }
+    }
+},
+"ErrorModel": {
+    "type": "object",
+    "properties": {
+        "code": {
+            "type": "string",
+            "description": "响应码"
+        },
+        "errMsg": {
+            "type": "string"
+        },
+        "innerErrMsg": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                "errcode": {
+                  "type": "number",
+                  "description": "错误编码"
+                },
+                "errmsg": {
+                    "description": "错误描述",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
