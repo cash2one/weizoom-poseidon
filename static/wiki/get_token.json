@@ -1,0 +1,107 @@
+"/auth/access_token/": {
+    "get": {
+        "tags": [
+            "auth"
+        ],
+        "summary": "根据appid和secret获取AccessToken",
+        "description": "根据appid和secret获取AccessToken",
+        "consumes": [
+            "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+            "application/json"
+        ],
+        "parameters": [
+            {
+                "in": "query",
+                "name": "appid",
+                "type": "string",
+                "description": "APP ID",
+                "required": true
+            },
+            {
+                "in": "query",
+                "name": "secret",
+                "type": "string",
+                "description": "secret",
+                "required": true
+            }
+        ],
+        "responses": {
+            "200": {
+                "description": "具体字段格式参考下面的'AccessToken'描述",
+                "examples": {
+                    "application/json": {
+                        "code": 200,
+                        "data": {
+                            "access_token": "UKywoSQIL6t4divvUtAPojk7wz0dNN1tRJFbnNTxbHApwI8wz1P5wGvt5j8f5ij04n7QKUDB2z81pA9YtQIjuiEvsA==",
+                            "expires_in": "7200"
+                        }
+                    }
+                }
+            },
+            "200": {
+                "description": "请求存在错误的时候的返回，具体字段格式参考下面的'ErrorModel'描述",
+                "schema": {
+                  "$ref": "#/definitions/ErrorModel"
+                },
+                "examples": {
+                    "application/json": {
+                        "code": 200,
+                        "data": {
+                            "errcode": 41001,
+                            "errmsg":"invalid appid"
+                        },
+                        "errMsg": "",
+                        "innerErrMsg": ""
+                    }
+                }
+            }
+        }
+    }
+},
+"AccessToken": {
+    "type": "object",
+    "required": [
+        "access_token",
+        "expires_in"
+    ],
+    "properties": {
+        "access_token": {
+            "type": "string",
+            "description": "api 接口访问凭证"
+        },
+        "expires_in": {
+            "type": "string",
+            "description": "access_token有效时间"
+        }
+    }
+},
+"ErrorModel": {
+    "type": "object",
+    "properties": {
+        "code": {
+            "type": "string",
+            "description": "响应码"
+        },
+        "errMsg": {
+            "type": "string"
+        },
+        "innerErrMsg": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                "errcode": {
+                  "type": "number",
+                  "description": "错误编码"
+                },
+                "errmsg": {
+                    "description": "错误描述",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="/static/css/strapdown.css" rel="stylesheet">
+    <link href="/static/css/united.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+</head>
+<title>获取 token</title>
+<xmp theme="united" style="display:none;">
+## 获取 token
+针对开放平台的访问，根据appid和secret获取AccessToken。
+
+```
+接口地址:
+    GET: /auth/access_token/
+必要参数:
+    appid: 平台开立账户时提供的 app_id
+    secret: 平台开立账户时提供的 app_secret
+
+```
+接口描述:
+```
+获取 token接口: 
+	需对接的客户根据此接口来获取访问开放平台的授权信息access_token
+```
+
+举例:
+```
+{
+    "appid": "wz0919ec55f58ca747",
+    "secret": "94ba1178ed0be97af1f219a130b31099"
+}
+```
+返回数据:
+```
+请求成功:
+
+>注意：access_token最大长度不超过254字节；expires_in代表的有效时间，单位：秒
+
+{
+    "code": 200,
+    "data": {
+        "access_token": "UKywoSQIL6t4divvUtAPojk7wz0dNN1tRJFbnNTxbHApwI8wz1P5wGvt5j8f5ij04n7QKUDB2z81pA9YtQIjuiEvsA==",
+        "expires_in": "7200"
+    }
+}
+```
+```
+请求失败:
+{
+    "code": 200,
+    "data": {
+        "errcode": 40001,
+        "errmsg":"invalid appid"
+    },
+    "errMsg": "",
+    "innerErrMsg": ""
+}
+```
+### 获取token返回数据下载
+[get_token.json文件地址](http://dev.poseidon.com/static/wiki/get_token.json)
+
+</xmp>
+<script src="/static/js/strapdown.js"></script>
+</html>
