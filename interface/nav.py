@@ -2,10 +2,6 @@
 __author__ = 'hj'
 
 SECOND_NAVS = [{
-	'name': 'interface-token',
-	'displayName': '获取Token',
-	'href': '/static/wiki/get_token.html'
-},{
 	'name': 'interface-product',
 	'displayName': '商品API',
 	'href': '/interface/product_api/'
@@ -14,6 +10,10 @@ SECOND_NAVS = [{
 	'name': 'interface-order',
 	'displayName': '订单API',
 	'href': '/interface/order_api/'
+},{
+	'name': 'interface-token',
+	'displayName': '获取Token',
+	'href': '/static/wiki/get_token.html'
 },
 {
 	'name': 'interface-area',
@@ -22,7 +22,7 @@ SECOND_NAVS = [{
 },
 {
 	'name': 'interface-notify',
-	'displayName': '通知',
+	'displayName': '发货通知',
 	'href': '/static/wiki/notify.html'
 },
 {
