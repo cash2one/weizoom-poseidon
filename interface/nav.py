@@ -2,6 +2,10 @@
 __author__ = 'hj'
 
 SECOND_NAVS = [{
+	'name': 'interface-token',
+	'displayName': '获取Token',
+	'href': '/static/wiki/get_token.html'
+},{
 	'name': 'interface-product',
 	'displayName': '商品API',
 	'href': '/interface/product_api/'
