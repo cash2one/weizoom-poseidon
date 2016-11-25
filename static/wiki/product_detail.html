@@ -14,9 +14,9 @@ access_token：访问开放平台的token;
 product_id：商品ID;
 接口地址
     测试地址：
-        http://poseidon.weapp.weizzz.com/mall/product?product_id=xxx&access_token=xxxx
+        http://openapi.weapp.weizzz.com/mall/product?product_id=xxx&access_token=xxxx
     线上地址：
-        http://open.weapp.weizoom.com/mall/product?product_id=xxx&access_token=xxxx
+        http://openapi.weapp.weizoom.com/mall/product?product_id=xxx&access_token=xxxx
 ```
 
 ## product_detail详细举例说明
@@ -360,10 +360,11 @@ product_id：商品ID;
     }],
   "price_info":  "商品价格信息，格式：{}"
     {
-        "display_original_price": "原价",
-        "display_price":  "售价",
-        "max_price":  "最高价",
-        "min_price": "最低价"
+        "display_original_price": "原价--可忽略",
+        "display_price":  "售价--可忽略",
+        "display_market_price":  "售价--可忽略",
+        "max_price":  "最高价--多规格中的最高价，如果是单规格，则与最低价相同",
+        "min_price": "最低价--多规格中的最低价，如果是单规格，则与最高价相同"
     },
   "unified_postage_money": "统一邮费金额",
   "postage_type": "运费类型,unified_postage_type统一运费 或者 custom_postage_type自定义运费即使用的是供货商的运费模板（需要根据supplier_postage_config进行计算）",
