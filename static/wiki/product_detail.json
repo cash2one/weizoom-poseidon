@@ -185,6 +185,7 @@
                                 "name": "4:7_5:10",
                                 "weight": 2,
                                 "price": 22,
+                                "after_add_price": 24.44,
                                 "user_code": "",
                                 "market_price": 0,
                                 "stock_type": 1,
@@ -226,6 +227,7 @@
                                 "name": "4:8_5:10",
                                 "weight": 2,
                                 "price": 33,
+                                "after_add_price": 36.67,
                                 "user_code": "",
                                 "market_price": 0,
                                 "stock_type": 1,
@@ -267,6 +269,7 @@
                                 "name": "4:9_5:10",
                                 "weight": 2,
                                 "price": 44,
+                                "after_add_price": 48.89,
                                 "user_code": "",
                                 "market_price": 0,
                                 "stock_type": 1,
@@ -308,6 +311,7 @@
                                 "name": "4:7_5:11",
                                 "weight": 2,
                                 "price": 22,
+                                "after_add_price": 24.44,
                                 "user_code": "",
                                 "market_price": 0,
                                 "stock_type": 1,
@@ -349,6 +353,7 @@
                                 "name": "4:8_5:11",
                                 "weight": 2,
                                 "price": 33,
+                                "after_add_price": 36.67,
                                 "user_code": "",
                                 "market_price": 0,
                                 "stock_type": 1,
@@ -390,6 +395,7 @@
                                 "name": "4:9_5:11",
                                 "weight": 2,
                                 "price": 44,
+                                "after_add_price": 48.89,
                                 "user_code": "",
                                 "market_price": 0,
                                 "stock_type": 1,
@@ -749,6 +755,10 @@
                           "price":{
                               "type": "string",
                               "description": "售价"  
+                          },
+                          "after_add_price": {
+                              "type": "number",
+                              "description": "商品加价10%后的展示价格（该字段是后来业务需要手动增加的）"
                           },
                           "id":{
                               "type": "number",

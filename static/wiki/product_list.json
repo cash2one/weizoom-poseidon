@@ -36,6 +36,8 @@
                                 {
                                   "name": "短袖T恤",
                                   "display_price": 220.00,
+                                  "after_add_price": 244.44,
+                                  "after_add_price": 443.33,
                                   "sales": 26,
                                   "thumbnails_url": "http://chaozhi.weizoom.com/static/upload/20160921/1474450258043_377.jpg",
                                   "supplier": 2,
@@ -102,6 +104,10 @@
                       "display_price": {
                           "type": "number",
                           "description": "商品总库存"
+                      },
+                      "after_add_price": {
+                          "type": "number",
+                          "description": "商品加价10%后的展示价格（该字段是后来业务需要手动增加的）"
                       },
                       "id": {
                           "type": "string",
