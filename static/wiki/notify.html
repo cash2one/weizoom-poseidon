@@ -5,23 +5,35 @@
     <link href="/static/css/united.min.css" rel="stylesheet">
     <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
 </head>
-<title>通知</title>
+<title>订单发货通知</title>
 <xmp theme="united" style="display:none;">
 ## 订单发货通知
+```
 针对订单发货，微众会向开发者在开放平台绑定的“回调地址”发送XML格式消息，通知客户订单已发货。
+```
 
+## 数据发送格式
 ```
 <xml>
 <OrderId><![CDATA[20161015^12]]></OrderId>
-<ExpressCompanyName><![CDATA[]]></ExpressCompanyName> 
+<ExpressCompanyName><![CDATA[shentong]]></ExpressCompanyName> 
 <ExpressNumber><![CDATA[123456]]></ExpressNumber>
 <Type><![CDATA[delivered]]></Type>
 <MsgId>1234567</MsgId>
 </xml>
+
+注：
 OrderId：订单编号
-ExpressCompanyName：sf｜shentong 
+ExpressCompanyName：快递公司名(参考下面需下载的文件express_company.json)：shentong
+ExpressNumber：快递单号
 Type: 消息类型（delivered：发货， update_delivered:修改发货信息）
 MsgId：信息ID
+```
+## 举例说明
+```
+开放平台会以下面的格式向合作方发送请求：
+http://回调地址?message=<xml>......</xml>
+注： 若合作方有特殊访问要求（比如需要使用秘钥才可访问）,需与我方协商一致后共同开发。
 ```
 ExpressCompanyName命名定义：
 [点击下载express_company.json](http://dev.poseidon.com/static/wiki/express_company.json)
