@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="/static/css/strapdown.css" rel="stylesheet">
+    <link href="/static/css/united.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-responsive.min.css" rel="stylesheet">
+</head>
+<title>商品更新通知</title>
+<xmp theme="united" style="display:none;">
+## 商品更新通知
+```
+针对商品更新，微众会向开发者在开放平台绑定的“回调地址”发送带有商品ID请求，通知客户哪个商品已经更新；
+然后客户根据商品ID自行通过获取商品详情的接口获取最新的商品信息。
+```
+
+## 举例说明
+```
+开放平台会以下面的格式向合作方发送请求：
+http://回调地址?product_id=xxx
+注： 若合作方有特殊访问要求（比如需要使用秘钥才可访问）,需与我方协商一致后共同开发。
+```
+
+</xmp>
+<script src="/static/js/strapdown.js"></script>
+</html>
