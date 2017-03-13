@@ -17,28 +17,37 @@ access_token：访问开放平台的token;
     线上地址：
         http://openapi.weapp.weizoom.com/mall/products?access_token=xxxx
 ```
-
+### 必要的参数
+    access_token：access_token,访问令牌
+    cur_page：当前请求页（默认发送页数为第一页，若超出最大页数则返回最后一页的商品列表）
+    count_per_page: 每页商品数量（默认最多一页200个商品，若超出的按照200个商品数量返回）
 ## product_list详细举例说明
 例子：
 ```
-[{
-  "name": "短袖T恤",
-  "display_price": 220.00,
-  "after_add_price": 244.44,
-  "sales": 26,
-  "thumbnails_url": "http://chaozhi.weizoom.com/static/upload/20160921/1474450258043_377.jpg",
-  "supplier": 2,
-  "id": 11
-},
 {
-  "name": "吊裆裤",
-  "display_price": 399.00,
-  "after_add_price": 443.33,
-  "sales": 44,
-  "thumbnails_url": "http://chaozhi.weizoom.com/static/upload/20160921/1474448967063_375.jpg",
-  "supplier": 2,
-  "id": 10
-}]
+    "code": 200,
+    "data": {
+        "items": [
+            {
+                "id": 11,
+                "name": "短袖T恤",
+                "thumbnails_url": "http://chaozhi.weizoom.com/static/upload/20160921/1474450258043_377.jpg"
+            },
+            {
+                "id": 10,
+                "name": "吊裆裤",
+                "thumbnails_url": "http://chaozhi.weizoom.com/static/upload/20160921/1474448967063_375.jpg"
+            }
+        ],
+        "page_info":{
+            'max_page': 3000,
+            'object_count': 5999,
+            'cur_page': 1,
+        }
+    },
+    "errMsg": "",
+    "innerErrMsg": ""
+}
 ```
 ## product_list字段描述信息：
 ```
@@ -46,12 +55,15 @@ access_token：访问开放平台的token;
     [{
         "name":  "商品名称",
         "thumbnails_url": "商品缩略图的url地址",
-        "display_price": "商品展示价格",
-        "after_add_price": "商品加价10%后的展示价格（该字段是后来业务需要手动增加的）",
-        "id": "商品ID",
-        "sales": "商品销量",
-        "supplier": "供货商ID"
+        "id": "商品ID"
     }]
+
+"page_info":商品列表分页信息,
+  {
+    "max_page": "最大页数",
+    "object_count": "商品总数",
+    "cur_page": "当前页数",
+  }
 ```
 ## product_list文件下载
 [product_list.json文件地址](http://dev.poseidon.com/static/wiki/product_list.json)
